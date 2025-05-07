@@ -18,7 +18,7 @@ const ListCard = () => {
             <h3 className="font-bold">Event</h3>
             <p>Beskrivende tekst om arrangement kort beskrevet</p>
           </div>
-          <Button />
+          <Button>Læs mere</Button>
         </div>
       </li>
     </Link>
