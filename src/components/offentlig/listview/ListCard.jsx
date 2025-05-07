@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/global/Button";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 
 const ListCard = () => {
   return (
@@ -17,7 +17,7 @@ const ListCard = () => {
       <h3 className="font-bold">Event</h3>
       <p>Beskrivende tekst om arrangement kort beskrevet</p>
 
-      <Button>Læs mere</Button>
+      <SecondaryButton>Læs mere</SecondaryButton>
     </li>
 
     // </Link>
