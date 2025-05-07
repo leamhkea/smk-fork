@@ -9,8 +9,9 @@
   --p-size: 1em;
 
   /*colors*/
-  --black: #212121;
-  --white: #fdfdfd;
+  --black: #333333;
+  --white: #f5f5f5;
+  --blue: #0219d7;
 
   /*spacing*/
   --content-width: max(20px, 50% - 80rem / 2);
@@ -18,8 +19,7 @@
 
 body {
   font-family: "Arial Narrow";
-  color: var(--black);
-  background-color: var(--grey);
+  background-color: var(--white);
 }
 
 .display {
