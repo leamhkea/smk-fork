@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+:root {
+  /*font-size*/
+  --display-font: 128px;
+  --h1-size: 36px;
+  --h2-size: 24px;
+  --h3-size: 18px;
+  --p-size: 1em;
+
+  /*colors*/
+  --black: #212121;
+  --white: #fdfdfd;
+
+  /*spacing*/
+  --content-width: max(20px, 50% - 80rem / 2);
+}
+
+body {
+  font-family: "Arial Narrow";
+  color: var(--black);
+  background-color: var(--grey);
+}
+
+.display {
+  font-size: var(--display-font);
+  font-size: var(--display-font);
+}
+
+h1 {
+  font-size: var(--h1-size);
+  line-height: 0.9;
+}
+
+h2 {
+  font-size: var(--h2-size);
+}
+
+h3 {
+  font-size: var(--h3-size);
+}
+
+p {
+  font-size: var(--p-size);
+}
+
+a {
+  text-decoration: none;
+}
