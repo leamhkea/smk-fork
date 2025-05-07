@@ -1,9 +1,8 @@
-import ListCard from "@/components/offentlig/listview/ListCard";
-
+import ListClient from "@/components/offentlig/listview/ListClient";
 const Arrangementer = () => {
   return (
     <section className="px-(--content-width) mt-30">
-      <ListCard />
+      <ListClient />
     </section>
   );
 };
