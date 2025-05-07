@@ -2,10 +2,18 @@
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import KurvPopover from "../offentlig/kurv/KurvPopover";
+import { useState } from "react";
 
 const Header = () => {
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
+  const [showPopover, setShowPopover] = useState(false);
+
+  const handleTogglePopover = () => {
+    setShowPopover((prev) => !prev);
+  };
+
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
       <ul className="flex items-baseline justify-between py-4 px-8">
@@ -43,9 +51,13 @@ const Header = () => {
 
         {/* Højre side: kurv */}
         <li
-          className={pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"}
+          className={`cursor-pointer ${
+            pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+          }`}
+          onClick={handleTogglePopover}
         >
           <HiOutlineShoppingBag size={30} />
+          {showPopover && <KurvPopover />}
         </li>
       </ul>
     </nav>

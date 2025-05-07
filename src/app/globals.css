@@ -66,6 +66,9 @@ body {
   }
   main {
     padding-inline: var(--content-width);
+    .no-padding {
+      padding-inline: 0;
+    }
   }
 }
 
@@ -98,7 +101,8 @@ h3 {
 
 h1[class*="blue"],
 h2[class*="blue"],
-h3[class*="blue"] {
+h3[class*="blue"],
+p[class*="blue"] {
   color: var(--blue);
 }
 
