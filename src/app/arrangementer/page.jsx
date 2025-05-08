@@ -1,8 +1,8 @@
-import ListClient from "@/components/offentlig/listview/ListClient";
+import ListServer from "@/components/offentlig/listview/ListServer";
 const Arrangementer = () => {
   return (
-    <section className="px-(--content-width) mt-30">
-      <ListClient />
+    <section className="px-(--content-width)">
+      <ListServer />
     </section>
   );
 };

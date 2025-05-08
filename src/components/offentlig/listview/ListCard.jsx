@@ -2,25 +2,25 @@ import Image from "next/image";
 import Link from "next/link";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 
-const ListCard = () => {
+const ListCard = ({ event }) => {
   return (
-    // <Link href={`/arrangementer/${event.id}`}>
-    <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
-      <Image
-        alt="Billede tilhørende event"
-        width="500"
-        height="500"
-        src="/placeholder.png"
-        className="object-contain max-w-full self-center"
-      />
+    <Link href={`/arrangementer/${event.id}`}>
+      <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
+        <Image
+          alt={`Billede af ${event.title}`}
+          width={500}
+          height={500}
+          src="/placeholder.png"
+          className="object-contain max-w-full self-center"
+        />
 
-      <h3 className="font-bold">Event</h3>
-      <p>Beskrivende tekst om arrangement kort beskrevet</p>
+        <h2>{event.title}</h2>
+        <p className="thin">{event.description}</p>
+        <p>{event.date}</p>
 
-      <SecondaryButton>Læs mere</SecondaryButton>
-    </li>
-
-    // </Link>
+        <SecondaryButton>Læs mere</SecondaryButton>
+      </li>
+    </Link>
   );
 };
 

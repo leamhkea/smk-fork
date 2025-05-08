@@ -111,7 +111,8 @@ p[class*="blue"] {
 
 h1[class*="thin"],
 h2[class*="thin"],
-h3[class*="thin"] {
+h3[class*="thin"],
+p[class*="thin"] {
   font-weight: 300;
 }
 
