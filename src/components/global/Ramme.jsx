@@ -22,7 +22,7 @@ const Ramme = ({ children }) => {
         width: isVisible ? "100%" : "40%",
         transform: isVisible ? "translateX(0)" : "translateX(100%)",
       }}
-      className="transition-all duration-1100 ease-out border-10 border-(--blue) mx-auto lg:p-30 md:p-20 sm:p-10 overflow-hidden"
+      className="transition-all duration-1100 ease-out border-10 border-(--blue) mx-auto lg:p-30 md:p-20 p-10 overflow-hidden"
     >
       {children}
     </div>

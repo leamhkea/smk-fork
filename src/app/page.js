@@ -6,24 +6,27 @@ export default function Home() {
   return (
     <section>
       <Ramme>
-        <article className="flex flex-col gap-8 h-70">
-          <div>
-            <h1 className="blue">event titel |</h1>
-            <h1 className="blue thin">dato</h1>
-          </div>
-          <p className="blue">event beskrivelse</p>
-        </article>
-        <TertrieryButton>Læs mere om arrangementet</TertrieryButton>
+      <article className="flex flex-col justify-between gap-8 h-70">
+  <div>
+    <h1 className="blue">event titel |</h1>
+    <h1 className="blue thin">dato</h1>
+  </div>
+  <p className="blue">event beskrivelse</p>
+  <div className="self-start mt-auto">
+    <TertrieryButton>Læs mere om arrangementet</TertrieryButton>
+  </div>
+</article>
+
       </Ramme>
       <div>
         <ParralaxText />
       </div>
-      <div className="mt-20">
+      <div className="mt-20 flex gap-20">
+      <h1 className="thin">Åbningstider</h1>
         <Ramme>
-          <article className="flex gap-20">
-            <h1 className="thin">Åbningstider</h1>
+          <article>
             <div className="flex flex-col justify-end gap-5">
-              <ul>
+              <ul className="flex flex-col gap-2">
                 <li>Tirsdag - Søndag 10:00 - 18:00</li>
                 <li>Onsdag 10:00 - 20:00</li>
                 <li>Mandag Lukket</li>
@@ -32,7 +35,7 @@ export default function Home() {
                 Vær opmærksom på, vi begynder at lukke udstillingerne 15
                 minutter før lukketid.
               </p>
-              <ul>
+              <ul className="flex flex-col gap-2">
                 <li>
                   <h2 className="thin">Særåbent i 2025</h2>
                 </li>
@@ -42,7 +45,7 @@ export default function Home() {
                 <li>13. oktober (mandag i efterårsferien)</li>
                 <li>26. december (2. juledag)</li>
               </ul>
-              <ul>
+              <ul className="flex flex-col gap-2">
                 <li>
                   <h2 className="thin">Lukket</h2>
                 </li>
