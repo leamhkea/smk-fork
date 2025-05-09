@@ -1,5 +1,5 @@
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
-const OpretArrangement = () => {
+const opretarrangement = () => {
     return ( <section className="flex flex-col gap-10 px-(--content-width)">
         <h1 className="thin">Opret arrangement</h1>
         <div className="flex flex-col">
@@ -32,4 +32,4 @@ const OpretArrangement = () => {
     </section> );
 }
  
-export default OpretArrangement;
+export default opretarrangement;
