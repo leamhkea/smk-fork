@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/*            HERUNDER ER ALLE IMPORTEREDE FONTS           */
+
 @font-face {
   font-family: "Hill";
   src: url("/fonts/Hill-Light.eot");
@@ -43,6 +45,8 @@
   font-style: normal;
   font-display: swap;
 }
+
+/*            HERUNDER ER ALLE CUSTOM PROPORTIES OG VARIABLER           */
 
 :root {
   /*colors*/
@@ -89,7 +93,7 @@ li[class*="bold"] {
   font-weight: 600;
 }
 
-/* Headers */
+/*            HERUNDER ER STYLING PÅ HEADERS           */
 
 h1,
 h2,
@@ -123,7 +127,7 @@ h2[class*="white"],
 h3[class*="white"],
 p[class*="white"],
 a[class*="white"] {
-  color:var(--white);
+  color: var(--white);
 }
 
 h1,
@@ -154,6 +158,8 @@ h3 {
   }
 }
 
+/*       HERUNDER ER STYLING, SÅ MARGIN ER 0 VED HEADERS EFTER HINANDEN      */
+
 h1 + h1,
 h2 + h2,
 h3 + h3,
@@ -161,3 +167,5 @@ h1 + h2 {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+/*            HERUNDER STARTER NAVNGIVNE CSS CLASSES TIL COMPONENTER           */
