@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
+import CoverFlow from "./CoverFlow";
 import SamledeImg from "./SamledeImg";
 
 const SingleCard = ({ event }) => {
@@ -19,7 +20,7 @@ const SingleCard = ({ event }) => {
       <PraktiskInfo event={event} />
 
       {/* Herunder importeres de tre værker i bunden af card */}
-      <SamledeImg event={event} />
+      <CoverFlow event={event} />
     </article>
   );
 };
