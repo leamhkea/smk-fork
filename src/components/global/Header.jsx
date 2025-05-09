@@ -4,15 +4,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import KurvPopover from "../offentlig/kurv/KurvPopover";
 import { useState } from "react";
+import { SignedIn } from "@clerk/nextjs";
+import SideMenu from "../kurator/global/SideMenu";
+import { IoIosMenu } from "react-icons/io";
+import { IoMdClose } from 'react-icons/io';
 
 const Header = () => {
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
   const [showPopover, setShowPopover] = useState(false);
+  const [showSideMenu, setShowSideMenu] = useState(false);
 
   const handleTogglePopover = () => {
     setShowPopover((prev) => !prev);
   };
+  const handleToggleSideMenu = () => {
+    setShowSideMenu((prev) => !prev);
+  };
+
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
@@ -50,6 +59,7 @@ const Header = () => {
         </div>
 
         {/* Højre side: kurv */}
+        <div className="flex gap-3">
         <li
           className={`cursor-pointer ${
             pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
@@ -59,6 +69,17 @@ const Header = () => {
           <HiOutlineShoppingBag size={30} />
           {showPopover && <KurvPopover />}
         </li>
+        <SignedIn>
+        <li
+          className={`cursor-pointer ${
+            pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+          }`}
+          onClick={handleToggleSideMenu}>
+         {showSideMenu ? <IoMdClose size={30} /> : <IoIosMenu size={30} />}
+          {showSideMenu && <SideMenu />}
+        </li>
+        </SignedIn>
+        </div>
       </ul>
     </nav>
   );

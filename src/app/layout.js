@@ -2,6 +2,7 @@ import "./globals.css";
 import "./reset.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "SMK - Statens Museum for Kunst",
@@ -10,16 +11,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="da">
       <body>
         <header>
           <Header />
         </header>
-        <main className="mt-25">{children}</main>
+        <main className="mt-25">
+          {children}</main>
         <footer>
           <Footer />
         </footer>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
