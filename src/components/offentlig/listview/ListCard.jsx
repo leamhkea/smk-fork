@@ -15,7 +15,7 @@ const ListCard = ({ event }) => {
         />
 
         <h2>{event.title}</h2>
-        <p className="thin">{event.description}</p>
+        <p>{event.description}</p>
         <p>{event.date}</p>
 
         <SecondaryButton>Læs mere</SecondaryButton>
