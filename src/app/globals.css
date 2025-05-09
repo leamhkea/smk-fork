@@ -57,7 +57,7 @@
 body {
   font-family: "Hill";
   background-color: var(--white);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.33333em;
   color: var(--black);
@@ -89,17 +89,12 @@ li[class*="bold"] {
   font-weight: 600;
 }
 
-li {
-  font-size: 1.4rem;
-}
-
 /* Headers */
 
 h1,
 h2,
 h3 {
   margin-top: 0;
-  font-weight: 700;
 }
 
 h1[class*="blue"],
@@ -109,11 +104,26 @@ p[class*="blue"] {
   color: var(--blue);
 }
 
+h1[class*="bold"],
+h2[class*="bold"],
+h3[class*="bold"],
+p[class*="bold"] {
+  font-weight: 700;
+}
+
 h1[class*="thin"],
 h2[class*="thin"],
 h3[class*="thin"],
 p[class*="thin"] {
   font-weight: 300;
+}
+
+h1[class*="white"],
+h2[class*="white"],
+h3[class*="white"],
+p[class*="white"],
+a[class*="white"] {
+  color:var(--white);
 }
 
 h1,
@@ -138,9 +148,9 @@ h2 {
 }
 
 h3 {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   @media (min-width: 1200px) {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 }
 
