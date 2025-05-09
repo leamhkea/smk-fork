@@ -11,7 +11,7 @@ import "swiper/components/effect-coverflow/effect-coverflow.scss";
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 
-export default function SwiperCoverflow() {
+const CoverFlow = ({ event }) => {
   return (
     <div className="App">
       <Swiper
@@ -104,4 +104,6 @@ export default function SwiperCoverflow() {
       </Swiper>
     </div>
   );
-}
+};
+
+export default CoverFlow;
