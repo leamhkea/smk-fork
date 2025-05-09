@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <div className="bg-(--black) flex justify-between md:p-30 p-10">
+  return <div className="bg-(--black) flex justify-between md:p-30 p-10 mt-20">
       <div className="flex flex-col gap-3">
         <h3 className="white">Gæst</h3>
         <h3 className="thin white">Åbningstider</h3>
@@ -22,7 +22,7 @@ const Footer = () => {
       <h3 className="white">Ansat</h3>
       <ul>
         <li>
-          <a className="white" href>Log in</a>
+          <a className="white" href="/sign-in">Log in</a>
         </li>
       </ul>
     </div>
