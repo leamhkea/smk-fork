@@ -37,7 +37,7 @@ export default function Home() {
               </p>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <h2 className="thin">Særåbent i 2025</h2>
+                  <h2>Særåbent i 2025</h2>
                 </li>
                 <li>10. februar (mandag i vinterferien)</li>
                 <li>21. april (2. påskedag)</li>
@@ -47,7 +47,7 @@ export default function Home() {
               </ul>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <h2 className="thin">Lukket</h2>
+                  <h2>Lukket</h2>
                 </li>
                 <li>24. december</li>
                 <li>25. december</li>
