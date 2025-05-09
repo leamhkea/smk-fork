@@ -12,7 +12,7 @@ const SingleCard = ({ event }) => {
       />
       <div>
         <h1>{event.title}</h1>
-        <h2>Galleri</h2>
+        <h2>{event.location.name}</h2>
       </div>
 
       <div>
