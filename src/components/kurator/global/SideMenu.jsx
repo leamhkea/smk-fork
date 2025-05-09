@@ -8,7 +8,7 @@ const SideMenu = () => {
                 <hr/>
                 </li>
             <li><a href="/arrangementer">Mine kladder</a></li>
-            <li><a href="/opretarrangement">Opret nyt arrangement</a></li>
+            {/* <li><a href="/opretarrangement">Opret nyt arrangement</a></li> */}
             <li>Værkarkiv</li>
             <li>
             <hr className="mb-2"/>

@@ -5,7 +5,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // Her kan du tilføje flere ruter, som ikke skal beskyttes
 const isPublicRoute = createRouteMatcher([
   "/", // forside
-  "/events(.*)", // event routes
+  "/arrangementer(.*)", // korrekt sti
   "/sign-in(.*)",
   "/sign-up(.*)",
 ]);

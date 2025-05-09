@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
 import ListCard from "./ListCard";
-import { SignedIn } from "@clerk/nextjs";
 import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
+import { SignedIn } from "@clerk/nextjs";
 
 const ListClient = ({ data }) => {
   return (
     <div>
       <SignedIn>
         <Kladder/>
-        </SignedIn>
+      </SignedIn>
       <div className="flex flex-col gap-4 mt-0 mb-8">
         <h1>Alle arrangementer</h1>
         <p>
