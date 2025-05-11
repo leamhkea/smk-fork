@@ -118,7 +118,8 @@ p[class*="bold"] {
 h1[class*="thin"],
 h2[class*="thin"],
 h3[class*="thin"],
-p[class*="thin"] {
+p[class*="thin"],
+a[class*="thin"] {
   font-weight: 300;
 }
 
