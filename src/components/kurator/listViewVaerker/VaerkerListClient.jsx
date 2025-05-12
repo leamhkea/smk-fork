@@ -29,7 +29,7 @@ const VaerkerListClient = ({ artData }) => {
         <h1>Alle kunstværker</h1>
         <p>For neden ses kunstværker i Statens Museum for Kunsts arkiv.</p>
       </div>
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">
+      <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-12">
         {visibleArtworks.map((art) => (
           <VaerkerListCard key={art.id} art={art} />
         ))}
