@@ -1,6 +1,6 @@
 import "./globals.css";
 import "./reset.css";
-import Header from "@/components/global/header/Header";
+import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
-// import CoverFlow from "./CoverFlow";
 import SamledeImg from "./SamledeImg";
+import ButtonAddBillet from "./ButtonAddBillet";
 
 const SingleCard = ({ event }) => {
   return (
@@ -19,8 +19,8 @@ const SingleCard = ({ event }) => {
       {/* Herunder importeres information om lokation og pris */}
       <PraktiskInfo event={event} />
 
-      {/* Herunder importeres de tre værker i bunden af card */}
-      {/* <CoverFlow event={event} /> */}
+      {/* Button til at tilføje event til kurven */}
+      <ButtonAddBillet />
     </article>
   );
 };
