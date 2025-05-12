@@ -5,7 +5,7 @@ const SingleVaerkBeskrivelse = ({art}) => {
         <h2>Værk</h2>
         <div className="flex gap-1">
             <p className="bold">Kunstværkets titel |</p>
-            <p>{art.titles?.[0]?.title || "Ingen titel"}</p>
+            <p>{art.titles?.[0]?.title}</p>
         </div>
         <div className="flex gap-1">
             <p className="bold">Udgivelsesdato |</p>
