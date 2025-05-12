@@ -2,13 +2,13 @@
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import KurvPopover from "./KurvPopover";
+import KurvPopover from "./kurv/KurvPopover";
 import { useState } from "react";
 import { SignedIn } from "@clerk/nextjs";
 import SideMenu from "@/components/kurator/global/SideMenu";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
-import ClosingTag from "../ikoner/ClosingTag";
+import ClosingTag from "./ikoner/ClosingTag";
 
 const Header = () => {
   const pathnameBlue = usePathname();
