@@ -35,7 +35,7 @@ const VaerkerListClient = ({ artData }) => {
         ))}
       </ul>
       {hasMore() && ( //viser kun knappen hvis der er mere data at indhente
-        <div>
+        <div className="flex mt-8 justify-center">
           <SecondaryButton
             onClick={() => {
               setLoading(true); //knappen begynder at load hvis der er trykket, dernæst køres handleLoadMore-funktionen fra zustandstore, og sætter dernæst tilbage til false
@@ -44,7 +44,7 @@ const VaerkerListClient = ({ artData }) => {
             }}
             disabled={loading}
           >
-            {loading ? "Indlæser..." : "Vis flere"}
+            {loading ? "Indlæser værker..." : "Vis flere værker"}
           </SecondaryButton>
         </div>
       )}
