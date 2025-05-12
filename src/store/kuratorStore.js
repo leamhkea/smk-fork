@@ -1,38 +1,41 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
-const useArtworkStore = create(
-  persist(
-    (set, get) => ({
-      artworks: [],
+const useArtworkStore = create((set, get) => ({
 
-      // Load or update artworks
-      setArtworks: (newArtworks) => set({ artworks: newArtworks }),
+  // DATA-SORTERING //
 
-      // Filter artworks that have images
-      filterHasImage: () => {
-        const filtered = get().artworks.filter(item => item.has_image);
-        return filtered;
-      },
+  artworks: [], // alle artworks fra datasættet (fuldt array)
+  visibleArtworks: [], // de værker, der vises på siden: 30, 60, 90 osv.
+  offset: 0, // holder styr på hvor langt vi er i rækken (starter ved 0)
 
-      // Limit to 30 artworks
-      limitTo30: () => {
-        return get().artworks.slice(0, 30);
-      },
+  // Sætter de første 30 værker og initialiserer offset
+  setArtworks: (newArtworks) => {
+    set({
+      artworks: newArtworks,
+      visibleArtworks: newArtworks.slice(0, 30), // starter med de første 30 værker
+      offset: 30, // næste batch starter ved indeks 30
+    });
+  },
 
-      // Show next 30 artworks based on offset
-      visFlere: (offset) => {
-        return get().artworks.slice(offset, offset + 30);
-      },
-    }),
-    { name: "artwork-storage" }
-  )
-);
+  // Loader de næste 30 værker, når knappen (på clientlist) trykkes
+  handleLoadMore: () => {
+    const { artworks, visibleArtworks, offset } = get(); // henter aktuel state
+    const nextBatch = artworks.slice(offset, offset + 30); // definerer de næste 30 værker
+
+    // Hvis der er mere at hente, tilføj dem til listen
+    if (nextBatch.length > 0) {
+      set({
+        visibleArtworks: [...visibleArtworks, ...nextBatch], // tilføj dem til de synlige. Bruger spreading så der tilføjes nye værker til det eksisterende array uden at overskrive de gamle
+        offset: offset + 30, // opdater offset til næste gang
+      });
+    }
+  },
+
+  // Tjekker om der stadig er værker tilbage at vise
+  hasMore: () => {
+    const { artworks, visibleArtworks } = get();
+    return visibleArtworks.length < artworks.length; // true hvis der er mere at vise
+  },
+}));
 
 export default useArtworkStore;
-
-
-
-
-// &&
-//     item.object_names?.some(obj => obj.name === "Fotografi (kunst)") //kun fotografier????
