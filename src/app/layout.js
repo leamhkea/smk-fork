@@ -1,6 +1,6 @@
 import "./globals.css";
 import "./reset.css";
-import Header from "@/components/global/Header";
+import Header from "@/components/global/header/Header";
 import Footer from "@/components/global/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -12,18 +12,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-    <html lang="da">
-      <body>
-        <header>
-          <Header />
-        </header>
-        <main className="mt-35">
-          {children}</main>
-        <footer>
-          <Footer />
-        </footer>
-      </body>
-    </html>
+      <html lang="da">
+        <body>
+          <header>
+            <Header />
+          </header>
+          <main className="mt-35">{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

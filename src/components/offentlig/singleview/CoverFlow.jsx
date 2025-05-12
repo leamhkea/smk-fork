@@ -4,10 +4,10 @@ import SwiperCore, { Navigation, Pagination, EffectCoverflow } from "swiper";
 import Image from "next/image";
 
 // Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-import "swiper/components/effect-coverflow/effect-coverflow.scss";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 SwiperCore.use([Navigation, Pagination, EffectCoverflow]);
 

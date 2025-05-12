@@ -16,7 +16,11 @@ const HeroImgText = ({ event }) => {
         {/* Div placerer text halvt ud fra venstre side på image */}
         <div className="absolute top-1/4 left-0 sm:left-[-15%] transform -translate-y-1/2 px-4 sm:px-0">
           <h1>{event.title}</h1>
-          <h2>{event.location.name}</h2>
+          <div className="flex flex-row pt-2">
+            <h3>{event.location.name}</h3>
+            <span className="px-4">|</span>
+            <h3>{event.date}</h3>
+          </div>
         </div>
       </div>
     </div>

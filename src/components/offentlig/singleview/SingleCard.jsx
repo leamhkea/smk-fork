@@ -1,7 +1,7 @@
 import Image from "next/image";
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
-import CoverFlow from "./CoverFlow";
+// import CoverFlow from "./CoverFlow";
 import SamledeImg from "./SamledeImg";
 
 const SingleCard = ({ event }) => {
@@ -12,7 +12,7 @@ const SingleCard = ({ event }) => {
 
       {/* Beskrivelse af event */}
       <div className="flex justify-between max-w-[50rem] mx-auto">
-        <h1 className="w-1/2 break-words">{event.title}</h1>
+        <h1 className="w-1/2 break-words">Om {event.title}</h1>
         <p className="w-1/2 break-words">{event.description}</p>
       </div>
 
@@ -20,7 +20,7 @@ const SingleCard = ({ event }) => {
       <PraktiskInfo event={event} />
 
       {/* Herunder importeres de tre værker i bunden af card */}
-      <CoverFlow event={event} />
+      {/* <CoverFlow event={event} /> */}
     </article>
   );
 };
