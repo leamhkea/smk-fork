@@ -5,85 +5,97 @@ import useArtworkStore from "@/store/kuratorStore";
 const Filtrering = ({ artData }) => {
   const { setFilter } = useArtworkStore();
 
-  const [artists, setArtists] = useState([]); //skal sættes som tomt objekt, ellers er det ikke muligt at mappe over, da den ikke har en standard værdi (i dette tilfælde tomt, så alle værker vises)
-  const [periods, setPeriods] = useState([]);
-  const [nationalities, setNationalities] = useState([]);
-  const [artTypes, setArtTypes] = useState([]);
+  const [kunstnere, setKunstnere] = useState([]);
+  const [tidsperioder, setTidsperioder] = useState([]);
+  const [nationaliteter, setNationaliteter] = useState([]);
+  const [kunsttyper, setKunsttyper] = useState([]);
 
-  useEffect(() => { //useEffect er nødvendig for at arbejde med dataen udenfor den normale render-proces, og bliver derfor først "aktiv" når artData er tilgængelig. Derfra kan kan setArtists (osv.) opdatere sin state
-    const artistSet = new Set(); //Set() bruges til at sikre, at hver dropdown kun indeholder unikke værdier fra dataen (f.eks. kunstnernavne uden dubletter).
+  useEffect(() => {
+    const artistSet = new Set(); //opretter en ny item til options uden at skabe dublikanter
     const periodSet = new Set();
     const nationalitySet = new Set();
-    const artTypeSet = new Set();
+    const typeSet = new Set();
 
-    //forEach over hver af de forskellige items ved at kalde på hver parameter
+    //for each titel, vis indhold
     artData.forEach((item) => {
-
-      item.artist?.forEach((kunstner) => { 
-        if (kunstner.artist) artistSet.add(kunstner.artist);
+      item.artist?.forEach((kunstner) => {
+        artistSet.add(kunstner);
       });
 
-      item.content_person_full?.forEach((nationalitet) => { 
-      if (nationalitet.nationality) nationalitySet.add(nationalitet.nationality);
-    });
+      item.production?.forEach((nationalitet) => {
+        if (nationalitet.creator_nationality) {
+          nationalitySet.add(nationalitet.creator_nationality);
+        }
+      });
+
       item.production_date?.forEach((periode) => {
-        if (periode.period) periodSet.add(periode.period);  //hvis parametret svarer til det valgte i select, tilføj til listview
+        if (periode.period) {
+          periodSet.add(periode.period);
+        }
       });
 
-      item.object_names?.forEach((kunsttype) => {
-        if (kunsttype.name) artTypeSet.add(kunsttype.name);
+      item.object_names?.forEach((type) => {
+        if (type.name) {
+          typeSet.add(type.name);
+        }
       });
     });
 
-    setArtists([...artistSet].sort()); //sort muterer arrayet og returnerer en reference til samme array. Der bruges spreading til at blive sorteret efter hver type, der er gemt som set() (og dermed unikt) gennem useEffect
-    setPeriods([...periodSet].sort());
-    setNationalities([...nationalitySet].sort());
-    setArtTypes([...artTypeSet].sort());
+    setKunstnere([...artistSet].sort()); //sorterer arrayet med sort() for at returnere en reference til det tomme array ved useState. 
+    setTidsperioder([...periodSet].sort());
+    setNationaliteter([...nationalitySet].sort());
+    setKunsttyper([...typeSet].sort());
   }, [artData]);
 
-  const filtreretValue = (field, value) => {
-    setFilter({ [field]: value }); //kalder denne funktion ved onChange, så listens values (fra API'et), vises i dropdownen uafhængig af field
+//opdaterer ét flterfelt ad gangen i zustand, bruges til onChange
+  const filtreretValue = (field, value) => { 
+    setFilter({ [field]: value });
   };
 
   return (
-    <div className="flex justify-between h-10">
-      <select onChange={(e) => filtreretValue("artist", e.target.value)}> 
-        <option value="">Vælg kunstner</option> {/* default value="", giver brugeren mulighed for at nulstille søgningen */}
-        {artists.map((artist, i) => (
-          <option key={i} value={artist}> {/* // i = index, bruges som key og finder forskellige antal af muligheder*/}
-            {artist}
+    <div className="flex justify-between h-10 gap-2">
+
+      {/* kunstner */}
+      <select onChange={(e) => filtreretValue("artist", e.target.value)}>
+        <option value="">Vælg kunstner</option>
+        {kunstnere.map((kunstner, i) => (
+          <option key={i} value={kunstner}>
+            {kunstner}
           </option>
         ))}
-      </select> 
- 
+      </select>
+
+      {/* tidsperiode */}
       <select onChange={(e) => filtreretValue("period", e.target.value)}>
-        <option value="">Vælg tidsperiode</option> 
-        {periods.map((period, i) => (
-          <option key={i} value={period}> 
-            {period}
-          </option>
-        ))} 
-      </select>
-
-      <select onChange={(e) => filtreretValue("type", e.target.value)}>
-        <option value="">Vælg kunstart</option> 
-        {artTypes.map((type, i) => (
-          <option key={i} value={type}>
-            {type}
+        <option value="">Vælg tidsperiode</option>
+        {tidsperioder.map((tidsperiode, i) => (
+          <option key={i} value={tidsperiode}>
+            {tidsperiode}
           </option>
         ))}
       </select>
 
+        {/* kunstart */}
+      <select onChange={(e) => filtreretValue("type", e.target.value)}>
+        <option value="">Vælg kunstart</option>
+        {kunsttyper.map((kunsttype, i) => (
+          <option key={i} value={kunsttype}>
+            {kunsttype}
+          </option>
+        ))}
+      </select>
+
+        {/* nationalitet */}
       <select onChange={(e) => filtreretValue("nationality", e.target.value)}>
         <option value="">Vælg nationalitet</option>
-        {nationalities.map((nat, i) => (
-          <option key={i} value={nat}>
-            {nat}
+        {nationaliteter.map((nationalitet, i) => (
+          <option key={i} value={nationalitet}>
+            {nationalitet}
           </option>
         ))}
       </select>
     </div>
   );
-}; 
+};
 
 export default Filtrering;

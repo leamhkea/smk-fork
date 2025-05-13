@@ -39,44 +39,39 @@ const useArtworkStore = create((set, get) => ({
 
 //FILTRERING// 
 
-//starter med tomt array
-filters: {
+// Initialiser filter state
+allFilters: {
   artist: "",
   period: "",
   nationality: "",
   type: "",
 },
 
-//opdaterer filter-objektet uden at slette de eksisterende filtre. Var spreading ikke brugt, ville det slette de gamle filtre
+// Updaterer filrenes values uden at slette de gamle
 setFilter: (newFilters) => {
-  set({ filters: { ...get().filters, ...newFilters } }); //get().filters = beholder de eksisterende filtre. ...newfilters overskriver med de nye. Set bruges til at opdatere statet
-  get().getFilter(); //opdaterer nu også visningen i listview
+  set({ allFilters: { ...get().allFilters, ...newFilters } });
+  get().getFilter(); // opdaterer
 },
 
+// Tilføj alle aktive filtre til listview
 getFilter: () => {
-  const { filters, artworks } = get();
+  const { allFilters, artworks } = get();
+
   const filtered = artworks.filter((item) => {
-    const kunstnerFilter = filters.artist
-      ? item.artist?.some((kunstner) => kunstner === filters.artist) //some() bruges til at tjekke om værket matcher det valgte filter og eksisterer i arrayet - hvis mindst én mather, returneres værdien
-      : true; //matcher titlen med det enklete værks indhold, returneres den som true og bliver dermed vist.
+    //vælg kunstner
+    const vaelgKunstner = !allFilters.artist || item.artist?.includes(allFilters.artist);
+    //vælg tidsperiode
+    const vaelgPeriode = !allFilters.period || item.production_date?.some(p => p.period === allFilters.period);
+    //vælg nationalitet
+    const vaelgNationalitet = !allFilters.nationality || item.production?.some(n => n.creator_nationality === allFilters.nationality);
+    //vælg kunstart
+    const vaelgKunstart = !allFilters.type || item.object_names?.some(n => n.name === allFilters.type);
 
-    const periodeFilter = filters.period
-      ? item.production_date?.some((periode) => periode.period === filters.period)
-      : true;
-
-    const nationalitetFilter = filters.nationality
-      ? item.content_person_full?.some((nationalitet) => nationalitet.nationality === filters.nationality)
-      : true;
-
-    const kunsttypeFilter = filters.type
-      ? item.object_names?.some((kunsttype) => kunsttype.name === filters.type)
-      : true;
-
-    return kunstnerFilter && periodeFilter && nationalitetFilter && kunsttypeFilter;
+    return vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart;
   });
 
   set({
-    visibleArtworks: filtered.slice(0, 30), //sørger for at der stadigvæk kun vises 30 ad gangen efter filtrering, og sætter den endelige filtrering
+    visibleArtworks: filtered.slice(0, 30), //setter artworks, og limiter igen til 30
     offset: 30,
   });
 },
