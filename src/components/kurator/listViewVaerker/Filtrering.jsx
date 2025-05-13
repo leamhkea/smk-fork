@@ -18,11 +18,14 @@ const Filtrering = ({ artData }) => {
 
     //forEach over hver af de forskellige items ved at kalde på hver parameter
     artData.forEach((item) => {
-      item.content_person_full?.forEach((person) => { //nationalitet og full name er samlet eftersom begge ligger i arrayet "content_person_full"
-        if (person.full_name) artistSet.add(person.full_name);
-        if (person.nationality) nationalitySet.add(person.nationality);
+
+      item.artist?.forEach((kunstner) => { 
+        if (kunstner.artist) artistSet.add(kunstner.artist);
       });
 
+      item.content_person_full?.forEach((nationalitet) => { 
+      if (nationalitet.nationality) nationalitySet.add(nationalitet.nationality);
+    });
       item.production_date?.forEach((periode) => {
         if (periode.period) periodSet.add(periode.period);  //hvis parametret svarer til det valgte i select, tilføj til listview
       });

@@ -57,7 +57,7 @@ getFilter: () => {
   const { filters, artworks } = get();
   const filtered = artworks.filter((item) => {
     const kunstnerFilter = filters.artist
-      ? item.content_person_full?.some((person) => person.full_name === filters.artist) //some() bruges til at tjekke om værket matcher det valgte filter og eksisterer i arrayet - hvis mindst én mather, returneres værdien
+      ? item.artist?.some((kunstner) => kunstner === filters.artist) //some() bruges til at tjekke om værket matcher det valgte filter og eksisterer i arrayet - hvis mindst én mather, returneres værdien
       : true; //matcher titlen med det enklete værks indhold, returneres den som true og bliver dermed vist.
 
     const periodeFilter = filters.period
