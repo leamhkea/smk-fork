@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import KurvPopover from "./kurv/KurvPopover";
 import { useState } from "react";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import SideMenu from "@/components/kurator/global/SideMenu";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import ClosingTag from "./ikoner/ClosingTag";
+import { IoHeartOutline } from "react-icons/io5";
 
 const Header = () => {
   const pathnameBlue = usePathname();
@@ -61,6 +62,7 @@ const Header = () => {
 
         {/* Højre side: kurv */}
         <div className="flex gap-3">
+        <SignedOut>
           <li
             className={`cursor-pointer ${
               pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
@@ -74,7 +76,17 @@ const Header = () => {
             )}
             {showKurvMenu && <KurvPopover />}
           </li>
+          </SignedOut>
           <SignedIn>
+          <li
+              className={`cursor-pointer ${
+                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+              }`}
+              onClick={handleToggleSideMenu}
+            >
+              {showSideMenu ? <IoMdClose size={30} /> : <IoHeartOutline size={30} />}
+              {/* {showSideMenu && <IoHeartOutline />} opdater til den rigtige sidemenu */}
+            </li>
             <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
