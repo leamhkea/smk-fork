@@ -23,14 +23,18 @@ const SingleVaerkBeskrivelse = ({art}) => {
             <p className="bold">Materiale |</p>
             <p>{art.materials}</p>
         </div>
-        <div className="flex flex-col">
-            <p className="bold">Værkbeskrivelse |</p>
+        <div className="flex flex-col mt-4">
+            <p className="bold">Værkbeskrivelse</p>
             <p>{art.content_description?.[0] || "Værket har ingen beskrivelse"}</p>
             <p>{art.content_description?.[1]}</p>
         </div>
-        <div className="flex flex-col">
-            <p className="bold">Litterær reference |</p>
+        <div className="flex flex-col mt-4">
+            <p className="bold">Litterær reference</p>
             <p>{art.literary_reference?.[0] || "Værket har ingen litterær reference"}</p>
+        </div>
+        <div className="flex flex-col gap-1 mt-3">
+            <p className="bold">Relateret information</p>
+            <p>{art.related_objects?.[8] || "Kunstneren har ingen relaterede  informationer"}</p>
         </div>
         </div>
         <div className="flex flex-col gap-1">
@@ -54,6 +58,10 @@ const SingleVaerkBeskrivelse = ({art}) => {
         <div className="flex gap-1">
             <p className="bold">Kunstnerens køn |</p>
             <p>{art.production[0]?.creator_gender}</p>
+        </div>
+        <div className="flex flex-col gap-1 mt-3">
+            <p className="bold">Om kunstneren</p>
+            <p>{art.production[0]?.creator_history || "Kunstneren har ingen beskrivelse"}</p>
         </div>
         </div>
         <div className="flex flex-col gap-1">

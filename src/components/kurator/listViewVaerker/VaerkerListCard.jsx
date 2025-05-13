@@ -21,7 +21,10 @@ const VaerkerListCard = ({art}) => {
         <p>{art.object_names[0]?.name}</p>
         </div>
           <p>{art.acquisition_date_precision}</p>
-  
+          <div className="flex justify-center gap-1">
+            <p>Inventarnummer |</p>
+            <p className="thin">{art.object_number}</p>
+          </div>
           <SecondaryButton>Læs mere</SecondaryButton>
         </li>
       </Link> 
