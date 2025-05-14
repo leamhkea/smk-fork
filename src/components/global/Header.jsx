@@ -78,22 +78,6 @@ const Header = () => {
 
         {/* Højre side: kurv */}
         <div className="flex gap-3">
-          {/* <SignedOut>
-            <li
-              className={`cursor-pointer ${
-                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-              }`}
-              onClick={handleToggleKurvMenu}
-            >
-              {showKurvMenu ? (
-                <ClosingTag size={50} />
-              ) : (
-                <HiOutlineShoppingBag size={30} />
-              )}
-              {showKurvMenu && <KurvPopover />}
-            </li>
-          </SignedOut> */}
-
           <SignedOut>
             <div ref={kurvRef} className="relative">
               <li
