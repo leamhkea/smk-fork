@@ -48,7 +48,7 @@ const useBookingStore = create(
       // Fjerner en billet helt
       sletBillet: (billetID) =>
         set((state) => ({
-          items: state.billetter.filter((billet) => billet.id !== billetID),
+          billetter: state.billetter.filter((billet) => billet.id !== billetID),
         })),
 
       // Tømmer hele kurven
