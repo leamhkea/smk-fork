@@ -26,12 +26,12 @@ const KurvPopover = () => {
 
   return (
     <div
-      className={`fixed top-20 right-0 w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 min-h-screen bg-(--white) shadow-lg z-1 transition-transform duration-500 ease-out 
-      ${isVisible ? "translate-x-0" : "translate-x-full"}`}
+      className={`fixed top-20 right-0 w-full sm:w-2/3 lg:w-1/2 min-h-screen bg-[var(--white)] shadow-lg z-1 transition-transform duration-500 ease-out 
+        ${isVisible ? "translate-x-0" : "translate-x-full"}`}
     >
       <div className="p-10 overflow-y-auto grid gap-8">
         {/* Viser antallet af billetter tilføjet til kurven */}
-        <p>Arrangementer ({billetSum})</p>
+        <p>Antal billetter til valgte arrangementer ({billetSum})</p>
 
         {/* If/else statement som viser bestilt arrangement ellers besked om tom kurv */}
         <div className="flex-1">
