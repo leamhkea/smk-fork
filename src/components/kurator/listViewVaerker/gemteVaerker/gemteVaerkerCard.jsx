@@ -1,25 +1,31 @@
+"use client";
 import Image from "next/image";
 import DeleteTrash from "@/components/global/ikoner/DeleteTrash";
+import useArtworkStore from "@/store/kuratorStore";
 
-const GemteVaerkerCard = () => {
+const GemteVaerkerCard = ({vaerk}) => {
+  const sletVaerk = useArtworkStore((state) => state.sletVaerk);
+
     return ( <div className="flex flex-row gap-4 items-stretch">
-      <Image
-        alt={`Billede af !event titel!`}
-        width={100}
-        height={100}
-        src="/placeholder.png"
-        className="object-cover"
-      />
+      {vaerk.image_thumbnail && (
+             <Image
+             src={vaerk.image_thumbnail}
+             alt={`Billede af ${vaerk.title}`}
+             width={200}
+             height={200}
+             className="object-contain max-w-full self-center"
+             />
+             )}
       <div className="flex flex-col justify-between flex-1">
-        <h2>Værk titel</h2>
+        <h2>{vaerk.titles[0]?.title}</h2>
         <div className="flex justify-between">
         <div className="flex">
             <p className="bold">Inventarnummer:</p>
             <span className="px-4">|</span>
-            <p>object_number</p>
+            <p>{vaerk.object_number}</p>
           </div>
         </div>
-        <DeleteTrash/>
+        <DeleteTrash onClick={sletVaerk}/>
       </div>
     </div> );
 }

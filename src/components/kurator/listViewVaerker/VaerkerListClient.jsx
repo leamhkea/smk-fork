@@ -36,7 +36,7 @@ const VaerkerListClient = ({ artData }) => {
       </div>
       <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">
         {visibleArtworks.map((art) => (
-          <VaerkerListCard key={art.id} art={art} />
+          <VaerkerListCard key={art.object_number} art={art} />
         ))}
       </ul>
       {hasMore() && ( //viser kun knappen hvis der er mere data at indhente
