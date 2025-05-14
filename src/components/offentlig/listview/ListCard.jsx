@@ -10,8 +10,7 @@ const ListCard = ({ event }) => {
           alt={`Billede af ${event.title}`}
           width={500}
           height={500}
-          src="/placeholder.png"
-          className="object-contain max-w-full self-center"
+          src={event.artworkIds}
         />
 
         <h2>{event.title}</h2>
