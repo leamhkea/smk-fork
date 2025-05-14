@@ -67,22 +67,26 @@ const useArtworkStore = create(
       // GEMTE VÆRKER //
       gemteVaerker: [],
 
-      addVaerk: (vaerk) =>
+      //tilføjer værk til array
+        addVaerk: (vaerk) =>
+          set((state) => ({
+            gemteVaerker: state.gemteVaerker.concat({ ...vaerk, antal: 1 }), //spreading og antal taler her sammen med vaerkSum
+          })),
+        
+
+        //det samlede antal af værker dispalyed
+        vaerkSum: () =>
+          get().gemteVaerker
+            .filter((v) => v && typeof v.antal === "number") //sikrer at der ikke er nogle null-elementer fra api'et
+            .reduce((accumulator, currentValue) => accumulator + currentValue.antal,0),
+        
+      //gør det muligt at slette et enkelt værk
+      sletVaerk: (vaerkObjectNumber) =>
         set((state) => ({
-          gemteVaerker: state.gemteVaerker.concat(vaerk),
+          gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk?.object_number !== vaerkObjectNumber),
         })),
 
-      vaerkSum: () =>
-        get().gemteVaerker.reduce(
-          (accumulator, currentValue) => accumulator + currentValue.antal,
-          0
-        ),
-
-      sletVaerk: (vaerkID) =>
-        set((state) => ({
-          gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk.id !== vaerkID),
-        })),
-
+        //sletter alle værker
       emptyGemteVaerker: () => set({ gemteVaerker: [] }),
 
     }),
@@ -97,3 +101,6 @@ const useArtworkStore = create(
 );
 
 export default useArtworkStore;
+
+
+
