@@ -25,16 +25,10 @@ const Header = () => {
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
 
-  // Laver const til at vise popover menuer for KURATOR
+  // Laver const til at vise burgermenu for KURATOR
   const [showSideMenu, setShowSideMenu] = useState(false);
   const handleToggleSideMenu = () => {
     setShowSideMenu((prev) => !prev);
-  };
-
-  // Laver const til at vise gemte værk menu for KURATOR
-  const [showGemteVaerker, setGemteVaerker] = useState(false);
-  const handleToggleGemteVaerker = () => {
-    setGemteVaerker((prev) => !prev);
   };
 
   // Laver const til at vise popover menuer for OFFENTLIG BRUGER
@@ -47,6 +41,16 @@ const Header = () => {
   useClickAway(kurvRef, () => {
     setShowKurvMenu(false);
   });
+
+   // Laver const til at vise popover menuer for KURATOR (gemte værker)
+   const [showGemteVaerker, setShowGemteVaerker] = useState(false);
+
+    // Laver en ref til gemteværker-menuen 
+    const gemteVaerkerRef = useRef(null);
+
+    useClickAway(gemteVaerkerRef, () => {
+      setShowGemteVaerker(false);
+    });
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
@@ -102,19 +106,21 @@ const Header = () => {
           </SignedOut>
 
           <SignedIn>
+            <div ref={gemteVaerkerRef} className="relative">
             <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
               }`}
-              onClick={handleToggleGemteVaerker}
+              onClick={()=>setShowGemteVaerker((prev)=>!prev)}
             >
               {showGemteVaerker ? (
                 <IoMdClose size={30} />
               ) : (
                 <IoHeartOutline size={30} />
               )}
-              {showGemteVaerker && <GemteVaerkerDisplay />}
             </li>
+            {showGemteVaerker && <GemteVaerkerDisplay />}
+            </div>
 
             <li
               className={`cursor-pointer ${
@@ -123,8 +129,8 @@ const Header = () => {
               onClick={handleToggleSideMenu}
             >
               {showSideMenu ? <IoMdClose size={30} /> : <IoIosMenu size={30} />}
-              {showSideMenu && <SideMenu />}
             </li>
+            {showSideMenu && <SideMenu />}
           </SignedIn>
         </div>
       </ul>

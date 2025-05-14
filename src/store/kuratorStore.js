@@ -86,6 +86,7 @@ const useArtworkStore = create(
           gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk?.object_number !== vaerkObjectNumber),
         })),
 
+
         //sletter alle værker
       emptyGemteVaerker: () => set({ gemteVaerker: [] }),
 

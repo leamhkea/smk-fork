@@ -2,6 +2,7 @@
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import useArtworkStore from "@/store/kuratorStore";
 
+
 const GemEtVaerkIcon = ({ vaerk }) => {
   const gemteVaerker = useArtworkStore((state) => state.gemteVaerker);
   const addVaerk = useArtworkStore((state) => state.addVaerk);

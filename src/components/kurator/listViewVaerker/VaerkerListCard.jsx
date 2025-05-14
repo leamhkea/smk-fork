@@ -4,9 +4,11 @@ import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import GemEtVaerkIcon from "./gemteVaerker/GemEtVaerkIcon";
 
 const VaerkerListCard = ({art}) => {
+
     return (
         <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
-          <GemEtVaerkIcon vaerk={art} />
+
+        <GemEtVaerkIcon vaerk={art} />
         {art.image_thumbnail && (
         <Image
         src={art.image_thumbnail}
@@ -16,6 +18,7 @@ const VaerkerListCard = ({art}) => {
         className="object-contain max-w-full self-center"
         />
         )}
+
         <Link href={`/vaerkarkiv/${art.object_number}`}>
         <h2>{art.titles[0]?.title}</h2>
         <div className="flex justify-center gap-1">
@@ -27,7 +30,9 @@ const VaerkerListCard = ({art}) => {
             <p>Inventarnummer |</p>
             <p className="thin">{art.object_number}</p>
           </div>
+
           <SecondaryButton>Læs mere</SecondaryButton>
+
           </Link>
         </li> 
       );

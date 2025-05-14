@@ -25,7 +25,12 @@ const GemteVaerkerCard = ({vaerk}) => {
             <p>{vaerk.object_number}</p>
           </div>
         </div>
-        <DeleteTrash onClick={sletVaerk}/>
+        <button
+            className=" hover:text-red-600"
+            onClick={() => sletVaerk(vaerk.object_number)}
+          >
+            <DeleteTrash />
+          </button>
       </div>
     </div> );
 }

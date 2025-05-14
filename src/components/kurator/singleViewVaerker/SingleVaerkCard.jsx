@@ -1,6 +1,7 @@
 import SingleVaerkBeskrivelse from "./SingleVarkBeskrivelse";
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import Image from "next/image";
+import GemEtVaerkButton from "../listViewVaerker/gemteVaerker/GemEtVaerkButton";
+
 const SingleVaerkCard = ({ art }) => {  
     return (
         <div className="flex flex-col gap-10">
@@ -18,7 +19,7 @@ const SingleVaerkCard = ({ art }) => {
                         </div>
                     <a className="thin" href="/opretarrangement">Opret arrangement</a>
                     </div>
-                    <SecondaryButton>Gem værk</SecondaryButton>
+                    <GemEtVaerkButton vaerk={art}/>
                     </div>
                 {art.image_thumbnail && (
                     <Image
