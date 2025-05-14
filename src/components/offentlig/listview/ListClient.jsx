@@ -8,7 +8,7 @@ const ListClient = ({ data }) => {
   return (
     <div>
       <SignedIn>
-        <Kladder/>
+        <Kladder />
       </SignedIn>
       <div className="flex flex-col gap-4 mt-0 mb-8">
         <h1>Alle arrangementer</h1>

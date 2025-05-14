@@ -21,8 +21,8 @@ const KurvCard = () => {
             <p>13:30</p>
           </div>
           <div className="flex gap-8">
-            <BilletAntal />
-            <DeleteTrash />
+            <BilletAntal className="flex-1" />
+            <DeleteTrash className="flex-1" />
           </div>
         </div>
       </div>
