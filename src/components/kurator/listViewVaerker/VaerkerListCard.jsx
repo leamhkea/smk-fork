@@ -4,7 +4,8 @@ import Link from "next/link";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import { IoHeartOutline } from "react-icons/io5";
 import { IoHeartSharp } from "react-icons/io5";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import GemEtVaerkIcon from "./gemteVaerker/GemEtVaerkIcon";
 
 const VaerkerListCard = ({art}) => {
   const [gemVaerk, setGemVaerk] = useState(false);
@@ -15,10 +16,9 @@ const VaerkerListCard = ({art}) => {
 
     return (
         <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
-          <div className="relative top-15 left-5" onClick={handleToggleGemVaerk}>{
-            gemVaerk?  <IoHeartSharp className="cursor-pointer" size={30} /> : <IoHeartOutline className="cursor-pointer" size={30} />}
-         
-          </div>  
+          <GemEtVaerkIcon gemteVaerker={art} onClick={handleToggleGemVaerk}>{
+            gemVaerk?  (<IoHeartSharp className="cursor-pointer" size={30} />) : (<IoHeartOutline className="cursor-pointer" size={30} />)}
+          </GemEtVaerkIcon>  
         {art.image_thumbnail && (
         <Image
         src={art.image_thumbnail}

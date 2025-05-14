@@ -18,6 +18,7 @@ import { IoHeartOutline } from "react-icons/io5";
 // Importerer egne components
 import KurvPopover from "./kurv/KurvPopover";
 import SideMenu from "@/components/kurator/global/SideMenu";
+import GemteVaerkerDisplay from "../kurator/listViewVaerker/gemteVaerker/GemteVaerkerDisplay";
 
 const Header = () => {
   // Laver const til de to pathname med underline og blå text-farve
@@ -29,6 +30,12 @@ const Header = () => {
   const handleToggleSideMenu = () => {
     setShowSideMenu((prev) => !prev);
   };
+
+    // Laver const til at vise gemte værk menu for KURATOR
+    const [showGemteVaerker, setGemteVaerker] = useState(false);
+    const handleToggleGemteVaerker=()=>{
+      setGemteVaerker((prev)=>!prev);
+    }
 
   // Laver const til at vise popover menuer for OFFENTLIG BRUGER
   const [showKurvMenu, setShowKurvMenu] = useState(false);
@@ -99,19 +106,16 @@ const Header = () => {
           </SignedOut>
 
           <SignedIn>
-            <li
+          <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
               }`}
-              onClick={handleToggleSideMenu}
+              onClick={handleToggleGemteVaerker}
             >
-              {showSideMenu ? (
-                <IoMdClose size={30} />
-              ) : (
-                <IoHeartOutline size={30} />
-              )}
-              {/* {showSideMenu && <IoHeartOutline />} opdater til den rigtige sidemenu */}
+              {showGemteVaerker ? <IoMdClose size={30} /> : <IoHeartOutline size={30} />}
+              {showGemteVaerker && <GemteVaerkerDisplay />}
             </li>
+
             <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
