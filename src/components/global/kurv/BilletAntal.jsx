@@ -10,27 +10,24 @@ const BilletAntal = ({ id, antal }) => {
   const incAntal = useBookingStore((state) => state.incAntal);
 
   return (
-    <div>
-      <div className="flex items-center space-x-2 w-25">
-        {/* Tilføjer x antal billetter til kurven */}
-        <button onClick={() => decAntal(id)}>
-          <HiMinus />
-        </button>
+    <div className="flex items-center">
+      {/* Tilføjer x antal billetter til kurven */}
+      <button onClick={() => decAntal(id)}>
+        <HiMinus />
+      </button>
 
-        {/* Viser antallet billetter tilføjet til kurven */}
-        <input
-          type="number"
-          value={antal}
-          onChange={(e) => setCount(Math.max(1, +e.target.value))}
-          className="text-center w-12"
-        />
+      {/* Viser antallet billetter tilføjet til kurven */}
+      <input
+        type="number"
+        value={antal}
+        onChange={(e) => setCount(Math.max(1, +e.target.value))}
+        className="text-center w-15"
+      />
 
-        {/* Fjerner x antal billetter til kurven */}
-        <button onClick={() => incAntal(id)}>
-          <BsPlusLg />
-        </button>
-      </div>
-      <hr />
+      {/* Fjerner x antal billetter til kurven */}
+      <button onClick={() => incAntal(id)}>
+        <BsPlusLg />
+      </button>
     </div>
   );
 };

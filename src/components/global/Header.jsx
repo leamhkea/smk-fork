@@ -9,7 +9,6 @@ import { useRef } from "react";
 import { useClickAway } from "react-use";
 
 // Importerer react icons
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import ClosingTag from "./ikoner/ClosingTag";
@@ -19,6 +18,7 @@ import { IoHeartOutline } from "react-icons/io5";
 import KurvPopover from "./kurv/KurvPopover";
 import SideMenu from "@/components/kurator/global/SideMenu";
 import GemteVaerkerDisplay from "../kurator/listViewVaerker/gemteVaerker/GemteVaerkerDisplay";
+import Kurv from "./ikoner/Kurv";
 
 const Header = () => {
   // Laver const til de to pathname med underline og blå text-farve
@@ -31,11 +31,11 @@ const Header = () => {
     setShowSideMenu((prev) => !prev);
   };
 
-    // Laver const til at vise gemte værk menu for KURATOR
-    const [showGemteVaerker, setGemteVaerker] = useState(false);
-    const handleToggleGemteVaerker=()=>{
-      setGemteVaerker((prev)=>!prev);
-    }
+  // Laver const til at vise gemte værk menu for KURATOR
+  const [showGemteVaerker, setGemteVaerker] = useState(false);
+  const handleToggleGemteVaerker = () => {
+    setGemteVaerker((prev) => !prev);
+  };
 
   // Laver const til at vise popover menuer for OFFENTLIG BRUGER
   const [showKurvMenu, setShowKurvMenu] = useState(false);
@@ -93,11 +93,7 @@ const Header = () => {
                 }`}
                 onClick={() => setShowKurvMenu((prev) => !prev)}
               >
-                {showKurvMenu ? (
-                  <ClosingTag size={50} />
-                ) : (
-                  <HiOutlineShoppingBag size={30} />
-                )}
+                {showKurvMenu ? <ClosingTag size={50} /> : <Kurv />}
               </li>
 
               {/* Nu er KurvPopover "indenfor" samme DOM-hierarki som ref */}
@@ -106,13 +102,17 @@ const Header = () => {
           </SignedOut>
 
           <SignedIn>
-          <li
+            <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
               }`}
               onClick={handleToggleGemteVaerker}
             >
-              {showGemteVaerker ? <IoMdClose size={30} /> : <IoHeartOutline size={30} />}
+              {showGemteVaerker ? (
+                <IoMdClose size={30} />
+              ) : (
+                <IoHeartOutline size={30} />
+              )}
               {showGemteVaerker && <GemteVaerkerDisplay />}
             </li>
 
