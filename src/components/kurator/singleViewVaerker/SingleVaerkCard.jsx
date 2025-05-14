@@ -1,4 +1,5 @@
 import SingleVaerkBeskrivelse from "./SingleVarkBeskrivelse";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import Image from "next/image";
 const SingleVaerkCard = ({ art }) => {  
     return (
@@ -17,6 +18,7 @@ const SingleVaerkCard = ({ art }) => {
                         </div>
                     <a className="thin" href="/opretarrangement">Opret arrangement</a>
                     </div>
+                    <SecondaryButton>Gem værk</SecondaryButton>
                     </div>
                 {art.image_thumbnail && (
                     <Image
