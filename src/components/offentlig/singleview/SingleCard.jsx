@@ -20,7 +20,7 @@ const SingleCard = ({ event }) => {
       <PraktiskInfo event={event} />
 
       {/* Button til at tilføje event til kurven */}
-      <ButtonAddBillet />
+      <ButtonAddBillet billet={event} />
     </article>
   );
 };

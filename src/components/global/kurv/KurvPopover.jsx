@@ -31,13 +31,13 @@ const KurvPopover = () => {
     >
       <div className="p-10 overflow-y-auto grid gap-8">
         {/* Viser antallet af billetter tilføjet til kurven */}
-        <p>Kurv ({billetSum})</p>
+        <p>Arrangementer ({billetSum})</p>
 
         {/* If/else statement som viser bestilt arrangement ellers besked om tom kurv */}
         <div className="flex-1">
           {billetter && billetter.length > 0 ? (
             billetter.map((billet) => (
-              <KurvCard key={billet.id} data={billet} />
+              <KurvCard key={billet.id} event={billet} />
             ))
           ) : (
             <p>Der er ingen arrangementer tilføjet til kurvet</p>

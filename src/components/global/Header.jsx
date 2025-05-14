@@ -1,29 +1,45 @@
 "use client";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+
+// Importerer pakker fra react og andet
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import KurvPopover from "./kurv/KurvPopover";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import SideMenu from "@/components/kurator/global/SideMenu";
+import { useRef } from "react";
+import { useClickAway } from "react-use";
+
+// Importerer react icons
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import ClosingTag from "./ikoner/ClosingTag";
 import { IoHeartOutline } from "react-icons/io5";
 
+// Importerer egne components
+import KurvPopover from "./kurv/KurvPopover";
+import SideMenu from "@/components/kurator/global/SideMenu";
+
 const Header = () => {
+  // Laver const til de to pathname med underline og blå text-farve
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
-  // const [showPopover, setShowPopover] = useState(false);
-  const [showSideMenu, setShowSideMenu] = useState(false);
-  const [showKurvMenu, setShowKurvMenu] = useState(false);
 
+  // Laver const til at vise popover menuer for KURATOR
+  const [showSideMenu, setShowSideMenu] = useState(false);
   const handleToggleSideMenu = () => {
     setShowSideMenu((prev) => !prev);
   };
-  const handleToggleKurvMenu = () => {
-    setShowKurvMenu((prev) => !prev);
-  };
+
+  // Laver const til at vise popover menuer for OFFENTLIG BRUGER
+  const [showKurvMenu, setShowKurvMenu] = useState(false);
+
+  // Laver en ref til kurv-menuen (for at lytte efter klik udenfor popover)
+  const kurvRef = useRef(null);
+
+  // useClickAway hook til at lukke menuen, hvis man klikker udenfor
+  useClickAway(kurvRef, () => {
+    setShowKurvMenu(false);
+  });
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
@@ -62,29 +78,54 @@ const Header = () => {
 
         {/* Højre side: kurv */}
         <div className="flex gap-3">
-        <SignedOut>
-          <li
-            className={`cursor-pointer ${
-              pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-            }`}
-            onClick={handleToggleKurvMenu}
-          >
-            {showKurvMenu ? (
-              <ClosingTag size={50} />
-            ) : (
-              <HiOutlineShoppingBag size={30} />
-            )}
-            {showKurvMenu && <KurvPopover />}
-          </li>
+          {/* <SignedOut>
+            <li
+              className={`cursor-pointer ${
+                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+              }`}
+              onClick={handleToggleKurvMenu}
+            >
+              {showKurvMenu ? (
+                <ClosingTag size={50} />
+              ) : (
+                <HiOutlineShoppingBag size={30} />
+              )}
+              {showKurvMenu && <KurvPopover />}
+            </li>
+          </SignedOut> */}
+
+          <SignedOut>
+            <div ref={kurvRef} className="relative">
+              <li
+                className={`cursor-pointer ${
+                  pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+                }`}
+                onClick={() => setShowKurvMenu((prev) => !prev)}
+              >
+                {showKurvMenu ? (
+                  <ClosingTag size={50} />
+                ) : (
+                  <HiOutlineShoppingBag size={30} />
+                )}
+              </li>
+
+              {/* Nu er KurvPopover "indenfor" samme DOM-hierarki som ref */}
+              {showKurvMenu && <KurvPopover />}
+            </div>
           </SignedOut>
+
           <SignedIn>
-          <li
+            <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
               }`}
               onClick={handleToggleSideMenu}
             >
-              {showSideMenu ? <IoMdClose size={30} /> : <IoHeartOutline size={30} />}
+              {showSideMenu ? (
+                <IoMdClose size={30} />
+              ) : (
+                <IoHeartOutline size={30} />
+              )}
               {/* {showSideMenu && <IoHeartOutline />} opdater til den rigtige sidemenu */}
             </li>
             <li
