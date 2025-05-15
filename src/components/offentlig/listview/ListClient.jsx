@@ -5,7 +5,7 @@ import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
 import EventSlider from "./EventSlider";
 
 const ListClient = (props) => {
-  const cities = [
+  const lokationer = [
     { title: "København", events: props.kobenhavn },
     { title: "Aarhus", events: props.aarhus },
     { title: "Odense", events: props.odense },
@@ -34,7 +34,7 @@ const ListClient = (props) => {
       </div>
 
       {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}
-      {cities.map(({ title, events }) => (
+      {lokationer.map(({ title, events }) => (
         <EventSlider key={title} title={title} events={events} />
       ))}
     </div>

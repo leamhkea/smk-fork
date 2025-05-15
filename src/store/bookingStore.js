@@ -54,10 +54,24 @@ const useBookingStore = create(
       // Tømmer hele kurven
       emptyKurv: () => set({ billetter: [] }),
 
-      // Ny funktion her
-      //
+      // Laver animation når popover menu fjernes
+      isKurvVisible: false,
+
+      showKurv: () => set({ isKurvVisible: true }),
+
+      hideKurv: () => {
+        set({ isKurvVisible: false });
+        setTimeout(() => {
+          const onCloseCallback = get().onKurvClose;
+          if (onCloseCallback) {
+            onCloseCallback(); // Hvis du har defineret en callback
+          }
+        }, 500); // Match din animationstid
+      },
+
+      setOnKurvClose: (callback) => set({ onKurvClose: callback }),
     }),
-    { name: "storage" }
+    { name: "storage", partialize: (state) => ({ billetter: state.billetter }) }
   )
 );
 
