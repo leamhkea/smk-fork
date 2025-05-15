@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DeleteTrash from "../ikoner/DeleteTrash";
+import DeleteTrash from "@/components/global/ikoner/DeleteTrash";
 import BilletAntal from "./BilletAntal";
 import useBookingStore from "@/store/bookingStore";
 
