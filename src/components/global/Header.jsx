@@ -12,7 +12,7 @@ import { useClickAway } from "react-use";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import ClosingTag from "./ikoner/ClosingTag";
-import { IoHeartOutline } from "react-icons/io5";
+import HeartIconSum from "./ikoner/HeartIconSum";
 
 // Importerer egne components
 import KurvPopover from "../offentlig/kurvview/KurvPopover";
@@ -118,7 +118,7 @@ const Header = () => {
                 {showGemteVaerker ? (
                   <IoMdClose size={30} />
                 ) : (
-                  <IoHeartOutline size={30} />
+                  <HeartIconSum />
                 )}
               </li>
               {showGemteVaerker && <GemteVaerkerDisplay />}

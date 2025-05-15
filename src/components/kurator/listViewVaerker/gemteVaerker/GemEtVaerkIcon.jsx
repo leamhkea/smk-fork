@@ -1,5 +1,6 @@
 "use client";
-import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
+import HeartIconActive from "@/components/global/ikoner/HeartIconActive";
+import HeartIconInactive from "@/components/global/ikoner/HeartIconInactive";
 import useArtworkStore from "@/store/kuratorStore";
 
 
@@ -26,7 +27,7 @@ const GemEtVaerkIcon = ({ vaerk }) => {
       className="relative top-15 left-5 cursor-pointer"
       onClick={handleSavedToggle}
     >
-      {isSaved ? <IoHeartSharp size={30} /> : <IoHeartOutline size={30} />}
+      {isSaved ? <HeartIconActive /> : <HeartIconInactive />}
     </div>
   );
 };
