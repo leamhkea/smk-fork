@@ -7,7 +7,7 @@ import KurvCard from "./KurvCard";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 
-const KurvPopover = () => {
+const KurvPopover = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { billetter } = useBookingStore((state) => state);
@@ -18,6 +18,15 @@ const KurvPopover = () => {
     setIsVisible(true);
   }, []);
 
+  // Funktion til at lukke popover og informere Header
+  const handleClose = () => {
+    setIsVisible(false);
+    // Vent på at animationen er færdig før vi informerer Header
+    setTimeout(() => {
+      if (onClose) onClose();
+    }, 500); // Match transition duration
+  };
+
   return (
     <div
       className={`px-10 pb-30 fixed right-0 w-full sm:w-2/3 lg:w-1/2 h-screen bg-(--white) shadow-lg z-1 transition-transform duration-500 ease-out flex flex-col
@@ -25,7 +34,6 @@ const KurvPopover = () => {
     >
       {/* Scrollbart indhold */}
       <div className="flex-1 overflow-y-auto">
-        {/* Viser antallet af billetter tilføjet til kurven */}
         <div className="pb-16 pt-4">
           <p>Antal billetter til valgte arrangementer ({billetSum})</p>
           <hr />
@@ -38,7 +46,7 @@ const KurvPopover = () => {
               <KurvCard key={billet.id} event={billet} />
             ))
           ) : (
-            <p>Der er ingen arrangementer tilføjet til kurvet</p>
+            <p>Der er ingen arrangementer tilføjet til kurven</p>
           )}
         </div>
       </div>
@@ -48,13 +56,13 @@ const KurvPopover = () => {
         <SecondaryButton
           onClick={() => {
             emptyKurv();
-            setIsVisible(false); // Luk popover
+            handleClose(); // Luk og informer Header
           }}
         >
           Tøm kurv
         </SecondaryButton>
 
-        <Link href="/ordreoversigt" onClick={() => setIsVisible(false)}>
+        <Link href="/ordreoversigt" onClick={handleClose}>
           <TertrieryButton>Bekræft billetter</TertrieryButton>
         </Link>
       </div>

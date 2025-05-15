@@ -25,18 +25,31 @@ const Header = () => {
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
 
-  // Laver const til at vise burgermenu for kurator og offentlig
+  // Laver const til at vise burgermenu for KURATOR
   const [showSideMenu, setShowSideMenu] = useState(false);
   const handleToggleSideMenu = () => {
     setShowSideMenu((prev) => !prev);
   };
 
-  // Laver en ref til menuen (for at lytte efter klik udenfor popover)
-  const menuRef = useRef(null);
+  // Laver const til at vise popover menuer for OFFENTLIG BRUGER
+  const [showKurvMenu, setShowKurvMenu] = useState(false);
+
+  // Laver en ref til kurv-menuen (for at lytte efter klik udenfor popover)
+  const kurvRef = useRef(null);
 
   // useClickAway hook til at lukke menuen, hvis man klikker udenfor
-  useClickAway(menuRef, () => {
-    setShowSideMenu(false);
+  useClickAway(kurvRef, () => {
+    setShowKurvMenu(false);
+  });
+
+  // Laver const til at vise popover menuer for KURATOR (gemte værker)
+  const [showGemteVaerker, setShowGemteVaerker] = useState(false);
+
+  // Laver en ref til gemteværker-menuen
+  const gemteVaerkerRef = useRef(null);
+
+  useClickAway(gemteVaerkerRef, () => {
+    setShowGemteVaerker(false);
   });
 
   return (
@@ -77,36 +90,38 @@ const Header = () => {
         {/* Højre side: kurv */}
         <div className="flex gap-3">
           <SignedOut>
-            <div ref={menuRef} className="relative">
+            <div ref={kurvRef} className="relative">
               <li
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
-                onClick={() => setShowSideMenu((prev) => !prev)}
+                onClick={() => setShowKurvMenu((prev) => !prev)}
               >
-                {showSideMenu ? <ClosingTag size={50} /> : <Kurv />}
+                {showKurvMenu ? <ClosingTag size={50} /> : <Kurv />}
               </li>
 
-              {/* Nu er KurvPopover "indenfor" samme DOM-hierarki som ref */}
-              {showSideMenu && <KurvPopover />}
+              {/* Send onClose prop så Header kan lukke menuen */}
+              {showKurvMenu && (
+                <KurvPopover onClose={() => setShowKurvMenu(false)} />
+              )}
             </div>
           </SignedOut>
 
           <SignedIn>
-            <div ref={menuRef} className="relative">
+            <div ref={gemteVaerkerRef} className="relative">
               <li
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
-                onClick={() => setShowSideMenu((prev) => !prev)}
+                onClick={() => setShowGemteVaerker((prev) => !prev)}
               >
-                {showSideMenu ? (
+                {showGemteVaerker ? (
                   <IoMdClose size={30} />
                 ) : (
                   <IoHeartOutline size={30} />
                 )}
               </li>
-              {showSideMenu && <GemteVaerkerDisplay />}
+              {showGemteVaerker && <GemteVaerkerDisplay />}
             </div>
 
             <li
