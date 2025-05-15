@@ -6,6 +6,7 @@ const VaerkerListServer = async () => {
   const artData = await res.json();
 
   const artworks = filterHasImage(artData.items);
+
   return <VaerkerListClient artData={artworks} />;
 };
 

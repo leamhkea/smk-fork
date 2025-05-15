@@ -59,7 +59,7 @@ const useArtworkStore = create(
         });
 
         set({
-          visibleArtworks: filtered.slice(0, 30),
+          visibleArtworks: filtered.slice(0, 30), //skal opdateres så den henter 30 mere fra samme filtrer og ikke bare genstarter
           offset: 30,
         });
       },
@@ -90,6 +90,16 @@ const useArtworkStore = create(
         //sletter alle værker
       emptyGemteVaerker: () => set({ gemteVaerker: [] }),
 
+      
+      //SØGEFUNKTION//
+      setSearchResults: (results) => {
+        set({
+          artworks: results,
+          visibleArtworks: results.slice(0, 30),
+          offset: 30,
+        });
+      },      
+        
     }),
     {
       name: "kuratorstorage",

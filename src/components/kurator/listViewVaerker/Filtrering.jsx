@@ -53,8 +53,8 @@ const Filtrering = ({ artData }) => {
   };
 
   return (
-    <div className="flex justify-between h-10 gap-2">
-
+    <div className="flex md:flex-row gap-10 h-10 justify-between">
+      <div className="h-15 md:flex lg:gap-35 md:gap-15">
       {/* kunstner */}
       <select onChange={(e) => filtreretValue("artist", e.target.value)}>
         <option value="">Vælg kunstner</option>
@@ -74,7 +74,9 @@ const Filtrering = ({ artData }) => {
           </option>
         ))}
       </select>
+      </div>
 
+      <div className="h-15 md:flex lg:gap-35 md:gap-15">
         {/* kunstart */}
       <select onChange={(e) => filtreretValue("type", e.target.value)}>
         <option value="">Vælg kunstart</option>
@@ -94,6 +96,7 @@ const Filtrering = ({ artData }) => {
           </option>
         ))}
       </select>
+      </div>
     </div>
   );
 };

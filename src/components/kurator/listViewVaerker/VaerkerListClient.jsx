@@ -4,6 +4,7 @@ import VaerkerListCard from "./VaerkerListCard";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import Filtrering from "./Filtrering";
+import SearchBar from "./SearchBar";
 
 const VaerkerListClient = ({ artData }) => {
   const {
@@ -26,9 +27,14 @@ const VaerkerListClient = ({ artData }) => {
 
   return (
     <div className="flex flex-col gap-4 mt-0 mb-8">
+      <div className="flex justify-between md:flex-row flex-col">
       <div>
         <h1>Alle kunstværker</h1>
         <p>For neden ses kunstværker i Statens Museum for Kunsts arkiv.</p>
+      </div>
+      <div>
+        <SearchBar artworks={visibleArtworks}/>
+      </div>
       </div>
       <div className="mt-10">
       <Filtrering artData={artData}/>
