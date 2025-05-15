@@ -6,7 +6,7 @@ import useArtworkStore from "@/store/kuratorStore";
 const GemteVaerkerCard = ({vaerk}) => {
   const sletVaerk = useArtworkStore((state) => state.sletVaerk);
 
-    return ( <div className="flex flex-row gap-4 items-stretch">
+    return ( <div className="flex flex-row gap-4 items-stretch mb-16">
       {vaerk.image_thumbnail && (
              <Image
              src={vaerk.image_thumbnail}
