@@ -88,10 +88,10 @@ a {
   text-decoration: none;
 }
 
-a,
+/* a,
 li[class*="bold"] {
   font-weight: 600;
-}
+} */
 
 /*            HERUNDER ER STYLING PÅ HEADERS           */
 

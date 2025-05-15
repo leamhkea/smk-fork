@@ -1,16 +1,31 @@
 "use client";
-import { useState } from "react";
-import ListCard from "./ListCard";
-import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
-import { SignedIn } from "@clerk/nextjs";
 
-const ListClient = ({ data }) => {
+import { SignedIn } from "@clerk/nextjs";
+import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
+import EventSlider from "./EventSlider";
+
+const ListClient = (props) => {
+  const cities = [
+    { title: "København", events: props.kobenhavn },
+    { title: "Aarhus", events: props.aarhus },
+    { title: "Odense", events: props.odense },
+    { title: "Aalborg", events: props.aalborg },
+    { title: "Esbjerg", events: props.esbjerg },
+    { title: "Køge", events: props.koge },
+    { title: "Silkeborg", events: props.silkeborg },
+    { title: "Lyngby", events: props.lyngby },
+    { title: "Holstebro", events: props.holstebro },
+  ];
+
   return (
     <div>
+      {/* Denne del vises kun, når man som kurator logger ind */}
       <SignedIn>
         <Kladder />
       </SignedIn>
-      <div className="flex flex-col gap-4 mt-0 mb-8">
+
+      {/* Denne del vises for kurator og offentlige brugere */}
+      <div className="flex flex-col gap-4 mt-0 mb-20">
         <h1>Alle arrangementer</h1>
         <p>
           For neden vises alle kommende arrangementer på SMK - Statens Museum
@@ -18,11 +33,10 @@ const ListClient = ({ data }) => {
         </p>
       </div>
 
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">
-        {data.map((event) => (
-          <ListCard key={event.id} event={event} />
-        ))}
-      </ul>
+      {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}
+      {cities.map(({ title, events }) => (
+        <EventSlider key={title} title={title} events={events} />
+      ))}
     </div>
   );
 };

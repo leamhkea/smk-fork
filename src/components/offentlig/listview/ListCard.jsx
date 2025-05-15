@@ -5,18 +5,16 @@ import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 const ListCard = ({ event }) => {
   return (
     <Link href={`/arrangementer/${event.id}`}>
-      <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
+      {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
+      <li className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]">
         <Image
           alt={`Billede af ${event.title}`}
-          width={500}
-          height={500}
-          src={event.artworkIds}
+          width={400}
+          height={400}
+          src="/placeholder.png"
         />
-
-        <h2>{event.title}</h2>
-        <p>{event.description}</p>
+        <h3>{event.title}</h3>
         <p>{event.date}</p>
-
         <SecondaryButton>Læs mere</SecondaryButton>
       </li>
     </Link>
