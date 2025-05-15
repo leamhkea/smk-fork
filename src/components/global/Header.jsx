@@ -15,7 +15,7 @@ import ClosingTag from "./ikoner/ClosingTag";
 import { IoHeartOutline } from "react-icons/io5";
 
 // Importerer egne components
-import KurvPopover from "./kurv/KurvPopover";
+import KurvPopover from "../offentlig/kurvview/KurvPopover";
 import SideMenu from "@/components/kurator/global/SideMenu";
 import GemteVaerkerDisplay from "../kurator/listViewVaerker/gemteVaerker/GemteVaerkerDisplay";
 import Kurv from "./ikoner/Kurv";
@@ -25,32 +25,19 @@ const Header = () => {
   const pathnameBlue = usePathname();
   const pathnameUnderline = usePathname();
 
-  // Laver const til at vise burgermenu for KURATOR
+  // Laver const til at vise burgermenu for kurator og offentlig
   const [showSideMenu, setShowSideMenu] = useState(false);
   const handleToggleSideMenu = () => {
     setShowSideMenu((prev) => !prev);
   };
 
-  // Laver const til at vise popover menuer for OFFENTLIG BRUGER
-  const [showKurvMenu, setShowKurvMenu] = useState(false);
-
-  // Laver en ref til kurv-menuen (for at lytte efter klik udenfor popover)
-  const kurvRef = useRef(null);
+  // Laver en ref til menuen (for at lytte efter klik udenfor popover)
+  const menuRef = useRef(null);
 
   // useClickAway hook til at lukke menuen, hvis man klikker udenfor
-  useClickAway(kurvRef, () => {
-    setShowKurvMenu(false);
+  useClickAway(menuRef, () => {
+    setShowSideMenu(false);
   });
-
-   // Laver const til at vise popover menuer for KURATOR (gemte værker)
-   const [showGemteVaerker, setShowGemteVaerker] = useState(false);
-
-    // Laver en ref til gemteværker-menuen 
-    const gemteVaerkerRef = useRef(null);
-
-    useClickAway(gemteVaerkerRef, () => {
-      setShowGemteVaerker(false);
-    });
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
@@ -90,36 +77,36 @@ const Header = () => {
         {/* Højre side: kurv */}
         <div className="flex gap-3">
           <SignedOut>
-            <div ref={kurvRef} className="relative">
+            <div ref={menuRef} className="relative">
               <li
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
-                onClick={() => setShowKurvMenu((prev) => !prev)}
+                onClick={() => setShowSideMenu((prev) => !prev)}
               >
-                {showKurvMenu ? <ClosingTag size={50} /> : <Kurv />}
+                {showSideMenu ? <ClosingTag size={50} /> : <Kurv />}
               </li>
 
               {/* Nu er KurvPopover "indenfor" samme DOM-hierarki som ref */}
-              {showKurvMenu && <KurvPopover />}
+              {showSideMenu && <KurvPopover />}
             </div>
           </SignedOut>
 
           <SignedIn>
-            <div ref={gemteVaerkerRef} className="relative">
-            <li
-              className={`cursor-pointer ${
-                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-              }`}
-              onClick={()=>setShowGemteVaerker((prev)=>!prev)}
-            >
-              {showGemteVaerker ? (
-                <IoMdClose size={30} />
-              ) : (
-                <IoHeartOutline size={30} />
-              )}
-            </li>
-            {showGemteVaerker && <GemteVaerkerDisplay />}
+            <div ref={menuRef} className="relative">
+              <li
+                className={`cursor-pointer ${
+                  pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+                }`}
+                onClick={() => setShowSideMenu((prev) => !prev)}
+              >
+                {showSideMenu ? (
+                  <IoMdClose size={30} />
+                ) : (
+                  <IoHeartOutline size={30} />
+                )}
+              </li>
+              {showSideMenu && <GemteVaerkerDisplay />}
             </div>
 
             <li

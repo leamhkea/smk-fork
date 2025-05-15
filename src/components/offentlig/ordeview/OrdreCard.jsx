@@ -1,5 +1,5 @@
 "use client";
-import KurvCard from "@/components/global/kurv/KurvCard";
+import KurvCard from "../kurvview/KurvCard";
 import useBookingStore from "@/store/bookingStore";
 
 const OrdreCard = () => {

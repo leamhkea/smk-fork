@@ -4,8 +4,8 @@ import useBookingStore from "@/store/bookingStore";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import KurvCard from "./KurvCard";
-import SecondaryButton from "../buttons/SecondaryButton";
-import TertrieryButton from "../buttons/TertrieryButton";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 
 const KurvPopover = () => {
   const [isVisible, setIsVisible] = useState(false);
