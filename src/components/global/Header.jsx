@@ -115,11 +115,7 @@ const Header = () => {
                 }`}
                 onClick={() => setShowGemteVaerker((prev) => !prev)}
               >
-                {showGemteVaerker ? (
-                  <IoMdClose size={30} />
-                ) : (
-                  <HeartIconSum />
-                )}
+                {showGemteVaerker ? <IoMdClose size={30} /> : <HeartIconSum />}
               </li>
               {showGemteVaerker && <GemteVaerkerDisplay />}
             </div>

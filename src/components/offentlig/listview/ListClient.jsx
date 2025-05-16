@@ -3,6 +3,7 @@
 import { SignedIn } from "@clerk/nextjs";
 import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
 import EventSlider from "./EventSlider";
+import Filtrering from "./Filtrering";
 
 const ListClient = (props) => {
   const lokationer = [
@@ -31,6 +32,10 @@ const ListClient = (props) => {
           For neden vises alle kommende arrangementer på SMK - Statens Museum
           for Kunst.
         </p>
+      </div>
+
+      <div>
+        <Filtrering events={events} />
       </div>
 
       {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}
