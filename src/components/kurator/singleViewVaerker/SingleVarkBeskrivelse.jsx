@@ -1,5 +1,4 @@
 import LongDescriptions from "./LongDescription";
-
 const SingleVaerkBeskrivelse = ({art}) => {
 
     return ( 
@@ -26,9 +25,19 @@ const SingleVaerkBeskrivelse = ({art}) => {
             <p className="bold">Materiale |</p>
             <p>{art.materials}</p>
         </div>
-        <LongDescriptions description={art.content_description?.[0] || "Værket har ingen beskrivelse"}/>
-        <LongDescriptions description={art.literary_reference?.[0] || "Værket har ingen litterær reference"}/>
-        <LongDescriptions description={art.related_objects?.[8] || "Kunstneren har ingen relaterede  informationer"}/>
+        <div className="flex flex-col mt-4">
+            <p className="bold">Værkbeskrivelse</p>
+            <p>{art.content_description?.[0] || "Værket har ingen beskrivelse"}</p>
+            <p>{art.content_description?.[1]}</p>
+        </div>
+        <div className="flex flex-col mt-4">
+            <p className="bold">Litterær reference</p>
+            <p>{art.literary_reference?.[0] || "Værket har ingen litterær reference"}</p>
+        </div>
+        <div className="flex flex-col gap-1 mt-3">
+            <p className="bold">Relateret information</p>
+            <p>{art.related_objects?.[8] || "Kunstneren har ingen relaterede  informationer"}</p>
+        </div>
         </div>
         <div className="flex flex-col gap-1">
         <h2>Kunstner</h2>
