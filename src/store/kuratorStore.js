@@ -7,12 +7,14 @@ const useArtworkStore = create(
 
       // DATA-SORTERING //
       artworks: [], // alle artworks fra datasættet (fuldt array)
+      initialArtworks: [], //de første artworks, der er loadet på siden
       visibleArtworks: [], // de værker, der vises på siden: 30, 60, 90 osv.
       offset: 0,
 
       setArtworks: (newArtworks) => {
         set({
           artworks: newArtworks,
+          initialArtworks: newArtworks,
           visibleArtworks: newArtworks.slice(0, 30),
           offset: 30,
         });
@@ -92,13 +94,25 @@ const useArtworkStore = create(
 
       
       //SØGEFUNKTION//
+
+      //gemmer søgeresultatet
       setSearchResults: (results) => {
         set({
           artworks: results,
           visibleArtworks: results.slice(0, 30),
           offset: 30,
         });
-      },      
+      },   
+      
+      //resetter til de orginale artworks (bruges når søgefeltet er tom og trykkes enter)
+      resetToInitial: () => {
+        const original = get().initialArtworks;
+        set({
+          artworks: original,
+          visibleArtworks: original.slice(0, 30),
+          offset: 30,
+        });
+      },
         
     }),
     {
