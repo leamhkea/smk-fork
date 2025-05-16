@@ -40,7 +40,7 @@ const VaerkerListClient = ({ artData }) => {
       <Filtrering artData={artData}/>
       <hr/>
       </div>
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">
+      <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
         {visibleArtworks.map((art) => (
           <VaerkerListCard key={art.object_number} art={art} />
         ))}
