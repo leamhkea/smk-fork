@@ -22,6 +22,7 @@ const Filtrering = ({ artData }) => {
         artistSet.add(kunstner);
       });
 
+      //herunder if-else-statements fordi nogle af items i mit array indeholder null værdier
       item.production?.forEach((nationalitet) => {
         if (nationalitet.creator_nationality) {
           nationalitySet.add(nationalitet.creator_nationality);

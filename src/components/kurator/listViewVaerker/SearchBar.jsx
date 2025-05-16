@@ -7,20 +7,21 @@ import { searchArtworks } from "@/librery/artworkUtils";
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const setSearchResults = useArtworkStore((state) => state.setSearchResults);
-  const setArtworks = useArtworkStore((state)=>state.setArtworks)
   const [loading, setLoading] = useState(false); 
+  const resetToInitial = useArtworkStore((state) => state.resetToInitial);
 
   const handleSearch = async () => {
     setLoading(true);
     if (query.trim() === "") {
-      // Nulstil søgeresultater hvis input er tomt
-      setSearchResults([setArtworks]); //ændr senere noget med denne sætning, der gør at alle værker returneres når søgefeltet er tomt
-      setLoading(false);
+      // Returner standard søgeresultater hvis input er tomt
+      resetToInitial();
+      setLoading(false); //resetter loading
       return;
     }
-    const results = await searchArtworks(query.trim());
+
+    const results = await searchArtworks(query.trim()); //kører søgeresultatet først når handleSearch er gennemført
     setSearchResults(results);
-    setLoading(false);
+    setLoading(false); //resetter loading
   };
 
   return (
@@ -30,10 +31,10 @@ const SearchBar = () => {
             placeholder="Søg værk..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={async (e) => {
+            onKeyDown={async (e) => { //gør det muligt at søge med enter
                 if (e.key === "Enter") {
                 setLoading(true);
-                await handleSearch();
+                await handleSearch(); // await for at vente på at søgningen bliver færdig.
                 setLoading(false);
                 }
             }}
@@ -44,7 +45,7 @@ const SearchBar = () => {
         <SecondaryButton
             onClick={async () => {
                 setLoading(true);
-                await handleSearch(); // await for at vente på at søgningen bliver færdig. opdater til kun at virke hvis det er mere end to sekunder??
+                await handleSearch(); // await for at vente på at søgningen bliver færdig.
                 setLoading(false);
             }}
             disabled={loading}
