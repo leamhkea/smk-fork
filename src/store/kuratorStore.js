@@ -113,13 +113,66 @@ const useArtworkStore = create(
           offset: 30,
         });
       },
-        
+
+      //OPRET VÆRK//
+
+      inputValue: {
+        titel: "",
+        beskrivelse: "",
+        lokation:"",
+        dato: "",
+        inventarnummer: "",
+      },
+      savedEvents: [], //tomt array til gemte kladder
+
+      //setter burgerens inputs
+      setInputValue: (field, value) =>
+        set((state) => ({
+          inputValue: {
+            ...state.inputValue,
+            [field]: value,
+          },
+        })),
+
+        //tilføjer event
+        addEvent: () =>
+          set((state) => ({
+            savedEvents: [ //udfylder det tomme array
+              ...state.savedEvents,
+              { ...state.inputValue, id: crypto.randomUUID() }, //skaber unikt id
+            ],
+          })),
+
+        isEventSaved: (id) => get().savedEvents.some((e) => e.id === id),
+
+      //returnerer objektet 
+      getInputValue: () => get().inputValue,
+
+      //resetter input, så kurator kan opprette et nyt arrangement flere gange
+      resetInputValue: () =>
+        set(() => ({
+          inputValue: {
+            titel: "",
+            beskrivelse: "",
+            lokation: "",
+            dato: "",
+            inventarnummer: "",
+          },
+        })),
+
+        //slet et arrangement
+        sletInputValue: (arrangementID) =>
+          set((state) => ({
+            savedEvents: state.savedEvents.filter((event) => event?.id !== arrangementID),
+          })),
     }),
     {
       name: "kuratorstorage",
       partialize: (state) => ({
         gemteVaerker: state.gemteVaerker,
         allFilters: state.allFilters,
+        savedEvents: state.savedEvents,
+        inputValue: state.inputValue,
       }),
     }
   )

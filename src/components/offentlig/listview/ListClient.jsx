@@ -1,7 +1,7 @@
 "use client";
 
 import { SignedIn } from "@clerk/nextjs";
-import Kladder from "@/components/kurator/listViewOffentlig/Kladder";
+import ListKladder from "@/components/kurator/listViewOffentlig/ListKladder";
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 
@@ -22,7 +22,7 @@ const ListClient = (props) => {
     <div>
       {/* Denne del vises kun, når man som kurator logger ind */}
       <SignedIn>
-        <Kladder />
+        <ListKladder />
       </SignedIn>
 
       {/* Denne del vises for kurator og offentlige brugere */}
@@ -35,7 +35,7 @@ const ListClient = (props) => {
       </div>
 
       <div>
-        <Filtrering events={events} />
+        {/* <Filtrering events={events} /> */}
       </div>
 
       {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}

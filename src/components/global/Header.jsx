@@ -52,6 +52,13 @@ const Header = () => {
     setShowGemteVaerker(false);
   });
 
+    // Laver en ref til gemteværker-menuen
+    const sideMenuRef = useRef(null);
+
+    useClickAway(sideMenuRef, () => {
+      setShowSideMenu(false);
+    });
+
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
       <ul className="flex items-baseline justify-between py-4 px-8">
@@ -119,7 +126,7 @@ const Header = () => {
               </li>
               {showGemteVaerker && <GemteVaerkerDisplay />}
             </div>
-
+              <div ref={sideMenuRef}>
             <li
               className={`cursor-pointer ${
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
@@ -129,6 +136,7 @@ const Header = () => {
               {showSideMenu ? <IoMdClose size={30} /> : <IoIosMenu size={30} />}
             </li>
             {showSideMenu && <SideMenu />}
+            </div>
           </SignedIn>
         </div>
       </ul>
