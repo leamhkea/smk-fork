@@ -35,7 +35,7 @@ const ListClient = (props) => {
       </div>
 
       <div>
-        {/* <Filtrering events={events} /> */}
+        <Filtrering events={events} />
       </div>
 
       {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}
