@@ -64,3 +64,4 @@ const VaerkerListClient = ({ artData }) => {
 };
 
 export default VaerkerListClient;
+

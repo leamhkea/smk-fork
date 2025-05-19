@@ -103,3 +103,17 @@ const Filtrering = ({ artData }) => {
 };
 
 export default Filtrering;
+
+//DOKUMENTATION BRUGT
+
+//set() constructor
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set
+
+//add() prop
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add
+
+//forståelse for key-prop
+//https://medium.com/@ishaqibrahimbss/reacts-favorite-warning-each-child-in-a-list-should-have-a-unique-key-prop-909dfe50cbe3
+
+
+

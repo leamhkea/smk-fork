@@ -5,6 +5,7 @@ import useArtworkStore from "@/store/kuratorStore";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
+import Form from 'next/form'
 
 const Inputs = ({events}) => {
   const { setFilter } = useArrangementStore();
@@ -40,7 +41,7 @@ const Inputs = ({events}) => {
   };
 
   return (
-    <form onSubmit={saveKladde} className="flex flex-col gap-10">
+    <Form onSubmit={saveKladde} className="flex flex-col gap-10">
       <h1 className="thin">Opret arrangement</h1>
 
       <div className="flex flex-col">
@@ -113,13 +114,16 @@ const Inputs = ({events}) => {
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>
         <TertrieryButton>Publicer arrangement</TertrieryButton>
       </div>
-    </form>
+    </Form>
   );
 };
 
 export default Inputs;
 
 //DOKUMENTATION BRUGT
+
+//Form komponent
+//https://nextjs.org/docs/app/api-reference/components/form
 
 //routing til ny side ved onclick
 //https://nextjs.org/docs/app/api-reference/functions/use-router
@@ -138,3 +142,11 @@ export default Inputs;
 
 //forståelse for event-handling
 //https://www.dhiwise.com/post/e-target-react-exploring-the-power-of-event-handling
+
+
+
+
+//SKAL BRUGES SENERE:
+
+//post til api
+//https://nextjs.org/docs/pages/building-your-application/data-fetching/forms-and-mutations

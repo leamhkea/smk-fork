@@ -11,3 +11,8 @@ const SecondaryButton = ({ children, onClick, disabled }) => {
 };
 
 export default SecondaryButton;
+
+//DOKUMENTATION BRUGT
+
+//disabled attribut
+//https://www.w3schools.com/tags/att_button_disabled.asp

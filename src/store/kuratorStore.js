@@ -193,15 +193,19 @@ export default useArtworkStore;
 
 //DOKUMENTATION BRUGT
 
-//generel forståelse af sorteingen af dataen:
+//generel forståelse af sorteringen af dataen:
 
 //Offset (load kun 3o værker ad gangen)
 //https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/
 
+
 //til forståelse af håndtering af filtrering:
 
-//includes()-syntaks - tog udgangspunkt i opgave fra vanilla JS forløb
+//includes()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
-//some()-syntaks
+//some()
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+
+//tyoeof
+//https://www.w3schools.com/js/js_typeof.asp

@@ -3,7 +3,7 @@ import { useState } from "react";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import { searchArtworks } from "@/librery/artworkUtils";
-//mangler at sørge for man kan bruge enter og nulstiller til søgninger når man søger tomt
+
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const setSearchResults = useArtworkStore((state) => state.setSearchResults);
@@ -14,7 +14,7 @@ const SearchBar = () => {
     setLoading(true);
     if (query.trim() === "") {
       // Returner standard søgeresultater hvis input er tomt
-      resetToInitial();
+      resetToInitial(); 
       setLoading(false); //resetter loading
       return;
     }
@@ -58,4 +58,13 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+
+//DOKUMENTATION BRUGT
+
+//hvornår bruges await
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+
+//on KeyDown vanilla eksempel for forståelse
+//https://stackoverflow.com/questions/44228386/javascript-onkeydown-code-to-clear-text-value-from-search-box-not-working-in-moz
 
