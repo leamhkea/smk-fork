@@ -1,31 +1,55 @@
 "use client";
 
+import { useEffect } from "react";
+import useArrangementStore from "@/store/arrangementStore";
 import { SignedIn } from "@clerk/nextjs";
 import ListKladder from "@/components/kurator/listViewOffentlig/ListKladder";
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 
 const ListClient = (props) => {
+  const { setArrangementer } = useArrangementStore();
+  const { visteArrangementer = [] } = useArrangementStore();
+
+  useEffect(() => {
+    if (props.events) {
+      setArrangementer(props.events);
+    }
+  }, [props.events, setArrangementer]);
+
   const lokationer = [
-    { title: "København", events: props.kobenhavn },
-    { title: "Aarhus", events: props.aarhus },
-    { title: "Odense", events: props.odense },
-    { title: "Aalborg", events: props.aalborg },
-    { title: "Esbjerg", events: props.esbjerg },
-    { title: "Køge", events: props.koge },
-    { title: "Silkeborg", events: props.silkeborg },
-    { title: "Lyngby", events: props.lyngby },
-    { title: "Holstebro", events: props.holstebro },
+    "København",
+    "Aarhus",
+    "Odense",
+    "Aalborg",
+    "Esbjerg",
+    "Køge",
+    "Silkeborg",
+    "Lyngby",
+    "Holstebro",
   ];
+
+  const grupperetEfterLokation = lokationer.map((by) => {
+    const byEvents = visteArrangementer.filter((event) =>
+      event.location?.address.includes(by)
+    );
+
+    return {
+      title: by,
+      events: byEvents,
+    };
+  });
+
+  const alleEventsErTom = grupperetEfterLokation.every(
+    (gruppe) => gruppe.events.length === 0
+  );
 
   return (
     <div>
-      {/* Denne del vises kun, når man som kurator logger ind */}
       <SignedIn>
         <ListKladder />
       </SignedIn>
 
-      {/* Denne del vises for kurator og offentlige brugere */}
       <div className="flex flex-col gap-4 mt-0 mb-20">
         <h1>Alle arrangementer</h1>
         <p>
@@ -34,14 +58,19 @@ const ListClient = (props) => {
         </p>
       </div>
 
-      <div>
-        <Filtrering events={events} />
-      </div>
+      <Filtrering events={props.events} />
 
-      {/* Herunder importeres EventSlider, som deler ListCards ud i de 9 lokationer */}
-      {lokationer.map(({ title, events }) => (
-        <EventSlider key={title} title={title} events={events} />
-      ))}
+      {alleEventsErTom && (
+        <p className="text-center py-50 text-gray-500 italic">
+          Der blev ikke fundet nogen arrangementer med de valgte filtre.
+        </p>
+      )}
+
+      {grupperetEfterLokation
+        .filter((gruppe) => gruppe.events.length > 0)
+        .map(({ title, events }) => (
+          <EventSlider key={title} title={title} events={events} />
+        ))}
     </div>
   );
 };

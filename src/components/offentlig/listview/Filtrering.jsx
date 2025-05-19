@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
 
-const Filtrering = ({ event }) => {
-  // OBS OBS Bruger som en funktion og ikke som prop / const
-  const { setFilter } = useArrangementStore();
+const Filtrering = ({ events }) => {
+  const { setFilter, allFilters } = useArrangementStore();
 
   // Sender et tomt objekt som default i useState (vis intet til at starte med)
   const [title, setTitle] = useState([]);
@@ -19,20 +18,15 @@ const Filtrering = ({ event }) => {
 
     // ForEach for hver parameter, der er på titel og date.
     // Den skal kigge på det fulde array for event, og tilføje det til listen. Det er de options/select som vises på listview
-    event.forEach((parameter) => {
-      parameter.title?.forEach((titleParameter) => {
-        titleSet.add(titleParameter);
-      });
-
-      parameter.date?.forEach((dateParameter) => {
-        dateSet.add(dateParameter);
-      });
+    events.forEach((event) => {
+      if (event.title) titleSet.add(event.title);
+      if (event.date) dateSet.add(event.date);
     });
 
     // Sorterer arrayet med sort() for at returnere en reference til det tomme array ved useState
     setTitle([...titleSet].sort());
     setDate([...dateSet].sort());
-  }, [event]);
+  }, [events]);
 
   // Opdaterer et filterfelt ad gangen i zustand, bruges senere i onchange
   const filteredValue = (field, value) => {
@@ -41,28 +35,43 @@ const Filtrering = ({ event }) => {
   };
 
   return (
-    <div>
+    <div className="flex gap-4 mb-10">
       {/* e er et change event parameter, lytter på ændringer (syntaktting) */}
-      <select onChange={(e) => filteredValue("placeholder", e.target.value)}>
+      <select
+        value={allFilters.title}
+        onChange={(e) => filteredValue("title", e.target.value)}
+      >
         <option value="">Vælg arrangement</option>
-        {title.map((titleParameter, i) => (
-          // Option får en key for at tildele unikt id, kalder value for den const som blev forEachet gennem data
-          <option key={i} value={titleParameter}>
-            {title}
+
+        {/* Tjekker om title er et array, inden der mappes over det. Sikrer at brugeren ikke får fejl i UI'et, hvis data ikke er tilgængelige. */}
+        {title.length > 0 ? (
+          title.map((t, i) => (
+            <option key={i} value={t}>
+              {t}
+            </option>
+          ))
+        ) : (
+          // Browser-venlig da den følger <select>-konventionen: value="" betyder "intet valgt"
+          <option value="">Ingen titler tilgængelige</option>
+        )}
+      </select>
+
+      <select
+        value={allFilters.date}
+        onChange={(e) => filteredValue("date", e.target.value)}
+      >
+        <option value="">Vælg dato</option>
+        {date.map((d, i) => (
+          <option key={i} value={d}>
+            {d}
           </option>
         ))}
       </select>
 
-      {/* Det samme med date */}
-      <select onChange={(e) => filteredValue("placeholder", e.target.value)}>
-        <option value="">Vælg arrangement</option>
-        {date.map((dateParameter, i) => (
-          // Option får en key for at tildele unikt id, kalder value for den const som blev forEachet gennem data
-          <option key={i} value={dateParameter}>
-            {date}
-          </option>
-        ))}
-      </select>
+      {/* Button til at nulstille alle filtre, og få alle arrangementer vist igen */}
+      <button onClick={() => setFilter({ title: "", date: "" })}>
+        Nulstil filtre
+      </button>
     </div>
   );
 };

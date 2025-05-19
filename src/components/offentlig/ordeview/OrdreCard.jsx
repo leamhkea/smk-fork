@@ -10,13 +10,15 @@ const OrdreCard = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       {/* Basket-indholdet */}
-      <div className="flex-1 bg-white px-6 py-10 shadow-md flex flex-col min-h-100">
-        Indhold
+      <div className="min-h-100 flex-1 bg-white px-6 py-10 shadow-md flex flex-col ">
+        <p className="border border-red-500">Indhold</p>
       </div>
 
       {/* Order summary --> bliver sticky kun på større skærme */}
-      <div className="grid gap-10 min-h-100 w-full lg:w-1/2 bg-white px-6 py-10 shadow-md md:sticky md:top-20 md:self-start">
-        <p>Antal billetter til valgte arrangementer ({billetSum})</p>
+      <div className="min-h-100 w-full grid gap-10 lg:w-1/2 bg-white px-6 py-10 shadow-md md:sticky md:top-20 md:self-start">
+        <p className="border border-red-500">
+          Antal billetter til valgte arrangementer ({billetSum})
+        </p>
 
         <div>
           {billetter && billetter.length > 0 ? (

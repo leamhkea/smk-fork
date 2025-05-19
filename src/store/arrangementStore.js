@@ -14,7 +14,7 @@ const useArrangementStore = create(
 
       // Filtre (tom streng - vil gerne fylde op gennem vores funktioner)
       allFilters: {
-        titel: "",
+        title: "",
         dato: "",
       },
 
@@ -44,6 +44,11 @@ const useArrangementStore = create(
           // Her kalder visteArrangementer på filteredArrangementer, for at "sætte" filtreringen på det opdaterede array
           visteArrangementer: filteredArrangementer,
         });
+      },
+
+      // ÆNDRING
+      setArrangementer: (data) => {
+        set({ arrangementer: data, visteArrangementer: data });
       },
     }),
 

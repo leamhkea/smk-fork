@@ -39,6 +39,7 @@ const ListServer = async () => {
       <ListClient
         // Herunder bliver const lokationerne sendt afsted som props
 
+        events={events}
         kobenhavn={kobenhavn}
         aarhus={aarhus}
         odense={odense}
