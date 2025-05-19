@@ -16,6 +16,7 @@ const useArrangementStore = create(
       allFilters: {
         title: "",
         dato: "",
+        lokation:"",
       },
 
       setFilter: (newFilters) => {
@@ -34,10 +35,13 @@ const useArrangementStore = create(
           // Returner titler hvis event har en, ellers kom med en fejlmeddelelse
           const valgtTitle =
             !allFilters.title || parameter.title?.includes(allFilters.title);
-          const valgtDate =
-            !allFilters.date || parameter.date?.includes(allFilters.date);
 
-          return valgtTitle && valgtDate;
+          const valgtDate =
+            !allFilters.date || parameter.date?.includes(allFilters.date); //bruger includes(), da det ønskes også at vise delvise matches på siden og ikke strengt taget samme værdi
+
+            const valgtLokation = //denne del bruges til filtrering for kurator ved opret arrangement
+            !allFilters.lokation || parameter.locationID === allFilters.lokation; //skal ikke bruges includes(), da den skal matche eksakt i lokationer
+          return valgtTitle && valgtDate && valgtLokation; 
         });
 
         set({

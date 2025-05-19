@@ -9,24 +9,26 @@ const useArtworkStore = create(
       artworks: [], // alle artworks fra datasættet (fuldt array)
       initialArtworks: [], //de første artworks, der er loadet på siden
       visibleArtworks: [], // de værker, der vises på siden: 30, 60, 90 osv.
-      offset: 0,
+      offset: 0, //starter med at vise 0 værker
 
+      //setter artworks (fylde de definerede tomme strenge)
       setArtworks: (newArtworks) => {
         set({
           artworks: newArtworks,
           initialArtworks: newArtworks,
-          visibleArtworks: newArtworks.slice(0, 30),
-          offset: 30,
+          visibleArtworks: newArtworks.slice(0, 30), //bruger slice til kun at vise 30
+          offset: 30, //sætter nu offset og viser 30
         });
       },
 
+      //viser de næste 30, uafhængig af de første der er vist
       handleLoadMore: () => {
         const { artworks, visibleArtworks, offset } = get();
-        const nextBatch = artworks.slice(offset, offset + 30);
-        if (nextBatch.length > 0) {
+        const loadMore = artworks.slice(offset, offset + 30);
+        if (loadMore.length > 0) {
           set({
-            visibleArtworks: [...visibleArtworks, ...nextBatch],
-            offset: offset + 30,
+            visibleArtworks: [...visibleArtworks, ...loadMore],
+            offset: offset + 30, //"vis det allerede satte offset, og load nu 30 mere"
           });
         }
       },
@@ -53,10 +55,14 @@ const useArtworkStore = create(
         const { allFilters, artworks } = get();
 
         const filtered = artworks.filter((item) => {
-          const vaelgKunstner = !allFilters.artist || item.artist?.includes(allFilters.artist);
-          const vaelgPeriode = !allFilters.period || item.production_date?.some(p => p.period === allFilters.period);
+          const vaelgKunstner = !allFilters.artist || item.artist?.includes(allFilters.artist); //filtrerer efter ikke-eksakte matches 
+
+          const vaelgPeriode = !allFilters.period || item.production_date?.some(p => p.period === allFilters.period); //filtrerer efter mindst ét match
+
           const vaelgNationalitet = !allFilters.nationality || item.production?.some(n => n.creator_nationality === allFilters.nationality);
+
           const vaelgKunstart = !allFilters.type || item.object_names?.some(n => n.name === allFilters.type);
+
           return vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart;
         });
 
@@ -165,7 +171,11 @@ const useArtworkStore = create(
           set((state) => ({
             savedEvents: state.savedEvents.filter((event) => event?.id !== arrangementID),
           })),
-    }),
+
+          //antal af gemte kladder
+          kladdeSum: () => get().savedEvents.length, //tæller antallet gennem length i stedet for accumulator og currentvalue, da inputValue ikke indeholder nogle antal-værdier
+
+      }),
     {
       name: "kuratorstorage",
       partialize: (state) => ({
@@ -181,4 +191,17 @@ const useArtworkStore = create(
 export default useArtworkStore;
 
 
+//DOKUMENTATION BRUGT
 
+//generel forståelse af sorteingen af dataen:
+
+//Offset (load kun 3o værker ad gangen)
+//https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/
+
+//til forståelse af håndtering af filtrering:
+
+//includes()-syntaks - tog udgangspunkt i opgave fra vanilla JS forløb
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+
+//some()-syntaks
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some

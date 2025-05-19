@@ -7,6 +7,7 @@ import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 
 const ListKladder = () => {
     const {savedEvents} = useArtworkStore();
+    const kladdeSum = useArtworkStore((state)=>state.kladdeSum());
 
     // index: Hvor mange kort der er scroll'et til højre
   const [index, setIndex] = useState(0);
@@ -42,13 +43,10 @@ const ListKladder = () => {
   // Kan ikke scrolle længere end der er kort, og hvis der er færre kort end plads, bliver maxIndex 0 → ingen scroll
   const maxIndex = Math.max(savedEvents.length - visibleCards, 0);
 
-  // Vis ikke nogle cards, hvis lokationen ikke har events
-  if (!savedEvents || savedEvents.length === 0) return null;
-
     return ( 
         <div className="mb-10">
             <div className="flex justify-between items-center">
-                <h1>Mine kladder</h1>
+                <h1>Mine kladder ({kladdeSum})</h1>
                 <div>
                     <a href="/opretarrangement">
                     <SecondaryButton>Opret nyt arrangement</SecondaryButton></a>
@@ -66,21 +64,31 @@ const ListKladder = () => {
                 />
                     {/* Container */}
                     <div ref={containerRef} className="overflow-hidden w-full">
-                        <div
+                    <div
                         className="flex transition-transform duration-500 ease-in-out"
                         style={{
                         transform: `translateX(-${index * cardWidth}px)`,
                         }}
-                        >
-                    {savedEvents.map((event, i) => (
-                        <div  key={event.id}
-                        ref={i === 0 ? cardRef : null}
-                        className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border">
+                    >
+                        {savedEvents && savedEvents.length > 0 ? (
+                        savedEvents.map((event, i) => (
+                            <div
+                            key={event.id}
+                            ref={i === 0 ? cardRef : null}
+                            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
+                            >
                             <Kladder event={event} />
+                            </div>
+                        ))
+                        ) : (
+                        // Denne div bevarer layoutet, men viser kun tekst
+                        <div className="w-full px-4 py-8">
+                            <p className="text-center text-gray-500">Du har ingen gemte kladder</p>
                         </div>
-                    ))}
-                </div>
-            </div>
+                        )}
+                    </div>
+                    </div>
+
             {/* Højre pil */}
             <CgArrowLongRight
             onClick={() => setIndex((prev) => Math.min(prev + 1, maxIndex))}

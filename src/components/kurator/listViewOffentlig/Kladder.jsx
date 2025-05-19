@@ -7,6 +7,7 @@ import useArtworkStore from "@/store/kuratorStore";
 import Image from "next/image";
 
 const Kladder = ({ event }) => {
+  const sletInputValue = useArtworkStore((state)=>state.sletInputValue);
 
   return (
       <div className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
@@ -24,6 +25,7 @@ const Kladder = ({ event }) => {
         <SecondaryButton>Rediger</SecondaryButton>
         <TertrieryButton>Publicer</TertrieryButton>
         </div>
+        <button onClick={() => sletInputValue(event.id)}  className="hover:text-red-500 transition-all duration-300">Slet arrangement</button>
       </div>
   );
 };
