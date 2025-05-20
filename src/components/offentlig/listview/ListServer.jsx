@@ -4,7 +4,7 @@ import ListClient from "./ListClient";
 const ListServer = async () => {
   // await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.
   // fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til Petfinder API
-  const event = await fetch("http://localhost:8080/events");
+  const event = await fetch("https://async-exhibit-server-rmug.onrender.com");
 
   // Når fetch-anmodningen er færdig, fås et Response-objekt (data), som konverteres til et JSON-format.
   const events = await event.json();
