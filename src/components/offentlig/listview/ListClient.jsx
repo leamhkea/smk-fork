@@ -68,8 +68,8 @@ const ListClient = (props) => {
 
       {grupperetEfterLokation
         .filter((gruppe) => gruppe.events.length > 0)
-        .map(({ title, events, art }) => (
-          <EventSlider key={title} title={title} events={events} art={art} />
+        .map(({ title, events }) => (
+          <EventSlider key={title} title={title} events={events} art={props.art} />
         ))}
     </div>
   );

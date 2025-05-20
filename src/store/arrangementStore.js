@@ -15,7 +15,7 @@ const useArrangementStore = create(
       // Filtre (tom streng - vil gerne fylde op gennem vores funktioner)
       allFilters: {
         title: "",
-        dato: "",
+        date: "",
         lokation:"",
       },
 

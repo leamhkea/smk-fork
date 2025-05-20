@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import ListCard from "./ListCard";
 
-const EventSlider = ({ title, events }) => {
+const EventSlider = ({ title, events, art }) => {
   // index: Hvor mange kort der er scroll'et til højre
   const [index, setIndex] = useState(0);
 
@@ -42,6 +42,7 @@ const EventSlider = ({ title, events }) => {
   // Vis ikke nogle cards, hvis lokationen ikke har events
   if (!events || events.length === 0) return null;
 
+
   return (
     <div className="mb-20 grid gap-10">
       <h2 className="text-center underline">{title}</h2>
@@ -66,15 +67,17 @@ const EventSlider = ({ title, events }) => {
           >
             {/* event:   Objektet med data for ét enkelt arrangement */}
             {/*    i:    ndexet i events-arrayet (0, 1, 2, ...) */}
-            {events.map((event, i, art) => (
+            {events.map((event, i) => (
+
               <div
                 // React skal bruge en unik nøgle for hvert element i en liste, så den effektivt kan holde styr på ændringer. unik ID for hvert arrangement
-                key={event.id}
+                key={event.id} 
                 // Måle ét kort (det første) for at beregne, hvor mange der kan vises ad gangen i slideren
                 ref={i === 0 ? cardRef : null}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
               >
                 <ListCard event={event} art={art} />
+
               </div>
             ))}
           </div>
