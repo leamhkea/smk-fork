@@ -4,10 +4,15 @@ import ListClient from "./ListClient";
 const ListServer = async () => {
   // await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.
   // fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til Petfinder API
-  const event = await fetch("https://async-exhibit-server-rmug.onrender.com/events");
+  const [event, smkData] = await Promise.all([
+    fetch("https://async-exhibit-server-rmug.onrender.com/events"),
+    fetch(
+      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
+    ),
+  ]);
 
   // Når fetch-anmodningen er færdig, fås et Response-objekt (data), som konverteres til et JSON-format.
-  const events = await event.json();
+  const [events, smk] = await Promise.all([event.json(), smkData.json()]);
 
   // Herunder laves const til alle lokationer, som bliver filtreret
 
@@ -54,6 +59,7 @@ const ListServer = async () => {
         silkeborg={silkeborg}
         lyngby={lyngby}
         holstebro={holstebro}
+        art={smk}
       />
     </div>
   );

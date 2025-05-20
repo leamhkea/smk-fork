@@ -66,7 +66,7 @@ const EventSlider = ({ title, events }) => {
           >
             {/* event:   Objektet med data for ét enkelt arrangement */}
             {/*    i:    ndexet i events-arrayet (0, 1, 2, ...) */}
-            {events.map((event, i) => (
+            {events.map((event, i, art) => (
               <div
                 // React skal bruge en unik nøgle for hvert element i en liste, så den effektivt kan holde styr på ændringer. unik ID for hvert arrangement
                 key={event.id}
@@ -74,7 +74,7 @@ const EventSlider = ({ title, events }) => {
                 ref={i === 0 ? cardRef : null}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
               >
-                <ListCard event={event} />
+                <ListCard event={event} art={art} />
               </div>
             ))}
           </div>
