@@ -7,7 +7,7 @@ export default async function SingleView({ params }) {
     fetch(`https://async-exhibit-server-rmug.onrender.com/events/${id}`),
 
     fetch(
-      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=0&rows=2000"
+      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
     ),
   ]) 
 

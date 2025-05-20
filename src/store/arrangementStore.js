@@ -17,6 +17,7 @@ const useArrangementStore = create(
         title: "",
         date: "",
         lokation:"",
+        inventarnummer:"",
       },
 
       setFilter: (newFilters) => {
@@ -41,7 +42,11 @@ const useArrangementStore = create(
 
             const valgtLokation = //denne del bruges til filtrering for kurator ved opret arrangement
             !allFilters.lokation || parameter.locationID === allFilters.lokation; //skal ikke bruges includes(), da den skal matche eksakt i lokationer
-          return valgtTitle && valgtDate && valgtLokation; 
+
+            const valgtInventarnummer = 
+            !allFilters.inventarnummer || parameter.inventarnummer === allFilters.inventarnummer;
+
+          return valgtTitle && valgtDate && valgtLokation && valgtInventarnummer; 
         });
 
         set({

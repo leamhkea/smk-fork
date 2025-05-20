@@ -8,7 +8,7 @@ const ListServer = async () => {
     fetch("https://async-exhibit-server-rmug.onrender.com/events"),
 
     fetch(
-      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=0&rows=2000"
+      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
     ),
   ]);
   // Når fetch-anmodningen er færdig, fås et Response-objekt (data), som konverteres til et JSON-format.

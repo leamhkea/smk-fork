@@ -6,7 +6,7 @@ import useArtworkStore from "@/store/kuratorStore";
 import Filtrering from "./Filtrering";
 import SearchBar from "./SearchBar";
 
-const VaerkerListClient = ({ artData }) => {
+const VaerkerListClient = ({ artData, events }) => {
   const {
     artworks,
     visibleArtworks,
@@ -33,7 +33,7 @@ const VaerkerListClient = ({ artData }) => {
         <p>For neden ses kunstværker i Statens Museum for Kunsts arkiv.</p>
       </div>
       <div>
-        <SearchBar artworks={visibleArtworks}/>
+        <SearchBar events={events} artworks={visibleArtworks}/>
       </div>
       </div>
       <div className="mt-10">

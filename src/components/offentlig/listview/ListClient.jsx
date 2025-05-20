@@ -47,7 +47,7 @@ const ListClient = (props) => {
   return (
     <div>
       <SignedIn>
-        <ListKladder />
+        <ListKladder art={props.art} />
       </SignedIn>
 
       <div className="flex flex-col gap-4 mt-0 mb-20">

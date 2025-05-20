@@ -127,7 +127,7 @@ const useArtworkStore = create(
         beskrivelse: "",
         lokation:"",
         dato: "",
-        inventarnummer: "",
+        inventarnummer: [],
       },
       savedEvents: [], //tomt array til gemte kladder
 
@@ -162,7 +162,7 @@ const useArtworkStore = create(
             beskrivelse: "",
             lokation: "",
             dato: "",
-            inventarnummer: "",
+            inventarnummer: [],
           },
         })),
 

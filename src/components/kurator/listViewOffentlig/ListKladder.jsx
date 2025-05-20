@@ -5,7 +5,7 @@ import useArtworkStore from "@/store/kuratorStore";
 import { useEffect, useRef, useState } from "react";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 
-const ListKladder = () => {
+const ListKladder = ({art}) => {
     const {savedEvents} = useArtworkStore();
     const kladdeSum = useArtworkStore((state)=>state.kladdeSum());
 
@@ -73,13 +73,13 @@ const ListKladder = () => {
                         {savedEvents && savedEvents.length > 0 ? (
                         savedEvents.map((event, i) => (
                             <div
-                            key={event.id}
-                            ref={i === 0 ? cardRef : null}
-                            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
+                              key={event.id}
+                              ref={i === 0 ? cardRef : null}
+                              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
                             >
-                            <Kladder event={event} />
+                              <Kladder art={art} event={event} />
                             </div>
-                        ))
+                          ))                          
                         ) : (
                         // Denne div bevarer layoutet, men viser kun tekst
                         <div className="w-full px-4 py-8">

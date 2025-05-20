@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
 import Form from 'next/form'
+import InventarnummerInput from "./inventarnumreInput";
 
-const Inputs = ({events}) => {
+const Inputs = ({events, art}) => {
   const { setFilter } = useArrangementStore();
 
   const inputValue = useArtworkStore((state) => state.inputValue);
@@ -18,27 +19,55 @@ const Inputs = ({events}) => {
   const router = useRouter();
 
   const [lokation, setLokation] = useState([]);
+  const [inventarnummer, setInventarnummer] = useState([]);
 
   useEffect(() => {
     const lokationMap = new Map(); //sørger for der er ingen duplikanter som i set()-constructor, men denne syntaks er ikke kompatibel da jeg ønsker en iterabel metode.
+    const inventarnummerMap = new Map();
   
     events.forEach((event) => {
       if (event.location && !lokationMap.has(event.location.id)) {
         lokationMap.set(event.location.id, event.location);
       }
     });
+
+    art.forEach((item) => {
+      const objectNumber = item.object_number;
+      const title = item.titles?.[0]?.title
+    
+      if (objectNumber && !inventarnummerMap.has(objectNumber)) {
+        inventarnummerMap.set(objectNumber, {
+          id: objectNumber,
+          label: title, 
+          title: title,
+        });
+      }
+    });
+    
   
     setLokation([...lokationMap.values()]); //setter alle eksisterende lokationer fra arrayet
-  }, [events]);
+    setInventarnummer([...inventarnummerMap.values()]);
+  }, [events, art]);
   
 
   //skaber funktion til at gemme kladder, der returnerer tilbage til funktionen i zustand og resetter value
   const saveKladde = (e) => {
-    e.preventDefault(); //sørger for at brugeren ikke kan gå videre uden at udfylde inputs
-    addEvent();
+    e.preventDefault();
+  
+    const eventData = {
+      ...inputValue,
+      artworkIds: inputValue.inventarnummer, // oversæt navn
+      id: crypto.randomUUID(),
+    };
+  
+    console.log("Gemmer kladde:", eventData);
+  
+    addEvent(eventData);
     resetInputValue();
-    router.push("/arrangementer"); //redirecter til view af gemte kladder
+    router.push("/arrangementer");
   };
+  
+  
 
   return (
     <Form onSubmit={saveKladde} className="flex flex-col gap-10">
@@ -97,18 +126,11 @@ const Inputs = ({events}) => {
           className="border-1 border-(--black) p-2"
         />
       </div>
-
-      <div className="flex flex-col">
-        <label>* Inventarnummer:</label>
-        <input required
-          type="text"
-          name="inventarnummer"
-          value={inputValue.inventarnummer}
-          onChange={(e) => setInputValue("inventarnummer", e.target.value)} 
-          placeholder="Eksempel: KKSgb18, KKS1997-4"
-          className="border-1 border-(--black) p-2"
-        />
-      </div>
+      
+            <InventarnummerInput inventarnummer={inventarnummer}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setFilter={setFilter}/>
 
       <div className="flex justify-center gap-10">
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>

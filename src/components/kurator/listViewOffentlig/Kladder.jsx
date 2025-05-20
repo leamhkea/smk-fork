@@ -6,18 +6,34 @@ import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import Image from "next/image";
 
-const Kladder = ({ event }) => {
-  const sletInputValue = useArtworkStore((state)=>state.sletInputValue);
+const Kladder = ({ event, art }) => {
+  const sletInputValue = useArtworkStore((state)=>state.sletInputValue);  
+  const visibleArtworks = useArtworkStore((state) => state.visibleArtworks);
+
+
+  console.log("event.artworkIds:", event.artworkIds);
+  
+
+// Matcher artworkIds med object_number i art
+  const matchedArtworks = event.inventarnummer?.length
+  ? visibleArtworks.filter((artwork) =>
+      event.inventarnummer.includes(artwork.object_number)
+    )
+  : [];
+
+
+  console.log("matchedArtworks:", matchedArtworks);
 
   return (
       <div className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
-        <Image
-          alt="Billede af"
-          width={500}
-          height={500}
-          src="/placeholder.png"
-          className="object-contain max-w-full self-center"
-        />
+          {matchedArtworks[0]?.image_thumbnail && (
+          <Image
+            alt="artwork"
+            width={400}
+            height={400}
+            src={matchedArtworks[0].image_thumbnail}
+          />
+        )}
         <h2>{event.titel}</h2>
         <p>{event.beskrivelse}</p>
         <p>{event.dato}</p>
