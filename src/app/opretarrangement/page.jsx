@@ -1,7 +1,7 @@
 import Inputs from "@/components/kurator/opretArrangementer/Inputs";
 
 const OpretArrangement = async () => {
-  const res = await fetch("https://async-exhibit-server-rmug.onrender.com");
+  const res = await fetch("https://async-exhibit-server-rmug.onrender.com/events");
   const events = await res.json();
 
   return (
