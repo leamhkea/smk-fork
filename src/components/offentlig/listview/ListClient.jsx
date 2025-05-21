@@ -50,15 +50,27 @@ const ListClient = (props) => {
         <ListKladder art={props.art} />
       </SignedIn>
 
-      <div className="flex flex-col gap-4 mt-0 mb-20">
-        <h1>Alle arrangementer</h1>
-        <p>
-          For neden vises alle kommende arrangementer på SMK - Statens Museum
-          for Kunst.
-        </p>
-      </div>
+      <h1>Alle arrangementer</h1>
 
-      <Filtrering events={props.events} />
+      <div className="flex flex-row flex-wrap justify-between mt-10 mb-20 gap-8">
+        <div className="grid gap-2 max-w-2xl">
+          <p>
+            SMK byder løbende på et væld af arrangementer, hvor kunst, kultur og
+            fællesskab mødes.
+          </p>
+          <p>
+            Arrangementerne henvender sig til både børn og voksne og spænder fra
+            det afslappede og sanselige til det mere dybdegående og fordybende.
+          </p>
+          <p>
+            Uanset om du er førstegangsbesøgende eller erfaren kunstelsker, er
+            der noget for enhver smag. Alle arrangementer, som vises her på
+            siden, kræver billet og kan bestilles på det enkelte arrangement.
+          </p>
+        </div>
+
+        <Filtrering className="self-end" events={props.events} />
+      </div>
 
       {alleEventsErTom && (
         <p className="text-center py-50 text-gray-500 italic">
@@ -69,7 +81,12 @@ const ListClient = (props) => {
       {grupperetEfterLokation
         .filter((gruppe) => gruppe.events.length > 0)
         .map(({ title, events }) => (
-          <EventSlider key={title} title={title} events={events} art={props.art} />
+          <EventSlider
+            key={title}
+            title={title}
+            events={events}
+            art={props.art}
+          />
         ))}
     </div>
   );

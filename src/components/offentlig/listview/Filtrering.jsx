@@ -35,7 +35,7 @@ const Filtrering = ({ events }) => {
   };
 
   return (
-    <div className="flex gap-4 mb-10">
+    <div className="flex justify-end gap-8 mb-15">
       {/* e er et change event parameter, lytter på ændringer (syntaktting) */}
       <select
         value={allFilters.title}
@@ -69,7 +69,10 @@ const Filtrering = ({ events }) => {
       </select>
 
       {/* Button til at nulstille alle filtre, og få alle arrangementer vist igen */}
-      <button onClick={() => setFilter({ title: "", date: "" })}>
+      <button
+        className="mt-1 ml-6 hover:text-red-600"
+        onClick={() => setFilter({ title: "", date: "" })}
+      >
         Nulstil filtre
       </button>
     </div>

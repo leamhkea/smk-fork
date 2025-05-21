@@ -3,27 +3,27 @@ import Link from "next/link";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 
 const ListCard = ({ event, art }) => {
-
   //matcher artworksID fra async api med object_number i smks api
   const matchedArtworks = event.artworkIds?.length
-  ? art?.filter((artwork) =>
-      event.artworkIds.includes(artwork.object_number)
-    )
-  : [];
+    ? art?.filter((artwork) => event.artworkIds.includes(artwork.object_number))
+    : [];
 
-  
   return (
     <Link href={`/arrangementer/${event.id}`}>
       {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
       <li className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]">
-        {matchedArtworks?.[0]?.image_thumbnail && ( //viser kun det første billede ud fra forskellige object_numbers
-          <Image
-            alt="artwork"
-            width={400}
-            height={400}
-            src={matchedArtworks[0].image_thumbnail}
-          />
-        )}
+        <div className="w-full h-80 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
+          {matchedArtworks?.[0]?.image_thumbnail && (
+            <Image
+              alt="artwork"
+              src={matchedArtworks[0].image_thumbnail}
+              width={200}
+              height={200}
+              className="object-contain w-full h-auto"
+            />
+          )}
+        </div>
+
         <h3>{event.title}</h3>
         <p>{event.date}</p>
         <SecondaryButton>Læs mere</SecondaryButton>
