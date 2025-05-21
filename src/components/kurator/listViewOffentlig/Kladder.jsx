@@ -25,7 +25,7 @@ const Kladder = ({ event, vaerk }) => {
         <SecondaryButton>Rediger</SecondaryButton>
         <TertrieryButton>Publicer</TertrieryButton>
         <button
-            className=" hover:text-red-600"
+            className=" hover:text-red-600 mt-5"
             onClick={() => sletInputValue(event.id)}
           >
             Slet kladde

@@ -6,7 +6,7 @@ import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 const ListKladder = ({ art }) => {
   const { savedEvents } = useArtworkStore();
   const [hydrated, setHydrated] = useState(false);
-  const kladdeSum = useArtworkStore((state)=>state.kladdeSum());
+  const kladdeSum = useArtworkStore((state) => state.kladdeSum());
 
   useEffect(() => {
     setHydrated(true);
@@ -27,8 +27,8 @@ const ListKladder = ({ art }) => {
 
   return (
     <div className="px-4 mb-10">
-      <div className="flex justify-between">
-          <h2>Mine kladder ({kladdeSum})</h2>
+      <div className="flex justify-between item-center">
+          <h2>Mine kladder</h2> {/* opdater evt med sum */}
           <div> 
             <SecondaryButton>Opret arrangement</SecondaryButton>
           </div>
@@ -36,11 +36,13 @@ const ListKladder = ({ art }) => {
 
       {kladderMedVaerker.length > 0 ? (
         kladderMedVaerker.map((event) => (
+          <ul>
           <Kladder
-            key={event.id || event.title}
+            key={event.id || event.titel}
             event={event}
             vaerk={event.matchedVaerk}
           />
+          </ul>
         ))
       ) : (
         <p className="text-gray-500 italic text-center p-10">Du har ingen gemte kladder.</p>

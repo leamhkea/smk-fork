@@ -115,17 +115,6 @@ const Header = () => {
           </SignedOut>
 
           <SignedIn>
-            <div ref={gemteVaerkerRef} className="relative">
-              <li
-                className={`cursor-pointer ${
-                  pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-                }`}
-                onClick={() => setShowGemteVaerker((prev) => !prev)}
-              >
-                {showGemteVaerker ? <IoMdClose size={30} /> : <HeartIconSum />}
-              </li>
-              {showGemteVaerker && <GemteVaerkerDisplay />}
-            </div>
               <div ref={sideMenuRef}>
             <li
               className={`cursor-pointer ${

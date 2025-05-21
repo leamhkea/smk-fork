@@ -10,6 +10,8 @@ import Form from 'next/form'
 const Inputs = ({events, art}) => {
   const { setFilter } = useArrangementStore();
   const {gemteVaerker}=useArtworkStore((state)=>state);
+  const resetVaerker = useArtworkStore((state) => state.resetVaerker);
+
 
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
@@ -46,6 +48,7 @@ const Inputs = ({events, art}) => {
     });
 
     resetInputValue();
+    resetVaerker(); 
     router.push("/arrangementer");
   };
   
