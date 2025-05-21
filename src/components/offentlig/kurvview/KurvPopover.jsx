@@ -7,7 +7,7 @@ import KurvCard from "./KurvCard";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 
-const KurvPopover = ({ onClose }) => {
+const KurvPopover = ({ onClose, art }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { billetter } = useBookingStore((state) => state);
@@ -43,7 +43,7 @@ const KurvPopover = ({ onClose }) => {
         <div className="flex-1">
           {billetter && billetter.length > 0 ? (
             billetter.map((billet) => (
-              <KurvCard key={billet.id} event={billet} />
+              <KurvCard key={billet.id} event={billet} art={art} />
             ))
           ) : (
             <p>Der er ingen arrangementer tilføjet til kurven</p>

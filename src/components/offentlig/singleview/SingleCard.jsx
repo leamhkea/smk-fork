@@ -4,11 +4,11 @@ import PraktiskInfo from "./PraktiskInfo";
 import SamledeImg from "./SamledeImg";
 import ButtonAddBillet from "./ButtonAddBillet";
 
-const SingleCard = ({ event }) => {
+const SingleCard = ({ event, art }) => {
   return (
     <article className="grid gap-40">
       {/* Herunder importeres hero med overskrift ovenpå image */}
-      <HeroImgText event={event} />
+      <HeroImgText event={event} art={art} />
 
       {/* Beskrivelse af event */}
       <div className="flex justify-between max-w-[50rem] mx-auto">
