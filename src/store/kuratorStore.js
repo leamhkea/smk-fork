@@ -71,25 +71,6 @@ const useArtworkStore = create(
           offset: 30,
         });
       },
-
-      // VÆLG ET VÆRK //
-      gemteVaerker: [],
-
-      //tilføjer værk til array
-        addVaerk: (vaerk) =>
-          set((state) => ({
-            gemteVaerker: state.gemteVaerker.concat({ ...vaerk, antal: 1 }), //spreading og antal taler her sammen med vaerkSum
-          })),
-        
-      //gør det muligt at fravælge et enkelt værk
-      sletVaerk: (vaerkObjectNumber) =>
-        set((state) => ({
-          gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk?.object_number !== vaerkObjectNumber),
-        })),
-
-        //fjerner lagringen til når brugeren har gemt kladden
-        resetVaerker: () => set({ gemteVaerker: [] }),
-
       
       //SØGEFUNKTION//
 
@@ -166,12 +147,33 @@ const useArtworkStore = create(
           })),
 
           //antal af gemte kladder
-          kladdeSum: () => 
-          get().savedEvents
-          .filter((v) => v && typeof v.antal === "number")
-          .reduce((accumulator, currentValue) => accumulator + currentValue.antal,0),
+          kladdeSum: () =>
+            get().savedEvents.reduce((sum, event) => {
+              return sum + (event.artworks?.length || 0); // artworks = gemteVaerker i kladden
+            }, 0),
 
-      }),
+          
+          // VÆLG ET VÆRK //
+          gemteVaerker: [],
+
+         //tilføjer værk til array
+        addVaerk: (vaerk) =>
+          set((state) => ({
+            gemteVaerker: state.gemteVaerker.concat({ ...vaerk, antal: 1 }), //spreading og antal taler her sammen med vaerkSum
+          })),
+        
+        //gør det muligt at fravælge et enkelt værk
+        sletVaerk: (vaerkObjectNumber) =>
+        set((state) => ({
+          gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk?.object_number !== vaerkObjectNumber),
+        })),
+
+        //fjerner lagringen til når brugeren har gemt kladden
+        resetVaerker: () => set({ gemteVaerker: [] }),
+
+
+          }),
+
     {
       name: "kuratorstorage",
       partialize: (state) => ({

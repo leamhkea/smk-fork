@@ -15,8 +15,7 @@ useEffect(()=>{
                 <hr/>
                 </li>
             <li><a href="/arrangementer">Mine kladder</a></li>
-            <li><a href="/opretarrangement">Opret nyt arrangement</a></li>
-            <li><a href="/vaerkarkiv">Værkarkiv</a></li>
+            <li><a href="/vaerkarkiv">Opret arrangement</a></li>
             <li>
             <hr className="mb-2"/>
                 <SignOutButton/></li>

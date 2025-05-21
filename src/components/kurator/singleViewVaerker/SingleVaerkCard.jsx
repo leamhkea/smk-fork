@@ -1,26 +1,18 @@
 import SingleVaerkBeskrivelse from "./SingleVarkBeskrivelse";
 import Image from "next/image";
-import GemEtVaerkButton from "../listViewVaerker/gemteVaerker/GemEtVaerkButton";
+// import GemEtVaerkButton from "../listViewVaerker/gemteVaerker/GemEtVaerkButton";
 
 const SingleVaerkCard = ({ art }) => {  
     return (
         <div className="flex flex-col gap-10">
-            <div className="flex items-center flex-col md:flex-row gap-5">
+            <div className="flex items-center justify-between flex-col md:flex-row gap-5">
                 <div className="flex flex-col gap-5">
                     <div>
                     <h1>{art.titles?.[0]?.title}</h1>
                     <p>Forneden ses alt samlet data om kunstværket.</p>
                     </div>
-                    <div>
-                    <p>Skal du oprette et arrangement med udgagspunkt i et af SMKs værker, skal du indtaste værkets inventarnummer.</p>
-                        <div className="flex gap-1">
-                        <p className="bold">Inventarnummer |</p>
-                        <p>{art.object_number}</p>
-                        </div>
-                    <a className="thin" href="/opretarrangement">Opret arrangement</a>
                     </div>
-                    <GemEtVaerkButton vaerk={art}/>
-                    </div>
+
                 {art.image_thumbnail && (
                     <Image
                     src={art.image_thumbnail}

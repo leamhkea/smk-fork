@@ -20,7 +20,6 @@ const VaerkerListCard = ({art}) => {
         )}
 
         <Link href={`/vaerkarkiv/${art.object_number}`}>
-        
         <h2>{art.titles?.[0]?.title || "ukendt titel"}</h2>
 
         <div className="flex justify-center gap-1">
