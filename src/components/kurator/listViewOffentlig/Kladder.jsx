@@ -15,9 +15,9 @@ const Kladder = ({ event, art }) => {
   
 
 // Matcher artworkIds med object_number i art
-  const matchedArtworks = event.inventarnummer?.length
+  const matchedArtworks = art.inventarnummer?.length
   ? visibleArtworks.filter((artwork) =>
-      event.inventarnummer.includes(artwork.object_number)
+      art.inventarnummer.includes(artwork.object_number)
     )
   : [];
 

@@ -19,34 +19,19 @@ const Inputs = ({events, art}) => {
   const router = useRouter();
 
   const [lokation, setLokation] = useState([]);
-  const [inventarnummer, setInventarnummer] = useState([]);
 
   useEffect(() => {
     const lokationMap = new Map(); //sørger for der er ingen duplikanter som i set()-constructor, men denne syntaks er ikke kompatibel da jeg ønsker en iterabel metode.
-    const inventarnummerMap = new Map();
+
   
     events.forEach((event) => {
       if (event.location && !lokationMap.has(event.location.id)) {
         lokationMap.set(event.location.id, event.location);
       }
     });
-
-    art.forEach((item) => {
-      const objectNumber = item.object_number;
-      const title = item.titles?.[0]?.title
-    
-      if (objectNumber && !inventarnummerMap.has(objectNumber)) {
-        inventarnummerMap.set(objectNumber, {
-          id: objectNumber,
-          label: title, 
-          title: title,
-        });
-      }
-    });
     
   
     setLokation([...lokationMap.values()]); //setter alle eksisterende lokationer fra arrayet
-    setInventarnummer([...inventarnummerMap.values()]);
   }, [events, art]);
   
 
@@ -56,7 +41,6 @@ const Inputs = ({events, art}) => {
   
     const eventData = {
       ...inputValue,
-      artworkIds: inputValue.inventarnummer, // oversæt navn
       id: crypto.randomUUID(),
     };
   
@@ -126,11 +110,11 @@ const Inputs = ({events, art}) => {
           className="border-1 border-(--black) p-2"
         />
       </div>
-      
-            <InventarnummerInput inventarnummer={inventarnummer}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            setFilter={setFilter}/>
+
+      <div className="flex flex-col">
+        <label>Valgte kunstværker:</label>
+        <span></span>
+      </div>
 
       <div className="flex justify-center gap-10">
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>

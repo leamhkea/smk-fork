@@ -1,6 +1,4 @@
 "use client";
-import HeartIconActive from "@/components/global/ikoner/HeartIconActive";
-import HeartIconInactive from "@/components/global/ikoner/HeartIconInactive";
 import useArtworkStore from "@/store/kuratorStore";
 
 
@@ -21,13 +19,9 @@ const GemEtVaerkIcon = ({ vaerk }) => {
     }
   };
 
-
   return (
-    <div
-      className="relative top-15 left-5 cursor-pointer"
-      onClick={handleSavedToggle}
-    >
-      {isSaved ? <HeartIconActive /> : <HeartIconInactive />}
+    <div className="relative top-15 -left-20">
+      <input className="w-5 h-5" onClick={handleSavedToggle} type="checkbox" />
     </div>
   );
 };

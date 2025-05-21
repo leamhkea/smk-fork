@@ -2,12 +2,15 @@ import VaerkerListClient from "./VaerkerListClient";
 import { filterHasImage } from "@/librery/artworkUtils";
 
 const VaerkerListServer = async () => {
-  const res = await fetch("https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000");
-  const artData = await res.json();
+  const [res, resEvents] = await Promise.all([
+    fetch("https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"),
+    fetch("https://async-exhibit-server-rmug.onrender.com/events/"),
+  ])
+  const [artData, events] = await Promise.all([res.json(), resEvents.json()]);
 
   const artworks = filterHasImage(artData.items);
 
-  return <VaerkerListClient artData={artworks} />;
+  return <VaerkerListClient events={events} artData={artworks} />;
 };
 
 export default VaerkerListServer;
