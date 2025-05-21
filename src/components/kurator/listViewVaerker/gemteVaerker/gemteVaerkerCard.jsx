@@ -8,7 +8,7 @@ const GemteVaerkerCard = ({vaerk}) => {
 
     return ( <div className="flex flex-row gap-4 items-stretch mb-16">
       {vaerk.image_thumbnail && (
-             <Image
+            <Image
              src={vaerk.image_thumbnail}
              alt={`Billede af ${vaerk.title}`}
              width={200}

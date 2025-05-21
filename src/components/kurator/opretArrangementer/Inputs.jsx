@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
 import Form from 'next/form'
-import InventarnummerInput from "./inventarnumreInput";
 
 const Inputs = ({events, art}) => {
   const { setFilter } = useArrangementStore();
+  const {gemteVaerker}=useArtworkStore((state)=>state);
 
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
@@ -39,14 +39,12 @@ const Inputs = ({events, art}) => {
   const saveKladde = (e) => {
     e.preventDefault();
   
-    const eventData = {
+    addEvent({
       ...inputValue,
-      id: crypto.randomUUID(),
-    };
-  
-    console.log("Gemmer kladde:", eventData);
-  
-    addEvent(eventData);
+      artworks: gemteVaerker, // tilføjer værker til arrangementet
+      inventarnummer: gemteVaerker.map((v) => v.object_number), //sørger for at inventarnummer matcher
+    });
+
     resetInputValue();
     router.push("/arrangementer");
   };
@@ -113,7 +111,17 @@ const Inputs = ({events, art}) => {
 
       <div className="flex flex-col">
         <label>Valgte kunstværker:</label>
-        <span></span>
+        <span className="grid gap-2">
+        {gemteVaerker.filter(v => v && v.object_number).length > 0 ? ( //filtrerer null-items fra api'et væk
+            gemteVaerker
+              .filter((art) => art && art.object_number)
+              .map((art) => (
+                <p key={art.object_number}>{art.titles?.[0]?.title}</p>
+              ))
+          ) : (
+            <p>Du har ikke valgt nogle værker</p>
+          )}
+        </span>
       </div>
 
       <div className="flex justify-center gap-10">

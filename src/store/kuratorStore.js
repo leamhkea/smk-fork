@@ -141,13 +141,14 @@ const useArtworkStore = create(
         })),
 
         //tilføjer event
-        addEvent: () =>
-          set((state) => ({
-            savedEvents: [ //udfylder det tomme array
-              ...state.savedEvents,
-              { ...state.inputValue, id: crypto.randomUUID() }, //skaber unikt id
-            ],
-          })),
+          addEvent: (eventData) =>
+            set((state) => ({
+              savedEvents: [ //udfylder det tomme array
+                ...state.savedEvents,
+                { ...eventData, id: crypto.randomUUID() }, //skaber unikt id
+              ],
+            })),
+          
 
         isEventSaved: (id) => get().savedEvents.some((e) => e.id === id),
 
@@ -173,7 +174,10 @@ const useArtworkStore = create(
           })),
 
           //antal af gemte kladder
-          kladdeSum: () => get().savedEvents.length, //tæller antallet gennem length i stedet for accumulator og currentvalue, da inputValue ikke indeholder nogle antal-værdier
+          kladdeSum: () => 
+          get().savedEvents
+          .filter((v) => v && typeof v.antal === "number")
+          .reduce((accumulator, currentValue) => accumulator + currentValue.antal,0),
 
       }),
     {
