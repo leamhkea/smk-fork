@@ -1,26 +1,33 @@
-import Image from "next/image";
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
-import SamledeImg from "./SamledeImg";
 import ButtonAddBillet from "./ButtonAddBillet";
 
 const SingleCard = ({ event, art }) => {
   return (
     <article className="grid gap-40">
-      {/* Herunder importeres hero med overskrift ovenpå image */}
+      {/* =================== IMAGE + OVERSKRIFT ==================== */}
       <HeroImgText event={event} art={art} />
 
-      {/* Beskrivelse af event */}
+      {/* ===================== OM ARRANGEMENT ====================== */}
       <div className="flex justify-between max-w-[50rem] mx-auto">
-        <h1 className="w-1/2 break-words">Om {event.title}</h1>
-        <p className="w-1/2 break-words">{event.description}</p>
+        <h2 className="w-1/2 break-words pb-2 self">Om {event.title}</h2>
+        <div className="w-1/2 break-words grid gap-2">
+          <p>
+            Dette arrangement omhandler
+            <span className="text-(--blue) px-1">{event.description}</span>
+          </p>
+          <p>
+            Arrangementet tilbyder en indbydende og inspirerende atmosfære, hvor
+            kunst og arkitektur smelter sammen for at skabe en unik oplevelse.
+          </p>
+        </div>
       </div>
 
-      {/* Herunder importeres information om lokation og pris */}
+      {/* ================== PRAKTISK INFORMATION =================== */}
       <PraktiskInfo event={event} />
 
-      {/* Button til at tilføje event til kurven */}
-      <ButtonAddBillet billet={event} />
+      {/* ================== TILFØJ EVENT TIL KURV ================== */}
+      <ButtonAddBillet billet={event} art={art} />
     </article>
   );
 };

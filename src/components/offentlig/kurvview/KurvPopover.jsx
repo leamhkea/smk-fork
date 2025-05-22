@@ -32,7 +32,7 @@ const KurvPopover = ({ onClose, art }) => {
       className={`px-10 pb-30 fixed right-0 w-full sm:w-2/3 lg:w-1/2 h-screen bg-(--white) shadow-lg z-1 transition-transform duration-500 ease-out flex flex-col
         ${isVisible ? "translate-x-0" : "translate-x-full"}`}
     >
-      {/* Scrollbart indhold */}
+      {/* ===================== SCROLLBART INDHOLD ====================== */}
       <div className="flex-1 overflow-y-auto">
         <div className="pb-16 pt-4">
           <p>Antal billetter til valgte arrangementer ({billetSum})</p>
@@ -42,6 +42,7 @@ const KurvPopover = ({ onClose, art }) => {
         {/* If/else statement som viser bestilt arrangement ellers besked om tom kurv */}
         <div className="flex-1">
           {billetter && billetter.length > 0 ? (
+            // Sender hver billet (som allerede indeholder alle event-felterne og matchedArtworks) videre som event til KurvCard
             billetter.map((billet) => (
               <KurvCard key={billet.id} event={billet} art={art} />
             ))
@@ -51,7 +52,7 @@ const KurvPopover = ({ onClose, art }) => {
         </div>
       </div>
 
-      {/* Knapper i bunden */}
+      {/* ======================= KNAPPER I BUNDEN ======================= */}
       {billetter && billetter.length > 0 && (
         <div className="grid grid-cols-2 gap-8">
           <SecondaryButton

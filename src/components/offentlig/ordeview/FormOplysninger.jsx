@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 
 export default function FormOplysninger() {
   const {
@@ -22,7 +23,7 @@ export default function FormOplysninger() {
       className="flex flex-col gap-8"
     >
       <div>
-        {/* Herunder bestemmes input FORNAVN */}
+        {/* ======================= FORNAVN ======================= */}
         <input
           className="border border-gray-300 p-2 w-full"
           {...register("forNavn", {
@@ -41,7 +42,7 @@ export default function FormOplysninger() {
       </div>
 
       <div>
-        {/* Herunder bestemmes input EFTERNAVN */}
+        {/* ====================== EFTERNAVN ======================= */}
         <input
           className="border-1 border-gray-300 p-2 w-full"
           {...register("efterNavn", {
@@ -60,7 +61,7 @@ export default function FormOplysninger() {
       </div>
 
       <div>
-        {/* Herunder bestemmes input EMAIL */}
+        {/* ======================== EMAIL ======================== */}
         <input
           className="border-1 border-gray-300 p-2 w-full"
           {...register("email", {
@@ -77,7 +78,7 @@ export default function FormOplysninger() {
       </div>
 
       <div>
-        {/* Herunder bestemmes input MOBILNUMMER */}
+        {/* ===================== MOBILNUMMER ====================== */}
         <input
           className="border-1 border-gray-300 p-2 w-full"
           type="number"
@@ -102,8 +103,10 @@ export default function FormOplysninger() {
         )}
       </div>
 
-      {/* Herunder bestemmes SUBMIT knap */}
-      <input type="submit" />
+      {/* ======================== SUBMIT ======================= */}
+      <TertrieryButton>
+        <input type="submit" />
+      </TertrieryButton>
     </form>
   );
 }

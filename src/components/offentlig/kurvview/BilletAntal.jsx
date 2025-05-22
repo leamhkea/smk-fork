@@ -11,12 +11,12 @@ const BilletAntal = ({ id, antal }) => {
 
   return (
     <div className="flex items-center">
-      {/* Tilføjer x antal billetter til kurven */}
+      {/* ===================== TILFØJER X ANTAL BILLETTER TIL KURVEN ====================== */}
       <button onClick={() => decAntal(id)}>
         <HiMinus />
       </button>
 
-      {/* Viser antallet billetter tilføjet til kurven */}
+      {/* ===================== VISER X ANTAL BILLETTER I KURVEN ====================== */}
       <input
         type="number"
         value={antal}
@@ -24,7 +24,7 @@ const BilletAntal = ({ id, antal }) => {
         className="text-center w-15"
       />
 
-      {/* Fjerner x antal billetter til kurven */}
+      {/* ===================== FJERNER X ANTAL BILLETTER FRA KURVEN ====================== */}
       <button onClick={() => incAntal(id)}>
         <BsPlusLg />
       </button>

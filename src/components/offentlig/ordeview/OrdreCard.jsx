@@ -10,13 +10,14 @@ const OrdreCard = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6">
-      {/* Basket-indholdet */}
+      {/* ===================== KONTAKTOPLYSNINGER ====================== */}
       <div className="min-h-150 gap-8 flex-1 bg-white px-6 py-10 shadow-md flex flex-col">
         <p>Kontaktoplysninger</p>
 
         <FormOplysninger />
       </div>
 
+      {/* ====================== BASKET INDHOLD ======================= */}
       {/* Order summary --> bliver sticky kun på større skærme */}
       <div className="min-h-150 gap-8 flex-1 bg-white px-6 py-10 shadow-md flex flex-col">
         <p>Antal billetter til valgte arrangementer ({billetSum})</p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import * as motion from "motion/react-client";
 
 const HeroImgText = ({ event, art }) => {
   //matcher artworksID fra async api med object_number i smks api
@@ -7,7 +8,15 @@ const HeroImgText = ({ event, art }) => {
     : [];
 
   return (
-    <div className="grid relative">
+    <motion.div
+      className="grid relative"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.4,
+        scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+      }}
+    >
       {/* Div placerer text og image i forhold til hinanden */}
       <div className="col-start-1 row-start-1 m-auto relative">
         {matchedArtworks?.[0]?.image_thumbnail && (
@@ -21,16 +30,16 @@ const HeroImgText = ({ event, art }) => {
         )}
 
         {/* Div placerer text halvt ud fra venstre side på image */}
-        <div className="absolute top-1/4 left-0 sm:left-[-15%] transform -translate-y-1/2 sm:px-0">
-          <h1>{event.title}</h1>
+        <div className="absolute top-1/4 left-0 sm:left-[-18%] transform -translate-y-1/2 sm:px-0">
+          <h1 className="text-[--blue]">{event.title}</h1>
           <div className="flex flex-row pt-2">
-            <h3>{event.location.name}</h3>
+            <h3 className="text-[--blue]">{event.location.name}</h3>
             <span className="px-4">|</span>
-            <h3>{event.date}</h3>
+            <h3 className="text-[--blue]">{event.date}</h3>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

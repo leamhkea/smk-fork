@@ -50,6 +50,7 @@ const ListClient = (props) => {
         <ListKladder art={props.art} />
       </SignedIn>
 
+      {/* =================== OPLYSNINGER OM SMK ARRANGEMENTER ==================== */}
       <h1>Alle arrangementer</h1>
 
       <div className="flex flex-row flex-wrap justify-between mt-10 mb-20 gap-8">
@@ -69,6 +70,7 @@ const ListClient = (props) => {
           </p>
         </div>
 
+        {/* ======================= FILTRE TIL EVENTS ======================== */}
         <Filtrering className="self-end" events={props.events} />
       </div>
 
