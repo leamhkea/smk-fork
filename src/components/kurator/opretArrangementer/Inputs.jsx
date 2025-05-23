@@ -28,7 +28,7 @@ const Inputs = ({events, art}) => {
   
     events.forEach((event) => {
       if (event.location && !lokationMap.has(event.location.id)) {
-        lokationMap.set(event.location.id, event.location);
+        lokationMap.set(event.location.id, event.location, event.location.name, event.location.address);
       }
     });
     
@@ -63,8 +63,8 @@ const Inputs = ({events, art}) => {
         <input
           type="text"
           name="titel"
-          value={inputValue.titel}
-          onChange={(e) => setInputValue("titel", e.target.value)} //e.target.value så den peger på feltnavnet fra zustand og ikke funktionen direkte. den får på den måde en callback-funktion og bliver dermed ikke kaldt direkte i render-fasen.
+          value={inputValue.title}
+          onChange={(e) => setInputValue("title", e.target.value)} //e.target.value så den peger på feltnavnet fra zustand og ikke funktionen direkte. den får på den måde en callback-funktion og bliver dermed ikke kaldt direkte i render-fasen.
           className="border-1 border-(--black) p-2"
         />
       </div>
@@ -73,8 +73,8 @@ const Inputs = ({events, art}) => {
         <label>* Beskrivelse:</label>
         <textarea
           name="beskrivelse"
-          value={inputValue.beskrivelse}
-          onChange={(e) => setInputValue("beskrivelse", e.target.value)} 
+          value={inputValue.description}
+          onChange={(e) => setInputValue("description", e.target.value)} 
           className="border-1 border-(--black) p-2 h-50"
         />
       </div>
@@ -83,19 +83,28 @@ const Inputs = ({events, art}) => {
         <label>* Lokation:</label>
             <select
             name="lokation"
-            value={inputValue.lokation}
-            onChange={(e) => { //denne del skal nok opdateres senere, så lokationer videresendes korrekt til resten af delene i projektet
-              const value = e.target.value;
-              setFilter({ lokation: value }); // til filtrering
-              setInputValue("lokation", value); // til kladde
-              }}
+            value={inputValue.location.id} // bruger locationId som value
+            onChange={(e) => {
+              const selectedId = e.target.value;
+              const selectedLocation = lokation.find(params => params.id === selectedId);
+
+              if (selectedLocation) {
+                setInputValue("location", { //til kladder
+                  id: selectedLocation.id,
+                  name: selectedLocation.name,
+                  address: selectedLocation.address,
+                });
+
+                setFilter({ lokation: selectedId }); //til filtrering
+              }
+            }}
             className="border-1 border-(--black) p-2"
-            >
+          >
             <option value="">Vælg lokation</option>
             {lokation.map((lokation, i) => (
-             <option key={i} value={lokation.id}>
-             {lokation.name} – {lokation.address}
-           </option>
+              <option key={i} value={lokation.id}>
+                {lokation.name} – {lokation.address}
+              </option>
             ))}
           </select>
       </div>
@@ -105,8 +114,8 @@ const Inputs = ({events, art}) => {
         <input 
           type="date"
           name="dato"
-          value={inputValue.dato}
-          onChange={(e) => setInputValue("dato", e.target.value)} 
+          value={inputValue.date}
+          onChange={(e) => setInputValue("date", e.target.value)} 
           className="border-1 border-(--black) p-2"
         />
       </div>
