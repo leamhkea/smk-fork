@@ -98,13 +98,19 @@ const useArtworkStore = create(
       inputValue: {
         title: "",
         description: "",
+        date: "",
+        locationID:"",
+        curator:"",
+        artworkIds: [],
+        totalTickets:"",
+        bookedTickets:"",
         location:{
           locationId:"",
           name:"",
           address:"",
+          maxGuests:"",
+          maxArtworks:"",
         },
-        date: "",
-        inventarnummer: [],
       },
       savedEvents: [], //tomt array til gemte kladder
 
@@ -138,13 +144,19 @@ const useArtworkStore = create(
           inputValue: {
             title: "",
             description: "",
+            date: "",
+            locationID:"",
+            curator:"",
+            artworkIds: [],
+            totalTickets:"",
+            bookedTickets:"",
             location:{
-              id:"",
+              locationId:"",
               name:"",
               address:"",
+              maxGuests:"",
+              maxArtworks:"",
             },
-            date: "",
-            inventarnummer: [],
           },
         })),
 

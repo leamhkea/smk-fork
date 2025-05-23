@@ -4,21 +4,22 @@ import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import { PublicerServer } from "../opretArrangementer/PublicerServer";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Kladder = ({ event, vaerk }) => {
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
-  const { savedEvents } = useArtworkStore();
+  const router = useRouter();
 
-  const publicerEvent = async (e) => {
-    const formData = savedEvents
-  
+  const publicerEvent = async () => {
     try {
-      await PublicerServer(formData);
+      await PublicerServer(event); // kun det ene event, ikke alle
+      // sletInputValue(event.id); // evt. fjern kladden ved success
       router.push("/arrangementer");
     } catch (err) {
       console.error("Fejl:", err);
     }
   };
+  
   
 
   return (

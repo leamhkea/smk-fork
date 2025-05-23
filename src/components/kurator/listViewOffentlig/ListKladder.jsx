@@ -26,14 +26,12 @@ const ListKladder = ({ art }) => {
     ? savedEvents //savedEvents lagret fra zustand
         .map((event) => { //mapper over async api'et
           const matchingVaerk = art.find(
-            (vaerk) => vaerk.object_number === event.inventarnummer?.[0] //matcher det indtastede inventarnummer fra inputs med api'ets object-number
+            (vaerk) => vaerk.object_number === event.artworkIds?.[0] //matcher det indtastede inventarnummer fra inputs med api'ets object-number
           );
           return matchingVaerk ? { ...event, matchedVaerk: matchingVaerk } : null; //skal returneres hvis den er sand
         })
         .filter(Boolean) //filtrerer den som true eller false
     : [];
-
-    console.log("events", savedEvents)
 
     //list-slider
   useEffect(() => {

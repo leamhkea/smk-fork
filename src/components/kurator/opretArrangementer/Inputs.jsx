@@ -44,7 +44,7 @@ const Inputs = ({events, art}) => {
     addEvent({
       ...inputValue,
       artworks: gemteVaerker, // tilføjer værker til arrangementet
-      inventarnummer: gemteVaerker.map((v) => v.object_number), //sørger for at inventarnummer matcher
+      artworkIds: gemteVaerker.map((v) => v.object_number), //sørger for at inventarnummer matcher
     });
 
     resetInputValue();
@@ -136,7 +136,7 @@ const Inputs = ({events, art}) => {
 
       <div className="flex justify-center gap-10">
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>
-        <TertrieryButton type="submit">Publicer arrangement</TertrieryButton>
+        <TertrieryButton>Publicer arrangement</TertrieryButton>
       </div>
     </Form>
   );

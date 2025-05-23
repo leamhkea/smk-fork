@@ -1,19 +1,23 @@
-"use server";
-import useArtworkStore from "@/store/kuratorStore";
-export async function PublicerServer(formData) {
-    // den skal vide at formData er input fra savedEvents 
+export async function PublicerServer(event) {
 
-  const data = {
-    title: formData.get("title"),
-    description: formData.get("description"),
-    date: formData.get("date"),
-    locationId: formData.get("locationId"),
-    locationName: formData.get("locationName"),
-    locationAddress: formData.get("locationAddress"),
-    inventarnumre: formData.getAll("inventarnumre"),
+  const data = { //alle dele af async api'et skal opdateres fra input. Tjek også input-komponentet og zustandstore
+    id: event.id || "Udefineret",
+    title: event.title || "Udefineret",
+    description: event.description || "Udefineret",
+    locationID: event.locationID || "Udefineret",
+    curator: event.curator || "Udefineret",
+    date: event.date || "Udefineret",
+    locationId: event.location?.id || "Udefineret",
+    curator: event.curator || "Udefineret",
+    artworkIds: event.artworks?.map((v) => v.object_number) || [],
+    totalTickets: event.totalTickets || "Udefineret",
+    bookedTickets: event.bookedTickets || "Udefineret",
+    name: event.location.name || "Udefineret",
+    address: event.location.address || "Udefineret",
+    maxGuests: event.location.maxGuests || "Udefineret",
+    maxArtworks: event.location.maxArtworks || "Udefineret",
   };
 
-  // Post til Render API
   const res = await fetch("https://async-exhibit-server-rmug.onrender.com/events", {
     method: "POST",
     headers: {
@@ -23,8 +27,10 @@ export async function PublicerServer(formData) {
   });
 
   if (!res.ok) {
-    throw new Error("Fejl ved oprettelse af arrangement.");
+        const errorText = await res.text(); // 👈 vis hele serverens svar
+        console.error("🚨 Fejl fra server:", errorText);
+        throw new Error("Fejl ved oprettelse af arrangement.");
   }
 
-  return await res.json();
+  return result = await res.json();
 }
