@@ -22,11 +22,11 @@ export default function ScrollLinked({ event, art }) {
   return (
     <div className="flex justify-between gap-12 mx-auto">
       <div className="break-words pb-2 self-center">
-        <h2>Værkbeskrivelse</h2>
+        <h2>Kunstner historik</h2>
         <p>
           {Array.isArray(art?.production) && art.production[0]?.creator_history
             ? art.production[0].creator_history
-            : "Værket har ingen beskrivelse"}
+            : "Kunstneren har ingen historik"}
         </p>
       </div>
       <div id="example" className="mx-auto">
