@@ -33,6 +33,8 @@ const ListKladder = ({ art }) => {
         .filter(Boolean) //filtrerer den som true eller false
     : [];
 
+    console.log("events", savedEvents)
+
     //list-slider
   useEffect(() => {
     const measure = () => {
