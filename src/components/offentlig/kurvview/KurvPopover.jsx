@@ -65,7 +65,7 @@ const KurvPopover = ({ onClose, art }) => {
           </SecondaryButton>
 
           <Link href="/ordreoversigt" onClick={handleClose}>
-            <TertrieryButton>Bekræft billetter</TertrieryButton>
+            <TertrieryButton>Bekræft ordre</TertrieryButton>
           </Link>
         </div>
       )}

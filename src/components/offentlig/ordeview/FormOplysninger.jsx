@@ -20,87 +20,91 @@ export default function FormOplysninger() {
   return (
     <form
       onSubmit={handleSubmit((data) => console.log(data))}
-      className="flex flex-col gap-8"
+      className="flex flex-col justify-between min-h-[450px]"
+      style={{ height: "100%" }}
     >
-      <div>
-        {/* ======================= FORNAVN ======================= */}
-        <input
-          className="border border-gray-300 p-3 w-full"
-          {...register("forNavn", {
-            required: "Fornavn er påkrævet",
+      <div className="grid gap-12">
+        <div>
+          {/* ======================= FORNAVN ======================= */}
+          <input
+            className="border border-gray-300 p-3 w-full"
+            {...register("forNavn", {
+              required: "Fornavn er påkrævet",
 
-            // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
-            pattern: /^[A-Åa-å]+$/i,
-          })}
-          placeholder="Fornavn *"
-        />
-        {/* Message kalder tilbage på required */}
-        <p className="text-red-600 text-sm">{errors.forNavn?.message}</p>
-        {errors?.forNavn?.type === "pattern" && (
-          <p className="text-red-600 text-sm">Kun alfabetiske tegn</p>
-        )}
-      </div>
+              // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
+              pattern: /^[A-Åa-å]+$/i,
+            })}
+            placeholder="Fornavn *"
+          />
+          {/* Message kalder tilbage på required */}
+          <p className="text-red-600 text-sm">{errors.forNavn?.message}</p>
+          {errors?.forNavn?.type === "pattern" && (
+            <p className="text-red-600 text-sm">Kun alfabetiske tegn</p>
+          )}
+        </div>
 
-      <div>
-        {/* ====================== EFTERNAVN ======================= */}
-        <input
-          className="border-1 border-gray-300 p-3 w-full"
-          {...register("efterNavn", {
-            required: "Efternavn er påkrævet",
+        <div>
+          {/* ====================== EFTERNAVN ======================= */}
+          <input
+            className="border-1 border-gray-300 p-3 w-full"
+            {...register("efterNavn", {
+              required: "Efternavn er påkrævet",
 
-            // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
-            pattern: /^[A-Åa-å]+$/i,
-          })}
-          placeholder="Efternavn *"
-        />
-        {/* Message kalder tilbage på required */}
-        <p className="text-red-600 text-sm">{errors.efterNavn?.message}</p>
-        {errors?.efterNavn?.type === "pattern" && (
-          <p className="text-red-600 text-sm">Kun alfabetiske tegn</p>
-        )}
-      </div>
+              // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
+              pattern: /^[A-Åa-å]+$/i,
+            })}
+            placeholder="Efternavn *"
+          />
+          {/* Message kalder tilbage på required */}
+          <p className="text-red-600 text-sm">{errors.efterNavn?.message}</p>
+          {errors?.efterNavn?.type === "pattern" && (
+            <p className="text-red-600 text-sm">Kun alfabetiske tegn</p>
+          )}
+        </div>
 
-      <div>
-        {/* ======================== EMAIL ======================== */}
-        <input
-          className="border-1 border-gray-300 p-3 w-full"
-          {...register("email", {
-            required: "E-mail er påkrævet",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Ugyldig e-mailadresse",
-            },
-          })}
-          aria-invalid={errors.email ? "true" : "false"}
-          placeholder="E-mail *"
-        />
-        <p className="text-red-600 text-sm">{errors.email?.message}</p>
-      </div>
+        <div>
+          {/* ======================== EMAIL ======================== */}
+          <input
+            className="border-1 border-gray-300 p-3 w-full"
+            {...register("email", {
+              required: "E-mail er påkrævet",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Ugyldig e-mailadresse",
+              },
+            })}
+            aria-invalid={errors.email ? "true" : "false"}
+            placeholder="E-mail *"
+          />
+          <p className="text-red-600 text-sm">{errors.email?.message}</p>
+        </div>
 
-      <div>
-        {/* ===================== MOBILNUMMER ====================== */}
-        <input
-          className="border-1 border-gray-300 p-3 w-full"
-          type="number"
-          {...register("mobilNummer", {
-            min: 8,
-            max: 8,
-            required: "Mobilnummer er påkrævet",
-          })}
-          placeholder="Mobilnummer *"
-        />
-        {/* Message kalder tilbage på required */}
-        <p className="text-red-600 text-sm">{errors.mobilNummer?.message}</p>
-        {errors?.mobilNummer?.type === "min" && (
-          <p className="text-red-600 text-sm">
-            Mobilnummer skal bestå af 8 cifre
-          </p>
-        )}
-        {errors?.mobilNummer?.type === "max" && (
-          <p className="text-red-600 text-sm">
-            Mobilnummer skal bestå af 8 cifre
-          </p>
-        )}
+        <div>
+          {/* ===================== MOBILNUMMER ====================== */}
+          <input
+            className="border-1 border-gray-300 p-3 w-full"
+            type="text"
+            {...register("mobilNummer", {
+              required: "Mobilnummer er påkrævet",
+              minLength: {
+                value: 8,
+                message: "Mobilnummer skal bestå af 8 cifre",
+              },
+              maxLength: {
+                value: 8,
+                message: "Mobilnummer skal bestå af 8 cifre",
+              },
+              pattern: {
+                // Sikrer at det kun indeholder cifre (0-9)
+                value: /^[0-9]{8}$/,
+                message: "Mobilnummer skal kun indeholde tal",
+              },
+            })}
+            placeholder="Mobilnummer *"
+          />
+          {/* Message kalder tilbage på required */}
+          <p className="text-red-600 text-sm">{errors.mobilNummer?.message}</p>
+        </div>
       </div>
 
       {/* ======================== SUBMIT ======================= */}
