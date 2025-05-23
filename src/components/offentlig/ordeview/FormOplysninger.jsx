@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import { useRouter } from "next/navigation";
 
 export default function FormOplysninger() {
   const {
@@ -7,6 +8,13 @@ export default function FormOplysninger() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
+
+  const onSubmit = (data) => {
+    console.log("Form valid og submittet:", data);
+    router.push("/ordrebekraeftelse"); // Navigér videre EFTER valid submission
+  };
 
   //        ^     =  starten på strengen
   //        $     =  slutningen på strengen
@@ -19,11 +27,10 @@ export default function FormOplysninger() {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => console.log(data))}
-      className="flex flex-col justify-between min-h-[450px]"
-      style={{ height: "100%" }}
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col justify-between h-full"
     >
-      <div className="grid gap-12">
+      <div className="grid gap-8">
         <div>
           {/* ======================= FORNAVN ======================= */}
           <input
@@ -108,9 +115,8 @@ export default function FormOplysninger() {
       </div>
 
       {/* ======================== SUBMIT ======================= */}
-      <TertrieryButton>
-        <input type="submit" />
-      </TertrieryButton>
+
+      <TertrieryButton type="submit">Bekræft booking</TertrieryButton>
     </form>
   );
 }

@@ -1,30 +1,23 @@
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
 import ButtonAddBillet from "./ButtonAddBillet";
+import BeskrivendeTekst from "./BeskrivendeTekst";
+import TestImg from "./SamledeVaerker";
 
 const SingleCard = ({ event, art }) => {
   return (
-    <article className="grid gap-40">
+    <article className="grid gap-20">
       {/* =================== IMAGE + OVERSKRIFT ==================== */}
       <HeroImgText event={event} art={art} />
 
       {/* ===================== OM ARRANGEMENT ====================== */}
-      <div className="flex justify-between max-w-[50rem] mx-auto">
-        <h2 className="w-1/2 break-words pb-2 self">Om {event.title}</h2>
-        <div className="w-1/2 break-words grid gap-2">
-          <p>
-            Dette arrangement omhandler
-            <span className="text-(--blue) px-1">{event.description}</span>
-          </p>
-          <p>
-            Arrangementet tilbyder en indbydende og inspirerende atmosfære, hvor
-            kunst og arkitektur smelter sammen for at skabe en unik oplevelse.
-          </p>
-        </div>
-      </div>
+      <BeskrivendeTekst event={event} art={art} />
 
       {/* ================== PRAKTISK INFORMATION =================== */}
       <PraktiskInfo event={event} />
+
+      {/* ===================== SAMLEDE VÆRKER ====================== */}
+      <TestImg event={event} art={art} />
 
       {/* ================== TILFØJ EVENT TIL KURV ================== */}
       <ButtonAddBillet billet={event} art={art} />
