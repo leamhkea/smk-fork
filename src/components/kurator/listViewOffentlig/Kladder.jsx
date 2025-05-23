@@ -2,10 +2,24 @@ import Image from "next/image";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
+import { PublicerServer } from "../opretArrangementer/PublicerServer";
 import Link from "next/link";
 
 const Kladder = ({ event, vaerk }) => {
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
+  const { savedEvents } = useArtworkStore();
+
+  const publicerEvent = async (e) => {
+    const formData = savedEvents
+  
+    try {
+      await PublicerServer(formData);
+      router.push("/arrangementer");
+    } catch (err) {
+      console.error("Fejl:", err);
+    }
+  };
+  
 
   return (
     <li className="flex flex-col justify-between gap-5 p-5 text-center h-full min-h-[100px]">
@@ -30,7 +44,7 @@ const Kladder = ({ event, vaerk }) => {
             <SecondaryButton>Rediger</SecondaryButton>
           </Link>
 
-        <TertrieryButton>Publicer</TertrieryButton>
+        <TertrieryButton onClick={publicerEvent}>Publicer</TertrieryButton>
         <button
             className=" hover:text-red-600 mt-5"
             onClick={() => sletInputValue(event.id)}
