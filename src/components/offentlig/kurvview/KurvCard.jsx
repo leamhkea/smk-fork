@@ -15,15 +15,18 @@ const KurvCard = ({ event, art }) => {
   return (
     <div className="flex flex-row gap-4 items-stretch mb-16">
       {/* =================== BILLEDE TIL TILHØRENDE ARRANGEMENT ==================== */}
-      {event.matchedArtworks?.[0]?.image_thumbnail && (
-        <Image
-          alt="artwork"
-          src={event.matchedArtworks[0].image_thumbnail}
-          width={100}
-          height={100}
-          className="object-contain w-full h-auto"
-        />
-      )}
+
+      <div className="w-30 h-40 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
+        {event.matchedArtworks?.[0]?.image_thumbnail && (
+          <Image
+            alt="artwork"
+            src={event.matchedArtworks[0].image_thumbnail}
+            width={50}
+            height={50}
+            className="object-contain w-full h-auto"
+          />
+        )}
+      </div>
 
       <div className="flex flex-col justify-between flex-1">
         {/* ======================= PRAKTISK INFORMATION ======================== */}

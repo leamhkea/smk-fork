@@ -25,7 +25,7 @@ export default function FormOplysninger() {
       <div>
         {/* ======================= FORNAVN ======================= */}
         <input
-          className="border border-gray-300 p-2 w-full"
+          className="border border-gray-300 p-3 w-full"
           {...register("forNavn", {
             required: "Fornavn er påkrævet",
 
@@ -44,7 +44,7 @@ export default function FormOplysninger() {
       <div>
         {/* ====================== EFTERNAVN ======================= */}
         <input
-          className="border-1 border-gray-300 p-2 w-full"
+          className="border-1 border-gray-300 p-3 w-full"
           {...register("efterNavn", {
             required: "Efternavn er påkrævet",
 
@@ -63,7 +63,7 @@ export default function FormOplysninger() {
       <div>
         {/* ======================== EMAIL ======================== */}
         <input
-          className="border-1 border-gray-300 p-2 w-full"
+          className="border-1 border-gray-300 p-3 w-full"
           {...register("email", {
             required: "E-mail er påkrævet",
             pattern: {
@@ -80,7 +80,7 @@ export default function FormOplysninger() {
       <div>
         {/* ===================== MOBILNUMMER ====================== */}
         <input
-          className="border-1 border-gray-300 p-2 w-full"
+          className="border-1 border-gray-300 p-3 w-full"
           type="number"
           {...register("mobilNummer", {
             min: 8,
