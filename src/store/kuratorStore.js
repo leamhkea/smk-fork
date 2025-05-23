@@ -96,10 +96,14 @@ const useArtworkStore = create(
       //OPRET VÆRK//
 
       inputValue: {
-        titel: "",
-        beskrivelse: "",
-        lokation:"",
-        dato: "",
+        title: "",
+        description: "",
+        location:{
+          locationId:"",
+          name:"",
+          address:"",
+        },
+        date: "",
         inventarnummer: [],
       },
       savedEvents: [], //tomt array til gemte kladder
@@ -134,7 +138,11 @@ const useArtworkStore = create(
           inputValue: {
             title: "",
             description: "",
-            location: "",
+            location:{
+              id:"",
+              name:"",
+              address:"",
+            },
             date: "",
             inventarnummer: [],
           },

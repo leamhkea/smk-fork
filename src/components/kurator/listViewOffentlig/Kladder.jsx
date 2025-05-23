@@ -23,8 +23,8 @@ const Kladder = ({ event, vaerk }) => {
           </div>
 
           <div className="flex flex-col justify-between flex-1">
-            <h2>{event.titel}</h2>
-            <p>{event.dato}</p>
+            <h2>{event.title}</h2>
+            <p>{event.date}</p>
 
             <Link href={`/arrangementer/${event.id}`}>
             <SecondaryButton>Rediger</SecondaryButton>
