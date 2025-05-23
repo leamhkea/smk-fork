@@ -60,7 +60,7 @@ const Inputs = ({events, art}) => {
 
       <div className="flex flex-col">
         <label>* Arrangement titel:</label>
-        <input required
+        <input
           type="text"
           name="titel"
           value={inputValue.titel}
@@ -71,7 +71,7 @@ const Inputs = ({events, art}) => {
 
       <div className="flex flex-col">
         <label>* Beskrivelse:</label>
-        <textarea required
+        <textarea
           name="beskrivelse"
           value={inputValue.beskrivelse}
           onChange={(e) => setInputValue("beskrivelse", e.target.value)} 
@@ -82,7 +82,6 @@ const Inputs = ({events, art}) => {
       <div className="flex flex-col">
         <label>* Lokation:</label>
             <select
-            required
             name="lokation"
             value={inputValue.lokation}
             onChange={(e) => { //denne del skal nok opdateres senere, så lokationer videresendes korrekt til resten af delene i projektet
@@ -103,7 +102,7 @@ const Inputs = ({events, art}) => {
 
       <div className="flex flex-col">
         <label>* Dato:</label>
-        <input required
+        <input 
           type="date"
           name="dato"
           value={inputValue.dato}

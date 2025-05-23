@@ -1,14 +1,14 @@
 import SingleCard from "@/components/offentlig/singleview/SingleCard";
 
 export default async function SingleView({ params }) {
-  const { id } = await params;
+  const { id, object_number } = await params;
 
   // Ved at bruge Promise.all() henter vi dem samtidig i stedet for én efter én
   const [dataAsync, dataSMK] = await Promise.all([
     fetch(`https://async-exhibit-server-rmug.onrender.com/events/${id}`),
 
     fetch(
-      "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
+      `https://api.smk.dk/api/v1/art/?object_number=${object_number}`
     ),
   ]);
 
