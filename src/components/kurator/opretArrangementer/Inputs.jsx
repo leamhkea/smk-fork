@@ -52,7 +52,6 @@ const Inputs = ({events, art}) => {
     router.push("/arrangementer");
   };
   
-  
 
   return (
     <Form onSubmit={saveKladde} className="flex flex-col gap-10">
@@ -137,7 +136,7 @@ const Inputs = ({events, art}) => {
 
       <div className="flex justify-center gap-10">
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>
-        <TertrieryButton>Publicer arrangement</TertrieryButton>
+        <TertrieryButton type="submit">Publicer arrangement</TertrieryButton>
       </div>
     </Form>
   );
