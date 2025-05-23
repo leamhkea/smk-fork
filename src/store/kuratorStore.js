@@ -132,10 +132,10 @@ const useArtworkStore = create(
       resetInputValue: () =>
         set(() => ({
           inputValue: {
-            titel: "",
-            beskrivelse: "",
-            lokation: "",
-            dato: "",
+            title: "",
+            description: "",
+            location: "",
+            date: "",
             inventarnummer: [],
           },
         })),
@@ -170,8 +170,6 @@ const useArtworkStore = create(
 
         //fjerner lagringen til når brugeren har gemt kladden
         resetVaerker: () => set({ gemteVaerker: [] }),
-
-
           }),
 
     {
