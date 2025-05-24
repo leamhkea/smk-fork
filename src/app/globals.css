@@ -69,12 +69,13 @@ body {
     font-size: calc(0.15vw + 0.15vh + 16px);
   }
   main {
-    padding-inline: var(--content-width);
     .no-padding {
+      margin-top:0;
       padding-inline: 0;
     }
     section {
-      margin-top: 2rem;
+      margin-top: 8rem;
+      padding-inline: var(--content-width);
     }
   }
 }

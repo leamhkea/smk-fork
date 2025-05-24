@@ -14,7 +14,7 @@ const Kladder = ({ event, vaerk }) => {
     try {
       console.log("📦 Event der sendes til server:", event);
       await PublicerServer(event); // kun det ene event, ikke alle
-      // sletInputValue(event.id); // evt. fjern kladden ved success
+      sletInputValue(event.id); // fjern kladden ved success
       router.push("/arrangementer");
     } catch (err) {
       console.error("Fejl:", err);

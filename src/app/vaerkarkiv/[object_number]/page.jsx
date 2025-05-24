@@ -8,7 +8,11 @@ const VaerkerSingleView = async ({ params }) => {
 
   const art = artData?.items?.[0];
 
-  return <SingleVaerkCard art={art} />;
+  return (
+  <section>
+      <SingleVaerkCard art={art} />
+  </section>)
+
 };
 
 export default VaerkerSingleView;

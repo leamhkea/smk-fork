@@ -48,8 +48,8 @@ export default async function SingleView({ params }) {
   const completeArtworks = [...smkData.items, ...missingArtworks];
 
   return (
-    <div>
+    <section>
       <SingleCard event={eventData} art={completeArtworks} />
-    </div>
+    </section>
   );
 }

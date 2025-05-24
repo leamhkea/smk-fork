@@ -12,7 +12,7 @@ const OrdreCard = dynamic(
 
 const OrdreOversigt = () => {
   return (
-    <section className="px-(--content-width)">
+    <section>
       <OrdreCard />
     </section>
   );

@@ -1,23 +1,14 @@
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import Ramme from "@/components/global/Ramme";
+import ServerForside from "@/components/forside/ServerForside";
 import ParralaxText from "@/components/forside/ParallaxText";
 
-export default function Home() {
-  return (
-    <section>
-      <Ramme>
-      <article className="flex flex-col justify-between gap-8 h-70">
-  <div>
-    <h1 className="blue">event titel |</h1>
-    <h1 className="blue thin">dato</h1>
-  </div>
-  <p className="blue">event beskrivelse</p>
-  <div className="self-start mt-auto">
-    <TertrieryButton>Læs mere om arrangementet</TertrieryButton>
-  </div>
-</article>
 
-      </Ramme>
+export default function Home({events, art}) {
+  return (
+    <section className="no-padding">
+        <ServerForside art={art} events={events}/>
+
       <div>
         <ParralaxText />
       </div>

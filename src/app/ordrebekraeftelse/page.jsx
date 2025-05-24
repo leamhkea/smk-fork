@@ -1,5 +1,5 @@
 const Ordrebekraeftelse = () => {
-  return <section className="px-(--content-width)">Hej</section>;
+  return <section>Hej</section>;
 };
 
 export default Ordrebekraeftelse;
