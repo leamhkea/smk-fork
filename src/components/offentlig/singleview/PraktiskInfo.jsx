@@ -2,7 +2,7 @@ import Ramme from "@/components/global/Ramme";
 
 const PraktiskInfo = ({ event }) => {
   return (
-    <Ramme>
+    <Ramme className="border-[5px] p-15">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         {/* ========================= LOKATION ======================= */}
         <div>

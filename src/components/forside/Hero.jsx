@@ -22,11 +22,11 @@ const Hero = ({ art, events }) => {
             className="object-cover w-full h-full z-0"
           />
         )}
-
         {/* Indhold ovenpå billedet */}
         <article className="relative flex flex-col z-0 justify-between gap-8 h-full p-8 text-white bg-black/50">
-        <div className="flex flex-col gap-10">
-          <div className="mt-50">
+        <Ramme className="mt-20 pb-50 border-(--blue) border-[10px]">
+        <div className="flex flex-col gap-10 pt-30">
+          <div>
             <h1 className="text-4xl font-bold">{events.title} |</h1>
             <h2 className="text-2xl">{events.date}</h2>
           </div>
@@ -34,11 +34,12 @@ const Hero = ({ art, events }) => {
           <p className="max-w-xl">{events.description}</p>
           </div>
 
-          <div className="self-start mt-auto">
+          {/* <div className="self-start mt-auto">
             <Link href={`/arrangementer/${events.id}`}>
               <TertrieryButton>Læs mere om arrangementet</TertrieryButton>
             </Link>
-          </div>
+          </div> */}
+          </Ramme>
         </article>
       </div>
   );
