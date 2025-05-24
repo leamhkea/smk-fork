@@ -28,7 +28,7 @@ const Inputs = ({events, art}) => {
   
     events.forEach((event) => {
       if (event.location && !lokationMap.has(event.location.id)) {
-        lokationMap.set(event.location.id, event.location, event.location.name, event.location.address);
+        lokationMap.set(event.location.id, event.location, event.location.name, event.location.address, event.location.maxArtworks, event.location.maxGuests);
       }
     });
     
@@ -43,7 +43,7 @@ const Inputs = ({events, art}) => {
   
     addEvent({
       ...inputValue,
-      artworks: gemteVaerker, // tilføjer værker til arrangementet
+      artworkIds: gemteVaerker, // tilføjer værker til arrangementet
       artworkIds: gemteVaerker.map((v) => v.object_number), //sørger for at inventarnummer matcher
     });
 
@@ -92,6 +92,8 @@ const Inputs = ({events, art}) => {
                   id: selectedLocation.id,
                   name: selectedLocation.name,
                   address: selectedLocation.address,
+                  maxGuests: selectedLocation.maxGuests,
+                  maxArtworks: selectedLocation.maxArtworks,
                 });
 
                 setFilter({ lokation: selectedId }); //til filtrering
@@ -143,6 +145,7 @@ const Inputs = ({events, art}) => {
 };
 
 export default Inputs;
+
 
 //DOKUMENTATION BRUGT
 

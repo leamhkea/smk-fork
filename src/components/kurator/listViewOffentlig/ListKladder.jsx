@@ -5,7 +5,6 @@ import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import Link from "next/link";
 
-
 const ListKladder = ({ art }) => {
   const { savedEvents } = useArtworkStore();
   const kladdeSum = useArtworkStore((state) => state.kladdeSum());
@@ -50,6 +49,8 @@ const ListKladder = ({ art }) => {
   }, []);
 
   const maxIndex = Math.max(kladderMedVaerker.length - visibleCards, 0);
+
+  console.log("event", savedEvents)
 
   return (
     <div className="px-4 mb-10">

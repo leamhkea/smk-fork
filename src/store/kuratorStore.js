@@ -99,7 +99,7 @@ const useArtworkStore = create(
         title: "",
         description: "",
         date: "",
-        locationID:"",
+        locationId:"",
         curator:"",
         artworkIds: [],
         totalTickets:"",
@@ -145,7 +145,7 @@ const useArtworkStore = create(
             title: "",
             description: "",
             date: "",
-            locationID:"",
+            locationId:"",
             curator:"",
             artworkIds: [],
             totalTickets:"",
@@ -169,7 +169,7 @@ const useArtworkStore = create(
           //antal af gemte kladder
           kladdeSum: () =>
             get().savedEvents.reduce((sum, event) => {
-              return sum + (event.artworks?.length || 0); // artworks = gemteVaerker i kladden
+              return sum + (event.artworkIds?.length || 0); // artworks = gemteVaerker i kladden
             }, 0),
 
           
@@ -205,6 +205,7 @@ const useArtworkStore = create(
 );
 
 export default useArtworkStore;
+
 
 
 //DOKUMENTATION BRUGT
