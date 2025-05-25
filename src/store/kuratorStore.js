@@ -114,6 +114,11 @@ const useArtworkStore = create(
       },
       savedEvents: [], //tomt array til gemte kladder
 
+      //til maxArtowkors: 
+      selectedLocation: null,
+      setSelectedLocation: (location) => set({ selectedLocation: location }), //lagrer den valgte lokation fra inputs globalt til at bruge på tværs af komponenterne
+      
+
       //setter burgerens inputs
       setInputValue: (field, value) =>
         set((state) => ({
@@ -168,9 +173,11 @@ const useArtworkStore = create(
 
           //antal af gemte kladder
           kladdeSum: () =>
-            get().savedEvents.reduce((sum, event) => {
-              return sum + (event.artworkIds?.length || 0); // artworks = gemteVaerker i kladden
-            }, 0),
+            get().savedEvents.reduce(
+              (accumulator, currentValue) =>
+                typeof currentValue.antal === "number" ? accumulator + currentValue.antal : accumulator, //skal opdateres for wtf??
+              0
+            ),          
 
           
           // VÆLG ET VÆRK //
@@ -191,6 +198,7 @@ const useArtworkStore = create(
         //fjerner lagringen til når brugeren har gemt kladden
         resetVaerker: () => set({ gemteVaerker: [] }),
           }),
+
 
     {
       name: "kuratorstorage",

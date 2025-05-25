@@ -3,12 +3,13 @@ import Link from "next/link";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import GemEtVaerkIcon from "./gemteVaerker/GemEtVaerkIcon";
 
-const VaerkerListCard = ({art}) => {
+const VaerkerListCard = ({art, events}) => {
+
 
     return (
         <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
 
-        <GemEtVaerkIcon vaerk={art} />
+        <GemEtVaerkIcon events={events} vaerk={art} />
         {art.image_thumbnail && (
         <Image
         src={art.image_thumbnail}

@@ -41,14 +41,14 @@ const VaerkerListClient = ({ artData, events }) => {
       </div>
 
       <div className="grid grid-cols-[1fr_5fr] gap-2">
-      <div className="mt-15">
+      <div className="mt-15 max-w-60">
         <Inputs art={artData} events={events} />
       </div>
 
       <div className="h-screen overflow-y-auto flex flex-col">
-        <ul className="grid grid-cols-3 gap-12">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {visibleArtworks.map((art) => (
-            <VaerkerListCard key={art.object_number} art={art} />
+            <VaerkerListCard key={art.object_number} events={events} art={art} />
           ))}
         </ul>
 

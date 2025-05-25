@@ -6,10 +6,17 @@ const GemEtVaerkIcon = ({ vaerk }) => {
   const gemteVaerker = useArtworkStore((state) => state.gemteVaerker);
   const addVaerk = useArtworkStore((state) => state.addVaerk);
   const sletVaerk = useArtworkStore((state) => state.sletVaerk);
+  const selectedLocation = useArtworkStore((state) => state.selectedLocation);
+
+  const maxArtworks = selectedLocation?.maxArtworks ?? Infinity;
 
   const isSaved = gemteVaerker.some(
     (item) => item?.object_number === vaerk.object_number
   );
+
+  const isDisabled =
+  !isSaved && gemteVaerker.length >= maxArtworks;
+
   
   const handleSavedToggle = () => {
     if (isSaved) {
@@ -26,6 +33,7 @@ const GemEtVaerkIcon = ({ vaerk }) => {
         type="checkbox"
         checked={isSaved}          // styret af Zustand. Uden denne syntaks af checkbox, vil den altid vælge første item som checked
         onChange={handleSavedToggle} // toggle-funktion
+        disabled={isDisabled}
       />
     </div>
   );
