@@ -8,20 +8,17 @@ import { useRouter } from "next/navigation";
 
 const Kladder = ({ event, vaerk }) => {
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
+  const {savedEvents} = useArtworkStore.getState();
   const router = useRouter();
 
+  const kladde = savedEvents.find((params)=>params.id === event.id)
+
   const publicerEvent = async () => {
-    try {
-      console.log("📦 Event der sendes til server:", event);
-      await PublicerServer(event); // kun det ene event, ikke alle
-      sletInputValue(event.id); // fjern kladden ved success
-      router.push("/arrangementer");
-    } catch (err) {
-      console.error("Fejl:", err);
+    if(kladde){
+      await PublicerServer(kladde);
+      sletInputValue(kladde.id);
     }
   };
-  
-  
 
   return (
     <li className="flex flex-col justify-between gap-5 p-5 text-center h-full min-h-[100px]">
