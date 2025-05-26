@@ -155,7 +155,7 @@ const Inputs = ({events, art}) => {
       <div className="flex flex-col">
         <input 
           type="date"
-          min={new Date().toISOString().split("T")[0]} //sørger for brugeren ikke kan vælge en dato i fortiden
+          // min={new Date().toISOString().split("T")[0]} //sørger for brugeren ikke kan vælge en dato i fortiden
           {...register("dato", { 
             required: "Dato er påkrævet"})}
           defaultValue={inputValue.date}

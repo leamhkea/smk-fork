@@ -1,3 +1,4 @@
+
 export async function PublicerServer(event) {
 
     const data = {
@@ -29,11 +30,11 @@ export async function PublicerServer(event) {
     });
   
     if (!res.ok) {
-          const errorText = await res.text(); // 👈 vis hele serverens svar
+          const errorText = await res.text(); // vis hele serverens svar
           console.error("🚨 Fejl fra server:", errorText);
           throw new Error("Fejl ved oprettelse af arrangement.");
     }
   
-    return result = await res.json();
+    return await res.json();
   }
   
