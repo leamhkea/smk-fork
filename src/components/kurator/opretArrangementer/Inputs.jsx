@@ -5,27 +5,26 @@ import useArtworkStore from "@/store/kuratorStore";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
-import Form from 'next/form'
+import Form from "next/form";
 
-const Inputs = ({events, art}) => {
+const Inputs = ({ events, art }) => {
   const { setFilter } = useArrangementStore();
-  const {gemteVaerker}=useArtworkStore((state)=>state);
+  const { gemteVaerker } = useArtworkStore((state) => state);
   const resetVaerker = useArtworkStore((state) => state.resetVaerker);
-
 
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
   const addEvent = useArtworkStore((state) => state.addEvent);
-  const resetInputValue = useArtworkStore((state)=> state.resetInputValue);
-
+  const resetInputValue = useArtworkStore((state) => state.resetInputValue);
   const router = useRouter();
 
   const [lokation, setLokation] = useState([]);
 
   useEffect(() => {
     const lokationMap = new Map(); //sørger for der er ingen duplikanter som i set()-constructor, men denne syntaks er ikke kompatibel da jeg ønsker en iterabel metode.
-  
-    events.forEach((event) => { //definerer alle felter, så lokationMap ikke kun modtager value og key (syntaks i map())
+
+    events.forEach((event) => {
+      //definerer alle felter, så lokationMap ikke kun modtager value og key (syntaks i map())
       const location = event.location;
       if (location && !lokationMap.has(location.id)) {
         lokationMap.set(location.id, {
@@ -38,22 +37,26 @@ const Inputs = ({events, art}) => {
       }
     });
 
-  
     events.forEach((event) => {
       if (event.location && !lokationMap.has(event.location.id)) {
-        lokationMap.set(event.location.id, event.location, event.location.name, event.location.address, event.location.maxArtworks, event.location.maxGuests);
+        lokationMap.set(
+          event.location.id,
+          event.location,
+          event.location.name,
+          event.location.address,
+          event.location.maxArtworks,
+          event.location.maxGuests
+        );
       }
     });
-    
-  
+
     setLokation([...lokationMap.values()]); //setter alle eksisterende lokationer fra arrayet
   }, [events, art]);
-  
 
   //skaber funktion til at gemme kladder, der returnerer tilbage til funktionen i zustand og resetter value
   const saveKladde = (e) => {
     e.preventDefault();
-  
+
     addEvent({
       ...inputValue,
       artworkIds: gemteVaerker, // tilføjer værker til arrangementet
@@ -61,10 +64,9 @@ const Inputs = ({events, art}) => {
     });
 
     resetInputValue();
-    resetVaerker(); 
+    resetVaerker();
     router.push("/arrangementer");
   };
-  
 
   return (
     <Form onSubmit={saveKladde} className="flex flex-col gap-10">
@@ -86,50 +88,53 @@ const Inputs = ({events, art}) => {
         <textarea
           name="beskrivelse"
           value={inputValue.description}
-          onChange={(e) => setInputValue("description", e.target.value)} 
+          onChange={(e) => setInputValue("description", e.target.value)}
           className="border-1 border-(--black) p-2 h-50"
         />
       </div>
 
       <div className="flex flex-col">
         <label>* Lokation:</label>
-            <select
-            name="lokation"
-            value={inputValue.location.id} // bruger locationId som value
-            onChange={(e) => {
-              const selectedId = e.target.value;
-              const selectedLocation = lokation.find(params => params.id === selectedId);
+        <select
+          name="lokation"
+          value={inputValue.location.id} // bruger locationId som value
+          onChange={(e) => {
+            const selectedId = e.target.value;
+            const selectedLocation = lokation.find(
+              (params) => params.id === selectedId
+            );
 
-              if (selectedLocation) {
-                setInputValue("location", { //til kladder
-                  id: selectedLocation.id,
-                  name: selectedLocation.name,
-                  address: selectedLocation.address,
-                  maxGuests: selectedLocation.maxGuests,
-                  maxArtworks: selectedLocation.maxArtworks,
-                });
+            if (selectedLocation) {
+              setInputValue("location", {
+                //til kladder
+                id: selectedLocation.id,
+                name: selectedLocation.name,
+                address: selectedLocation.address,
+                maxGuests: selectedLocation.maxGuests,
+                maxArtworks: selectedLocation.maxArtworks,
+              });
 
-                setFilter({ lokation: selectedId }); //til filtrering
-              }
-            }}
-            className="border-1 border-(--black) p-2"
-          >
-            <option value="">Vælg lokation</option>
-            {lokation.map((lokation, i) => (
-              <option key={i} value={lokation.id}>
-                {lokation.name} – {lokation.address}
-              </option>
-            ))}
-          </select>
+              setFilter({ lokation: selectedId }); //til filtrering
+            }
+          }}
+          className="border-1 border-(--black) p-2"
+        >
+          <option value="">Vælg lokation</option>
+          {lokation.map((lokation, i) => (
+            <option key={i} value={lokation.id}>
+              {lokation.name} – {lokation.address}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="flex flex-col">
         <label>* Dato:</label>
-        <input 
+        <input
           type="date"
           name="dato"
           value={inputValue.date}
-          onChange={(e) => setInputValue("date", e.target.value)} 
+          onChange={(e) => setInputValue("date", e.target.value)}
           className="border-1 border-(--black) p-2"
         />
       </div>
@@ -137,7 +142,7 @@ const Inputs = ({events, art}) => {
       <div className="flex flex-col">
         <label>Valgte kunstværker:</label>
         <span className="grid gap-2">
-        {gemteVaerker.filter(v => v && v.object_number).length > 0 ? ( //filtrerer null-items fra api'et væk
+          {gemteVaerker.filter((v) => v && v.object_number).length > 0 ? ( //filtrerer null-items fra api'et væk
             gemteVaerker
               .filter((art) => art && art.object_number)
               .map((art) => (
@@ -158,7 +163,6 @@ const Inputs = ({events, art}) => {
 };
 
 export default Inputs;
-
 
 //DOKUMENTATION BRUGT
 
@@ -182,9 +186,6 @@ export default Inputs;
 
 //forståelse for event-handling
 //https://www.dhiwise.com/post/e-target-react-exploring-the-power-of-event-handling
-
-
-
 
 //SKAL BRUGES SENERE:
 
