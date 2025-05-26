@@ -40,33 +40,36 @@ const VaerkerListClient = ({ artData, events }) => {
         <hr />
       </div>
 
-      <div className="grid grid-cols-[1fr_5fr] gap-2">
-      <div className="mt-15 max-w-60">
-        <Inputs art={artData} events={events} />
-      </div>
-
-      <div className="h-screen overflow-y-auto flex flex-col">
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {visibleArtworks.map((art) => (
-            <VaerkerListCard key={art.object_number} events={events} art={art} />
-          ))}
-        </ul>
-
-
-      {hasMore() && ( //viser kun knappen hvis der er mere data at indhente
-        <div className="flex mt-8 justify-center">
-          <SecondaryButton
-            onClick={() => {
-              setLoading(true); //knappen begynder at load hvis der er trykket, dernæst køres handleLoadMore-funktionen fra zustandstore, og sætter dernæst tilbage til false
-              handleLoadMore();
-              setLoading(false);
-            }}
-            disabled={loading}
-          >
-            {loading ? "Indlæser værker..." : "Vis flere værker"}
-          </SecondaryButton>
+      <div className="grid grid-cols-[2fr_5fr] h-screen overflow-hidden">
+        {/* Venstre kolonne */}
+        <div className="min-h-full max-w-80 overflow-y-auto p-4">
+          <Inputs art={artData} events={events} />
         </div>
-      )}
+
+        {/* Højre kolonne */}
+        <div className="h-full overflow-y-auto">
+          <div className="flex flex-col min-h-full px-4 py-6">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {visibleArtworks.map((art) => (
+                <VaerkerListCard key={art.object_number} events={events} art={art} />
+              ))}
+            </ul>
+
+            {hasMore() && (
+              <div className="flex mt-8 m-auto justify-center">
+                <SecondaryButton
+                  onClick={() => {
+                    setLoading(true);
+                    handleLoadMore();
+                    setLoading(false);
+                  }}
+                  disabled={loading}
+                >
+                  {loading ? "Indlæser værker..." : "Vis flere værker"}
+                </SecondaryButton>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
