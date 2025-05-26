@@ -5,8 +5,10 @@ import useArtworkStore from "@/store/kuratorStore";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Inputs = ({ events, art }) => {
   const { setFilter } = useArrangementStore();
@@ -30,6 +32,7 @@ const Inputs = ({ events, art }) => {
     setValue,
     trigger,
     watch,
+    control,
   } = useForm();
 
   // Synkroniserer zustand med react hook (til kunstværkers object_number)
@@ -69,6 +72,41 @@ const Inputs = ({ events, art }) => {
   const selectedLocation = lokation.find((loc) => loc.id === locationId);
   const maxArtworks = selectedLocation?.maxArtworks || Infinity;
   //se gemEtVaerkIcon (komponent) og kuratorStore - sørger for at man ikke kan klikke på flere ved maxArtworks
+
+     // Finder datoer der allerede er optaget for den valgte lokation
+     const optagedeDatoer = events
+     .filter(
+       (event) => event.location?.id === locationId && event.date // matcher lokation og sørger for dato eksisterer
+     )
+     .map((event) => new Date(event.date));
+ 
+
+  // Liste over gyldige datoer
+    const alleDatoer = [
+      "2025-05-01",
+      "2025-05-02",
+      "2025-05-03",
+      "2025-05-04",
+      "2025-05-05",
+      "2025-05-06",
+      "2025-05-07",
+      "2025-05-08",
+      "2025-05-09",
+      "2025-05-10",
+      "2025-05-11",
+      "2025-05-12",
+      "2025-05-13",
+      "2025-05-14",
+      "2025-05-15",
+    ].map((params) => new Date(params)); // konverter til Date-objekter
+
+    // Fjern de datoer der allerede er optaget for den valgte lokation
+    const gyldigeDatoer = alleDatoer.filter(
+      (d) =>
+        !optagedeDatoer.some(
+          (optaget) => d.toDateString() === new Date(optaget).toDateString()
+        )
+    );
 
   //GEMMER KLADDE//
 
@@ -155,21 +193,36 @@ const Inputs = ({ events, art }) => {
         <p className="text-red-600 text-sm">{errors.locationId?.message}</p>
       </div>
 
-      {/* DATO */}
-      <div className="flex flex-col">
-        <input
-          type="date"
-          {...register("dato", { 
-            required: "Dato er påkrævet"})}
-          defaultValue={inputValue.date}
-          className="border-1 border-(--black) p-2"
-          onChange={(e) => {
-            setValue("dato", e.target.value); // React Hook Form
-            setInputValue("date", e.target.value); // Zustand
-          }}
-        />
-        <p className="text-red-600 text-sm">{errors.dato?.message}</p>
-      </div>
+        {/* DATO */}
+        <div className="flex flex-col">
+          <label className="mb-1 font-medium">Dato *</label>
+          <Controller
+            name="dato"
+            control={useForm().control}
+            rules={{ required: "Dato er påkrævet" }}
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                selected={field.value ? new Date(field.value) : null}
+                onChange={(date) => {
+                  field.onChange(date); // React Hook Form
+                  setInputValue("date", date?.toISOString().split("T")[0]); // Zustand og gemmer ISO dato som '2025-05-01'
+                }}
+                includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
+                placeholderText="Vælg en dato"
+                dateFormat="yyyy-MM-dd"
+                className="border border-(--black) p-2 w-full"
+              />
+            )}
+          />
+          <p className="text-red-600 text-sm">{errors.dato?.message}</p>
+          {gyldigeDatoer.length === 0 && (
+          <p className="text-red-600 text-sm mt-2">
+            Alle datoer er optaget for den valgte lokation.
+          </p>
+        )}
+        </div>
+
 
       {/* KUNSTVÆRKER */}
       <div className="flex flex-col">
@@ -243,10 +296,20 @@ export default Inputs;
 //watch fra react hook form
 //https://react-hook-form.com/docs/useform/watch
 
-//så brugeren ikke kan vælge en dato i fortiden
+//så brugeren ikke kan vælge datoer, der ikke er gyldige
 //date input syntaks:
 //https://stackoverflow.com/questions/53252398/how-to-not-let-user-select-past-date-in-input-type-date
 //toISOString
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
 //split("T")
 //https://www.servicenow.com/community/developer-forum/split-date-time/m-p/1611210
+
+//react date picker
+//https://www.npmjs.com/package/react-datepicker
+//https://reactdatepicker.com/
+
+//og controller
+//https://react-hook-form.com/docs/usecontroller/controller
+
+//date constructor
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date

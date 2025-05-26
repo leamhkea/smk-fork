@@ -124,7 +124,7 @@ const useArtworkStore = create(
       },
       savedEvents: [], //tomt array til gemte kladder
 
-      //til maxArtowkors:
+      //til maxArtowkors og datoer:
       selectedLocation: null,
       setSelectedLocation: (location) => set({ selectedLocation: location }), //lagrer den valgte lokation fra inputs globalt til at bruge på tværs af komponenterne
 
