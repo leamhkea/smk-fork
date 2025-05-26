@@ -128,6 +128,9 @@ const useArtworkStore = create(
       selectedLocation: null,
       setSelectedLocation: (location) => set({ selectedLocation: location }), //lagrer den valgte lokation fra inputs globalt til at bruge på tværs af komponenterne
 
+      selectedDate: null,
+      setSelectedDate:(date)=>set({selectedDate: date}),
+
       //setter burgerens inputs
       setInputValue: (field, value) =>
         set((state) => ({

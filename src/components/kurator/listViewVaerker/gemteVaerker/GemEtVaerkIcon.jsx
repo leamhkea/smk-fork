@@ -7,6 +7,7 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
   const addVaerk = useArtworkStore((state) => state.addVaerk);
   const sletVaerk = useArtworkStore((state) => state.sletVaerk);
   const selectedLocation = useArtworkStore((state) => state.selectedLocation);
+  const selectedDate = useArtworkStore((state)=>state.selectedDate);
 
   //MAXARTWORKS PÅ VALGT LOKATION//
   const maxArtworks = selectedLocation?.maxArtworks ?? Infinity;
@@ -15,18 +16,20 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
     (item) => item?.object_number === vaerk.object_number
   );
 
-  //ER ARTWORK ALLEREDE UDSTILLET PÅ DEN LOKATION?//
-  const isInAnotherLocation = events.some((event) => {
-    const locationId = event.location?.id;
-    const isSameLocation = selectedLocation?.id === locationId;
-  
+  //ER ARTWORK ALLEREDE UDSTILLET DEN DATO?//
+  const isInSameDate = events.some((event) => {
     const usedInEvent = event.artworkIds?.includes(vaerk.object_number);
   
-    return usedInEvent && isSameLocation; // Bruges i anden lokation
+    const sameDate =
+      selectedDate &&
+      new Date(event.date).toDateString() === new Date(selectedDate).toDateString(); //sørger for den er en Date og konverterer til en string
+  
+    return usedInEvent && sameDate;
   });
   
+  
   const isDisabled =
-  (!isSaved && gemteVaerker.length >= maxArtworks) || isInAnotherLocation;
+  (!isSaved && gemteVaerker.length >= maxArtworks) || isInSameDate;
 
   
   const handleSavedToggle = () => {

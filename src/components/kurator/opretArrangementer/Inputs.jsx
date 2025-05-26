@@ -21,6 +21,9 @@ const Inputs = ({ events, art }) => {
   const setSelectedLocation = useArtworkStore(
     (state) => state.setSelectedLocation
   );
+  const setSelectedDate = useArtworkStore(
+    (state) => state.setSelectedDate
+  );
 
   const router = useRouter();
 
@@ -132,7 +135,7 @@ const Inputs = ({ events, art }) => {
         <input
           type="text"
           placeholder="Arrangement titel *"
-          {...register("titel", { required: "Titel er påkrævet" })}
+          {...register("titel", { required: "Titel er påkrævet"})}
           defaultValue={inputValue.title}
           className="border-1 border-(--black) p-2"
           onChange={(e) => {
@@ -206,8 +209,11 @@ const Inputs = ({ events, art }) => {
                 selected={field.value ? new Date(field.value) : null}
                 onChange={(date) => {
                   field.onChange(date); // React Hook Form
-                  setInputValue("date", date?.toISOString().split("T")[0]); // Zustand og gemmer ISO dato som '2025-05-01'
+                  const isoDate = date?.toISOString().split("T")[0]; // '2025-05-01'
+                  setInputValue("date", isoDate); // Til den lokale form/kladde
+                  setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
                 }}
+                
                 includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
                 placeholderText="Vælg en dato"
                 dateFormat="yyyy-MM-dd"
