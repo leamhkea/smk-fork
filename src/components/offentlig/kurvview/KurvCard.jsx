@@ -4,7 +4,7 @@ import BilletAntal from "./BilletAntal";
 import useBookingStore from "@/store/bookingStore";
 
 // Indhenter event, som blev sendt afsted fra popover som prop ( event={billet} )
-const KurvCard = ({ event, art }) => {
+const KurvCard = ({ event, art, undtagelser = false }) => {
   //matcher artworksID fra async api med object_number i smks api
   const matchedArtworks = event.artworkIds?.length
     ? art?.filter((artwork) => event.artworkIds.includes(artwork.object_number))
@@ -35,19 +35,21 @@ const KurvCard = ({ event, art }) => {
         <p>{event.date}</p>
 
         {/* ==================== PÅVIRKER BILLETTER I KURVEN ==================== */}
-        <div className="flex gap-20 self-end">
-          {/* Sender parameter med id og antal, så BilletAntal kan påvirke antal billetter arrangement */}
-          <BilletAntal id={event.id} antal={event.antal} />
+        {!undtagelser && (
+          <div className="flex gap-20 self-end">
+            {/* Sender parameter med id og antal, så BilletAntal kan påvirke antal billetter arrangement */}
+            <BilletAntal id={event.id} antal={event.antal} />
 
-          {/* ==================== SLETTER BILLETTER I KURVEN ==================== */}
-          {/* Sender parameter med event.id, så id kan slette et helt event tilføjet til kurv */}
-          <button
-            className=" hover:text-red-600"
-            onClick={() => sletBillet(event.id)}
-          >
-            <DeleteTrash />
-          </button>
-        </div>
+            {/* ==================== SLETTER BILLETTER I KURVEN ==================== */}
+            {/* Sender parameter med event.id, så id kan slette et helt event tilføjet til kurv */}
+            <button
+              className=" hover:text-red-600"
+              onClick={() => sletBillet(event.id)}
+            >
+              <DeleteTrash />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

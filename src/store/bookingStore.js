@@ -7,8 +7,14 @@ const useBookingStore = create(
       // Vores array som indeholder objekter ( arrangementbillerne )
       billetter: [],
 
-      // Ny state til bekræftelse
+      // Ny state til bekræftelse: gemte billetter og kontaktinfo til ordrebekræftelsen
       bekraeftelsesBilletter: [],
+      bekraeftelsesKontaktoplysninger: {
+        forNavn: "",
+        efterNavn: "",
+        email: "",
+        mobilNummer: "",
+      },
 
       // Tilføjer en billet til arrayet
       addBillet: (billet) =>
@@ -57,16 +63,17 @@ const useBookingStore = create(
       // Tømmer hele kurven
       emptyKurv: () => set({ billetter: [] }),
 
-      // **Ny funktion der gemmer kurv i bekræftelsesBilletter og tømmer kurv**
-      confirmBooking: () => {
-        const currentBilletter = get().billetter;
-        set({
-          bekraeftelsesBilletter: currentBilletter,
-          billetter: [],
-        });
-      },
-
       // =================== VIDEREFØRER UDFYLDTE KONTAKTINFORMATIONER TIL ORDREBEKRÆFTELSE ==============================
+
+      // **Ny funktion der gemmer både billetter og kontaktoplysninger til bekræftelse**
+      // saveBekraeftelsesData: () => {
+      //   const { billetter, kontaktoplysninger } = get();
+      //   set({
+      //     bekraeftelsesBilletter: billetter,
+      //     bekraeftelsesKontaktoplysninger: kontaktoplysninger,
+      //   });
+      // },
+
       kontaktoplysninger: {
         forNavn: "",
         efterNavn: "",
