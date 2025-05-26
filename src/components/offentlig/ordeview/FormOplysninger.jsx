@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
-import useBekraeftelseStore from "@/store/bekraeftelseStore";
+import useBookingStore from "@/store/bookingStore";
 
 export default function FormOplysninger() {
   const methods = useForm();
@@ -10,10 +10,14 @@ export default function FormOplysninger() {
     handleSubmit,
     formState: { errors },
   } = methods;
-  const setKontaktoplysninger = useBekraeftelseStore(
+  const setKontaktoplysninger = useBookingStore(
     (state) => state.setKontaktoplysninger
   );
   const router = useRouter();
+
+  // Billetter og emptykurv hentes for at kurven slettes ved bekræft booking
+  const emptyKurv = useBookingStore((state) => state.emptyKurv);
+  const billetter = useBookingStore((state) => state.billetter);
 
   const onSubmit = (data) => {
     // Gemmer form-data i localStorage til debugging
@@ -24,20 +28,14 @@ export default function FormOplysninger() {
       setKontaktoplysninger(field, value);
     });
 
-    // Giv os 2 sekunder til at se loggen, før vi redirecter
+    // Tøm kurven her efter formular data er håndteret
+    emptyKurv();
+
+    // Vent 300 ms før routing, så persist kan nå at gemme tom kurv i localStorage
     setTimeout(() => {
       router.push("/ordrebekraeftelse");
-    }, 2000);
+    }, 300);
   };
-
-  //        ^     =  starten på strengen
-  //        $     =  slutningen på strengen
-  //    [A-Åa-å]  =  indeholde bogstaver fra A-Å (inklusiv store og små)
-  //        +     =  mindst ét af de godkendte tegn i pattern
-  //        i     =  skelner ikke mellem store og små bogstaver
-  //    [^\s@]+   =  et eller flere tegn, som ikke er mellemrum eller @
-  //        @     =  skal indeholde et @
-  //        \.    =  skal indeholde et punktum
 
   return (
     <FormProvider {...methods}>
@@ -138,3 +136,14 @@ export default function FormOplysninger() {
     </FormProvider>
   );
 }
+
+// ======================== INFORMATION OM TEGN BRUGT I INPUT FELTER ==========================
+
+//        ^     =  starten på strengen
+//        $     =  slutningen på strengen
+//    [A-Åa-å]  =  indeholde bogstaver fra A-Å (inklusiv store og små)
+//        +     =  mindst ét af de godkendte tegn i pattern
+//        i     =  skelner ikke mellem store og små bogstaver
+//    [^\s@]+   =  et eller flere tegn, som ikke er mellemrum eller @
+//        @     =  skal indeholde et @
+//        \.    =  skal indeholde et punktum

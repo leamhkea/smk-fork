@@ -1,16 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import useBekraeftelseStore from "@/store/bekraeftelseStore";
+import useBookingStore from "@/store/bookingStore";
 
 const BekraeftelseCard = () => {
+  // Billetter og emptykurv hentes for at kurven slettes ved bekræft booking
+  const billetter = useBookingStore((state) => state.billetter);
+  const billetSum = useBookingStore((state) => state.billetSum());
+
   // Henter kontaktoplysninger fra Zustand bekraeftelse-store
-  const kontaktoplysninger = useBekraeftelseStore(
+  const kontaktoplysninger = useBookingStore(
     (state) => state.kontaktoplysninger
   );
 
   // Nulstiller kontaktoplysningerne
-  const resetKontaktoplysninger = useBekraeftelseStore(
+  const resetKontaktoplysninger = useBookingStore(
     (state) => state.resetKontaktoplysninger
   );
 
@@ -38,6 +42,17 @@ const BekraeftelseCard = () => {
       </p>
       <p>En bekræftelse er sendt til: {kontaktoplysninger.email}</p>
       <p>Vi kontakter dig på: {kontaktoplysninger.mobilNummer}</p>
+
+      <hr className="my-4" />
+
+      <p>Du har bestilt {billetSum} billetter til følgende arrangementer:</p>
+      <ul>
+        {billetter.map((billet) => (
+          <li key={billet.id}>
+            {billet.eventNavn} — {billet.antal} stk.
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
