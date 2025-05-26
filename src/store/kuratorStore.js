@@ -4,7 +4,6 @@ import { persist } from "zustand/middleware";
 const useArtworkStore = create(
   persist(
     (set, get) => ({
-
       // DATA-SORTERING //
       artworks: [], // alle artworks fra datasættet (fuldt array)
       initialArtworks: [], //de første artworks, der er loadet på siden
@@ -55,15 +54,26 @@ const useArtworkStore = create(
         const { allFilters, artworks } = get();
 
         const filtered = artworks.filter((item) => {
-          const vaelgKunstner = !allFilters.artist || item.artist?.includes(allFilters.artist); //filtrerer efter ikke-eksakte matches 
+          const vaelgKunstner =
+            !allFilters.artist || item.artist?.includes(allFilters.artist); //filtrerer efter ikke-eksakte matches
 
-          const vaelgPeriode = !allFilters.period || item.production_date?.some(p => p.period === allFilters.period); //filtrerer efter mindst ét match
+          const vaelgPeriode =
+            !allFilters.period ||
+            item.production_date?.some((p) => p.period === allFilters.period); //filtrerer efter mindst ét match
 
-          const vaelgNationalitet = !allFilters.nationality || item.production?.some(n => n.creator_nationality === allFilters.nationality);
+          const vaelgNationalitet =
+            !allFilters.nationality ||
+            item.production?.some(
+              (n) => n.creator_nationality === allFilters.nationality
+            );
 
-          const vaelgKunstart = !allFilters.type || item.object_names?.some(n => n.name === allFilters.type);
+          const vaelgKunstart =
+            !allFilters.type ||
+            item.object_names?.some((n) => n.name === allFilters.type);
 
-          return vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart;
+          return (
+            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart
+          );
         });
 
         set({
@@ -71,7 +81,7 @@ const useArtworkStore = create(
           offset: 30,
         });
       },
-      
+
       //SØGEFUNKTION//
 
       //gemmer søgeresultatet
@@ -81,8 +91,8 @@ const useArtworkStore = create(
           visibleArtworks: results.slice(0, 30),
           offset: 30,
         });
-      },   
-      
+      },
+
       //resetter til de orginale artworks (bruges når søgefeltet er tom og trykkes enter)
       resetToInitial: () => {
         const original = get().initialArtworks;
@@ -99,25 +109,24 @@ const useArtworkStore = create(
         title: "",
         description: "",
         date: "",
-        locationId:"",
-        curator:"",
+        locationId: "",
+        curator: "",
         artworkIds: [],
-        totalTickets:"",
-        bookedTickets:"",
-        location:{
-          locationId:"",
-          name:"",
-          address:"",
-          maxGuests:"",
-          maxArtworks:"",
+        totalTickets: "",
+        bookedTickets: "",
+        location: {
+          locationId: "",
+          name: "",
+          address: "",
+          maxGuests: "",
+          maxArtworks: "",
         },
       },
       savedEvents: [], //tomt array til gemte kladder
 
-      //til maxArtowkors: 
+      //til maxArtowkors:
       selectedLocation: null,
       setSelectedLocation: (location) => set({ selectedLocation: location }), //lagrer den valgte lokation fra inputs globalt til at bruge på tværs af komponenterne
-      
 
       //setter burgerens inputs
       setInputValue: (field, value) =>
@@ -128,19 +137,19 @@ const useArtworkStore = create(
           },
         })),
 
-        //tilføjer event
-          addEvent: (eventData) =>
-            set((state) => ({
-              savedEvents: [ //udfylder det tomme array
-                ...state.savedEvents,
-                { ...eventData, id: crypto.randomUUID() }, //skaber unikt id
-              ],
-            })),
-          
+      //tilføjer event
+      addEvent: (eventData) =>
+        set((state) => ({
+          savedEvents: [
+            //udfylder det tomme array
+            ...state.savedEvents,
+            { ...eventData, id: crypto.randomUUID() }, //skaber unikt id
+          ],
+        })),
 
-        isEventSaved: (id) => get().savedEvents.some((e) => e.id === id),
+      isEventSaved: (id) => get().savedEvents.some((e) => e.id === id),
 
-      //returnerer objektet 
+      //returnerer objektet
       getInputValue: () => get().inputValue,
 
       //resetter input, så kurator kan opprette et nyt arrangement flere gange
@@ -150,55 +159,59 @@ const useArtworkStore = create(
             title: "",
             description: "",
             date: "",
-            locationId:"",
-            curator:"",
+            locationId: "",
+            curator: "",
             artworkIds: [],
-            totalTickets:"",
-            bookedTickets:"",
-            location:{
-              locationId:"",
-              name:"",
-              address:"",
-              maxGuests:"",
-              maxArtworks:"",
+            totalTickets: "",
+            bookedTickets: "",
+            location: {
+              locationId: "",
+              name: "",
+              address: "",
+              maxGuests: "",
+              maxArtworks: "",
             },
           },
         })),
 
-        //slet et arrangement
-        sletInputValue: (arrangementID) =>
-          set((state) => ({
-            savedEvents: state.savedEvents.filter((event) => event?.id !== arrangementID),
-          })),
-
-          //antal af gemte kladder
-          kladdeSum: () =>
-            get().savedEvents.reduce(
-              (accumulator, currentValue) =>
-                typeof currentValue.antal === "number" ? accumulator + currentValue.antal : accumulator, //skal opdateres for wtf??
-              0
-            ),          
-
-          
-          // VÆLG ET VÆRK //
-          gemteVaerker: [],
-
-         //tilføjer værk til array
-        addVaerk: (vaerk) =>
-          set((state) => ({
-            gemteVaerker: state.gemteVaerker.concat({ ...vaerk, antal: 1 }), //spreading og antal taler her sammen med vaerkSum
-          })),
-        
-        //gør det muligt at fravælge et enkelt værk
-        sletVaerk: (vaerkObjectNumber) =>
+      //slet et arrangement
+      sletInputValue: (arrangementID) =>
         set((state) => ({
-          gemteVaerker: state.gemteVaerker.filter((vaerk) => vaerk?.object_number !== vaerkObjectNumber),
+          savedEvents: state.savedEvents.filter(
+            (event) => event?.id !== arrangementID
+          ),
         })),
 
-        //fjerner lagringen til når brugeren har gemt kladden
-        resetVaerker: () => set({ gemteVaerker: [] }),
-          }),
+      //antal af gemte kladder
+      kladdeSum: () =>
+        get().savedEvents.reduce(
+          (accumulator, currentValue) =>
+            typeof currentValue.antal === "number"
+              ? accumulator + currentValue.antal
+              : accumulator, //skal opdateres for wtf??
+          0
+        ),
 
+      // VÆLG ET VÆRK //
+      gemteVaerker: [],
+
+      //tilføjer værk til array
+      addVaerk: (vaerk) =>
+        set((state) => ({
+          gemteVaerker: state.gemteVaerker.concat({ ...vaerk, antal: 1 }), //spreading og antal taler her sammen med vaerkSum
+        })),
+
+      //gør det muligt at fravælge et enkelt værk
+      sletVaerk: (vaerkObjectNumber) =>
+        set((state) => ({
+          gemteVaerker: state.gemteVaerker.filter(
+            (vaerk) => vaerk?.object_number !== vaerkObjectNumber
+          ),
+        })),
+
+      //fjerner lagringen til når brugeren har gemt kladden
+      resetVaerker: () => set({ gemteVaerker: [] }),
+    }),
 
     {
       name: "kuratorstorage",
@@ -214,15 +227,12 @@ const useArtworkStore = create(
 
 export default useArtworkStore;
 
-
-
 //DOKUMENTATION BRUGT
 
 //generel forståelse af sorteringen af dataen:
 
 //Offset (load kun 3o værker ad gangen)
 //https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/
-
 
 //til forståelse af håndtering af filtrering:
 
