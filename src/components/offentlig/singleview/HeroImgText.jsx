@@ -44,3 +44,7 @@ const HeroImgText = ({ event, art }) => {
 };
 
 export default HeroImgText;
+
+//DOKUMENTATION BRUGT
+
+// https://examples.motion.dev/react/enter-animation?utm_source=embed

@@ -65,14 +65,14 @@ const useBookingStore = create(
 
       // =================== VIDEREFØRER UDFYLDTE KONTAKTINFORMATIONER TIL ORDREBEKRÆFTELSE ==============================
 
-      // **Ny funktion der gemmer både billetter og kontaktoplysninger til bekræftelse**
-      // saveBekraeftelsesData: () => {
-      //   const { billetter, kontaktoplysninger } = get();
-      //   set({
-      //     bekraeftelsesBilletter: billetter,
-      //     bekraeftelsesKontaktoplysninger: kontaktoplysninger,
-      //   });
-      // },
+      // Gemmer både billetter og kontaktoplysninger til bekræftelse
+      saveBekraeftelsesData: (kontaktoplysninger) => {
+        const { billetter } = get();
+        set({
+          bekraeftelsesBilletter: billetter,
+          bekraeftelsesKontaktoplysninger: kontaktoplysninger,
+        });
+      },
 
       kontaktoplysninger: {
         forNavn: "",
