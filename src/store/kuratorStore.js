@@ -175,12 +175,13 @@ const useArtworkStore = create(
               maxArtworks: "",
             },
           },
+          savedEvents: [],
         })),
 
       //slet et arrangement
       sletInputValue: (arrangementID) =>
         set((state) => ({
-          savedEvents: state.savedEvents.filter(
+          savedEventsRediger: state.savedEventsRediger.filter(
             (event) => event?.id !== arrangementID
           ),
         })),
@@ -198,6 +199,12 @@ const useArtworkStore = create(
       // VÆLG ET VÆRK //
       gemteVaerker: [],
 
+       //det samlede antal af værker dispalyed
+       vaerkSum: () =>
+        get().gemteVaerker
+          .filter((v) => v && typeof v.antal === "number") //sikrer at der ikke er nogle null-elementer fra api'et
+          .reduce((accumulator, currentValue) => accumulator + currentValue.antal,0),
+
       //tilføjer værk til array
       addVaerk: (vaerk) =>
         set((state) => ({
@@ -214,7 +221,19 @@ const useArtworkStore = create(
 
       //fjerner lagringen til når brugeren har gemt kladden
       resetVaerker: () => set({ gemteVaerker: [] }),
+
+
+      //REDIGER KLADDE
+
+      updateKladde: (updatedEvent) =>
+        set((state) => ({
+          savedEvents: state.savedEvents.map((event) =>
+            event.id === updatedEvent.id ? updatedEvent : event
+          ),
+        })),
+      
     }),
+
 
     {
       name: "kuratorstorage",

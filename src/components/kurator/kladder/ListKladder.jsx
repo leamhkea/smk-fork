@@ -9,7 +9,7 @@ const ListKladder = ({ art }) => {
   const { savedEvents } = useArtworkStore();
   const kladdeSum = useArtworkStore((state) => state.kladdeSum());
 
-  const [hydrated, setHydrated] = useState(false);
+  const [match, setMatch] = useState(false);
   const [index, setIndex] = useState(0);
   const cardRef = useRef(null);
   const containerRef = useRef(null);
@@ -18,11 +18,11 @@ const ListKladder = ({ art }) => {
 
   // Hydration til Zustand
   useEffect(() => {
-    setHydrated(true);
+    setMatch(true);
   }, []);
 
   // Map og match værker
-  const kladderMedVaerker = hydrated
+  const kladderMedVaerker = match
     ? savedEvents
         .map((event) => {
           const matchingVaerk = art.find(
@@ -62,7 +62,7 @@ const ListKladder = ({ art }) => {
         </Link>
       </div>
 
-      {hydrated ? (
+      {match ? (
         kladderMedVaerker.length > 0 ? (
           <div className="mb-20 relative w-full flex items-center gap-2">
             <CgArrowLongLeft
@@ -110,3 +110,8 @@ const ListKladder = ({ art }) => {
 };
 
 export default ListKladder;
+
+//DOKUMENTATION BRUGT
+
+//boolean constructor
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean
