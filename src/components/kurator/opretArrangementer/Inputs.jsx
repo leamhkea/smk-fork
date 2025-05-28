@@ -12,11 +12,13 @@ import "react-datepicker/dist/react-datepicker.css";
 const Inputs = ({ events, art }) => {
   const { setFilter } = useArrangementStore();
   const { gemteVaerker } = useArtworkStore((state) => state);
-  const resetVaerker = useArtworkStore((state) => state.resetVaerker);
+
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
-  const addEvent = useArtworkStore((state) => state.addEvent);
-  const resetInputValue = useArtworkStore((state) => state.resetInputValue);
+
+  const saveKladde = useArtworkStore((state)=>state.saveKladde);
+
+  
   const setSelectedLocation = useArtworkStore(
     (state) => state.setSelectedLocation
   );
@@ -35,7 +37,14 @@ const Inputs = ({ events, art }) => {
     trigger,
     watch,
     control,
-  } = useForm();
+  } = useForm({ //bruges til redigering af kladder, så det tidligere valgte input vises i rediger-view
+    defaultValues: {
+      titel: inputValue.title || "",
+      beskrivelse: inputValue.description || "",
+      locationId: inputValue.location?.id || "",
+      dato: inputValue.date ? new Date(inputValue.date) : null,
+    },
+  });
 
   // Synkroniserer zustand med react hook (til kunstværkers object_number)
   useEffect(() => {
@@ -112,21 +121,15 @@ const Inputs = ({ events, art }) => {
 
   //GEMMER KLADDE//
 
-  const saveKladde = () => {
-    //tilføjer event til kladder
-    addEvent({
-      ...inputValue,
-      artworkIds: gemteVaerker.map((v) => v.object_number), //object_number fra smk api
-    });
+  const gemKladde = () => {
+    //tilføjer event til kladder (bruges både til redigering og oprettelse af nyt event)
+      saveKladde();
 
-      resetInputValue();
-      resetVaerker();
-    //reset fra zustand ved lykket submission
-    router.push("/arrangementer"); //navigerer til kladder ved lykket submission
+      router.push("/arrangementer"); //navigerer til kladder ved lykket submission
   };
 
   return (
-    <Form onSubmit={handleSubmit(saveKladde)} className="flex flex-col gap-10">
+    <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-10">
       <h1 className="thin">Opret arrangement</h1>
 
       {/* TITEL */}
@@ -200,7 +203,7 @@ const Inputs = ({ events, art }) => {
           <label className="mb-1 font-medium">Dato *</label>
           <Controller
             name="dato"
-            control={useForm().control}
+            control={control}
             rules={{ required: "Dato er påkrævet" }}
             render={({ field }) => (
               <DatePicker
