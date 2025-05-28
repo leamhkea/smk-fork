@@ -16,7 +16,7 @@ const BilletAntal = ({ id, antal }) => {
         <HiMinus />
       </button>
 
-      {/* ===================== VISER X ANTAL BILLETTER I KURVEN ====================== */}
+      {/* ======================== VISER X ANTAL BILLETTER I KURVEN ======================== */}
       <input
         type="number"
         value={antal}
