@@ -118,7 +118,7 @@ const Inputs = ({ events, art, children }) => {
     addEvent({
       ...inputValue,
       artworkIds: gemteVaerker.map((v) => v.object_number), //obj ect_number fra smk api
-      artworks: gemteVaerker, // inkluder hele værk-objektet, eftersom gemteVaerker bliver nulstillet i zustand ved initialisering
+      // artworks: gemteVaerker, // inkluder hele værk-objektet, eftersom gemteVaerker bliver nulstillet i zustand ved initialisering
     });
 
     //reset fra zustand ved lykket submission

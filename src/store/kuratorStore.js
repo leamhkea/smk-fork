@@ -181,7 +181,7 @@ const useArtworkStore = create(
       //slet et arrangement
       sletInputValue: (arrangementID) =>
         set((state) => ({
-          savedEventsRediger: state.savedEventsRediger.filter(
+          savedEvents: state.savedEvents.filter(
             (event) => event?.id !== arrangementID
           ),
         })),
