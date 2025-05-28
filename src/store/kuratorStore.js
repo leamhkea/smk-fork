@@ -21,7 +21,7 @@ const useArtworkStore = create(
       },
 
       //viser de næste 30, uafhængig af de første der er vist
-      handleLoadMore: () => {
+      handleLoadMore: async () => {
         const { artworks, visibleArtworks, offset } = get();
         const loadMore = artworks.slice(offset, offset + 30);
         if (loadMore.length > 0) {
