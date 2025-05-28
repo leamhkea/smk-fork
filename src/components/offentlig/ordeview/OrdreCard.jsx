@@ -23,10 +23,10 @@ const OrdreCard = () => {
   // Listen over billetter i kurven
   const billetter = useBookingStore((state) => state.billetter);
 
-  // En funktion, der returnerer summen af billetter
+  // Funktion, der returnerer summen af billetter
   const billetSumFn = useBookingStore((state) => state.billetSum);
 
-  // En funktion til at opdatere kontaktoplysninger ét felt ad gangen
+  // Funktion til at opdatere kontaktoplysninger ét felt ad gangen
   const setKontaktoplysninger = useBookingStore(
     (state) => state.setKontaktoplysninger
   );

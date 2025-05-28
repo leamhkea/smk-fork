@@ -5,11 +5,11 @@ import * as motion from "motion/react-client";
 import { useEffect } from "react";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
-import React from "react";
+import React, { useMemo } from "react";
 
 // Imports egne components
 import useBookingStore from "@/store/bookingStore";
-import KurvCard from "../kurvview/KurvCard"; // Sørg for at stien passer
+import KurvCard from "../kurvview/KurvCard";
 
 const BekraeftelseCard = () => {
   // Sørger for, at confetti dækker hele viewet
@@ -28,6 +28,21 @@ const BekraeftelseCard = () => {
     (state) => state.resetKontaktoplysninger
   );
 
+  // Laver et random 8 cifret nummer (useMemo gemmer (memoizer) resultatet af en beregning, så den ikke udføres igen ved hver render)
+  const random8DigitNumber = useMemo(() => {
+    // Starter med en tom streng
+    let number = "";
+
+    // Tilføjer 8 cifre til number – én gang for hvert ciffer der genereres
+    for (let randomNumber = 0; randomNumber < 8; randomNumber++) {
+      // number +=          = tilføjer det nye ciffer til slutningen af strengen
+      // Math.floor(...)    = fjerner decimalerne og giver et heltal mellem 0 og 9
+      // Math.random() * 10 = laver decimaltal mellem 0 og 9.999
+      number += Math.floor(Math.random() * 10);
+    }
+    return number;
+  }, []);
+
   // Sætter en timer, så oplysningerne bliver hentet inden de ryddes
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -37,6 +52,7 @@ const BekraeftelseCard = () => {
     return () => clearTimeout(timeout);
   }, [resetKontaktoplysninger]);
 
+  // Laver en if statement, hvis kontaktoplysninger ikke blev sendt videre
   if (!kontaktoplysninger || !kontaktoplysninger.forNavn) {
     return <p>Ingen kontaktoplysninger fundet.</p>;
   }
@@ -59,6 +75,7 @@ const BekraeftelseCard = () => {
         {/* ================= FORMOPLYSNING INFORMATIONEN SENDT VIDERE =================== */}
         <div className="flex flex-col items-center gap-6">
           <h1>Ordrebekræftelse</h1>
+
           <p>
             Tak for din booking,
             <span className="text-(--blue) px-1">
@@ -69,17 +86,24 @@ const BekraeftelseCard = () => {
             </span>
             !
           </p>
+
           <p>
             Bekræftelsen på din ordre er sendt til:
             <span className="text-(--blue) px-1">
               {kontaktoplysninger.email}.
             </span>
           </p>
+
           <p>
             Ved yderligere opdateringer for arrangementet kontakter dig på:
             <span className="text-(--blue) px-1">
               {kontaktoplysninger.mobilNummer}.
             </span>
+          </p>
+
+          <p>
+            Her er dit ordrenummer, som vises ved fremmøde:
+            <span className="text-(--blue) px-1">{random8DigitNumber}.</span>
           </p>
 
           {/* =================== KURV CARD ARRANGEMENT OG ANTAL BILLETTER ================= */}

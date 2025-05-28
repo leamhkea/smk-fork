@@ -38,7 +38,11 @@ const KurvCard = ({ event, art, undtagelser = false }) => {
         {!undtagelser && (
           <div className="flex gap-20 self-end">
             {/* Sender parameter med id og antal, så BilletAntal kan påvirke antal billetter arrangement */}
-            <BilletAntal id={event.id} antal={event.antal} />
+            <BilletAntal
+              id={event.id}
+              antal={event.antal}
+              maxBilletter={event.bookedTickets}
+            />
 
             {/* ==================== SLETTER BILLETTER I KURVEN ==================== */}
             {/* Sender parameter med event.id, så id kan slette et helt event tilføjet til kurv */}
