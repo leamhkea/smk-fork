@@ -4,19 +4,10 @@ import useBookingStore from "@/store/bookingStore";
 import { BsPlusLg } from "react-icons/bs";
 import { HiMinus } from "react-icons/hi2";
 
-const BilletAntal = ({ id, antal, maxBilletter }) => {
+const BilletAntal = ({ id, antal }) => {
   // Laver const med functions fra bookingStore, så antal billetter opdateres med udgangspunkt i state
   const decAntal = useBookingStore((state) => state.decAntal);
   const incAntal = useBookingStore((state) => state.incAntal);
-
-  // Laver en "wrapper" for incAntal der tjekker mod maxBilletter
-  const handleIncrement = () => {
-    if (antal < maxBilletter) {
-      incAntal(id);
-    } else {
-      alert("Du kan ikke bestille flere billetter til dette arrangement.");
-    }
-  };
 
   return (
     <div className="flex items-center">
@@ -34,7 +25,7 @@ const BilletAntal = ({ id, antal, maxBilletter }) => {
       />
 
       {/* ===================== FJERNER X ANTAL BILLETTER FRA KURVEN ====================== */}
-      <button onClick={handleIncrement}>
+      <button onClick={() => incAntal(id)}>
         <BsPlusLg />
       </button>
     </div>
