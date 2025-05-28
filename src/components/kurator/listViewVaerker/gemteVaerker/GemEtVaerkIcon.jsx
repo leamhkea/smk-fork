@@ -46,7 +46,7 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
         className="w-5 h-5"
         type="checkbox"
         checked={isSaved}          // styret af Zustand. Uden denne syntaks af checkbox, vil den altid vælge første item som checked
-        onChange={handleSavedToggle} // toggle-funktion
+        onChange={handleSavedToggle}
         disabled={isDisabled}
       />
     </div>

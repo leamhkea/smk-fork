@@ -24,12 +24,12 @@ const ListKladder = ({ art }) => {
   // Map og match værker
   const kladderMedVaerker = hydrated
     ? savedEvents
-        .map((event) => {
-          const matchingVaerk = art.find(
-            (vaerk) => vaerk.object_number === event.artworkIds?.[0]
-          );
-          return matchingVaerk ? { ...event, matchedVaerk: matchingVaerk } : null;
-        })
+    .map((event) => {
+      const matchingVaerk = art.find(
+        (vaerk) => vaerk.object_number === event.artworkIds?.[0] //finder smks object_number
+      );
+      return { ...event, matchedVaerk: matchingVaerk }; // behold alle events også hvis den ikke kan finde værket
+    })
         .filter(Boolean)
     : [];
 
