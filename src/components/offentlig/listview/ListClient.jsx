@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import useArrangementStore from "@/store/arrangementStore";
 import { SignedIn } from "@clerk/nextjs";
-import ListKladder from "@/components/kurator/listViewOffentlig/ListKladder";
+import ListKladder from "@/components/kurator/kladder/ListKladder";
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 

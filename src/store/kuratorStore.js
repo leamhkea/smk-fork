@@ -214,6 +214,8 @@ const useArtworkStore = create(
 
       //fjerner lagringen til når brugeren har gemt kladden
       resetVaerker: () => set({ gemteVaerker: [] }),
+
+
     }),
 
     {
@@ -247,3 +249,4 @@ export default useArtworkStore;
 
 //tyoeof
 //https://www.w3schools.com/js/js_typeof.asp
+

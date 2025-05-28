@@ -20,13 +20,6 @@ const Kladder = ({ event, vaerk }) => {
     }
   };
 
-  //til fejlmeddelelse hvis artworket allerede er udstillet den dato
-      const isInSameDate =
-      event.artworkIds?.includes(vaerk.object_number) &&
-      selectedDate &&
-      new Date(event.date).toDateString() === new Date(selectedDate).toDateString();
-
-
 
   return (
     <li className="flex flex-col justify-between gap-5 p-5 text-center h-full min-h-[100px]">
@@ -45,10 +38,9 @@ const Kladder = ({ event, vaerk }) => {
           
           <div className="flex flex-col justify-between flex-1">
             <h2>{event.title}</h2>
-            <span className="text-red-500 text-sm">{isInSameDate ? "Værket er allerede udstillet denne dato" : "" }</span>
             <p>{event.date}</p>
 
-            <Link href={`/arrangementer/${event.id}`}>
+            <Link href={`.../${event.id}`}> 
             <SecondaryButton>Rediger</SecondaryButton>
           </Link>
 

@@ -43,7 +43,7 @@ const VaerkerListClient = ({ artData, events }) => {
       <div className="grid grid-cols-[2fr_5fr] h-screen overflow-hidden">
         {/* Venstre kolonne */}
         <div className="min-h-full max-w-80 overflow-y-auto p-4">
-          <Inputs art={artData} events={events} />
+          <Inputs art={artData} events={events}>Opret arrangement</Inputs>
         </div>
 
         {/* Højre kolonne */}

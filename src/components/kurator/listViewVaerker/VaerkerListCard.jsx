@@ -5,7 +5,6 @@ import GemEtVaerkIcon from "./gemteVaerker/GemEtVaerkIcon";
 
 const VaerkerListCard = ({art, events}) => {
 
-
     return (
         <li className="flex flex-col flex-wrap gap-5 p-5 text-center hover:scale-105 transition-all duration-300">
 
@@ -22,7 +21,6 @@ const VaerkerListCard = ({art, events}) => {
 
         <Link href={`/vaerkarkiv/${art.object_number}`}>
         <h2>{art.titles?.[0]?.title || "ukendt titel"}</h2>
-
         <div className="flex justify-center gap-1">
           <p>{art.artist}</p> 
             <span>|</span>

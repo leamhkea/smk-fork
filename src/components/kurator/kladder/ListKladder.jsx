@@ -110,3 +110,4 @@ const ListKladder = ({ art }) => {
 };
 
 export default ListKladder;
+

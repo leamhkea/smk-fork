@@ -1,4 +1,3 @@
-"use client";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
@@ -120,9 +119,9 @@ const Inputs = ({ events, art }) => {
       artworkIds: gemteVaerker.map((v) => v.object_number), //object_number fra smk api
     });
 
+      resetInputValue();
+      resetVaerker();
     //reset fra zustand ved lykket submission
-    resetInputValue();
-    resetVaerker();
     router.push("/arrangementer"); //navigerer til kladder ved lykket submission
   };
 
@@ -209,7 +208,7 @@ const Inputs = ({ events, art }) => {
                 selected={field.value ? new Date(field.value) : null}
                 onChange={(date) => {
                   field.onChange(date); // React Hook Form
-                  const isoDate = date?.toISOString().split("T")[0]; // '2025-05-01'
+                  const isoDate = date?.toLocaleDateString("sv-SE"); // sætter datoen til svensk tidszone
                   setInputValue("date", isoDate); // Til den lokale form/kladde
                   setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
                 }}
@@ -268,7 +267,6 @@ const Inputs = ({ events, art }) => {
 
       <div className="flex justify-center gap-10">
         <SecondaryButton type="submit">Gem kladde</SecondaryButton>
-        <TertrieryButton>Publicer arrangement</TertrieryButton>
       </div>
     </Form>
   );
