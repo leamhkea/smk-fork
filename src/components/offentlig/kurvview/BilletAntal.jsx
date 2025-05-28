@@ -4,10 +4,13 @@ import useBookingStore from "@/store/bookingStore";
 import { BsPlusLg } from "react-icons/bs";
 import { HiMinus } from "react-icons/hi2";
 
-const BilletAntal = ({ id, antal }) => {
+const BilletAntal = ({ id, antal, event }) => {
   // Laver const med functions fra bookingStore, så antal billetter opdateres med udgangspunkt i state
   const decAntal = useBookingStore((state) => state.decAntal);
   const incAntal = useBookingStore((state) => state.incAntal);
+
+  // Laver const til at udregne antal ledige billetter
+  const ledigeBilletter = event.totalTickets - event.bookedTickets;
 
   return (
     <div className="flex items-center">
@@ -25,7 +28,15 @@ const BilletAntal = ({ id, antal }) => {
       />
 
       {/* ===================== FJERNER X ANTAL BILLETTER FRA KURVEN ====================== */}
-      <button onClick={() => incAntal(id)}>
+      <button
+        onClick={() => {
+          if (antal < ledigeBilletter) {
+            incAntal(id);
+          } else {
+            alert("Der er ikke flere ledige billetter til dette arrangement.");
+          }
+        }}
+      >
         <BsPlusLg />
       </button>
     </div>
