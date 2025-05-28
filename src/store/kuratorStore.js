@@ -175,7 +175,6 @@ const useArtworkStore = create(
               maxArtworks: "",
             },
           },
-          savedEvents: [],
         })),
 
       //slet et arrangement
@@ -199,12 +198,6 @@ const useArtworkStore = create(
       // VÆLG ET VÆRK //
       gemteVaerker: [],
 
-       //det samlede antal af værker dispalyed
-       vaerkSum: () =>
-        get().gemteVaerker
-          .filter((v) => v && typeof v.antal === "number") //sikrer at der ikke er nogle null-elementer fra api'et
-          .reduce((accumulator, currentValue) => accumulator + currentValue.antal,0),
-
       //tilføjer værk til array
       addVaerk: (vaerk) =>
         set((state) => ({
@@ -223,17 +216,7 @@ const useArtworkStore = create(
       resetVaerker: () => set({ gemteVaerker: [] }),
 
 
-      //REDIGER KLADDE
-
-      updateKladde: (updatedEvent) =>
-        set((state) => ({
-          savedEvents: state.savedEvents.map((event) =>
-            event.id === updatedEvent.id ? updatedEvent : event
-          ),
-        })),
-      
     }),
-
 
     {
       name: "kuratorstorage",
@@ -266,3 +249,4 @@ export default useArtworkStore;
 
 //tyoeof
 //https://www.w3schools.com/js/js_typeof.asp
+

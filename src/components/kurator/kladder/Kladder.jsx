@@ -8,6 +8,7 @@ import Link from "next/link";
 const Kladder = ({ event, vaerk }) => {
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
   const {savedEvents} = useArtworkStore.getState();
+  const selectedDate = useArtworkStore((state)=>state.selectedDate);
 
   //definerer at input fra zustand skal svare til api'et
   const kladde = savedEvents.find((params)=>params.id === event.id)
@@ -18,6 +19,7 @@ const Kladder = ({ event, vaerk }) => {
       sletInputValue(kladde.id);
     }
   };
+
 
   return (
     <li className="flex flex-col justify-between gap-5 p-5 text-center h-full min-h-[100px]">
@@ -38,7 +40,7 @@ const Kladder = ({ event, vaerk }) => {
             <h2>{event.title}</h2>
             <p>{event.date}</p>
 
-            <Link href={`/rediger-kladde/${event.id}`}>
+            <Link href={`.../${event.id}`}> 
             <SecondaryButton>Rediger</SecondaryButton>
           </Link>
 

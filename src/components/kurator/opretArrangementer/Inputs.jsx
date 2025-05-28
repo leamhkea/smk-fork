@@ -1,4 +1,3 @@
-"use client";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
@@ -10,7 +9,7 @@ import Form from "next/form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Inputs = ({ events, art, children }) => {
+const Inputs = ({ events, art }) => {
   const { setFilter } = useArrangementStore();
   const { gemteVaerker } = useArtworkStore((state) => state);
   const resetVaerker = useArtworkStore((state) => state.resetVaerker);
@@ -105,9 +104,9 @@ const Inputs = ({ events, art, children }) => {
 
     // Fjern de datoer der allerede er optaget for den valgte lokation
     const gyldigeDatoer = alleDatoer.filter(
-      (params) =>
+      (d) =>
         !optagedeDatoer.some(
-          (optaget) => params.toDateString() === new Date(optaget).toDateString()
+          (optaget) => d.toDateString() === new Date(optaget).toDateString()
         )
     );
 
@@ -117,34 +116,25 @@ const Inputs = ({ events, art, children }) => {
     //tilføjer event til kladder
     addEvent({
       ...inputValue,
-      artworkIds: gemteVaerker.map((v) => v.object_number), //obj ect_number fra smk api
-      // artworks: gemteVaerker, // inkluder hele værk-objektet, eftersom gemteVaerker bliver nulstillet i zustand ved initialisering
+      artworkIds: gemteVaerker.map((v) => v.object_number), //object_number fra smk api
     });
 
+      resetInputValue();
+      resetVaerker();
     //reset fra zustand ved lykket submission
-    resetInputValue();
-    resetVaerker();
     router.push("/arrangementer"); //navigerer til kladder ved lykket submission
   };
 
-
   return (
     <Form onSubmit={handleSubmit(saveKladde)} className="flex flex-col gap-10">
-      <h1 className="thin">{children}</h1>
+      <h1 className="thin">Opret arrangement</h1>
 
       {/* TITEL */}
       <div className="flex flex-col">
         <input
           type="text"
           placeholder="Arrangement titel *"
-          {...register("titel",
-             { required: "Titel er påkrævet",
-             // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
-             pattern:{ 
-              value: /^[A-Åa-å]+$/i,
-              message: "Kun bogstaver tilladt",
-             },
-          })}
+          {...register("titel", { required: "Titel er påkrævet"})}
           defaultValue={inputValue.title}
           className="border-1 border-(--black) p-2"
           onChange={(e) => {
@@ -164,11 +154,6 @@ const Inputs = ({ events, art, children }) => {
             maxLength: {
               value: 400,
               message: "Beskrivelse må max bestå af 400 karakterer",
-              // Inputtet skal bestå af danske bogstaver (store eller små), og der skal være mindst ét bogstav
-              pattern: {
-                value: /^[A-Åa-å0-9 ,.!?]+$/i,
-                message: "Ugyldige tegn i beskrivelsen",
-              },
             },
           })}
           defaultValue={inputValue.description}
@@ -223,10 +208,11 @@ const Inputs = ({ events, art, children }) => {
                 selected={field.value ? new Date(field.value) : null}
                 onChange={(date) => {
                   field.onChange(date); // React Hook Form
-                  const isoDate = date?.toLocaleDateString("sv-SE"); //konverterer date-objektet til en læsbar string. sv-SE for at bibeholde den rigtige tidszone
+                  const isoDate = date?.toLocaleDateString("sv-SE"); // sætter datoen til svensk tidszone
                   setInputValue("date", isoDate); // Til den lokale form/kladde
                   setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
                 }}
+                
                 includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
                 placeholderText="Vælg en dato"
                 dateFormat="yyyy-MM-dd"

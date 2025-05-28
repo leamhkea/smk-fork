@@ -2,6 +2,7 @@
 import { useParams } from 'next/navigation';
 import useArtworkStore from "@/store/kuratorStore";
 import Inputs from '@/components/kurator/opretArrangementer/Inputs';
+import Image from 'next/image';
 
 export default function RedigerKladde() {
   const { id } = useParams();
@@ -12,7 +13,12 @@ export default function RedigerKladde() {
     <section className="flex gap-5">
 
       <div>
-
+      <Image
+      height={500}
+      width={500}
+      alt="hej"
+      src={gemteVaerker.image_thumbnail}
+      />
       <div className='flex gap-5'>
         <h3>Titel:</h3>
         <h3 className='thin'>{kladde.title}</h3>
