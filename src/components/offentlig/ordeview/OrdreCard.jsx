@@ -37,16 +37,40 @@ const OrdreCard = () => {
   // Kalder billetSum for at få det aktuelle antal billetter
   const billetSum = billetSumFn(); // kald funktionen uden for hooken
 
-  const onSubmit = (data) => {
-    // Gem kontaktoplysninger i state ét felt ad gangen (valgfrit – men ikke nødvendigt her)
+  const onSubmit = async (data) => {
+    // Gem kontaktoplysninger i Zustand
     Object.entries(data).forEach(([field, value]) => {
       setKontaktoplysninger(field, value);
     });
 
-    // Gem billetter og kontaktoplysninger til bekræftelse
+    // Loop gennem alle billetter og send PUT-request til API
+    const results = await Promise.all(
+      billetter.map(async (billet) => {
+        const res = await fetch(
+          `https://async-exhibit-server-rmug.onrender.com/events/${billet.id}/book`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ tickets: billet.antal }),
+          }
+        );
+
+        // Hvis API-kald fejler
+        if (!res.ok) {
+          alert(
+            `Kunne ikke booke billet til arrangement: "${billet.title}". Prøv igen senere.`
+          );
+          return false;
+        }
+        return true;
+      })
+    );
+
+    // Alt lykkedes – gem og fortsæt
     saveBekraeftelsesData(data);
 
-    // Slet kurven efter kort delay
     setTimeout(() => {
       emptyKurv();
     }, 500);
