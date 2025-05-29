@@ -1,5 +1,4 @@
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -8,6 +7,7 @@ import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Select from 'react-select';
 
 const Inputs = ({ events, art }) => {
   const { setFilter } = useArrangementStore();
@@ -168,30 +168,52 @@ const Inputs = ({ events, art }) => {
 
       {/* LOKATION */}
       <div className="flex flex-col">
-        <select
-          {...register("locationId", { required: "Lokation er påkrævet" })}
-          defaultValue={inputValue.location?.id}
-          className="border-1 border-(--black) p-2"
-          onChange={(e) => {
-            const selectedId = e.target.value;
-            const selectedLocation = lokation.find(
-              (params) => params.id === selectedId
-            ); //matcher lokationen med id
-            if (selectedLocation) {
-              setFilter({ lokation: selectedId }); //til filtrering
-              setValue("locationId", selectedId); // Syncer med react-hook-form og setter value korrekt
-              setInputValue("location", selectedLocation); // Zustand
-              setSelectedLocation(selectedLocation);
-            }
-          }}
-        >
-          <option value="">Vælg lokation *</option>
-          {lokation.map((lokation, i) => (
-            <option key={i} value={lokation.id}>
-              {lokation.name} – {lokation.address}
-            </option>
-          ))}
-        </select>
+  <label className="mb-1 font-medium">Lokation *</label>
+        <Controller
+          name="locationId"
+          control={control}
+          rules={{ required: "Lokation er påkrævet" }}
+          render={({ field }) => (
+            <Select
+              {...field}
+              options={lokation.map((loc) => ({
+                value: loc.id,
+                label: `${loc.name} – ${loc.address}`,
+                data: loc,
+              }))}
+              placeholder="Vælg lokation *"
+              value={
+                field.value
+                  ? lokation
+                      .map((loc) => ({
+                        value: loc.id,
+                        label: `${loc.name} – ${loc.address}`,
+                        data: loc,
+                      }))
+                      .find((option) => option.value === field.value)
+                  : null
+              }
+              onChange={(selectedOption) => {
+                const selectedLocation = selectedOption?.data;
+                field.onChange(selectedOption?.value); // opdater react-hook-form
+                setFilter({ lokation: selectedOption?.value }); // filtering
+                setInputValue("location", selectedLocation); // Zustand
+                setSelectedLocation(selectedLocation); // Zustand
+              }}
+              className="border border-(--black) p-2 w-full"
+              styles={{ //styling af reacts default
+                control: (base) => ({
+                  ...base,
+                  backgroundColor: "transparent",
+                  border: "none",
+                  boxShadow: "none",
+                  fontSize: "18px",
+                }),
+                // osv.
+              }}
+            />
+          )}
+        />
         <p className="text-red-600 text-sm">{errors.locationId?.message}</p>
       </div>
 
@@ -315,3 +337,6 @@ export default Inputs;
 
 //date constructor
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+
+//react select
+//https://react-select.com/home

@@ -181,73 +181,102 @@ const useArtworkStore = create(
         })),
 
       //REDIGER KLADDE//
+     
+        selectedEventId: null,
 
-      // Vælg kladde der skal redigeres
-      selectedEventId: null,
+        setSelectedEventId: (id) => set({ selectedEventId: id }),
 
-      setSelectedEventId: (id) => set({ selectedEventId: id }),
+        loadKladdeTilRedigering: (eventId) => {
+          const { savedEvents, artworks } = get();
+          const eventToEdit = savedEvents.find((e) => e.id === eventId);
+          if (eventToEdit) {
+            // Find de faktiske værk-objekter ud fra deres IDs
+            const matchedVaerker = artworks.filter((vaerk) =>
+              eventToEdit.artworkIds.includes(vaerk.object_number)
+            );
+        
+            set({
+              inputValue: eventToEdit,
+              selectedEventId: eventId,
+              gemteVaerker: matchedVaerker,
+            });
+          }
+        },
+        
+        saveKladde: () => {
+          const state = get();
 
-      // Fyld inputValue med værdier fra eksisterende kladde (denne bruges ti kladde-komponenten)
-      loadKladdeTilRedigering: (eventId) => {
-        const { savedEvents } = get();
-        const eventToEdit = savedEvents.find((e) => e.id === eventId);
-        if (eventToEdit) {
+          const isEditing = state.savedEvents.some(
+            (event) => event.id === state.inputValue.id
+          ); //hvis event id er det samme som inputValue.id betyder det at brugeren er i redigeringsmode
+
+          const updatedEvent = {
+            ...state.inputValue,
+            id: state.inputValue.id || crypto.randomUUID(), //eksisterer id, bruges det ellers oprettes et nyt
+            artworkIds: state.gemteVaerker.map((v) => v.object_number),
+          };
+
+          const newEvents = isEditing //er isEditing true, opdateres eksisterende event med samme id
+            ? state.savedEvents.map((event) =>
+                event.id === updatedEvent.id ? updatedEvent : event
+              )
+            : [...state.savedEvents, updatedEvent]; //er den false, tilføjes updatedEvent spm ny post
+
+          set({ savedEvents: newEvents });
+
+          // Reset kun input og tilstand,kun gemte værker ved ny oprettelse
           set({
-            inputValue: eventToEdit,
-            selectedEventId: eventId,
+            inputValue: {
+              title: "",
+              description: "",
+              date: "",
+              locationId: "",
+              curator: "",
+              artworkIds: [],
+              totalTickets: "",
+              bookedTickets: "",
+              location: {
+                locationId: "",
+                name: "",
+                address: "",
+                maxGuests: "",
+                maxArtworks: "",
+              },
+            },
+            selectedEventId: null,
+            selectedLocation: null,
+            selectedDate: null,
+            ...(isEditing ? {} : { gemteVaerker: [] }), // behold værker ved redigering
+          });
+        },
+
+        //bruges ved onclick af opret-arrangement, så brugeren ikke forbliver i redigeringsmode
+        resetForm: () => {
+          set({
+            inputValue: {
+              title: "",
+              description: "",
+              date: "",
+              locationId: "",
+              curator: "",
+              artworkIds: [],
+              totalTickets: "",
+              bookedTickets: "",
+              location: {
+                locationId: "",
+                name: "",
+                address: "",
+                maxGuests: "",
+                maxArtworks: "",
+              },
+            },
+            gemteVaerker: [],
+            selectedEventId: null,
+            selectedLocation: null,
+            selectedDate: null,
           });
         }
-      },
 
-      // Opdater eksisterende kladde (hvis selectedEventId er sat), ellers tilføj ny
-      saveKladde: () => {
-        const state = get();
-        const existingIndex = state.savedEvents.findIndex(
-          (event) => event.id === state.inputValue.id
-        ); //Søger i savedEvents efter et event med samme id som input-formularens - bruges til at finde ud af, om vi opdaterer en eksisterende kladde eller tilføjer en ny
-
-        //bruges til at nulstille formularen ved lykket submission, så kurator kan oprette flere værker uafhængigt af hinanden
-        const initialInputValue = {
-          title: "",
-          description: "",
-          date: "",
-          locationId: "",
-          curator: "",
-          artworkIds: [],
-          totalTickets: "",
-          bookedTickets: "",
-          location: {
-            locationId: "",
-            name: "",
-            address: "",
-            maxGuests: "",
-            maxArtworks: "",
-          },
-        };
-
-        const updatedEvent = {
-          ...state.inputValue, //stater inputValue-arrayet
-          id: state.inputValue.id || crypto.randomUUID(), //har værket allerede et ID beholdes det ellers skabes et nyt
-          artworkIds: state.gemteVaerker.map((params) => params.object_number), //matcher smks object_number
-        };
-
-        //Til hvis man redigerer en eksisterende kladde
-        if (existingIndex !== -1) {
-          // !== -1 definerer at der eksisterer et event med samme ID
-          const newEvents = [...state.savedEvents];
-          newEvents[existingIndex] = updatedEvent; //udskifter det fundne event med det opdaterede
-          set({ savedEvents: newEvents }); //opdaterer ny liste
-        } else {
-          //hvis existingIndex === -1 findes ID'et ikke og der skal oprettes et nyt event
-          set({ savedEvents: [...state.savedEvents, updatedEvent] });
-        }
-
-        // nulstiller inputtet ved at kalde tilbage på initialInputValue
-        set({
-          inputValue: initialInputValue,
-          gemteVaerker: [],
-        });
-      },
     }),
 
     {

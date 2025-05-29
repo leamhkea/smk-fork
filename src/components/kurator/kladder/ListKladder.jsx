@@ -4,10 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ListKladder = ({ art }) => {
   const { savedEvents } = useArtworkStore();
   const kladdeSum = useArtworkStore((state) => state.kladdeSum());
+  const { resetForm } = useArtworkStore();
 
   const [hydrated, setHydrated] = useState(false);
   const [index, setIndex] = useState(0);
@@ -15,6 +17,8 @@ const ListKladder = ({ art }) => {
   const containerRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(0);
   const [visibleCards, setVisibleCards] = useState(1);
+
+  const router = useRouter();
 
   // Hydration til Zustand
   useEffect(() => {
@@ -32,6 +36,12 @@ const ListKladder = ({ art }) => {
         })
         .filter(Boolean)
     : [];
+
+    //opret arrangement
+    const nytEvent = ()=>{
+      resetForm();
+      router.push("/vaerkarkiv")
+    }
 
   // Mål kort og container
   useEffect(() => {
@@ -51,14 +61,14 @@ const ListKladder = ({ art }) => {
 
   const maxIndex = Math.max(kladderMedVaerker.length - visibleCards, 0);
 
-  console.log("arrays:", savedEvents);
+
 
   return (
     <div className="px-4 mb-10">
       <div className="flex justify-between items-center mb-6">
         <h2>Mine kladder ({kladdeSum})</h2>
         <Link href="/vaerkarkiv">
-          <SecondaryButton>Opret arrangement</SecondaryButton>
+          <SecondaryButton onClick={nytEvent}>Opret arrangement</SecondaryButton>
         </Link>
       </div>
 

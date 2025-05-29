@@ -90,10 +90,10 @@ const Kladder = ({ event, vaerk }) => {
           Er du sikker på, du vil publicere denne kladde? <br />
           Denne handling kan ikke fotrydes
           <div className="flex gap-5">
-            <SecondaryButton onClick={confirmPublicering}>Ja</SecondaryButton>
-            <TertrieryButton onClick={() => setVisPopUpPublicer(false)}>
+            <TertrieryButton onClick={confirmPublicering}>Ja</TertrieryButton>
+            <SecondaryButton onClick={() => setVisPopUpPublicer(false)}>
               Nej
-            </TertrieryButton>
+            </SecondaryButton>
           </div>
         </PopUP>
       )}
