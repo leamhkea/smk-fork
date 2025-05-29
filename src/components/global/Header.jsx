@@ -12,12 +12,10 @@ import { useClickAway } from "react-use";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import ClosingTag from "./ikoner/ClosingTag";
-import HeartIconSum from "./ikoner/HeartIconSum";
 
 // Importerer egne components
 import KurvPopover from "../offentlig/kurvview/KurvPopover";
 import SideMenu from "@/components/kurator/global/SideMenu";
-import GemteVaerkerDisplay from "../kurator/listViewVaerker/gemteVaerker/GemteVaerkerDisplay";
 import Kurv from "./ikoner/Kurv";
 
 const Header = () => {
@@ -52,12 +50,12 @@ const Header = () => {
     setShowGemteVaerker(false);
   });
 
-    // Laver en ref til gemteværker-menuen
-    const sideMenuRef = useRef(null);
+  // Laver en ref til gemteværker-menuen
+  const sideMenuRef = useRef(null);
 
-    useClickAway(sideMenuRef, () => {
-      setShowSideMenu(false);
-    });
+  useClickAway(sideMenuRef, () => {
+    setShowSideMenu(false);
+  });
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
@@ -115,16 +113,20 @@ const Header = () => {
           </SignedOut>
 
           <SignedIn>
-              <div ref={sideMenuRef}>
-            <li
-              className={`cursor-pointer ${
-                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-              }`}
-              onClick={handleToggleSideMenu}
-            >
-              {showSideMenu ? <IoMdClose size={30} /> : <IoIosMenu size={30} />}
-            </li>
-            {showSideMenu && <SideMenu />}
+            <div ref={sideMenuRef}>
+              <li
+                className={`cursor-pointer ${
+                  pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+                }`}
+                onClick={handleToggleSideMenu}
+              >
+                {showSideMenu ? (
+                  <IoMdClose size={30} />
+                ) : (
+                  <IoIosMenu size={30} />
+                )}
+              </li>
+              {showSideMenu && <SideMenu />}
             </div>
           </SignedIn>
         </div>

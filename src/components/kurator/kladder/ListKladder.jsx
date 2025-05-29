@@ -24,12 +24,12 @@ const ListKladder = ({ art }) => {
   // Map og match værker
   const kladderMedVaerker = hydrated
     ? savedEvents
-    .map((event) => {
-      const matchingVaerk = art.find(
-        (vaerk) => vaerk.object_number === event.artworkIds?.[0] //finder smks object_number
-      );
-      return { ...event, matchedVaerk: matchingVaerk }; // behold alle events også hvis den ikke kan finde værket
-    })
+        .map((event) => {
+          const matchingVaerk = art.find(
+            (vaerk) => vaerk.object_number === event.artworkIds?.[0] //finder smks object_number
+          );
+          return { ...event, matchedVaerk: matchingVaerk }; // behold alle events også hvis den ikke kan finde værket
+        })
         .filter(Boolean)
     : [];
 
@@ -51,7 +51,7 @@ const ListKladder = ({ art }) => {
 
   const maxIndex = Math.max(kladderMedVaerker.length - visibleCards, 0);
 
-  console.log("arrays:", savedEvents)
+  console.log("arrays:", savedEvents);
 
   return (
     <div className="px-4 mb-10">
@@ -102,7 +102,9 @@ const ListKladder = ({ art }) => {
             />
           </div>
         ) : (
-          <p className="text-center m-10 text-gray-500 italic">Du har ingen gemte kladder.</p>
+          <p className="text-center m-10 text-gray-500 italic">
+            Du har ingen gemte kladder.
+          </p>
         )
       ) : null}
     </div>
@@ -110,4 +112,3 @@ const ListKladder = ({ art }) => {
 };
 
 export default ListKladder;
-

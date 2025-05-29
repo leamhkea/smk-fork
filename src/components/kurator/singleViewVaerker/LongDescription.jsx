@@ -31,10 +31,7 @@ const LongDescriptions = ({ description }) => {
       <p>
         {laesmere || !isLong ? description : `${shortText}...`}
         {isLong && (
-          <button
-            className=" ml-5 underline"
-            onClick={readMoreToggle}
-          >
+          <button className=" ml-5 underline" onClick={readMoreToggle}>
             {laesmere ? "Læs mindre" : "Læs mere"}
           </button>
         )}
@@ -44,7 +41,6 @@ const LongDescriptions = ({ description }) => {
 };
 
 export default LongDescriptions;
-
 
 //DOKUMENTATION BRUGT TIL LØSNING:
 

@@ -42,61 +42,61 @@ const Filtrering = ({ artData }) => {
       });
     });
 
-    setKunstnere([...artistSet].sort()); //sorterer arrayet med sort() for at returnere en reference til det tomme array ved useState. 
+    setKunstnere([...artistSet].sort()); //sorterer arrayet med sort() for at returnere en reference til det tomme array ved useState.
     setTidsperioder([...periodSet].sort());
     setNationaliteter([...nationalitySet].sort());
     setKunsttyper([...typeSet].sort());
   }, [artData]);
 
-//opdaterer ét flterfelt ad gangen i zustand, bruges til onChange
-  const filtreretValue = (field, value) => { 
+  //opdaterer ét flterfelt ad gangen i zustand, bruges til onChange
+  const filtreretValue = (field, value) => {
     setFilter({ [field]: value });
   };
 
   return (
     <div className="flex md:flex-row gap-10 h-10 justify-between">
       <div className="h-15 md:flex lg:gap-35 md:gap-15">
-      {/* kunstner */}
-      <select onChange={(e) => filtreretValue("artist", e.target.value)}>
-        <option value="">Vælg kunstner</option>
-        {kunstnere.map((kunstner, i) => (
-          <option key={i} value={kunstner}>
-            {kunstner}
-          </option>
-        ))}
-      </select>
+        {/* kunstner */}
+        <select onChange={(e) => filtreretValue("artist", e.target.value)}>
+          <option value="">Vælg kunstner</option>
+          {kunstnere.map((kunstner, i) => (
+            <option key={i} value={kunstner}>
+              {kunstner}
+            </option>
+          ))}
+        </select>
 
-      {/* tidsperiode */}
-      <select onChange={(e) => filtreretValue("period", e.target.value)}>
-        <option value="">Vælg tidsperiode</option>
-        {tidsperioder.map((tidsperiode, i) => (
-          <option key={i} value={tidsperiode}>
-            {tidsperiode}
-          </option>
-        ))}
-      </select>
+        {/* tidsperiode */}
+        <select onChange={(e) => filtreretValue("period", e.target.value)}>
+          <option value="">Vælg tidsperiode</option>
+          {tidsperioder.map((tidsperiode, i) => (
+            <option key={i} value={tidsperiode}>
+              {tidsperiode}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="h-15 md:flex lg:gap-35 md:gap-15">
         {/* kunstart */}
-      <select onChange={(e) => filtreretValue("type", e.target.value)}>
-        <option value="">Vælg kunstart</option>
-        {kunsttyper.map((kunsttype, i) => (
-          <option key={i} value={kunsttype}>
-            {kunsttype}
-          </option>
-        ))}
-      </select>
+        <select onChange={(e) => filtreretValue("type", e.target.value)}>
+          <option value="">Vælg kunstart</option>
+          {kunsttyper.map((kunsttype, i) => (
+            <option key={i} value={kunsttype}>
+              {kunsttype}
+            </option>
+          ))}
+        </select>
 
         {/* nationalitet */}
-      <select onChange={(e) => filtreretValue("nationality", e.target.value)}>
-        <option value="">Vælg nationalitet</option>
-        {nationaliteter.map((nationalitet, i) => (
-          <option key={i} value={nationalitet}>
-            {nationalitet}
-          </option>
-        ))}
-      </select>
+        <select onChange={(e) => filtreretValue("nationality", e.target.value)}>
+          <option value="">Vælg nationalitet</option>
+          {nationaliteter.map((nationalitet, i) => (
+            <option key={i} value={nationalitet}>
+              {nationalitet}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
@@ -114,6 +114,3 @@ export default Filtrering;
 
 //forståelse for key-prop
 //https://medium.com/@ishaqibrahimbss/reacts-favorite-warning-each-child-in-a-list-should-have-a-unique-key-prop-909dfe50cbe3
-
-
-

@@ -14,14 +14,15 @@ const PopUP = ({ children }) => {
 
   return createPortal(
     <div className="fixed inset-0 backdrop-blur-sm z-50 flex justify-center items-center">
-      <motion.div 
-      className="bg-(--white) p-10 shadow-md max-w-xl w-full"
-        animate={{y: ["100", "-20%"]}}
+      <motion.div
+        className="bg-(--white) p-10 shadow-md max-w-xl w-full"
+        animate={{ y: ["100", "-20%"] }}
         transition={{
-            triggerOnce:true,
-            duration:0.5,
-            ease: "easeOut",
-        }}>
+          triggerOnce: true,
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
         {children}
       </motion.div>
     </div>,

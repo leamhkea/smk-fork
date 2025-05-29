@@ -16,15 +16,12 @@ const Inputs = ({ events, art }) => {
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
 
-  const saveKladde = useArtworkStore((state)=>state.saveKladde);
+  const saveKladde = useArtworkStore((state) => state.saveKladde);
 
-  
   const setSelectedLocation = useArtworkStore(
     (state) => state.setSelectedLocation
   );
-  const setSelectedDate = useArtworkStore(
-    (state) => state.setSelectedDate
-  );
+  const setSelectedDate = useArtworkStore((state) => state.setSelectedDate);
 
   const router = useRouter();
 
@@ -37,7 +34,8 @@ const Inputs = ({ events, art }) => {
     trigger,
     watch,
     control,
-  } = useForm({ //bruges til redigering af kladder, så det tidligere valgte input vises i rediger-view
+  } = useForm({
+    //bruges til redigering af kladder, så det tidligere valgte input vises i rediger-view
     defaultValues: {
       titel: inputValue.title || "",
       beskrivelse: inputValue.description || "",
@@ -84,48 +82,47 @@ const Inputs = ({ events, art }) => {
   const maxArtworks = selectedLocation?.maxArtworks || Infinity;
   //se gemEtVaerkIcon (komponent) og kuratorStore - sørger for at man ikke kan klikke på flere ved maxArtworks
 
-     // Finder datoer der allerede er optaget for den valgte lokation
-     const optagedeDatoer = events
-     .filter(
-       (event) => event.location?.id === locationId && event.date // matcher lokation og sørger for dato eksisterer
-     )
-     .map((event) => new Date(event.date));
- 
+  // Finder datoer der allerede er optaget for den valgte lokation
+  const optagedeDatoer = events
+    .filter(
+      (event) => event.location?.id === locationId && event.date // matcher lokation og sørger for dato eksisterer
+    )
+    .map((event) => new Date(event.date));
 
   // Liste over gyldige datoer
-    const alleDatoer = [
-      "2025-05-01",
-      "2025-05-02",
-      "2025-05-03",
-      "2025-05-04",
-      "2025-05-05",
-      "2025-05-06",
-      "2025-05-07",
-      "2025-05-08",
-      "2025-05-09",
-      "2025-05-10",
-      "2025-05-11",
-      "2025-05-12",
-      "2025-05-13",
-      "2025-05-14",
-      "2025-05-15",
-    ].map((params) => new Date(params)); // konverter til Date-objekter
+  const alleDatoer = [
+    "2025-05-01",
+    "2025-05-02",
+    "2025-05-03",
+    "2025-05-04",
+    "2025-05-05",
+    "2025-05-06",
+    "2025-05-07",
+    "2025-05-08",
+    "2025-05-09",
+    "2025-05-10",
+    "2025-05-11",
+    "2025-05-12",
+    "2025-05-13",
+    "2025-05-14",
+    "2025-05-15",
+  ].map((params) => new Date(params)); // konverter til Date-objekter
 
-    // Fjern de datoer der allerede er optaget for den valgte lokation
-    const gyldigeDatoer = alleDatoer.filter(
-      (d) =>
-        !optagedeDatoer.some(
-          (optaget) => d.toDateString() === new Date(optaget).toDateString()
-        )
-    );
+  // Fjern de datoer der allerede er optaget for den valgte lokation
+  const gyldigeDatoer = alleDatoer.filter(
+    (d) =>
+      !optagedeDatoer.some(
+        (optaget) => d.toDateString() === new Date(optaget).toDateString()
+      )
+  );
 
   //GEMMER KLADDE//
 
   const gemKladde = () => {
     //tilføjer event til kladder (bruges både til redigering og oprettelse af nyt event)
-      saveKladde();
+    saveKladde();
 
-      router.push("/arrangementer"); //navigerer til kladder ved lykket submission
+    router.push("/arrangementer"); //navigerer til kladder ved lykket submission
   };
 
   return (
@@ -137,7 +134,7 @@ const Inputs = ({ events, art }) => {
         <input
           type="text"
           placeholder="Arrangement titel *"
-          {...register("titel", { required: "Titel er påkrævet"})}
+          {...register("titel", { required: "Titel er påkrævet" })}
           defaultValue={inputValue.title}
           className="border-1 border-(--black) p-2"
           onChange={(e) => {
@@ -198,39 +195,37 @@ const Inputs = ({ events, art }) => {
         <p className="text-red-600 text-sm">{errors.locationId?.message}</p>
       </div>
 
-        {/* DATO */}
-        <div className="flex flex-col">
-          <label className="mb-1 font-medium">Dato *</label>
-          <Controller
-            name="dato"
-            control={control}
-            rules={{ required: "Dato er påkrævet" }}
-            render={({ field }) => (
-              <DatePicker
-                {...field}
-                selected={field.value ? new Date(field.value) : null}
-                onChange={(date) => {
-                  field.onChange(date); // React Hook Form
-                  const isoDate = date?.toLocaleDateString("sv-SE"); // sætter datoen til svensk tidszone
-                  setInputValue("date", isoDate); // Til den lokale form/kladde
-                  setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
-                }}
-                
-                includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
-                placeholderText="Vælg en dato"
-                dateFormat="yyyy-MM-dd"
-                className="border border-(--black) p-2 w-full"
-              />
-            )}
-          />
-          <p className="text-red-600 text-sm">{errors.dato?.message}</p>
-          {gyldigeDatoer.length === 0 && (
+      {/* DATO */}
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Dato *</label>
+        <Controller
+          name="dato"
+          control={control}
+          rules={{ required: "Dato er påkrævet" }}
+          render={({ field }) => (
+            <DatePicker
+              {...field}
+              selected={field.value ? new Date(field.value) : null}
+              onChange={(date) => {
+                field.onChange(date); // React Hook Form
+                const isoDate = date?.toLocaleDateString("sv-SE"); // sætter datoen til svensk tidszone
+                setInputValue("date", isoDate); // Til den lokale form/kladde
+                setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
+              }}
+              includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
+              placeholderText="Vælg en dato"
+              dateFormat="yyyy-MM-dd"
+              className="border border-(--black) p-2 w-full"
+            />
+          )}
+        />
+        <p className="text-red-600 text-sm">{errors.dato?.message}</p>
+        {gyldigeDatoer.length === 0 && (
           <p className="text-red-600 text-sm mt-2">
             Alle datoer er optaget for den valgte lokation.
           </p>
         )}
-        </div>
-
+      </div>
 
       {/* KUNSTVÆRKER */}
       <div className="flex flex-col">
