@@ -4,7 +4,7 @@ const PraktiskInfo = ({ event }) => {
   const ledigeBilletter = event.totalTickets - event.bookedTickets;
 
   return (
-    <Ramme className="border-[5px] p-15">
+    <Ramme className="border-[5px] p-15 border-(--blue)">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         {/* ========================= LOKATION ======================= */}
         <div>
@@ -33,7 +33,7 @@ const PraktiskInfo = ({ event }) => {
           <p>
             Der er
             <span className="text-(--blue) px-2">{ledigeBilletter}</span>
-            billetter tilbage arrangementet. Der tilbydes i alt op til
+            billetter tilbage til arrangementet. Der tilbydes i alt op til
             <span className="text-(--blue) px-2">{event.totalTickets}</span>
             gæster.
           </p>
@@ -43,7 +43,7 @@ const PraktiskInfo = ({ event }) => {
         <div>
           <h2 className="pb-2">Pris</h2>
           <p>
-            Dette arrangement er{" "}
+            Dette arrangement er
             <span className="text-(--blue) px-1">gratis</span>, så du/I kan med
             fordel se frem til en dag...
           </p>

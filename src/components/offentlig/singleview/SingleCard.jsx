@@ -15,7 +15,6 @@ const SingleCard = ({ event, art }) => {
 
       {/* ================== PRAKTISK INFORMATION =================== */}
       <PraktiskInfo event={event} />
-
       {/* ===================== SAMLEDE VÆRKER ====================== */}
       <SamledeVaerker event={event} art={art} />
 
