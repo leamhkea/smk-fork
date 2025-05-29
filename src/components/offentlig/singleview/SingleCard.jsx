@@ -2,7 +2,7 @@ import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
 import ButtonAddBillet from "./ButtonAddBillet";
 import BeskrivendeTekst from "./BeskrivendeTekst";
-import TestImg from "./SamledeVaerker";
+import SamledeVaerker from "./SamledeVaerker";
 
 const SingleCard = ({ event, art }) => {
   return (
@@ -17,7 +17,7 @@ const SingleCard = ({ event, art }) => {
       <PraktiskInfo event={event} />
 
       {/* ===================== SAMLEDE VÆRKER ====================== */}
-      <TestImg event={event} art={art} />
+      <SamledeVaerker event={event} art={art} />
 
       {/* ================== TILFØJ EVENT TIL KURV ================== */}
       <ButtonAddBillet billet={event} art={art} />
