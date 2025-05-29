@@ -14,9 +14,7 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    useLightningcss: false,
-  },
 };
 
 module.exports = nextConfig;
+
