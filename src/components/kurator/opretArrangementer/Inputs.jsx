@@ -209,7 +209,6 @@ const Inputs = ({ events, art }) => {
                   boxShadow: "none",
                   fontSize: "18px",
                 }),
-                // osv.
               }}
             />
           )}

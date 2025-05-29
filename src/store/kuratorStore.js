@@ -275,7 +275,14 @@ const useArtworkStore = create(
             selectedLocation: null,
             selectedDate: null,
           });
-        }
+        },
+
+        //get savedEvents efter publicering så det vises på siden
+        updatePublishedEvents: (nyeEvents) => {
+          set({
+            nyeEvents, // Opdaterer savedEvents med de nye events fra API'et
+          });
+        },
 
     }),
 

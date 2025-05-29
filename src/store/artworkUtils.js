@@ -11,3 +11,10 @@ export const searchArtworks = async (query) => {
   const data = await res.json();
   return filterHasImage(data.items);
 };
+
+// Til get-request af API'et
+export const getEvents = async () => {
+  const res = await fetch("https://async-exhibit-server-rmug.onrender.com/events");
+  const data = await res.json();
+  return data;
+};

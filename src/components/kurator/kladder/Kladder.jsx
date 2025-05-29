@@ -7,6 +7,7 @@ import { PublicerServer } from "../opretArrangementer/PublicerServer";
 import PopUP from "../global/PopUp";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { getEvents } from "@/store/artworkUtils";
 
 const Kladder = ({ event, vaerk }) => {
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
@@ -14,9 +15,10 @@ const Kladder = ({ event, vaerk }) => {
   const loadKladdeTilRedigering = useArtworkStore(
     (state) => state.loadKladdeTilRedigering
   );
+  const updatePublishedEvents = useArtworkStore((state)=>state.updatePublishedEvents);
   const router = useRouter();
 
-  //definerer at input fra zustand skal svare til api'et
+  // definerer at input fra zustand skal svare til api'et
   const kladde = savedEvents.find((params) => params.id === event.id);
 
   const [visPopUpDelete, setVisPopUpDelete] = useState();
@@ -25,6 +27,8 @@ const Kladder = ({ event, vaerk }) => {
   const confirmPublicering = async () => {
     if (kladde) {
       await PublicerServer(kladde);
+      const nyeEvents = await getEvents(); //fetch fra utils
+      updatePublishedEvents(nyeEvents);
       sletInputValue(kladde.id);
       setVisPopUpPublicer(false);
     }
