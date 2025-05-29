@@ -1,7 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['iip-thumb.smk.dk', 'api.smk.dk'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'iip-thumb.smk.dk',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.smk.dk',
+        pathname: '/**',
+      },
+    ],
   },
   experimental: {
     useLightningcss: false,
