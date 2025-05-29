@@ -277,10 +277,13 @@ const useArtworkStore = create(
           });
         },
 
+        //PUBLICEREDE EVENTS
+        publishedEvents: [], //tomt array til alle publicerede events
+
         //get savedEvents efter publicering så det vises på siden
         updatePublishedEvents: (nyeEvents) => {
           set({
-            nyeEvents, // Opdaterer savedEvents med de nye events fra API'et
+            publishedEvents: nyeEvents, // setter nye events sammen med de andre fra api'et
           });
         },
 

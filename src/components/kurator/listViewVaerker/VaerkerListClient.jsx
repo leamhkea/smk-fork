@@ -11,6 +11,8 @@ const VaerkerListClient = ({ artData, events }) => {
   const { artworks, visibleArtworks, setArtworks, handleLoadMore, hasMore } =
     useArtworkStore();
 
+    const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
+
   //loading af knap
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +23,13 @@ const VaerkerListClient = ({ artData, events }) => {
       setArtworks(artData);
     }
   }, [artData]);
+
+  //til at publicere kladder sammen med resten af eventsene:
+      useEffect(() => {
+        if (events?.length) {
+          updatePublishedEvents(events);
+        }
+      }, [events]); 
 
   return (
     <div className="flex flex-col gap-4 mt-0 mb-8">
