@@ -236,7 +236,7 @@ const Inputs = ({ events, art }) => {
                 setInputValue("date", isoDate); // Til den lokale form/kladde
                 setSelectedDate(date); // Zustand globalt, så andre komponenter kan reagere på den
               }}
-              includeDates={gyldigeDatoer} //viser kun de datoer, der er definret i consten gyldigeDatoer
+              includeDates={locationId ? gyldigeDatoer : []} //viser kun de datoer, der er definret i consten gyldigeDatoer og er tom hvis brugeren ikke har valgt en lokation
               placeholderText="Vælg en dato"
               dateFormat="yyyy-MM-dd"
               className="border border-(--black) p-2 w-full"
@@ -249,6 +249,9 @@ const Inputs = ({ events, art }) => {
             Alle datoer er optaget for den valgte lokation.
           </p>
         )}
+          {!selectedLocation && (
+              <p className="text-sm text-red-500 mt-1">Vælg en lokation før du kan vælge en dato.</p>
+         )}
       </div>
 
       {/* KUNSTVÆRKER */}

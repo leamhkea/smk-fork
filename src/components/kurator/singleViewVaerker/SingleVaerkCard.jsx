@@ -1,9 +1,13 @@
+"use client";
+import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 import SingleVaerkBeskrivelse from "./SingleVarkBeskrivelse";
 import Image from "next/image";
 // import GemEtVaerkButton from "../listViewVaerker/gemteVaerker/GemEtVaerkButton";
 
 const SingleVaerkCard = ({ art }) => {
   return (
+    <div>
+      <GoBackArrow/>
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between flex-col md:flex-row gap-5">
         <div className="flex flex-col gap-5">
@@ -41,6 +45,7 @@ const SingleVaerkCard = ({ art }) => {
             )
         )}
       </ul>
+    </div>
     </div>
   );
 };

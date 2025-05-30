@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
 import React, { useMemo } from "react";
+import { CgArrowLongLeft } from "react-icons/cg";
+import Link from "next/link";
 
 // Imports egne components
 import useBookingStore from "@/store/bookingStore";
@@ -59,6 +61,11 @@ const BekraeftelseCard = () => {
 
   return (
     <div>
+      <Link href="/arrangementer">
+        <div className="pl-5 pb-5 hover:scale-105 transition-all duration-300">
+          <CgArrowLongLeft size={40}/>
+        </div>
+      </Link>
       {/* ======================= CONFETTI EFFEKT PÅ HELE VIEWET ========================= */}
       <Confetti width={width} height={height} />
 

@@ -1,11 +1,16 @@
+"use client";
 import HeroImgText from "./HeroImgText";
 import PraktiskInfo from "./PraktiskInfo";
 import ButtonAddBillet from "./ButtonAddBillet";
 import BeskrivendeTekst from "./BeskrivendeTekst";
 import SamledeVaerker from "./SamledeVaerker";
+import GoBackArrow from "@/components/global/buttons/GoBackArrow";
+
 
 const SingleCard = ({ event, art }) => {
   return (
+    <div>
+     <GoBackArrow/>
     <article className="grid gap-20">
       {/* =================== IMAGE + OVERSKRIFT ==================== */}
       <HeroImgText event={event} art={art} />
@@ -24,6 +29,7 @@ const SingleCard = ({ event, art }) => {
       <SamledeVaerker event={event} art={art} />
 
     </article>
+    </div>
   );
 };
 

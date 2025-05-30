@@ -27,8 +27,11 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
     return usedInEvent && sameDate;
   });
 
-  const isDisabled =
-    (!isSaved && gemteVaerker.length >= maxArtworks) || isInSameDate;
+      const isDisabled =
+      !selectedDate || // forhindrer valg hvis dato ikke er valgt
+      (!isSaved && gemteVaerker.length >= maxArtworks) || 
+      isInSameDate;
+
 
   const handleSavedToggle = () => {
     if (isSaved) {

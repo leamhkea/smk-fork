@@ -9,6 +9,7 @@ import KurvCard from "../kurvview/KurvCard";
 import useBookingStore from "@/store/bookingStore";
 import FormOplysninger from "./FormOplysninger";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const OrdreCard = () => {
   // Initialiserer router til navigation
@@ -79,6 +80,8 @@ const OrdreCard = () => {
   };
 
   return (
+    <div>
+    <GoBackArrow/>
     <div className="flex flex-col lg:flex-row gap-6">
       {/* ====================== BASKET INDHOLD ======================= */}
       {/* Order summary --> bliver sticky kun på større skærme */}
@@ -113,6 +116,7 @@ const OrdreCard = () => {
           <TertrieryButton type="submit">Bekræft booking</TertrieryButton>
         </form>
       </FormProvider>
+    </div>
     </div>
   );
 };

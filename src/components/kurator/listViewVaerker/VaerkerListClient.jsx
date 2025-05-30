@@ -6,12 +6,14 @@ import useArtworkStore from "@/store/kuratorStore";
 import Filtrering from "./Filtrering";
 import SearchBar from "./SearchBar";
 import Inputs from "../opretArrangementer/Inputs";
+import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const VaerkerListClient = ({ artData, events }) => {
   const { artworks, visibleArtworks, setArtworks, handleLoadMore, hasMore } =
     useArtworkStore();
 
     const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
+    const selectedDate = useArtworkStore((state) => state.selectedDate); //til fejlmeddelelse hvis brugeren ikke har valgt dato endnu
 
   //loading af knap
   const [loading, setLoading] = useState(false);
@@ -33,6 +35,7 @@ const VaerkerListClient = ({ artData, events }) => {
 
   return (
     <div className="flex flex-col gap-4 mt-0 mb-8">
+      <GoBackArrow/>
       <div className="flex justify-between md:flex-row flex-col">
         <div>
           <h1>Alle kunstværker</h1>
@@ -60,6 +63,11 @@ const VaerkerListClient = ({ artData, events }) => {
         {/* Højre kolonne */}
         <div className="h-full overflow-y-auto">
           <div className="flex flex-col min-h-full px-4 py-6">
+
+          {!selectedDate && (
+              <p className=" text-red-500 mt-1 pl-5">Du skal vælge en dato før du kan vælge et kunstværk.</p>
+            )}
+
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {visibleArtworks.map((art) => (
                 <VaerkerListCard
