@@ -13,10 +13,10 @@ const Hero = ({ art, events }) => {
   return (
     <div className="relative w-full h-screen overflow-hidden -z-10">
       {/* Baggrundsbillede */}
-      {matchedArtworks?.[1]?.image_thumbnail && (
+      {matchedArtworks?.[0]?.image_thumbnail && (
         <Image
           alt="artwork"
-          src={matchedArtworks[1].image_thumbnail}
+          src={matchedArtworks[0].image_thumbnail}
           fill
           priority
           className="object-cover w-full h-full z-0"

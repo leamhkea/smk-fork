@@ -3,7 +3,7 @@ import Hero from "./Hero";
 const ServerForside = async () => {
   const [event, smkData] = await Promise.all([
     fetch(
-      "https://async-exhibit-server-rmug.onrender.com/events/02979c36-6618-42e1-be9d-cf6faa0f05db"
+      "https://async-exhibit-server-rmug.onrender.com/events/81d1af83-35bb-4dd4-84bd-e1a0d7bb99d9"
     ),
 
     fetch(

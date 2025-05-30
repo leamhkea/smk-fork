@@ -13,13 +13,16 @@ const SingleCard = ({ event, art }) => {
       {/* ===================== OM ARRANGEMENT ====================== */}
       <BeskrivendeTekst event={event} art={art} />
 
+       {/* ================== TILFØJ EVENT TIL KURV ================== */}
+       <div className="m-auto">
+      <ButtonAddBillet billet={event} art={art} />
+      </div>
+
       {/* ================== PRAKTISK INFORMATION =================== */}
       <PraktiskInfo event={event} />
       {/* ===================== SAMLEDE VÆRKER ====================== */}
       <SamledeVaerker event={event} art={art} />
 
-      {/* ================== TILFØJ EVENT TIL KURV ================== */}
-      <ButtonAddBillet billet={event} art={art} />
     </article>
   );
 };

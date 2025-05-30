@@ -102,7 +102,7 @@ const Header = () => {
                 }`}
                 onClick={() => setShowKurvMenu((prev) => !prev)}
               >
-                {showKurvMenu ? <ClosingTag size={50} /> : <Kurv />}
+                {showKurvMenu ? <ClosingTag /> : <Kurv />}
               </li>
 
               {/* Send onClose prop så Header kan lukke menuen */}

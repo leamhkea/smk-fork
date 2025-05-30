@@ -39,7 +39,7 @@ const ButtonAddBillet = ({ billet, art }) => {
 
   return (
     <TertrieryButton onClick={() => addToKurv(billet)}>
-      Book arrangement
+      Book billet til arrangement
     </TertrieryButton>
   );
 };
