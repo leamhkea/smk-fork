@@ -18,7 +18,7 @@ const Aabningstider = () => {
               Vær opmærksom på, vi begynder at lukke udstillingerne 15 minutter
               før lukketid.
             </p>
-            <div className="flex gap-20">
+            <div className="flex gap-20 mt-5">
 
             <ul className="flex flex-col gap-2">
               <li>

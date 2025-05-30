@@ -1,6 +1,7 @@
+"use client";
 import Ramme from "../global/Ramme";
-import TertrieryButton from "../global/buttons/TertrieryButton";
-import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
 const Hero = ({ art, events }) => {
@@ -10,10 +11,25 @@ const Hero = ({ art, events }) => {
       )
     : [];
 
+    const containerRef = useRef(null);
+
+    // Scroll-progress i forhold til containeren
+    const { scrollYProgress } = useScroll({
+      target: containerRef,
+      offset: ["start start", "end start"],
+    });
+  
+    // Transformér scroll til y aksens bevægelse (parallax-delen)
+    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden -z-10">
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden -z-10">
       {/* Baggrundsbillede */}
       {matchedArtworks?.[0]?.image_thumbnail && (
+        <motion.div
+        style={{y}}
+        className="absolute inset-0 z-[-1] will-change-transform"
+        >
         <Image
           alt="artwork"
           src={matchedArtworks[0].image_thumbnail}
@@ -21,6 +37,7 @@ const Hero = ({ art, events }) => {
           priority
           className="object-cover w-full h-full z-0"
         />
+          </motion.div>
       )}
       {/* Indhold ovenpå billedet */}
       <article className="relative flex flex-col z-0 justify-between gap-8 h-full p-8 text-white bg-black/50">
@@ -33,12 +50,6 @@ const Hero = ({ art, events }) => {
 
             <p className="max-w-xl">{events.description}</p>
           </div>
-
-          {/* <div className="self-start mt-auto">
-            <Link href={`/arrangementer/${events.id}`}>
-              <TertrieryButton>Læs mere om arrangementet</TertrieryButton>
-            </Link>
-          </div> */}
         </Ramme>
       </article>
     </div>

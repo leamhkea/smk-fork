@@ -1,8 +1,8 @@
 import { UserProfile } from "@clerk/nextjs";
 const Profil = () => {
-    return ( <div>
+    return ( <section>
         <UserProfile/> 
-    </div> );
+    </section> );
 }
  
 export default Profil;

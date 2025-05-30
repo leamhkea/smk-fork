@@ -11,7 +11,7 @@ const ListKladder = ({ art }) => {
   const kladdeSum = useArtworkStore((state) => state.kladdeSum());
   const { resetForm } = useArtworkStore();
 
-  const [hydrated, setHydrated] = useState(false);
+  const [match, setMatchh] = useState(false);
   const [index, setIndex] = useState(0);
   const cardRef = useRef(null);
   const containerRef = useRef(null);
@@ -22,11 +22,11 @@ const ListKladder = ({ art }) => {
 
   // Hydration til Zustand
   useEffect(() => {
-    setHydrated(true);
+    setMatchh(true);
   }, []);
 
   // Map og match værker
-  const kladderMedVaerker = hydrated
+  const kladderMedVaerker = match
     ? savedEvents
         .map((event) => {
           const matchingVaerk = art.find(
@@ -72,7 +72,7 @@ const ListKladder = ({ art }) => {
         </Link>
       </div>
 
-      {hydrated ? (
+      {match ? (
         kladderMedVaerker.length > 0 ? (
           <div className="mb-20 relative w-full flex items-center gap-2">
             <CgArrowLongLeft
@@ -122,3 +122,11 @@ const ListKladder = ({ art }) => {
 };
 
 export default ListKladder;
+
+//DOKUMENTATION BRUGT 
+
+//filter boolean
+//https://michaeluloth.com/javascript-filter-boolean/
+
+//hydration
+//https://stackoverflow.com/questions/73451295/how-to-solve-react-hydration-error-in-next

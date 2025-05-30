@@ -93,6 +93,7 @@ const Kladder = ({ event, vaerk }) => {
         <PopUP>
           Er du sikker på, du vil publicere denne kladde? <br />
           Denne handling kan ikke fotrydes
+          <p className="text-red-500 text-sm">OBS: Der går et øjeblik før eventet er synlig efter publicering.</p>
           <div className="flex gap-5">
             <TertrieryButton onClick={confirmPublicering}>Ja</TertrieryButton>
             <SecondaryButton onClick={() => setVisPopUpPublicer(false)}>
