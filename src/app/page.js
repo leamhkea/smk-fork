@@ -6,10 +6,8 @@ export default function Home({events, art}) {
   return (
     <section className="no-padding">
         <ServerForside art={art} events={events}/>
-
         <ParralaxText />
         <Aabningstider/>
-
     </section>
   );
 }

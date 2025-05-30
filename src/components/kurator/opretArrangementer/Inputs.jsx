@@ -163,6 +163,9 @@ const Inputs = ({ events, art }) => {
             setInputValue("description", e.target.value); // Zustand
           }}
         />
+         <p className="text-sm text-gray-500">
+            {inputValue.description.length} / 400 karakterer
+          </p>
         <p className="text-red-600 text-sm">{errors.beskrivelse?.message}</p>
       </div>
 

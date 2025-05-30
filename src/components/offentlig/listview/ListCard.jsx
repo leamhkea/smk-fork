@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+import ScrollFlow from "@/components/global/ScrollFlow";
 
 const ListCard = ({ event, art }) => {
   //matcher artworksID fra async api med object_number i smks api
@@ -9,6 +10,7 @@ const ListCard = ({ event, art }) => {
     : [];
 
   return (
+    <ScrollFlow>
     <Link href={`/arrangementer/${event.id}`}>
       {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
       <li className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]">
@@ -29,6 +31,7 @@ const ListCard = ({ event, art }) => {
         <SecondaryButton>Læs mere</SecondaryButton>
       </li>
     </Link>
+    </ScrollFlow>
   );
 };
 

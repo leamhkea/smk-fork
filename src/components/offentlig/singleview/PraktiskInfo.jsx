@@ -4,7 +4,7 @@ const PraktiskInfo = ({ event }) => {
   const ledigeBilletter = event.totalTickets - event.bookedTickets;
 
   return (
-    <Ramme className="border-[5px] border-(--blue)">
+    <Ramme className="border-[5px] p-5 border-(--blue)">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         {/* ========================= LOKATION ======================= */}
         <div>

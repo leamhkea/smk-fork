@@ -1,10 +1,14 @@
 import Ramme from "../global/Ramme";
+import ScrollFlow from "../global/ScrollFlow";
+import SlideRight from "../global/SlideRight";
 
 const Aabningstider = () => {
   return (
-    // put suggested bg-color på denne section fra billedet i hero
+    <ScrollFlow>
     <section className="flex flex-col md:flex-row gap-5 md:gap-20">
+      <SlideRight>
       <h1 className="thin">Åbningstider</h1>
+      </SlideRight>
       <Ramme className="border-(--blue) border-[5px]">
         <article>
           <div className="flex flex-col justify-end gap-5">
@@ -44,6 +48,7 @@ const Aabningstider = () => {
         </article>
       </Ramme>
     </section>
+    </ScrollFlow>
   );
 };
 
