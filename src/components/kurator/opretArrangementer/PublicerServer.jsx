@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 export async function PublicerServer(event) {
   const data = {
     id: event.id || "Udefineret",
@@ -31,10 +33,13 @@ export async function PublicerServer(event) {
   );
 
   if (!res.ok) {
-    const errorText = await res.text(); // vis hele serverens svar
-    Alert("🚨 Fejl fra server:", errorText);
+    const errorText = await res.text();
+    toast.error("🚨 Fejl fra server: " + errorText);
     throw new Error("Fejl ved oprettelse af arrangement.");
+  } else {
+    toast.success("Event publiceret!");
   }
+  
 
   return await res.json();
 }

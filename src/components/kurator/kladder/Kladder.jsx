@@ -31,6 +31,7 @@ const Kladder = ({ event, vaerk }) => {
       updatePublishedEvents(nyeEvents);
       sletInputValue(kladde.id);
       setVisPopUpPublicer(false);
+      
     }
   };
 
