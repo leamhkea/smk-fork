@@ -32,7 +32,7 @@ export async function PublicerServer(event) {
 
   if (!res.ok) {
     const errorText = await res.text(); // vis hele serverens svar
-    console.error("🚨 Fejl fra server:", errorText);
+    Alert("🚨 Fejl fra server:", errorText);
     throw new Error("Fejl ved oprettelse af arrangement.");
   }
 
