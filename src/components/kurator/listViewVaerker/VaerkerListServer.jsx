@@ -16,3 +16,9 @@ const VaerkerListServer = async () => {
 };
 
 export default VaerkerListServer;
+
+
+//DOKUMENTATION BRUGT 
+
+//promiseAll
+//https://medium.com/@sito6496t/how-to-fetch-multiple-apis-c59fec9076e2
