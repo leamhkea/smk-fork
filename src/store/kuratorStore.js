@@ -154,14 +154,7 @@ const useArtworkStore = create(
         })),
 
       //antal af gemte kladder
-      kladdeSum: () =>
-        get().savedEvents.reduce(
-          (accumulator, currentValue) =>
-            typeof currentValue.antal === "number"
-              ? accumulator + currentValue.antal
-              : accumulator, //skal opdateres for wtf??
-          0
-        ),
+      kladdeSum: () => get().savedEvents.length,
 
       // VÆLG ET VÆRK //
       gemteVaerker: [],

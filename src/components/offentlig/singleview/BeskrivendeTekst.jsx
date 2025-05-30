@@ -4,7 +4,7 @@ const BeskrivendeTekst = ({ event, art }) => {
       <h2 className="w-1/2 break-words pb-2 self">Om {event.title}</h2>
       <div className="w-1/2 break-words grid gap-2">
         <p>
-          Dette arrangement omhandler
+          Dette arrangement er
           <span className="text-(--blue) px-1">{event.description}</span>
         </p>
         <p>

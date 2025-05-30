@@ -4,7 +4,7 @@ const PraktiskInfo = ({ event }) => {
   const ledigeBilletter = event.totalTickets - event.bookedTickets;
 
   return (
-    <Ramme className="border-[5px] p-15 border-(--blue)">
+    <Ramme className="border-[5px] border-(--blue)">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
         {/* ========================= LOKATION ======================= */}
         <div>
@@ -45,7 +45,7 @@ const PraktiskInfo = ({ event }) => {
           <p>
             Dette arrangement er
             <span className="text-(--blue) px-1">gratis</span>, så du/I kan med
-            fordel se frem til en dag...
+            fordel se frem til en dag fyldt med oplevelser og kulturelle kunstværker, uden at det koster jer noget.
           </p>
         </div>
       </div>
