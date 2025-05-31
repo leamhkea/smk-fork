@@ -4,38 +4,12 @@ import { persist } from "zustand/middleware";
 const useArtworkStore = create(
   persist(
     (set, get) => ({
-      // DATA-SORTERING //
+      // DATA-SORTERING // Kaldes på i utils til load-more knap
       artworks: [], // alle artworks fra datasættet (fuldt array)
       initialArtworks: [], //de første artworks, der er loadet på siden
       visibleArtworks: [], // de værker, der vises på siden: 30, 60, 90 osv.
       offset: 0, //starter med at vise 0 værker
 
-      //setter artworks (fylde de definerede tomme strenge)
-      setArtworks: (newArtworks) => {
-        set({
-          artworks: newArtworks,
-          initialArtworks: newArtworks,
-          visibleArtworks: newArtworks.slice(0, 30), //bruger slice til kun at vise 30
-          offset: 30, //sætter nu offset og viser 30
-        });
-      },
-
-      //viser de næste 30, uafhængig af de første der er vist
-      handleLoadMore: async () => {
-        const { artworks, visibleArtworks, offset } = get();
-        const loadMore = artworks.slice(offset, offset + 30);
-        if (loadMore.length > 0) {
-          set({
-            visibleArtworks: [...visibleArtworks, ...loadMore],
-            offset: offset + 30, //"vis det allerede satte offset, og load nu 30 mere"
-          });
-        }
-      },
-
-      hasMore: () => {
-        const { artworks, visibleArtworks } = get();
-        return visibleArtworks.length < artworks.length;
-      },
 
       // FILTRERING //
       allFilters: {
@@ -44,6 +18,7 @@ const useArtworkStore = create(
         nationality: "",
         type: "",
       },
+      filteredArtworks: [], //defineret til at bruge til load-more
 
       setFilter: (newFilters) => {
         set({ allFilters: { ...get().allFilters, ...newFilters } });
@@ -77,6 +52,7 @@ const useArtworkStore = create(
         });
 
         set({
+          filteredArtworks: filtered,
           visibleArtworks: filtered.slice(0, 30), //skal opdateres så den henter 30 mere fra samme filtrer og ikke bare genstarter
           offset: 30,
         });

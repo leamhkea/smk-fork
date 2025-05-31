@@ -57,7 +57,7 @@ const Filtrering = ({ artData }) => {
     <div className="flex md:flex-row gap-10 h-10 justify-between">
       <div className="h-15 md:flex lg:gap-35 md:gap-15">
         {/* kunstner */}
-        <select onChange={(e) => filtreretValue("artist", e.target.value)}>
+        <select className="md:max-w-40 max-w-30" onChange={(e) => filtreretValue("artist", e.target.value)}>
           <option value="">Vælg kunstner</option>
           {kunstnere.map((kunstner, i) => (
             <option key={i} value={kunstner}>
@@ -67,7 +67,7 @@ const Filtrering = ({ artData }) => {
         </select>
 
         {/* tidsperiode */}
-        <select onChange={(e) => filtreretValue("period", e.target.value)}>
+        <select className="md:max-w-40 max-w-30" onChange={(e) => filtreretValue("period", e.target.value)}>
           <option value="">Vælg tidsperiode</option>
           {tidsperioder.map((tidsperiode, i) => (
             <option key={i} value={tidsperiode}>
@@ -79,7 +79,7 @@ const Filtrering = ({ artData }) => {
 
       <div className="h-15 md:flex lg:gap-35 md:gap-15">
         {/* kunstart */}
-        <select onChange={(e) => filtreretValue("type", e.target.value)}>
+        <select className="md:max-w-40 max-w-30" onChange={(e) => filtreretValue("type", e.target.value)}>
           <option value="">Vælg kunstart</option>
           {kunsttyper.map((kunsttype, i) => (
             <option key={i} value={kunsttype}>
@@ -89,7 +89,7 @@ const Filtrering = ({ artData }) => {
         </select>
 
         {/* nationalitet */}
-        <select onChange={(e) => filtreretValue("nationality", e.target.value)}>
+        <select className="md:max-w-40 max-w-30" onChange={(e) => filtreretValue("nationality", e.target.value)}>
           <option value="">Vælg nationalitet</option>
           {nationaliteter.map((nationalitet, i) => (
             <option key={i} value={nationalitet}>

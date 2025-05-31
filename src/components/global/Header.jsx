@@ -61,7 +61,7 @@ const Header = () => {
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
       <ul className="flex items-baseline justify-between py-4 px-8">
         {/* Venstre side */}
-        <div className="flex items-baseline gap-8">
+        <div className="flex items-baseline gap-2 md:gap-8">
           <Link href="/">
             <li
               className={
@@ -70,7 +70,7 @@ const Header = () => {
             >
               <svg
                 viewBox="0 0 73 25"
-                width="130px"
+                width="120px"
                 height="auto"
                 style={{ display: "block", margin: 0, padding: 0 }}
                 fill="currentColor"

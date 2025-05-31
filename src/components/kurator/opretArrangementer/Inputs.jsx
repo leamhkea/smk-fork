@@ -127,7 +127,7 @@ const Inputs = ({ events, art }) => {
 
   return (
     <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-10">
-      <h1 className="thin">Opret arrangement</h1>
+      <h2 className="thin">Opret arrangement</h2>
 
       {/* TITEL */}
       <div className="flex flex-col">
@@ -171,7 +171,7 @@ const Inputs = ({ events, art }) => {
 
       {/* LOKATION */}
       <div className="flex flex-col">
-  <label className="mb-1 font-medium">Lokation *</label>
+      <label className="mb-1 font-medium">Lokation *</label>
         <Controller
           name="locationId"
           control={control}
