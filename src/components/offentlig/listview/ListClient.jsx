@@ -6,6 +6,7 @@ import { SignedIn } from "@clerk/nextjs";
 import ListKladder from "@/components/kurator/kladder/ListKladder";
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
+import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const ListClient = (props) => {
   const { setArrangementer } = useArrangementStore();
@@ -46,6 +47,7 @@ const ListClient = (props) => {
 
   return (
     <div>
+      <GoBackArrow/>
       <SignedIn>
         <ListKladder art={props.art} />
       </SignedIn>
