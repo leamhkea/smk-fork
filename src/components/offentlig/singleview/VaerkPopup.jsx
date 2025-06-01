@@ -3,15 +3,45 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import { useEffect, useState } from "react";
 
-const VaerkPopup = ({ artwork, onClose, event }) => {
+const VaerkPopup = ({ artwork, onClose }) => {
+  // Gemmer alle arrangementer (events), der hentes fra serveren. Starter som en tom liste []
+  const [allEvents, setAllEvents] = useState([]);
+
+  // Gemmer de arrangementer, der er relateret til det aktuelle artwork. Starter også som tom liste
+  const [relatedEvents, setRelatedEvents] = useState([]);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      // Henter data fra API'et
+      const alleEvents = await fetch(
+        "https://async-exhibit-server-rmug.onrender.com/events"
+      );
+
+      // Sætter allEvents state til den hentede data
+      const data = await alleEvents.json();
+      setAllEvents(data);
+    }
+    fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    // Tjekker om der er hentet nogle events og om er der et valgt kunstværk
+    if (allEvents.length > 0 && artwork) {
+      // Hvis ja, laver den en filtrering. Går alle events igennem og finder kun dem, som indeholder det valgte kunstværks
+      const filtered = allEvents.filter((event) =>
+        event.artworkIds?.includes(artwork.object_number)
+      );
+      // Resultatet gemmes i relatedEvents state
+      setRelatedEvents(filtered);
+    }
+  }, [allEvents, artwork]);
+
   return (
     <div className="fixed inset-0 backdrop-blur-sm z-1 flex justify-center items-center">
       <motion.div
-        className="bg-(--white) p-10 shadow-md max-w-xl w-full"
-        // style={{
-        //   backgroundColor: artwork.suggested_bg_color?.[0] || "#ffffff",
-        // }}
+        className="bg-(--white) p-10 shadow-md max-w-220 w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
@@ -19,60 +49,70 @@ const VaerkPopup = ({ artwork, onClose, event }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* =========================== DET TILKNYTTEDE VÆRK ========================== */}
-        <div className="flex flex-col gap-8 mx-auto">
-          <div className="self-center">
-            {artwork?.image_thumbnail && (
-              <Image
-                alt="Artwork thumbnail"
-                src={artwork.image_thumbnail}
-                width={200}
-                height={200}
-                className="object-contain w-full h-auto"
-              />
-            )}
-          </div>
 
-          {/* ============================= TITEL PÅ VÆRKET ============================ */}
-          <h3 className="text-center">{artwork.titles?.[0]?.title}</h3>
+        <div className="grid lg:flex lg:gap-8">
+          {artwork?.image_thumbnail && (
+            <Image
+              alt="Artwork thumbnail"
+              src={artwork.image_thumbnail}
+              width={200}
+              height={200}
+              className="object-contain m-auto pb-4"
+            />
+          )}
 
           {/* ========================== INFORMATION OM VÆRKET ========================= */}
-          <div className="grid gap-4">
-            <p>
-              Kunstneren
-              <span className="text-(--blue) px-1">{artwork.artist}</span>
-              krearede kunstværket d.
-              <span className="text-(--blue) pl-1">
-                {artwork.acquisition_date_precision}
-              </span>
-              .
-            </p>
-            <p>
-              Kunstværkets type er et
-              <span className="text-(--blue) px-1">
-                {artwork.object_names[0]?.name}
-              </span>
-              og findes i afdelingen
-              <span className="text-(--blue) pl-1">
-                {artwork.responsible_department}
-              </span>
-              .
-            </p>
 
-            {/* ========================= EVENT VÆRKET INDGÅR I ========================= */}
-            {event.artworkIds?.includes(artwork.object_number) && (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+            <div>
+              <h3 className="text-center pb-2">{artwork.titles?.[0]?.title}</h3>
               <p>
-                Dette værk er en del af arrangementet:
+                Kunstneren
+                <span className="text-(--blue) px-1">{artwork.artist}</span>
+                krearede kunstværket d.
                 <span className="text-(--blue) pl-1">
-                  {event.title || event.name}
+                  {artwork.acquisition_date_precision}
                 </span>
                 .
               </p>
-            )}
-          </div>
+              <p>
+                Kunstværkets type er et
+                <span className="text-(--blue) px-1">
+                  {artwork.object_names[0]?.name}
+                </span>
+                og findes i afdelingen
+                <span className="text-(--blue) pl-1">
+                  {artwork.responsible_department}
+                </span>
+                .
+              </p>
+            </div>
 
-          {/* ============================= LUK POPOVER BUTTON =========================== */}
-          <TertrieryButton onClick={onClose}>Luk</TertrieryButton>
+            {/* ========================= EVENTs VÆRKET INDGÅR I ======================== */}
+            <div>
+              <h3 className="text-center pb-2">
+                Arrangementer værket indgår i
+              </h3>
+              {relatedEvents.length === 0 ? (
+                <p>Ingen arrangementer fundet</p>
+              ) : (
+                <ul>
+                  {relatedEvents.map((event) => (
+                    <li key={event.id} className="grid grid-cols-2 gap-4">
+                      <span className="text-end text-(--blue)">
+                        {event.title}
+                      </span>
+                      <span>{event.date}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
+
+        {/* ============================= LUK POPOVER BUTTON =========================== */}
+        <TertrieryButton onClick={onClose}>Luk</TertrieryButton>
       </motion.div>
     </div>
   );

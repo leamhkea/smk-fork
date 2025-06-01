@@ -62,9 +62,9 @@ const BekraeftelseCard = () => {
   return (
     <div>
       <Link href="/arrangementer">
-        <div className="pl-5 pb-5 hover:scale-105 transition-all duration-300">
+        {/* <div className="pl-5 pb-5 hover:scale-105 transition-all duration-300">
           <CgArrowLongLeft size={40}/>
-        </div>
+        </div> */}
       </Link>
       {/* ======================= CONFETTI EFFEKT PÅ HELE VIEWET ========================= */}
       <Confetti width={width} height={height} />

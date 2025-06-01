@@ -1,4 +1,3 @@
-import Arrangementer from "@/app/arrangementer/page";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -16,8 +15,8 @@ const useArrangementStore = create(
       allFilters: {
         title: "",
         date: "",
-        lokation:"",
-        inventarnummer:"",
+        lokation: "",
+        inventarnummer: "",
       },
 
       setFilter: (newFilters) => {
@@ -40,13 +39,17 @@ const useArrangementStore = create(
           const valgtDate =
             !allFilters.date || parameter.date?.includes(allFilters.date); //bruger includes(), da det ønskes også at vise delvise matches på siden og ikke strengt taget samme værdi
 
-            const valgtLokation = //denne del bruges til filtrering for kurator ved opret arrangement
-            !allFilters.lokation || parameter.locationID === allFilters.lokation; //skal ikke bruges includes(), da den skal matche eksakt i lokationer
+          const valgtLokation = //denne del bruges til filtrering for kurator ved opret arrangement
+            !allFilters.lokation ||
+            parameter.locationID === allFilters.lokation; //skal ikke bruges includes(), da den skal matche eksakt i lokationer
 
-            const valgtInventarnummer = 
-            !allFilters.inventarnummer || parameter.inventarnummer === allFilters.inventarnummer;
+          const valgtInventarnummer =
+            !allFilters.inventarnummer ||
+            parameter.inventarnummer === allFilters.inventarnummer;
 
-          return valgtTitle && valgtDate && valgtLokation && valgtInventarnummer; 
+          return (
+            valgtTitle && valgtDate && valgtLokation && valgtInventarnummer
+          );
         });
 
         set({
