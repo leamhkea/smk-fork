@@ -1,4 +1,4 @@
-import VaerkerListServer from "@/components/kurator/listViewVaerker/VaerkerListServer";
+import VaerkerListServer from "@/components/kurator/listView/VaerkerListServer";
 
 const Vaerkarkiv = () => {
     return ( <section>

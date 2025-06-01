@@ -1,5 +1,6 @@
 import { SignOutButton } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+
 const SideMenu = () => {
   const [isVisible, setIsVisible] = useState(false);
 

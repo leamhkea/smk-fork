@@ -1,8 +1,10 @@
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+//imports af egne komponenter
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
+import useArrangementStore from "@/store/arrangementStore";
+//imports udefra
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import useArrangementStore from "@/store/arrangementStore";
 import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
 import DatePicker from "react-datepicker";
@@ -10,19 +12,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 
 const Inputs = ({ events, art }) => {
+  //zustand imports
   const { setFilter } = useArrangementStore();
   const { gemteVaerker } = useArtworkStore((state) => state);
-
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
-
   const saveKladde = useArtworkStore((state) => state.saveKladde);
-
-  const setSelectedLocation = useArtworkStore(
-    (state) => state.setSelectedLocation
-  );
+  const setSelectedLocation = useArtworkStore((state) => state.setSelectedLocation);
   const setSelectedDate = useArtworkStore((state) => state.setSelectedDate);
 
+  //useRouter
   const router = useRouter();
 
   // React Hook Form
@@ -80,7 +79,7 @@ const Inputs = ({ events, art }) => {
   const locationId = watch("locationId");
   const selectedLocation = lokation.find((loc) => loc.id === locationId);
   const maxArtworks = selectedLocation?.maxArtworks || Infinity;
-  //se gemEtVaerkIcon (komponent) og kuratorStore - sørger for at man ikke kan klikke på flere ved maxArtworks
+  //se GemVaerk(komponent) og kuratorStore - sørger for at man ikke kan klikke på flere ved maxArtworks
 
   // Finder datoer der allerede er optaget for den valgte lokation
   const optagedeDatoer = events
@@ -117,7 +116,6 @@ const Inputs = ({ events, art }) => {
   );
 
   //GEMMER KLADDE//
-
   const gemKladde = () => {
     //tilføjer event til kladder (bruges både til redigering og oprettelse af nyt event)
     saveKladde();
@@ -291,7 +289,7 @@ const Inputs = ({ events, art }) => {
       </div>
 
       <div className="flex justify-center gap-10">
-        <SecondaryButton type="submit">Gem kladde</SecondaryButton>
+        <PrimaryButton type="submit">Gem kladde</PrimaryButton>
       </div>
     </Form>
   );

@@ -1,6 +1,8 @@
 "use client";
+//import af egne komponenter
 import Ramme from "../global/Ramme";
-import { useEffect, useRef } from "react";
+//imports udefra
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
@@ -11,6 +13,7 @@ const Hero = ({ art, events }) => {
       )
     : [];
 
+    //useRef
     const containerRef = useRef(null);
 
     // Scroll-progress i forhold til containeren

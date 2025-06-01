@@ -1,10 +1,9 @@
 "use client";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
-import SingleVaerkBeskrivelse from "./SingleVarkBeskrivelse";
+import SingleBeskrivelse from "./SingleBeskrivelse";
 import Image from "next/image";
-// import GemEtVaerkButton from "../listViewVaerker/gemteVaerker/GemEtVaerkButton";
 
-const SingleVaerkCard = ({ art }) => {
+const SingleCard = ({ art }) => {
   return (
     <div>
       <GoBackArrow/>
@@ -28,7 +27,7 @@ const SingleVaerkCard = ({ art }) => {
         )}
       </div>
 
-      <SingleVaerkBeskrivelse art={art} />
+      <SingleBeskrivelse art={art} />
       <ul>
         {art.alternative_images?.map(
           (image, index) =>
@@ -50,4 +49,4 @@ const SingleVaerkCard = ({ art }) => {
   );
 };
 
-export default SingleVaerkCard;
+export default SingleCard;

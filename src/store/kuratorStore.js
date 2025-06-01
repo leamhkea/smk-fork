@@ -100,7 +100,7 @@ const useArtworkStore = create(
       },
       savedEvents: [], //tomt array til gemte kladder
 
-      //til maxArtowkors og datoer:
+      //til maxArtowkors og datoer (bruges på tværs af input og GemVaerk komponenter):
       selectedLocation: null,
       setSelectedLocation: (location) => set({ selectedLocation: location }), //lagrer den valgte lokation fra inputs globalt til at bruge på tværs af komponenterne
 
@@ -115,8 +115,6 @@ const useArtworkStore = create(
             [field]: value,
           },
         })),
-
-      // isEventSaved: (id) => get().savedEvents.some((e) => e.id === id),
 
       //returnerer objektet
       getInputValue: () => get().inputValue,
@@ -245,6 +243,7 @@ const useArtworkStore = create(
             selectedDate: null,
           });
         },
+  
 
         //PUBLICEREDE EVENTS
         publishedEvents: [], //tomt array til alle publicerede events
@@ -276,7 +275,7 @@ export default useArtworkStore;
 
 //generel forståelse af sorteringen af dataen:
 
-//Offset (load kun 3o værker ad gangen)
+//Offset (load kun 30 værker ad gangen)
 //https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/
 
 //til forståelse af håndtering af filtrering:

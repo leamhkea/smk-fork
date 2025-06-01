@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import KurvCard from "../kurvview/KurvCard";
 import useBookingStore from "@/store/bookingStore";
 import FormOplysninger from "./FormOplysninger";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const OrdreCard = () => {
@@ -113,7 +113,7 @@ const OrdreCard = () => {
             <FormOplysninger />
           </div>
 
-          <TertrieryButton type="submit">Bekræft booking</TertrieryButton>
+          <SecondaryButton type="submit">Bekræft booking</SecondaryButton>
         </form>
       </FormProvider>
     </div>

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import { useEffect, useState } from "react";
 
 const VaerkPopup = ({ artwork, onClose }) => {
@@ -112,7 +112,7 @@ const VaerkPopup = ({ artwork, onClose }) => {
         </div>
 
         {/* ============================= LUK POPOVER BUTTON =========================== */}
-        <TertrieryButton onClick={onClose}>Luk</TertrieryButton>
+        <SecondaryButton onClick={onClose}>Luk</SecondaryButton>
       </motion.div>
     </div>
   );

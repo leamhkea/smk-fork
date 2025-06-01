@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const PopUP = ({ children }) => {
-  const [mounted, setMounted] = useState(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setInView(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!inView) return null;
 
   return createPortal(
     <div className="fixed inset-0 backdrop-blur-sm z-50 flex justify-center items-center">
@@ -31,3 +31,6 @@ const PopUP = ({ children }) => {
 };
 
 export default PopUP;
+
+//DOKUMENTATION BRUGT
+//https://developer.mozilla.org/en-US/docs/Web/API/Document/body

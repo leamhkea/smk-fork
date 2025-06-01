@@ -4,8 +4,8 @@ import useBookingStore from "@/store/bookingStore";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import KurvCard from "./KurvCard";
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 
 const KurvPopover = ({ onClose, art }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -55,17 +55,17 @@ const KurvPopover = ({ onClose, art }) => {
       {/* ======================= KNAPPER I BUNDEN ======================= */}
       {billetter && billetter.length > 0 && (
         <div className="grid grid-cols-2 gap-8">
-          <SecondaryButton
+          <PrimaryButton
             onClick={() => {
               emptyKurv();
               handleClose(); // Luk og informer Header
             }}
           >
             Tøm kurv
-          </SecondaryButton>
+          </PrimaryButton>
 
           <Link href="/ordreoversigt" onClick={handleClose}>
-            <TertrieryButton>Bekræft ordre</TertrieryButton>
+            <SecondaryButton>Bekræft ordre</SecondaryButton>
           </Link>
         </div>
       )}

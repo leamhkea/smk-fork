@@ -1,4 +1,4 @@
-import SingleVaerkCard from "@/components/kurator/singleViewVaerker/SingleVaerkCard";
+import SingleCard from "@/components/offentlig/singleview/SingleCard";
 
 const VaerkerSingleView = async ({ params }) => {
   const { object_number } = params;
@@ -10,7 +10,7 @@ const VaerkerSingleView = async ({ params }) => {
 
   return (
   <section>
-      <SingleVaerkCard art={art} />
+      <SingleCard art={art} />
   </section>)
 
 };

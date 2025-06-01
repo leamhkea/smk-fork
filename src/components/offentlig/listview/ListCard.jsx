@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import ScrollFlow from "@/components/global/ScrollFlow";
 
 const ListCard = ({ event, art }) => {
@@ -28,7 +28,7 @@ const ListCard = ({ event, art }) => {
 
         <h3>{event.title}</h3>
         <p>{event.date}</p>
-        <SecondaryButton>Læs mere</SecondaryButton>
+        <PrimaryButton>Læs mere</PrimaryButton>
       </li>
     </Link>
     </ScrollFlow>

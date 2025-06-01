@@ -1,16 +1,20 @@
+//import af egne komponenter
 import useArtworkStore from "@/store/kuratorStore";
 import Kladder from "./Kladder";
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
+//imports udefra
 import { useEffect, useState, useRef } from "react";
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const ListKladder = ({ art }) => {
+  //zustand imports
   const { savedEvents } = useArtworkStore();
   const kladdeSum = useArtworkStore((state) => state.kladdeSum());
   const { resetForm } = useArtworkStore();
 
+  //til kort visning
   const [match, setMatchh] = useState(false);
   const [index, setIndex] = useState(0);
   const cardRef = useRef(null);
@@ -18,6 +22,7 @@ const ListKladder = ({ art }) => {
   const [cardWidth, setCardWidth] = useState(0);
   const [visibleCards, setVisibleCards] = useState(1);
 
+  //router
   const router = useRouter();
 
   // Hydration til Zustand
@@ -68,7 +73,7 @@ const ListKladder = ({ art }) => {
       <div className="flex justify-between items-center mb-6">
         <h2>Mine kladder ({kladdeSum})</h2>
         <Link href="/vaerkarkiv">
-          <SecondaryButton onClick={nytEvent}>Opret arrangement</SecondaryButton>
+          <PrimaryButton onClick={nytEvent}>Opret arrangement</PrimaryButton>
         </Link>
       </div>
 

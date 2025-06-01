@@ -2,7 +2,7 @@
 
 // Importerer store og components
 import useBookingStore from "@/store/bookingStore";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
+import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 
 const ButtonAddBillet = ({ billet, art }) => {
   // Kalder på nødvendige funktioner fra store
@@ -38,9 +38,9 @@ const ButtonAddBillet = ({ billet, art }) => {
   };
 
   return (
-    <TertrieryButton onClick={() => addToKurv(billet)}>
+    <SecondaryButton onClick={() => addToKurv(billet)}>
       Book billet til arrangement
-    </TertrieryButton>
+    </SecondaryButton>
   );
 };
 

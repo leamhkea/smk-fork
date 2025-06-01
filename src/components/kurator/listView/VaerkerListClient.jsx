@@ -1,23 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
+//import af egne komponenter
 import VaerkerListCard from "./VaerkerListCard";
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import Filtrering from "./Filtrering";
 import SearchBar from "./SearchBar";
-import Inputs from "../opretArrangementer/Inputs";
+import Inputs from "../opretArrangement/Inputs";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
-import { loadMoreArtworks, setArtworks,
-  hasMore, } from "@/store/artworkUtils";
+import { loadMoreArtworks, setArtworks, hasMore, } from "@/store/artworkUtils";
+
+//imports udefra
+import { useEffect, useState } from "react";
 
 const VaerkerListClient = ({ artData, events }) => {
+  //zustand import
   const get = useArtworkStore.getState;
   const set = useArtworkStore.setState;
-
   const { artworks, visibleArtworks } = useArtworkStore();
   const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
   const selectedDate = useArtworkStore((state) => state.selectedDate);
 
+  //useState
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -58,6 +61,8 @@ const VaerkerListClient = ({ artData, events }) => {
 
         <div className="h-full overflow-y-auto">
           <div className="flex flex-col min-h-full px-4 py-6">
+            
+            {/* fejlmeddelelse til hvis brugeren ikke har valgt dato endnu */}
             {!selectedDate && (
               <p className="text-red-500 mt-1 pl-5">
                 Du skal vælge en dato før du kan vælge et kunstværk.
@@ -74,9 +79,10 @@ const VaerkerListClient = ({ artData, events }) => {
               ))}
             </ul>
 
+            {/* viser herunder kun knappen hvis der er flere værker at indlæse ellers display none */}
             {hasMore(get) && (
               <div className="flex mt-8 m-auto justify-center">
-                <SecondaryButton
+                <PrimaryButton
                   onClick={() => {
                     setLoading(true);
                     loadMoreArtworks(get, set);
@@ -85,7 +91,7 @@ const VaerkerListClient = ({ artData, events }) => {
                   disabled={loading}
                 >
                   {loading ? "Indlæser værker..." : "Vis flere værker"}
-                </SecondaryButton>
+                </PrimaryButton>
               </div>
             )}
           </div>

@@ -1,5 +1,7 @@
 import LongDescriptions from "./LongDescription";
-const SingleVaerkBeskrivelse = ({ art }) => {
+
+const SingleBeskrivelse = ({ art }) => {
+  
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-1">
@@ -95,4 +97,4 @@ const SingleVaerkBeskrivelse = ({ art }) => {
   );
 };
 
-export default SingleVaerkBeskrivelse;
+export default SingleBeskrivelse;

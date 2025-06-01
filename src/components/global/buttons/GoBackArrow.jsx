@@ -18,4 +18,6 @@ const GoBackArrow = () => {
 export default GoBackArrow;
 
 //DOKUMENTATION BRUGT
+
+//history.back()
 //https://developer.mozilla.org/en-US/docs/Web/API/History/back

@@ -1,7 +1,8 @@
 "use client";
 import useArtworkStore from "@/store/kuratorStore";
 
-const GemEtVaerkIcon = ({ vaerk, events }) => {
+const GemVaerk = ({ vaerk, events }) => {
+  //zustand imports
   const gemteVaerker = useArtworkStore((state) => state.gemteVaerker);
   const addVaerk = useArtworkStore((state) => state.addVaerk);
   const sletVaerk = useArtworkStore((state) => state.sletVaerk);
@@ -28,7 +29,7 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
   });
 
       const isDisabled =
-      !selectedDate || // forhindrer valg hvis dato ikke er valgt
+      !selectedDate || // forhindrer valg hvis dato ikke er valgt eller hvis brugeren har nået max antal af værker fra lokationen
       (!isSaved && gemteVaerker.length >= maxArtworks) || 
       isInSameDate;
 
@@ -54,4 +55,4 @@ const GemEtVaerkIcon = ({ vaerk, events }) => {
   );
 };
 
-export default GemEtVaerkIcon;
+export default GemVaerk;

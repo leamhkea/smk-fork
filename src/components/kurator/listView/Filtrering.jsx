@@ -1,10 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+//import af egne komponenter
 import useArtworkStore from "@/store/kuratorStore";
+//imports udefra
+import { useEffect, useState } from "react";
 
 const Filtrering = ({ artData }) => {
+  //zustand import
   const { setFilter } = useArtworkStore();
 
+  //useState
   const [kunstnere, setKunstnere] = useState([]);
   const [tidsperioder, setTidsperioder] = useState([]);
   const [nationaliteter, setNationaliteter] = useState([]);

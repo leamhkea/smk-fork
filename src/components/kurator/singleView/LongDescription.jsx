@@ -5,7 +5,7 @@ const LongDescriptions = ({ description }) => {
   const [laesmere, setLaesmere] = useState(false);
   const maxLength = 150;
 
-  const sectionRef = useRef(null); // bruger ref i stedet for id
+  const sectionRef = useRef(null);
 
   const isLong = description.length > maxLength;
   const shortText = description.slice(0, maxLength);

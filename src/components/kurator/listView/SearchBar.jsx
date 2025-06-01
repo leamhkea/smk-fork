@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
-import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+//import af egne komponenter
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import { searchArtworks } from "@/store/artworkUtils";
+//imports udefra
+import { useState } from "react";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState("");
+  //zustand import
   const setSearchResults = useArtworkStore((state) => state.setSearchResults);
   const [loading, setLoading] = useState(false);
   const resetToInitial = useArtworkStore((state) => state.resetToInitial);
+
+  //useState
+  const [query, setQuery] = useState("");
 
   const handleSearch = async () => {
     setLoading(true);
@@ -43,7 +48,7 @@ const SearchBar = () => {
       />
 
       <div className="m-auto">
-        <SecondaryButton
+        <PrimaryButton
           onClick={async () => {
             setLoading(true);
             await handleSearch(); // await for at vente på at søgningen bliver færdig.
@@ -52,7 +57,7 @@ const SearchBar = () => {
           disabled={loading}
         >
           {loading ? "søger..." : "søg"}
-        </SecondaryButton>
+        </PrimaryButton>
       </div>
     </div>
   );

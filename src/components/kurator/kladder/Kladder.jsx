@@ -1,28 +1,34 @@
 "use client";
-import Image from "next/image";
+
+//imports af egne komponenter
+import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
-import TertrieryButton from "@/components/global/buttons/TertrieryButton";
 import useArtworkStore from "@/store/kuratorStore";
-import { PublicerServer } from "../opretArrangementer/PublicerServer";
+import { PublicerServer } from "../opretArrangement/PublicerServer";
 import PopUP from "../global/PopUp";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { getEvents } from "@/store/artworkUtils";
 
+//imports udefra
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 const Kladder = ({ event, vaerk }) => {
+  //zustand store imports
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
   const { savedEvents } = useArtworkStore.getState();
-  const loadKladdeTilRedigering = useArtworkStore(
-    (state) => state.loadKladdeTilRedigering
-  );
+  const loadKladdeTilRedigering = useArtworkStore((state) => state.loadKladdeTilRedigering);
   const updatePublishedEvents = useArtworkStore((state)=>state.updatePublishedEvents);
+
+  //router import
   const router = useRouter();
+
+  //popOver states
+  const [visPopUpDelete, setVisPopUpDelete] = useState();
+  const [visPopUpPublicer, setVisPopUpPublicer] = useState();
 
   // definerer at input fra zustand skal svare til api'et
   const kladde = savedEvents.find((params) => params.id === event.id);
-
-  const [visPopUpDelete, setVisPopUpDelete] = useState();
-  const [visPopUpPublicer, setVisPopUpPublicer] = useState();
 
   const confirmPublicering = async () => {
     if (kladde) {
@@ -63,13 +69,13 @@ const Kladder = ({ event, vaerk }) => {
         <h2>{event.title}</h2>
         <p>{event.date}</p>
 
-        <SecondaryButton onClick={() => redigerEvent(event.id)}>
+        <PrimaryButton onClick={() => redigerEvent(event.id)}>
           Rediger
-        </SecondaryButton>
+        </PrimaryButton>
 
-        <TertrieryButton onClick={() => setVisPopUpPublicer(true)}>
+        <SecondaryButton onClick={() => setVisPopUpPublicer(true)}>
           Publicer
-        </TertrieryButton>
+        </SecondaryButton>
 
         <button
           className=" hover:text-red-600 mt-5"
@@ -78,28 +84,32 @@ const Kladder = ({ event, vaerk }) => {
           Slet kladde
         </button>
       </div>
+      
+      {/* popUp til at sikre at brugeren vil slette arrangement */}
       {visPopUpDelete && (
         <PopUP>
           Er du sikker på, du vil slette denne kladde? <br />
           Denne handling kan ikke fotrydes
           <div className="flex gap-5">
-            <SecondaryButton onClick={confirmDelete}>Ja</SecondaryButton>
-            <TertrieryButton onClick={() => setVisPopUpDelete(false)}>
+            <PrimaryButton onClick={confirmDelete}>Ja</PrimaryButton>
+            <SecondaryButton onClick={() => setVisPopUpDelete(false)}>
               Nej
-            </TertrieryButton>
+            </SecondaryButton>
           </div>
         </PopUP>
       )}
+
+      {/* PopUp til at sikre at brugeren vil publicere arrangement */}
       {visPopUpPublicer && (
         <PopUP>
           Er du sikker på, du vil publicere denne kladde? <br />
           Denne handling kan ikke fotrydes
           <p className="text-red-500 text-sm">OBS: Der går et øjeblik før eventet er synlig efter publicering.</p>
           <div className="flex gap-5">
-            <TertrieryButton onClick={confirmPublicering}>Ja</TertrieryButton>
-            <SecondaryButton onClick={() => setVisPopUpPublicer(false)}>
+            <SecondaryButton onClick={confirmPublicering}>Ja</SecondaryButton>
+            <PrimaryButton onClick={() => setVisPopUpPublicer(false)}>
               Nej
-            </SecondaryButton>
+            </PrimaryButton>
           </div>
         </PopUP>
       )}
