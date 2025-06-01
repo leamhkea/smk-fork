@@ -50,64 +50,60 @@ const VaerkPopup = ({ artwork, onClose }) => {
       >
         {/* =========================== DET TILKNYTTEDE VÆRK ========================== */}
 
-        <div className="grid lg:flex lg:gap-8">
-          {artwork?.image_thumbnail && (
-            <Image
-              alt="Artwork thumbnail"
-              src={artwork.image_thumbnail}
-              width={200}
-              height={200}
-              className="object-contain m-auto pb-4"
-            />
-          )}
+        {artwork?.image_thumbnail && (
+          <Image
+            alt="Artwork thumbnail"
+            src={artwork.image_thumbnail}
+            width={200}
+            height={200}
+            className="object-contain m-auto pb-4"
+          />
+        )}
 
-          {/* ========================== INFORMATION OM VÆRKET ========================= */}
+        {/* ========================== INFORMATION OM VÆRKET ========================= */}
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-            <div>
-              <h3 className="text-center pb-2">{artwork.titles?.[0]?.title}</h3>
-              <p>
-                Kunstneren
-                <span className="text-(--blue) px-1">{artwork.artist}</span>
-                krearede kunstværket d.
-                <span className="text-(--blue) pl-1">
-                  {artwork.acquisition_date_precision}
-                </span>
-                .
-              </p>
-              <p>
-                Kunstværkets type er et
-                <span className="text-(--blue) px-1">
-                  {artwork.object_names[0]?.name}
-                </span>
-                og findes i afdelingen
-                <span className="text-(--blue) pl-1">
-                  {artwork.responsible_department}
-                </span>
-                .
-              </p>
-            </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+          <div>
+            <h3 className="text-center pb-2">{artwork.titles?.[0]?.title}</h3>
+            <p>
+              Kunstneren
+              <span className="text-(--blue) px-1">{artwork.artist}</span>
+              krearede kunstværket d.
+              <span className="text-(--blue) pl-1">
+                {artwork.acquisition_date_precision}
+              </span>
+              .
+            </p>
+            <p>
+              Kunstværkets type er et
+              <span className="text-(--blue) px-1">
+                {artwork.object_names[0]?.name}
+              </span>
+              og findes i afdelingen
+              <span className="text-(--blue) pl-1">
+                {artwork.responsible_department}
+              </span>
+              .
+            </p>
+          </div>
 
-            {/* ========================= EVENTs VÆRKET INDGÅR I ======================== */}
-            <div>
-              <h3 className="text-center pb-2">
-                Arrangementer værket indgår i
-              </h3>
-              {relatedEvents.length === 0 ? (
-                <p>Ingen arrangementer fundet</p>
-              ) : (
-                <ul>
-                  {relatedEvents.map((event) => (
-                    <li key={event.id} className="grid grid-cols-2 gap-4">
-                      <span className="text-end text-(--blue)">
-                        {event.title}
-                      </span>
-                      <span>{event.date}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+          {/* ========================= EVENTs VÆRKET INDGÅR I ======================== */}
+          <div>
+            <h3 className="text-center pb-2">Arrangementer værket indgår i</h3>
+            {relatedEvents.length === 0 ? (
+              <p>Ingen arrangementer fundet</p>
+            ) : (
+              <ul>
+                {relatedEvents.map((event) => (
+                  <li key={event.id} className="grid grid-cols-2 gap-4">
+                    <span className="text-end text-(--blue)">
+                      {event.title}
+                    </span>
+                    <span>{event.date}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
