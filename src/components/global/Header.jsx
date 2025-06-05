@@ -62,13 +62,13 @@ const Header = () => {
       <div className="flex items-baseline justify-between py-4 px-8">
         {/* Venstre side */}
         <ul className="flex items-baseline gap-2 md:gap-8">
-        {/* label er relevant for skærmlæsere */}
-          <Link href="/" aria-label="Gå til forsiden"> 
-            <li
-              className={
-                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-              }
-            >
+          {/* label er relevant for skærmlæsere */}
+          <li
+            className={
+              pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+            }
+          >
+            <Link href="/" aria-label="Gå til forsiden">
               <svg
                 viewBox="0 0 73 25"
                 width="120px"
@@ -81,17 +81,15 @@ const Header = () => {
                 <path d="M67.36 13.55c-3.0806.0276-5.5582 2.5424-5.5399 5.623.0183 3.0807 2.5257 5.5659 5.6064 5.5568C70.5072 24.7206 73 22.2208 73 19.14a5.59 5.59 0 0 0-5.64-5.59zm2.49 8.6h-5v-1.26h5v1.26zm1.17-3c-.11.16-.36.41-.36.62-.41 0-.73.45-.78.81h-.58c-.31 0-.48 0-.56-.25a.73.73 0 0 1-.65.25.79.79 0 0 1-.7-.31.79.79 0 0 1-.7.31.74.74 0 0 1-.65-.25c-.08.2-.25.25-.56.25h-.58c0-.36-.37-.81-.77-.81 0-.21-.26-.46-.37-.62-.65-.88-.17-1.43.52-1.44a1.59 1.59 0 0 1 .71.18c0-.61.45-.84 1-.84a1.93 1.93 0 0 1 1.18.48 1.82 1.82 0 0 1 .13-.28.55.55 0 0 1-.45-.52.56.56 0 0 1 .5-.53v-.35H67v.05a.1.1 0 0 1-.2 0v-.05a.1.1 0 0 1-.1-.09.1.1 0 0 1 .1-.1v-.05a.1.1 0 0 1 .2 0v.05h.23v-.27h-.05a.1.1 0 0 1-.09-.1.09.09 0 0 1 .09-.1h.05v-.05a.11.11 0 0 1 .1-.1.1.1 0 0 1 .1.1v.05h.05a.1.1 0 0 1 .1.1.11.11 0 0 1-.1.1h-.05v.27h.23v-.05a.1.1 0 0 1 .1-.1.09.09 0 0 1 .1.1v.05a.1.1 0 0 1 .1.1.1.1 0 0 1-.1.09v.05a.09.09 0 0 1-.1.1.1.1 0 0 1-.1-.1v-.05h-.23v.35a.53.53 0 0 1 .05 1.05 1.82 1.82 0 0 1 .13.28 1.93 1.93 0 0 1 1.21-.53c.52 0 1 .23 1 .84a1.62 1.62 0 0 1 .71-.18c.67.04 1.14.59.47 1.47l.02.02z"></path>
                 <path d="M70.22 18.07a1.22 1.22 0 0 0-.41.07 1.86 1.86 0 0 1-.44.79c.45.26 0 .86-.48 1.05 0 .22.16.27.45.27h.34c-.06-.54.37-1.23.76-.86a2.87 2.87 0 0 0 .32-.58c.16-.52-.15-.74-.54-.74z"></path>
               </svg>
-            </li>
-          </Link>
-          <Link href="/arrangementer">
-            <li
-              className={`bold hover:underline ${
-                pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
-              } ${pathnameUnderline === "/arrangementer" ? "underline" : ""}`}
-            >
-              Arrangementer
-            </li>
-          </Link>
+            </Link>
+          </li>
+          <li
+            className={`bold hover:underline ${
+              pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
+            } ${pathnameUnderline === "/arrangementer" ? "underline" : ""}`}
+          >
+            <Link href="/arrangementer">Arrangementer</Link>
+          </li>
         </ul>
 
         {/* Højre side: kurv */}
@@ -103,6 +101,7 @@ const Header = () => {
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
                 onClick={() => setShowKurvMenu((prev) => !prev)}
+                aria-label="Gå til kurv"
               >
                 {showKurvMenu ? <ClosingTag /> : <Kurv />}
               </button>
@@ -120,6 +119,7 @@ const Header = () => {
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
+                aria-label="Gå til menuen"
                 onClick={handleToggleSideMenu}
               >
                 {showSideMenu ? (
