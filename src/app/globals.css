@@ -70,7 +70,7 @@ body {
   }
   main {
     .no-padding {
-      margin-top:0;
+      margin-top: 0;
       padding-inline: 0;
     }
     section {
@@ -171,3 +171,7 @@ h1 + h2 {
 }
 
 /*            HERUNDER STARTER NAVNGIVNE CSS CLASSES TIL COMPONENTER           */
+
+.test {
+  height: 1px;
+}
