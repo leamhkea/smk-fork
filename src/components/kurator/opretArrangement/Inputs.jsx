@@ -3,13 +3,15 @@ import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import useArrangementStore from "@/store/arrangementStore";
 //imports udefra
+import dynamic from 'next/dynamic';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from 'react-select';
+
+const Select = dynamic(() => import('react-select'), { ssr: false }); //til hyrdration fail
 
 const Inputs = ({ events, art }) => {
   //zustand imports
@@ -133,7 +135,6 @@ const Inputs = ({ events, art }) => {
           type="text"
           placeholder="Arrangement titel *"
           {...register("titel", { required: "Titel er påkrævet" })}
-          defaultValue={inputValue.title}
           className="border-1 border-(--black) p-2"
           onChange={(e) => {
             setValue("titel", e.target.value); // React Hook Form
@@ -154,7 +155,6 @@ const Inputs = ({ events, art }) => {
               message: "Beskrivelse må max bestå af 400 karakterer",
             },
           })}
-          defaultValue={inputValue.description}
           className="border-1 border-(--black) p-2 h-50"
           onChange={(e) => {
             setValue("beskrivelse", e.target.value); // React Hook Form

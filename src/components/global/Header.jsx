@@ -59,10 +59,11 @@ const Header = () => {
 
   return (
     <nav className="fixed top-0 px-(--content-width) w-full z-1 backdrop-blur-xs">
-      <ul className="flex items-baseline justify-between py-4 px-8">
+      <div className="flex items-baseline justify-between py-4 px-8">
         {/* Venstre side */}
-        <div className="flex items-baseline gap-2 md:gap-8">
-          <Link href="/">
+        <ul className="flex items-baseline gap-2 md:gap-8">
+        {/* label er relevant for skærmlæsere */}
+          <Link href="/" aria-label="Gå til forsiden"> 
             <li
               className={
                 pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
@@ -72,6 +73,7 @@ const Header = () => {
                 viewBox="0 0 73 25"
                 width="120px"
                 height="auto"
+                length="auto"
                 style={{ display: "block", margin: 0, padding: 0 }}
                 fill="currentColor"
               >
@@ -90,20 +92,20 @@ const Header = () => {
               Arrangementer
             </li>
           </Link>
-        </div>
+        </ul>
 
         {/* Højre side: kurv */}
         <div className="flex gap-3">
           <SignedOut>
             <div ref={kurvRef} className="relative">
-              <li
+              <button
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
                 onClick={() => setShowKurvMenu((prev) => !prev)}
               >
                 {showKurvMenu ? <ClosingTag /> : <Kurv />}
-              </li>
+              </button>
 
               {/* Send onClose prop så Header kan lukke menuen */}
               {showKurvMenu && (
@@ -114,7 +116,7 @@ const Header = () => {
 
           <SignedIn>
             <div ref={sideMenuRef}>
-              <li
+              <button
                 className={`cursor-pointer ${
                   pathnameBlue === "/" ? "text-(--blue)" : "text-(--black)"
                 }`}
@@ -125,12 +127,12 @@ const Header = () => {
                 ) : (
                   <IoIosMenu size={30} />
                 )}
-              </li>
+              </button>
               {showSideMenu && <SideMenu />}
             </div>
           </SignedIn>
         </div>
-      </ul>
+      </div>
     </nav>
   );
 };

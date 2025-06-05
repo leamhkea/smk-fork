@@ -4,31 +4,19 @@ const Footer = () => {
       <div className="flex flex-col gap-3">
         <h3 className="white">Gæst</h3>
         <h3 className="thin white">Åbningstider</h3>
-        <ul>
-          <div className="flex gap-10">
-            <li>
-              <p className="white">Tirsdag - søndag</p>
-            </li>
-            <li>
-              <p className="white">10 - 18</p>
-            </li>
-          </div>
-          <div className="flex justify-between">
-            <li>
-              <p className="white">Onsdag</p>
-            </li>
-            <li>
-              <p className="white">10 - 20</p>
-            </li>
-          </div>
-          <div className="flex justify-between">
-            <li>
-              <p className="white">Mandag</p>
-            </li>
-            <li>
-              <p className="white">Lukket</p>
-            </li>
-          </div>
+        <ul className="flex flex-col gap-2">
+          <li className="flex gap-10">
+            <p className="white">Tirsdag - søndag</p>
+            <p className="white">10 - 18</p>
+          </li>
+          <li className="flex justify-between">
+            <p className="white">Onsdag</p>
+            <p className="white">10 - 20</p>
+          </li>
+          <li className="flex justify-between">
+            <p className="white">Mandag</p>
+            <p className="white">Lukket</p>
+          </li>
         </ul>
       </div>
       <div className="flex flex-col gap-3">
@@ -44,5 +32,6 @@ const Footer = () => {
     </div>
   );
 };
+
 
 export default Footer;
