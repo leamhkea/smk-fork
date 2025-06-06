@@ -3,6 +3,7 @@ import "./globals.css";
 import "./reset.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
+import Head from "./head";
 
 //imports udefra
 import { ClerkProvider } from "@clerk/nextjs";
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="da">
+        <Head />
         <body>
           <header>
             <Header />

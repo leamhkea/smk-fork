@@ -32,12 +32,13 @@ const useArrangementStore = create(
         const { allFilters, arrangementer } = get();
 
         const filteredArrangementer = arrangementer.filter((parameter) => {
-          // Returner titler hvis event har en, ellers kom med en fejlmeddelelse
           const valgtTitle =
+            // Returner titler hvis event har en, ellers kom med en fejlmeddelelse
             !allFilters.title || parameter.title?.includes(allFilters.title);
 
           const valgtDate =
-            !allFilters.date || parameter.date?.includes(allFilters.date); //bruger includes(), da det ønskes også at vise delvise matches på siden og ikke strengt taget samme værdi
+            //bruger includes(), da det ønskes også at vise delvise matches på siden og ikke strengt taget samme værdi
+            !allFilters.date || parameter.date?.includes(allFilters.date);
 
           const valgtLokation = //denne del bruges til filtrering for kurator ved opret arrangement
             !allFilters.lokation ||

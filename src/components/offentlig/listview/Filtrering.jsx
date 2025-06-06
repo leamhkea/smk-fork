@@ -41,6 +41,7 @@ const Filtrering = ({ events }) => {
         value={allFilters.title}
         onChange={(e) => filteredValue("title", e.target.value)}
       >
+        {/* Første default option */}
         <option value="">Vælg arrangement</option>
 
         {/* Tjekker om title er et array, inden der mappes over det. Sikrer at brugeren ikke får fejl i UI'et, hvis data ikke er tilgængelige. */}

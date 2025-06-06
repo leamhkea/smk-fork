@@ -5,34 +5,44 @@ import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import ListCard from "./ListCard";
 
 const EventSlider = ({ title, events, art }) => {
-  // index: Hvor mange kort der er scroll'et til højre
+  // index: Hvilket "trin" slideren er på (0 = start). Bruges til at beregne hvor langt vi skal scroll
+  // Når man klikker pil til højre, øges index, og hele rækken af kort forskydes til venstre
   const [index, setIndex] = useState(0);
 
-  // cardWidth: Bredden på ét kort i pixels (måles med ref)
+  // cardWidth: Bredden på ét kort i pixels (måles med ref). Bruges til at udregne præcis hvor langt rækken skal flyttes ved scroll.
   const [cardWidth, setCardWidth] = useState(0);
 
-  // visibleCards: Hvor mange kort er synlige på én gang
+  // visibleCards: Hvor mange kort er synlige på én gang. Bruges til at vide, hvornår vi skal stoppe med at scrolle.
+  // Hvis containeren er 1000px bred og hvert kort er 250px, så er visibleCards = 4
   const [visibleCards, setVisibleCards] = useState(1);
 
-  // cardRef: ref til første kort → bruges til at måle bredden
+  // cardRef: Reference til det første kort, så vi kan måle bredden
   const cardRef = useRef(null);
 
   // containerRef: ref til den synlige visning (viewport) → bruges til at måle hele containerens bredde
   const containerRef = useRef(null);
 
   useEffect(() => {
+    // measure() bliver kaldt når komponenten loader og hver gang vinduet ændrer størrelse
     const measure = () => {
+      // Den måler: card (bredden på et card) container (bredden på hele visningsområdet)
       if (!cardRef.current || !containerRef.current) return;
       const card = cardRef.current.offsetWidth;
       const container = containerRef.current.offsetWidth;
 
+      // F.eks. 1000 / 250 = 4. Vi kan se 4 kort ad gangen
       const numVisible = Math.floor(container / card);
+
+      // Det hele bliver gemt i state med setCardWidth og setVisibleCards
       setCardWidth(card);
       setVisibleCards(numVisible);
     };
 
-    measure(); // initial måling
+    measure();
+    // Slideren måler igen, hver gang brugeren ændrer vinduets størrelse
     window.addEventListener("resize", measure);
+
+    // "Clean up" – fjerner event listener, når komponenten unmountes (best practice i React)
     return () => window.removeEventListener("resize", measure);
   }, []);
 
@@ -65,7 +75,7 @@ const EventSlider = ({ title, events, art }) => {
             }}
           >
             {/* event:   Objektet med data for ét enkelt arrangement */}
-            {/*    i:    ndexet i events-arrayet (0, 1, 2, ...) */}
+            {/*    i:    Indexet i events-arrayet (0, 1, 2, ...) */}
             {events.map((event, i) => (
               <div
                 // React skal bruge en unik nøgle for hvert element i en liste, så den effektivt kan holde styr på ændringer. unik ID for hvert arrangement

@@ -37,6 +37,7 @@ const useBookingStore = create(
       // Sænker mængden af billetter, men aldrig under 1
       decAntal: (billetID) =>
         set((state) => ({
+          // Returnerer en ny version af den billet med opdateret antal, men returnerer de andre billetter uændret
           billetter: state.billetter.map((billet) => {
             if (billet.id === billetID) {
               const nyAntal = billet.antal > 1 ? billet.antal - 1 : 1;

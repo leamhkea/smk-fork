@@ -1,23 +1,28 @@
 "use client";
 
 import { useEffect } from "react";
-import useArrangementStore from "@/store/arrangementStore";
 import { SignedIn } from "@clerk/nextjs";
+import useArrangementStore from "@/store/arrangementStore";
 import ListKladder from "@/components/kurator/kladder/ListKladder";
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const ListClient = (props) => {
+  // Funktion til at sætte listen af arrangementer i global state
   const { setArrangementer } = useArrangementStore();
+
+  // En filtreret version af arrangementerne
   const { visteArrangementer = [] } = useArrangementStore();
 
+  // Når props.events ændrer sig, opdateres den globale state med disse arrangementer
   useEffect(() => {
     if (props.events) {
       setArrangementer(props.events);
     }
   }, [props.events, setArrangementer]);
 
+  // Definerer lokationerne manuelt
   const lokationer = [
     "København",
     "Aarhus",
@@ -30,24 +35,27 @@ const ListClient = (props) => {
     "Holstebro",
   ];
 
+  // For hver by filtreres visteArrangementer, og kun events med matchende address tilføjes
   const grupperetEfterLokation = lokationer.map((by) => {
     const byEvents = visteArrangementer.filter((event) =>
       event.location?.address.includes(by)
     );
 
+    // Resultatet bliver en liste
     return {
       title: by,
       events: byEvents,
     };
   });
 
+  // Bruges til at vise en besked, hvis der ikke findes nogen events i nogen af byerne
   const alleEventsErTom = grupperetEfterLokation.every(
     (gruppe) => gruppe.events.length === 0
   );
 
   return (
     <div>
-      <GoBackArrow/>
+      <GoBackArrow />
       <SignedIn>
         <ListKladder art={props.art} />
       </SignedIn>
@@ -72,16 +80,18 @@ const ListClient = (props) => {
           </p>
         </div>
 
-        {/* ======================= FILTRE TIL EVENTS ======================== */}
+        {/* ========================= FILTRE TIL EVENTS =========================== */}
         <Filtrering className="self-end" events={props.events} />
       </div>
 
+      {/* Turnary at vise hvis der INGEN arrangementer er til filtre */}
       {alleEventsErTom && (
         <p className="text-center py-50 text-gray-500 italic">
           Der blev ikke fundet nogen arrangementer med de valgte filtre.
         </p>
       )}
 
+      {/* For hver by, der har events, vises et EventSlider-komponent med events fra den by */}
       {grupperetEfterLokation
         .filter((gruppe) => gruppe.events.length > 0)
         .map(({ title, events }) => (
@@ -97,3 +107,11 @@ const ListClient = (props) => {
 };
 
 export default ListClient;
+
+// 1. Modtager events fra props.
+// 2. Gemmer dem i en global Zustand-store.
+// 3. Filtrerer dem efter byer.
+// 4. Viser filtre og info.
+// 5. Viser events opdelt i byer i EventSlider.
+// 6. Viser en besked hvis ingen events matcher filtrene.
+// 7. Viser ekstra indhold (kladder) for indloggede brugere.

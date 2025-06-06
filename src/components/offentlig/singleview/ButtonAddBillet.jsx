@@ -22,7 +22,7 @@ const ButtonAddBillet = ({ billet, art }) => {
       // Tjekker om den specifikke billet findes baseret på id
       const duplicate = billetter.find((el) => el.id === billet.id);
 
-      // Hvis   = Kalder funktionen updateAntal med billetens id og øger antallet (antal) af den billet i kurven.
+      // Hvis = Kalder funktionen updateAntal med billetens id og øger antallet (antal) af den billet i kurven.
       if (duplicate) {
         updateAntal(billet.id);
 

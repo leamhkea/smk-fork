@@ -7,9 +7,7 @@ export default async function SingleView({ params }) {
   const [dataAsync, dataSMK] = await Promise.all([
     fetch(`https://async-exhibit-server-rmug.onrender.com/events/${id}`),
 
-    fetch(
-      `https://api.smk.dk/api/v1/art/?object_number=${object_number}`
-    ),
+    fetch(`https://api.smk.dk/api/v1/art/?object_number=${object_number}`),
   ]);
 
   // Parser begge fetch-responser til JSON. Nu har vi to JavaScript-objekter

@@ -3,8 +3,9 @@ import ListClient from "./ListClient";
 // ListServer er en asynkron komponent. async betyder, at man arbejder med asynkrone operationer (f.eks. at hente data fra en API).
 const ListServer = async () => {
   // await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.
-  // fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til API
+  // fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til API.
   const [event, smkData] = await Promise.all([
+    //Promise all for samle fetch i en.
     fetch("https://async-exhibit-server-rmug.onrender.com/events"),
 
     fetch(
@@ -22,7 +23,9 @@ const ListServer = async () => {
   const fetchMissingArtworks = async (ids) => {
     const results = [];
     for (const id of ids) {
-      const res = await fetch(`https://api.smk.dk/api/v1/art/search/?keys=${id}`);
+      const res = await fetch(
+        `https://api.smk.dk/api/v1/art/search/?keys=${id}`
+      );
       const data = await res.json();
       const match = data.items.find((item) => item.object_number === id);
       if (match) results.push(match);

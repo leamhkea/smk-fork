@@ -12,6 +12,7 @@ const VaerkPopup = ({ artwork, onClose }) => {
   // Gemmer de arrangementer, der er relateret til det aktuelle artwork. Starter også som tom liste
   const [relatedEvents, setRelatedEvents] = useState([]);
 
+  // useEffect bliver slet ikke kørt på serversiden, men først efter komponenten er monteret i browseren
   useEffect(() => {
     async function fetchEvents() {
       // Henter data fra API'et

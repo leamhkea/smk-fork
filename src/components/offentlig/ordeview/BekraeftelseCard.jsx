@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
 import React, { useMemo } from "react";
-import { CgArrowLongLeft } from "react-icons/cg";
 import Link from "next/link";
 
 // Imports egne components
