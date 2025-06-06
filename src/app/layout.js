@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="da">
+        {/* Forsøg */}
         <Head />
         <body>
           <header>
