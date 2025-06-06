@@ -3,7 +3,7 @@ import "./globals.css";
 import "./reset.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
-import Head from "./head";
+import Head from "next/head";
 
 //imports udefra
 import { ClerkProvider } from "@clerk/nextjs";
