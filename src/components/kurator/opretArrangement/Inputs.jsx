@@ -279,9 +279,6 @@ const Inputs = ({ events, art }) => {
             validate: (value) => {
               const count = parseInt(value);
               if (count === 0) return "Du skal vælge mindst ét kunstværk";
-              if (count > maxArtworks)
-                return `Maksimalt ${maxArtworks} værker tilladt for denne lokation`;
-              return true;
             },
           })}
         />
