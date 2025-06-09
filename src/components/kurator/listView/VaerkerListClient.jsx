@@ -3,11 +3,14 @@
 import VaerkerListCard from "./VaerkerListCard";
 import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
-import Filtrering from "./Filtrering";
-import SearchBar from "./SearchBar";
-import Inputs from "../opretArrangement/Inputs";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 import { loadMoreArtworks, setArtworks, hasMore, } from "@/store/artworkUtils";
+import Filtrering from "./Filtrering";
+
+import SearchBar from "./SearchBar";
+
+import Inputs from "../opretArrangement/Inputs";
+
 
 //imports udefra
 import { useEffect, useState } from "react";

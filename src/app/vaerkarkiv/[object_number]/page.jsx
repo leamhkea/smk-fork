@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
-
-const SingleCard = dynamic(
-  () => import("@/components/offentlig/singleview/SingleCard"),
-  {
-    loading: () => <p>Loading...</p>,
-  }
-);
+import SingleCard from "@/components/kurator/singleView/SingleCard";
 
 const VaerkerSingleView = async ({ params }) => {
   const { object_number } = params;
