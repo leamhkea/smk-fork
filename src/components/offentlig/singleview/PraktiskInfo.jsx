@@ -11,9 +11,9 @@ const PraktiskInfo = ({ event }) => {
           <h2 className="pb-2">Lokation</h2>
           <p>
             Adressen for arrangementet på Statens Museum for Kunst er
-            <span className="text-(--blue) px-2">{event.location.address}</span>
+            {event.location.address}
             og foregår på lokationen
-            <span className="text-(--blue) pl-2">{event.location.name}</span>.
+            {event.location.name}.
           </p>
         </div>
 
@@ -22,7 +22,7 @@ const PraktiskInfo = ({ event }) => {
           <h2 className="pb-2">Dato</h2>
           <p>
             Arrangementet kommer til at foregå d.
-            <span className="text-(--blue) px-2">{event.date}</span>
+            {event.date}
             fra kl. 12.00 – 16.00, hvortil der tilbydes drikkelse og snacks.
           </p>
         </div>
@@ -32,9 +32,9 @@ const PraktiskInfo = ({ event }) => {
           <h2 className="pb-2">Ledige billetter</h2>
           <p>
             Der er
-            <span className="text-(--blue) px-2">{ledigeBilletter}</span>
+            {ledigeBilletter}
             billetter tilbage til arrangementet. Der tilbydes i alt op til
-            <span className="text-(--blue) px-2">{event.totalTickets}</span>
+            {event.totalTickets}
             gæster.
           </p>
         </div>
@@ -43,9 +43,9 @@ const PraktiskInfo = ({ event }) => {
         <div>
           <h2 className="pb-2">Pris</h2>
           <p>
-            Dette arrangement er
-            <span className="text-(--blue) px-1">gratis</span>, så du/I kan med
-            fordel se frem til en dag fyldt med oplevelser og kulturelle kunstværker, uden at det koster jer noget.
+            Dette arrangement er gratis, så du/I kan med fordel se frem til en
+            dag fyldt med oplevelser og kulturelle kunstværker, uden at det
+            koster jer noget.
           </p>
         </div>
       </div>
