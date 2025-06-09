@@ -16,7 +16,7 @@ const ScrollFlow = ({ children }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   // Fade ud ved scroll (fra 1 til 0 i opacity)
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, -0]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   return (
     <div ref={containerRef}>
