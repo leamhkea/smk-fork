@@ -1,7 +1,8 @@
 "use client";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
-import SingleBeskrivelse from "./SingleBeskrivelse";
 import Image from "next/image";
+
+import SingleBeskrivelse from "./SingleBeskrivelse";
 
 const SingleCard = ({ art }) => {
   return (
