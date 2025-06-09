@@ -8,7 +8,7 @@ const GoBackArrow = () => {
 
   return (
     <SlideRight>
-    <button className="pl-5 pb-5 hover:scale-105 transition-all duration-300" onClick={goBack}>
+    <button aria-label="Gå tilbage" className="pl-5 pb-5 hover:scale-105 transition-all duration-300" onClick={goBack}>
       <CgArrowLongLeft size={40} />
     </button>
     </SlideRight>

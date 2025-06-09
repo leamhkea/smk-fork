@@ -132,6 +132,7 @@ const Inputs = ({ events, art }) => {
       {/* TITEL */}
       <div className="flex flex-col">
         <input
+        aria-label="indtast titel"
           type="text"
           placeholder="Arrangement titel *"
           {...register("titel", { required: "Titel er påkrævet" })}
@@ -147,6 +148,7 @@ const Inputs = ({ events, art }) => {
       {/* BESKRIVELSE */}
       <div className="flex flex-col">
         <textarea
+        aria-label="indtast beskrivelse"
           placeholder="Beskrivelse *"
           {...register("beskrivelse", {
             required: "Beskrivelse er påkrævet",
@@ -176,6 +178,7 @@ const Inputs = ({ events, art }) => {
           rules={{ required: "Lokation er påkrævet" }}
           render={({ field }) => (
             <Select
+            aria-label="Vælg lokation"
               {...field}
               options={lokation.map((loc) => ({
                 value: loc.id,
@@ -221,6 +224,7 @@ const Inputs = ({ events, art }) => {
       <div className="flex flex-col">
         <label className="mb-1 font-medium">Dato *</label>
         <Controller
+        aria-label="Vælg dato"
           name="dato"
           control={control}
           rules={{ required: "Dato er påkrævet" }}
@@ -270,6 +274,7 @@ const Inputs = ({ events, art }) => {
 
         {/* Skjult input til validering */}
         <input
+        aria-label="Vælg kunstværker"
           type="hidden"
           value={
             gemteVaerker.filter((params) => params && params.object_number)
@@ -286,7 +291,7 @@ const Inputs = ({ events, art }) => {
       </div>
 
       <div className="flex justify-center gap-10">
-        <PrimaryButton type="submit">Gem kladde</PrimaryButton>
+        <PrimaryButton aria-label="Gem kladde" type="submit">Gem kladde</PrimaryButton>
       </div>
     </Form>
   );
