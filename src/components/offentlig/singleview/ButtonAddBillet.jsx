@@ -3,6 +3,7 @@
 // Importerer store og components
 import useBookingStore from "@/store/bookingStore";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
+import { toast } from "react-toastify";
 
 const ButtonAddBillet = ({ billet, art }) => {
   // Kalder på nødvendige funktioner fra store
@@ -17,6 +18,8 @@ const ButtonAddBillet = ({ billet, art }) => {
 
   // Funktion til at tilføje billet til kurv
   const addToKurv = (billet) => {
+    toast.success("Billetten er tilføjet til kurven!");
+
     // Tjekker først, om der allerede er billetter i kurven
     if (billetter.length) {
       // Tjekker om den specifikke billet findes baseret på id

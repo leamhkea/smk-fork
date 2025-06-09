@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 const SingleCard = dynamic(
   () => import("@/components/offentlig/singleview/SingleCard"),
   {
-    ssr: false, // Hvis komponenten kun skal køre i browseren
     loading: () => <p>Loading...</p>,
     ssr: false,
   }

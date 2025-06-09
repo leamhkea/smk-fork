@@ -68,23 +68,15 @@ const VaerkPopup = ({ artwork, onClose }) => {
             <h3 className="text-center pb-2">{artwork.titles?.[0]?.title}</h3>
             <p>
               Kunstneren
-              <span className="text-(--blue) px-1">{artwork.artist}</span>
+              {artwork.artist}
               krearede kunstværket d.
-              <span className="text-(--blue) pl-1">
-                {artwork.acquisition_date_precision}
-              </span>
-              .
+              {artwork.acquisition_date_precision}.
             </p>
             <p>
               Kunstværkets type er et
-              <span className="text-(--blue) px-1">
-                {artwork.object_names[0]?.name}
-              </span>
+              {artwork.object_names[0]?.name}
               og findes i afdelingen
-              <span className="text-(--blue) pl-1">
-                {artwork.responsible_department}
-              </span>
-              .
+              {artwork.responsible_department}.
             </p>
           </div>
 
@@ -96,10 +88,8 @@ const VaerkPopup = ({ artwork, onClose }) => {
             ) : (
               <ul>
                 {relatedEvents.map((event) => (
-                  <li key={event.id} className="grid grid-cols-2 gap-4">
-                    <span className="text-end text-(--blue)">
-                      {event.title}
-                    </span>
+                  <li key={event.id} className="grid grid-cols-2 gap-6">
+                    <span className="text-end">{event.title}</span>
                     <span>{event.date}</span>
                   </li>
                 ))}

@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         <body>
           <header>
             <Header />
-            <ToastContainer />
+            <ToastContainer className={"mt-14"} />
           </header>
           <main>{children}</main>
           <footer>
