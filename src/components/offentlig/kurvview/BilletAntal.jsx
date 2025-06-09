@@ -3,6 +3,7 @@
 import useBookingStore from "@/store/bookingStore";
 import { BsPlusLg } from "react-icons/bs";
 import { HiMinus } from "react-icons/hi2";
+import { toast } from "react-toastify";
 
 const BilletAntal = ({ id, antal, event }) => {
   // Laver const med functions fra bookingStore, så antal billetter opdateres med udgangspunkt i state
@@ -33,7 +34,9 @@ const BilletAntal = ({ id, antal, event }) => {
           if (antal < ledigeBilletter) {
             incAntal(id);
           } else {
-            alert("Der er ikke flere ledige billetter til dette arrangement.");
+            toast.error(
+              "Der er ikke flere ledige billetter til dette arrangement."
+            );
           }
         }}
       >
