@@ -1,4 +1,5 @@
 import ScrollFlow from "@/components/global/ScrollFlow";
+// hej
 
 const BeskrivendeTekst = ({ event, art }) => {
   return (
