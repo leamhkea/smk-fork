@@ -42,11 +42,11 @@ const ListKladder = ({ art }) => {
         .filter(Boolean)
     : [];
 
-    //opret arrangement
-    const nytEvent = ()=>{
-      resetForm();
-      router.push("/vaerkarkiv")
-    }
+  //opret arrangement
+  const nytEvent = () => {
+    resetForm();
+    router.push("/vaerkarkiv");
+  };
 
   // Mål kort og container
   useEffect(() => {
@@ -65,8 +65,6 @@ const ListKladder = ({ art }) => {
   }, []);
 
   const maxIndex = Math.max(kladderMedVaerker.length - visibleCards, 0);
-
-
 
   return (
     <div className="px-4 mb-10">
@@ -128,7 +126,7 @@ const ListKladder = ({ art }) => {
 
 export default ListKladder;
 
-//DOKUMENTATION BRUGT 
+//DOKUMENTATION BRUGT
 
 //filter boolean
 //https://michaeluloth.com/javascript-filter-boolean/

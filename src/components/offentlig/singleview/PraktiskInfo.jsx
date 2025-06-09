@@ -1,4 +1,10 @@
-import Ramme from "@/components/global/Ramme";
+// Import fra react og egne components
+import dynamic from "next/dynamic";
+
+const Ramme = dynamic(() => import("@/components/global/Ramme"), {
+  ssr: false, // Kun client-side
+  loading: () => null, // Evt. vis en spinner hvis ønsket
+});
 
 const PraktiskInfo = ({ event }) => {
   const ledigeBilletter = event.totalTickets - event.bookedTickets;

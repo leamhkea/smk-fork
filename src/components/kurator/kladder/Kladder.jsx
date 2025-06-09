@@ -1,11 +1,18 @@
 "use client";
 
+// Import fra react og egne components
+import dynamic from "next/dynamic";
+
+const PopUP = dynamic(() => import("../global/PopUp"), {
+  ssr: false, // Kun client-side
+  loading: () => null, // Evt. vis en spinner hvis ønsket
+});
+
 //imports af egne komponenter
 import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import SecondaryButton from "@/components/global/buttons/SecondaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import { PublicerServer } from "../opretArrangement/PublicerServer";
-import PopUP from "../global/PopUp";
 import { getEvents } from "@/store/artworkUtils";
 
 //imports udefra
@@ -17,8 +24,12 @@ const Kladder = ({ event, vaerk }) => {
   //zustand store imports
   const sletInputValue = useArtworkStore((state) => state.sletInputValue);
   const { savedEvents } = useArtworkStore.getState();
-  const loadKladdeTilRedigering = useArtworkStore((state) => state.loadKladdeTilRedigering);
-  const updatePublishedEvents = useArtworkStore((state)=>state.updatePublishedEvents);
+  const loadKladdeTilRedigering = useArtworkStore(
+    (state) => state.loadKladdeTilRedigering
+  );
+  const updatePublishedEvents = useArtworkStore(
+    (state) => state.updatePublishedEvents
+  );
 
   //router import
   const router = useRouter();
@@ -37,7 +48,6 @@ const Kladder = ({ event, vaerk }) => {
       updatePublishedEvents(nyeEvents);
       sletInputValue(kladde.id);
       setVisPopUpPublicer(false);
-      
     }
   };
 
@@ -84,7 +94,7 @@ const Kladder = ({ event, vaerk }) => {
           Slet kladde
         </button>
       </div>
-      
+
       {/* popUp til at sikre at brugeren vil slette arrangement */}
       {visPopUpDelete && (
         <PopUP>
@@ -104,7 +114,9 @@ const Kladder = ({ event, vaerk }) => {
         <PopUP>
           Er du sikker på, du vil publicere denne kladde? <br />
           Denne handling kan ikke fotrydes
-          <p className="text-red-500 text-sm">OBS: Der går et øjeblik før eventet er synlig efter publicering.</p>
+          <p className="text-red-500 text-sm">
+            OBS: Der går et øjeblik før eventet er synlig efter publicering.
+          </p>
           <div className="flex gap-5">
             <SecondaryButton onClick={confirmPublicering}>Ja</SecondaryButton>
             <PrimaryButton onClick={() => setVisPopUpPublicer(false)}>
