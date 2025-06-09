@@ -10,28 +10,31 @@ const ListCard = ({ event, art }) => {
     : [];
 
   return (
-    <ScrollFlow>
-    <Link href={`/arrangementer/${event.id}`}>
-      {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
-      <li className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]">
-        <div className="w-full h-80 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
-          {matchedArtworks?.[0]?.image_thumbnail && (
-            <Image
-              alt="artwork"
-              src={matchedArtworks[0].image_thumbnail}
-              width={200}
-              height={200}
-              className="object-contain w-full h-auto"
-            />
-          )}
-        </div>
+    <li>
+      <ScrollFlow>
+        <Link
+          href={`/arrangementer/${event.id}`}
+          className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]"
+        >
+          {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
+          <div className="w-full h-80 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
+            {matchedArtworks?.[0]?.image_thumbnail && (
+              <Image
+                alt="artwork"
+                src={matchedArtworks[0].image_thumbnail}
+                width={200}
+                height={200}
+                className="object-contain w-full h-auto"
+              />
+            )}
+          </div>
 
-        <h3>{event.title}</h3>
-        <p>{event.date}</p>
-        <PrimaryButton>Læs mere</PrimaryButton>
-      </li>
-    </Link>
-    </ScrollFlow>
+          <h3>{event.title}</h3>
+          <p>{event.date}</p>
+          <PrimaryButton>Læs mere</PrimaryButton>
+        </Link>
+      </ScrollFlow>
+    </li>
   );
 };
 
