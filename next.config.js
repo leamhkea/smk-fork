@@ -18,6 +18,8 @@
 
 // module.exports = nextConfig;
 
+// hej
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
