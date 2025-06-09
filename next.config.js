@@ -22,6 +22,14 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
+  webpack(config, { dev, isServer }) {
+    if (!dev && !isServer) {
+      // Sæt source map optioner for produktion client build
+      config.devtool = "source-map"; // sikrer fuld source map inkl. sourcesContent
+    }
+    return config;
+  },
   images: {
     remotePatterns: [
       {
@@ -36,8 +44,6 @@ const nextConfig = {
       },
     ],
   },
-
-  productionBrowserSourceMaps: true,
   rewrites: async () => {
     if (process.env.VERCEL_ENV === "production") {
       return [

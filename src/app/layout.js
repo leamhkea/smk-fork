@@ -8,16 +8,12 @@ import Footer from "@/components/global/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Head from "next/head";
 
 export const metadata = {
   title: "SMK - Statens Museum for Kunst",
   description: "SMK arrangement side",
-};
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
+  viewport: "width=device-width, initial-scale=1",
+  charset: "UTF-8",
 };
 
 export default function RootLayout({ children }) {
