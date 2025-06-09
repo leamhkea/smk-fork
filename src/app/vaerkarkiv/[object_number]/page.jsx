@@ -4,7 +4,6 @@ const SingleCard = dynamic(
   () => import("@/components/offentlig/singleview/SingleCard"),
   {
     loading: () => <p>Loading...</p>,
-    ssr: false,
   }
 );
 
