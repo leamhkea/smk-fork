@@ -17,9 +17,9 @@ const PraktiskInfo = ({ event }) => {
           <h2 className="pb-2">Lokation</h2>
           <p>
             Adressen for arrangementet på Statens Museum for Kunst er
-            {event.location.address}
+            <span className="px-1">{event.location.address}</span>
             og foregår på lokationen
-            {event.location.name}.
+            <span className="pl-1">{event.location.name}</span>.
           </p>
         </div>
 
@@ -28,8 +28,8 @@ const PraktiskInfo = ({ event }) => {
           <h2 className="pb-2">Dato</h2>
           <p>
             Arrangementet kommer til at foregå d.
-            {event.date}
-            fra kl. 12.00 – 16.00, hvortil der tilbydes drikkelse og snacks.
+            <span className="px-1">{event.date}</span>
+            fra kl. 12.00 - 16.00, hvortil der tilbydes drikkelse og snacks.
           </p>
         </div>
 
@@ -37,10 +37,9 @@ const PraktiskInfo = ({ event }) => {
         <div>
           <h2 className="pb-2">Ledige billetter</h2>
           <p>
-            Der er
-            {ledigeBilletter}
+            Der er <span className="px-1">{ledigeBilletter}</span>
             billetter tilbage til arrangementet. Der tilbydes i alt op til
-            {event.totalTickets}
+            <span className="px-1">{event.totalTickets}</span>
             gæster.
           </p>
         </div>

@@ -9,8 +9,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Hej her
-
 export const metadata = {
   title: "SMK - Statens Museum for Kunst",
   description: "SMK arrangement side",

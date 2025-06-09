@@ -67,16 +67,16 @@ const VaerkPopup = ({ artwork, onClose }) => {
           <div>
             <h3 className="text-center pb-2">{artwork.titles?.[0]?.title}</h3>
             <p>
-              Kunstneren
-              {artwork.artist}
+              Kunstneren <span className="px-1">{artwork.artist}</span>
               krearede kunstværket d.
-              {artwork.acquisition_date_precision}.
+              <span className="pl-1">{artwork.acquisition_date_precision}</span>
+              .
             </p>
             <p>
               Kunstværkets type er et
-              {artwork.object_names[0]?.name}
+              <span className="px-1">{artwork.object_names[0]?.name}</span>
               og findes i afdelingen
-              {artwork.responsible_department}.
+              <span className="pl-1">{artwork.responsible_department}</span>.
             </p>
           </div>
 

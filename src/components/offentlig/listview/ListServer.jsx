@@ -1,13 +1,13 @@
 import ListClient from "./ListClient";
 
-// ListServer er en asynkron komponent. async betyder, at man arbejder med asynkrone operationer (f.eks. at hente data fra en API).
+// async: Man arbejder med asynkrone operationer (f.eks. at hente data fra en API).
+// await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.
+// fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til API.
+
 const ListServer = async () => {
-  // await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.
-  // fetch: Bruges til at sende en HTTP-anmodning til en API. Her sendes en GET-anmodning til API.
   const [event, smkData] = await Promise.all([
     //Promise all for samle fetch i en.
     fetch("https://async-exhibit-server-rmug.onrender.com/events"),
-
     fetch(
       "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
     ),
@@ -37,49 +37,24 @@ const ListServer = async () => {
   const completeArtworks = [...smk.items, ...missingArtworks];
 
   // Herunder laves const til alle lokationer, som bliver filtreret
-  const kobenhavn = events.filter((event) =>
-    event.location?.address.includes("København")
-  );
-  const aarhus = events.filter((event) =>
-    event.location?.address.includes("Aarhus")
-  );
-  const odense = events.filter((event) =>
-    event.location?.address.includes("Odense")
-  );
-  const aalborg = events.filter((event) =>
-    event.location?.address.includes("Aalborg")
-  );
-  const esbjerg = events.filter((event) =>
-    event.location?.address.includes("Esbjerg")
-  );
-  const koge = events.filter((event) =>
-    event.location?.address.includes("Køge")
-  );
-  const silkeborg = events.filter((event) =>
-    event.location?.address.includes("Silkeborg")
-  );
-  const lyngby = events.filter((event) =>
-    event.location?.address.includes("Lyngby")
-  );
-  const holstebro = events.filter((event) =>
-    event.location?.address.includes("Holstebro")
-  );
+  const filterByer = (byer) =>
+    events.filter((ev) => ev.location?.address.includes(byer));
 
   return (
     <div>
       <ListClient
         // Herunder bliver const lokationerne sendt afsted som props
         events={events}
-        kobenhavn={kobenhavn}
-        aarhus={aarhus}
-        odense={odense}
-        aalborg={aalborg}
-        esbjerg={esbjerg}
-        koge={koge}
-        silkeborg={silkeborg}
-        lyngby={lyngby}
-        holstebro={holstebro}
         art={completeArtworks}
+        kobenhavn={filterByer("København")}
+        aarhus={filterByer("Aarhus")}
+        odense={filterByer("Odense")}
+        aalborg={filterByer("Aalborg")}
+        esbjerg={filterByer("Esbjerg")}
+        koge={filterByer("Køge")}
+        silkeborg={filterByer("Silkeborg")}
+        lyngby={filterByer("Lyngby")}
+        holstebro={filterByer("Holstebro")}
       />
     </div>
   );
