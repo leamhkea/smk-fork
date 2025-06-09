@@ -27,13 +27,13 @@ const VaerkerListClient = ({ artData, events }) => {
     if (artworks.length === 0 && artData.length > 0) {
       setArtworks(set, artData);
     }
-  }, [artData]);
+  }, [artData]); //tilføjer data-sorteringen fra utils af artworks
 
   useEffect(() => {
     if (events?.length) {
       updatePublishedEvents(events);
     }
-  }, [events]);
+  }, [events]); //setter published events efter get-requesten
 
   return (
     <div className="flex flex-col gap-4 mt-0 mb-8">
