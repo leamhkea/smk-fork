@@ -40,16 +40,6 @@ const Header = () => {
     setShowKurvMenu(false);
   });
 
-  // Laver const til at vise popover menuer for KURATOR (gemte værker)
-  const [showGemteVaerker, setShowGemteVaerker] = useState(false);
-
-  // Laver en ref til gemteværker-menuen
-  const gemteVaerkerRef = useRef(null);
-
-  useClickAway(gemteVaerkerRef, () => {
-    setShowGemteVaerker(false);
-  });
-
   // Laver en ref til gemteværker-menuen
   const sideMenuRef = useRef(null);
 
