@@ -5,17 +5,17 @@ import { motion } from "framer-motion";
 const Ramme = ({ className = "", style = {}, children }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0,
   });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ width: "5%", x: "100%" }}
-      animate={inView ? { width: "100%", x: 0 } : {}}
+      initial={{ scaleX: 0, opacity: 0 }}
+      animate={inView ? { scaleX: 1, opacity: 1 } : {}}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      style={style}
-      className={`relative p-10 mx-auto overflow-hidden ${className}`}
+      style={{ ...style, transformOrigin: "right" }}
+      className={`inline-block origin-right p-10 px-50 mx-auto overflow-hidden ${className}`}
     >
       {children}
     </motion.div>
