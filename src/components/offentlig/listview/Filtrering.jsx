@@ -38,6 +38,7 @@ const Filtrering = ({ events }) => {
     <div className="flex justify-end gap-8 mb-15">
       {/* e er et change event parameter, lytter på ændringer (syntaktting) */}
       <select
+        aria-label="Vælg arrangement"
         value={allFilters.title}
         onChange={(e) => filteredValue("title", e.target.value)}
       >
@@ -58,6 +59,7 @@ const Filtrering = ({ events }) => {
       </select>
 
       <select
+      aria-label="Vælg dato"
         value={allFilters.date}
         onChange={(e) => filteredValue("date", e.target.value)}
       >
@@ -70,7 +72,7 @@ const Filtrering = ({ events }) => {
       </select>
 
       {/* Button til at nulstille alle filtre, og få alle arrangementer vist igen */}
-      <button
+      <button aria-label="nultil filtre"
         className="mt-1 ml-6 hover:text-red-600"
         onClick={() => setFilter({ title: "", date: "" })}
       >
