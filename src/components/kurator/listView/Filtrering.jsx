@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 const Filtrering = ({ artData }) => {
   //zustand import
   const { setFilter } = useArtworkStore();
+  const {gemteVaerker} = useArtworkStore();
 
   //useState
   const [kunstnere, setKunstnere] = useState([]);
   const [tidsperioder, setTidsperioder] = useState([]);
   const [nationaliteter, setNationaliteter] = useState([]);
   const [kunsttyper, setKunsttyper] = useState([]);
+  const [valgteVaerker, setValgteVaerker] = useState([]);
 
   useEffect(() => {
     const artistSet = new Set(); //opretter en ny item til options uden at skabe dublikanter
@@ -50,6 +52,7 @@ const Filtrering = ({ artData }) => {
     setTidsperioder([...periodSet].sort());
     setNationaliteter([...nationalitySet].sort());
     setKunsttyper([...typeSet].sort());
+    setValgteVaerker([...gemteVaerker]);
   }, [artData]);
 
   //opdaterer ét flterfelt ad gangen i zustand, bruges til onChange
@@ -101,6 +104,14 @@ const Filtrering = ({ artData }) => {
             </option>
           ))}
         </select>
+
+        {/* gemte værker */}
+        <button
+          className="hover:scale-105 transition-all duration-300"
+          onClick={() => filtreretValue("inventarnr", valgteVaerker.map(v => v.inventarnummer))}
+        >
+          Vis valgte værker
+        </button>
       </div>
     </div>
   );

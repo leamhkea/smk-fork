@@ -17,6 +17,7 @@ const useArtworkStore = create(
         period: "",
         nationality: "",
         type: "",
+        inventarnr: "",
       },
       filteredArtworks: [], //defineret til at bruge til load-more
 
@@ -37,7 +38,7 @@ const useArtworkStore = create(
             item.production_date?.some((p) => p.period === allFilters.period); //filtrerer efter mindst ét match
 
           const vaelgNationalitet =
-            !allFilters.nationality ||
+            !allFilters.nationality || // Hvis intet filter er sat, vis alt ellers vis filteret
             item.production?.some(
               (n) => n.creator_nationality === allFilters.nationality
             );
@@ -46,8 +47,13 @@ const useArtworkStore = create(
             !allFilters.type ||
             item.object_names?.some((n) => n.name === allFilters.type);
 
+            const vaelgVisteVaerker =
+              !allFilters.inventarnr ||
+              allFilters.inventarnr.includes(item.inventarnummer);
+
+
           return (
-            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart
+            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart && vaelgVisteVaerker
           );
         });
 
