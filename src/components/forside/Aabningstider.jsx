@@ -7,9 +7,9 @@ const Aabningstider = () => {
     <ScrollFlow>
     <section className="flex flex-col md:flex-row gap-5 md:gap-20">
       <SlideRight>
-      <h1 className="thin">Åbningstider</h1>
+      <h1 className="thin pl-10">Åbningstider</h1>
       </SlideRight>
-      <Ramme className="border-(--blue) border-[5px]">
+      <Ramme className="border-(--blue) border-[5px] md:py-10">
         <article>
           <div className="flex flex-col justify-end gap-5">
             <ul className="flex flex-col gap-2">
