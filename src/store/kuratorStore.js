@@ -17,7 +17,6 @@ const useArtworkStore = create(
         period: "",
         nationality: "",
         type: "",
-        inventarnr: "",
       },
       filteredArtworks: [], //defineret til at bruge til load-more
 
@@ -47,13 +46,8 @@ const useArtworkStore = create(
             !allFilters.type ||
             item.object_names?.some((n) => n.name === allFilters.type);
 
-            const vaelgVisteVaerker =
-              !allFilters.inventarnr ||
-              allFilters.inventarnr.includes(item.inventarnummer);
-
-
           return (
-            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart && vaelgVisteVaerker
+            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart 
           );
         });
 
