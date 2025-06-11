@@ -129,7 +129,7 @@ const Inputs = ({ events, art }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-10">
+    <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-5">
       <h2 className="thin">Opret arrangement</h2>
 
       {/* TITEL */}
@@ -267,7 +267,7 @@ const Inputs = ({ events, art }) => {
             {gemteVaerker.length} / {maxArtworks} værker valgt
           </p>
         )}
-        <span className="grid gap-2">
+        {/* <span className="grid gap-2">
             {gemteVaerker
               .filter((art) => art && art.object_number)
               .map((art) => (
@@ -282,7 +282,7 @@ const Inputs = ({ events, art }) => {
                   </button>
                 </div>
               ))}
-          </span>
+          </span> */}
 
 
         {/* Skjult input til validering */}

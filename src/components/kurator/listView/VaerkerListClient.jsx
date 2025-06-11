@@ -23,9 +23,6 @@ const VaerkerListClient = ({ artData, events }) => {
   const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
   const gemteVaerker = useArtworkStore((state)=>state.gemteVaerker);
 
-  //useState
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     if (artworks.length === 0 && artData.length > 0) {
       setArtworks(set, artData);
@@ -71,12 +68,12 @@ const VaerkerListClient = ({ artData, events }) => {
       </div>
 
       <div className="grid grid-cols-[2fr_3fr] md:grid-cols-[2fr_5fr] h-screen overflow-hidden">
-        <div className="min-h-full max-w-80 overflow-y-auto p-4">
+        <div className="min-h-full max-w-80 overflow-hidden p-4">
           <Inputs art={artData} events={events}>Opret arrangement</Inputs>
         </div>
 
         <div className="h-full overflow-y-auto">
-          <div className="flex flex-col min-h-full px-4 py-6">
+          <div className="flex flex-col min-h-full px-4 pb-10">
           {visteVaerker.length >0 ? (
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {visteVaerker.map((art) => (
@@ -92,25 +89,28 @@ const VaerkerListClient = ({ artData, events }) => {
               <h3 className="text-gray-500 text-center p-10">Ingen kunstværker fundet</h3>
             </div>
             }
-
-            {/* viser herunder kun knappen hvis der er flere værker at indlæse ellers display none */}
-            {hasMore(get, visKunValgte) && (
-              <div className="flex mt-8 m-auto justify-center">
-                <PrimaryButton
-                  onClick={() => {
-                    setLoading(true);
-                    loadMoreArtworks(get, set);
-                    setLoading(false);
-                  }}
-                  disabled={loading}
-                >
-                  {loading ? "Indlæser værker..." : "Vis flere værker"}
-                </PrimaryButton>
-              </div>
-            )}
           </div>
         </div>
       </div>
+
+            {hasMore(get, visKunValgte) && (
+                <div className="flex justify-center">
+                <div className="m-auto flex items-center">
+                <PrimaryButton
+                    onClick={() => {
+                      loadMoreArtworks(get, set);
+                    }}
+                  >
+                    Vis {visteVaerker.length} ud af {visKunValgte 
+                      ? gemteVaerker.length 
+                      : get().filteredArtworks.length > 0 
+                        ? get().filteredArtworks.length 
+                        : get().artworks.length
+                    } værker
+                  </PrimaryButton>
+                  </div>
+                  </div>
+            )}
     </div>
   );
 };
