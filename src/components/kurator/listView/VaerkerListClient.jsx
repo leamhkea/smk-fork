@@ -21,6 +21,7 @@ const VaerkerListClient = ({ artData, events }) => {
   const set = useArtworkStore.setState;
   const { artworks, visibleArtworks } = useArtworkStore();
   const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
+  const gemteVaerker = useArtworkStore((state)=>state.gemteVaerker);
 
   //useState
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,11 @@ const VaerkerListClient = ({ artData, events }) => {
       updatePublishedEvents(events);
     }
   }, [events]); //setter published events efter get-requesten
+
+  //VIS KUN GEMTE VÆRKER
+  const [visKunValgte, setVisKunValgte] = useState(false)
+
+  const visteVaerker = visKunValgte ? gemteVaerker : visibleArtworks;
 
 
   return (
@@ -53,7 +59,14 @@ const VaerkerListClient = ({ artData, events }) => {
       </div>
 
       <div className="mt-10">
+        <div className="flex items-baseline gap-2 md:gap-10">
         <Filtrering artData={artData} />
+            <div onClick={() => setVisKunValgte((prev) => !prev)}>
+              <button className="hover:underline">
+                {visKunValgte ? 'Vis alle værker' : 'Vis valgte værker'}
+              </button>
+            </div>
+        </div>
         <hr />
       </div>
 
@@ -64,9 +77,9 @@ const VaerkerListClient = ({ artData, events }) => {
 
         <div className="h-full overflow-y-auto">
           <div className="flex flex-col min-h-full px-4 py-6">
-          {visibleArtworks.length >0 ? (
+          {visteVaerker.length >0 ? (
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {visibleArtworks.map((art) => (
+              {visteVaerker.map((art) => (
                 <VaerkerListCard
                   key={art.object_number}
                   events={events}
@@ -81,7 +94,7 @@ const VaerkerListClient = ({ artData, events }) => {
             }
 
             {/* viser herunder kun knappen hvis der er flere værker at indlæse ellers display none */}
-            {hasMore(get) && (
+            {hasMore(get, visKunValgte) && (
               <div className="flex mt-8 m-auto justify-center">
                 <PrimaryButton
                   onClick={() => {
