@@ -21,7 +21,6 @@ const VaerkerListClient = ({ artData, events }) => {
   const set = useArtworkStore.setState;
   const { artworks, visibleArtworks } = useArtworkStore();
   const updatePublishedEvents = useArtworkStore((state) => state.updatePublishedEvents);
-  const selectedDate = useArtworkStore((state) => state.selectedDate);
 
   //useState
   const [loading, setLoading] = useState(false);
@@ -37,6 +36,7 @@ const VaerkerListClient = ({ artData, events }) => {
       updatePublishedEvents(events);
     }
   }, [events]); //setter published events efter get-requesten
+
 
   return (
     <div className="flex flex-col gap-4 mt-0 mb-8">
@@ -64,14 +64,7 @@ const VaerkerListClient = ({ artData, events }) => {
 
         <div className="h-full overflow-y-auto">
           <div className="flex flex-col min-h-full px-4 py-6">
-            
-            {/* fejlmeddelelse til hvis brugeren ikke har valgt dato endnu */}
-            {!selectedDate && (
-              <p className="text-red-500 mt-1 pl-5">
-                Du skal vælge en dato før du kan vælge et kunstværk.
-              </p>
-            )}
-
+          {visibleArtworks.length >0 ? (
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {visibleArtworks.map((art) => (
                 <VaerkerListCard
@@ -81,6 +74,11 @@ const VaerkerListClient = ({ artData, events }) => {
                 />
               ))}
             </ul>
+            ):
+            <div>
+              <h3 className="text-gray-500 text-center p-10">Ingen kunstværker fundet</h3>
+            </div>
+            }
 
             {/* viser herunder kun knappen hvis der er flere værker at indlæse ellers display none */}
             {hasMore(get) && (
