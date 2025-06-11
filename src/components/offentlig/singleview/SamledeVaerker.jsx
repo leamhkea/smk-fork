@@ -92,16 +92,23 @@ export default function SamledeVaerker({ event, art }) {
   );
 }
 
+// Disse konstanter bruges til at definere farve og position i masken:
+
+// left og right = 0% og 100% → hele bredden
 const left = `0%`;
 const right = `100%`;
+
+// leftInset og rightInset = 20% og 80% → en zone inde fra kanten
 const leftInset = `20%`;
 const rightInset = `80%`;
-const transparent = `#0000`;
-const opaque = `#000`;
+
+// Masker fungerer omvendt af, hvad man måske tror: sort (opaque) = synligt, gennemsigtig (transparent) = skjult
+const transparent = `#0000`; // helt gennemsigtig
+const opaque = `#000`; // helt sort (synligt i mask)
 
 // Denne funktion styrer hvor maskeringen skal være
 function useScrollOverflowMask(scrollXProgress) {
-  const maskImage = useMotionValue(getMask(0));
+  const maskImage = useMotionValue(getMask(0)); // Start med fade i højre side
 
   useMotionValueEvent(scrollXProgress, "change", (value) => {
     const prev = scrollXProgress.getPrevious();
@@ -120,11 +127,14 @@ function useScrollOverflowMask(scrollXProgress) {
 // Returnerer CSS gradient-mask afhængig af position
 function getMask(position) {
   if (position === 0) {
+    // // Vi er scrollet helt til venstre – fade ud mod højre
     return `linear-gradient(90deg, ${opaque}, ${opaque} ${left}, ${opaque} ${rightInset}, ${transparent})`;
   }
   if (position === 1) {
+    // // Vi er helt til højre – fade ind fra venstre
     return `linear-gradient(90deg, ${transparent}, ${opaque} ${leftInset}, ${opaque} ${right}, ${opaque})`;
   }
+  // // Midt i scroll – fade begge sider
   return `linear-gradient(90deg, ${transparent}, ${opaque} ${leftInset}, ${opaque} ${rightInset}, ${transparent})`;
 }
 
