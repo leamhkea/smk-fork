@@ -62,7 +62,7 @@ const VaerkerListCard = ({ art, events }) => {
           <p className="text-sm">{art.object_names?.[0]?.name || "Ukendt kategori"}</p>
         </div>
 
-        <p className="thin">{art.acquisition_date_precision}</p>
+        <p className="thin">{art.production_date?.[0]?.period}</p>
 
         <PrimaryButton>Læs mere</PrimaryButton>
         </div>

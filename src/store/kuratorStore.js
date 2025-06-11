@@ -220,27 +220,7 @@ const useArtworkStore = create(
         //bruges ved onclick af opret-arrangement, så brugeren ikke forbliver i redigeringsmode
         resetForm: () => {
           set({
-            inputValue: {
-              title: "",
-              description: "",
-              date: "",
-              locationId: "",
-              curator: "",
-              artworkIds: [],
-              totalTickets: "",
-              bookedTickets: "",
-              location: {
-                locationId: "",
-                name: "",
-                address: "",
-                maxGuests: "",
-                maxArtworks: "",
-              },
-            },
             gemteVaerker: [],
-            selectedEventId: null,
-            selectedLocation: null,
-            selectedDate: null,
           });
         },
   
