@@ -41,7 +41,7 @@ const Hero = ({ art, events }) => {
             src={matchedArtworks[0].image_thumbnail}
             fill
             priority
-            className="object-cover w-full h-full z-0"
+            className="object-cover h-full z-0"
           />
         </motion.div>
       )}
