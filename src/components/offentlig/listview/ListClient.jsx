@@ -1,26 +1,9 @@
 "use client";
-import dynamic from "next/dynamic";
 
 import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 import ListKladder from "@/components/kurator/kladder/ListKladder";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
-
-// const EventSlider = dynamic(() => import("./EventSlider"), {
-//   ssr: false, // Kun client-side
-//   loading: () => null, // Evt. vis en spinner hvis ønsket
-// });
-
-// const Filtrering = dynamic(() => import("./Filtrering"), { ssr: false });
-// const ListKladder = dynamic(
-//   () => import("@/components/kurator/kladder/ListKladder"),
-//   { ssr: false }
-// );
-// const GoBackArrow = dynamic(
-//   () => import("@/components/global/buttons/GoBackArrow"),
-//   { ssr: false }
-// );
-
 import { useEffect } from "react";
 import { SignedIn } from "@clerk/nextjs";
 import useArrangementStore from "@/store/arrangementStore";

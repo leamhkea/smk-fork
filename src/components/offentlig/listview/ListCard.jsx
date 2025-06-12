@@ -16,19 +16,6 @@ const ListCard = ({ event, art }) => {
           href={`/arrangementer/${event.id}`}
           className="flex flex-col justify-between gap-5 p-5 text-center hover:scale-105 transition-all duration-300 h-full min-h-[100px]"
         >
-          {/* Sætter en min-heigt på li container, så der sikres en ensartet højde på alle cards uanset indholdet */}
-          {/* <div className="w-full h-80 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
-            {matchedArtworks?.[0]?.image_thumbnail && (
-              <Image
-                src={matchedArtworks[0].image_thumbnail}
-                alt="artwork"
-                width={200}
-                height={200}
-                layout="responsive"
-                className="object-contain"
-              />
-            )}
-          </div> */}
           <div
             className="w-full relative overflow-hidden border border-gray-300"
             style={{ paddingTop: "100%" }}
@@ -41,6 +28,7 @@ const ListCard = ({ event, art }) => {
                 objectFit="contain"
                 className="absolute top-0 left-0"
                 priority={false}
+                placeholder="blur"
               />
             )}
           </div>
