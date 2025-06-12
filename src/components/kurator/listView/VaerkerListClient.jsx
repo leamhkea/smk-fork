@@ -1,14 +1,13 @@
 "use client";
 //import af egne komponenter
+
 import PrimaryButton from "@/components/global/buttons/PrimaryButton";
+import useArtworkStore from "@/store/kuratorStore";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 import { loadMoreArtworks, setArtworks, hasMore } from "@/store/artworkUtils";
 
 import dynamic from "next/dynamic";
-const useArtworkStore = dynamic(() => import("@/store/kuratorStore"), {
-  ssr: false,
-  loading: () => <p>Indlæser dato...</p>,
-});
+
 const VaerkerListCard = dynamic(() => import("./VaerkerListCard"), {
   ssr: false,
   loading: () => <p>Indlæser dato...</p>,
