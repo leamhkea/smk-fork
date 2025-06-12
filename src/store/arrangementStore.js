@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-//  "version": "0.1.0",
 
 const useArrangementStore = create(
   persist(
