@@ -15,7 +15,7 @@ const Ramme = ({ className = "", style = {}, children }) => {
       animate={inView ? { scaleX: 1, opacity: 1 } : {}}
       transition={{ duration: 1.5, ease: "easeOut" }}
       style={{ ...style, transformOrigin: "right" }}
-      className={`inline-block origin-right p-10 px-50 mx-auto overflow-hidden ${className}`}
+      className={`inline-block origin-right md:px-50 px-10 py-5 mx-auto overflow-hidden ${className}`}
     >
       {children}
     </motion.div>

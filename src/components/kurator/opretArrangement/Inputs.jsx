@@ -10,6 +10,8 @@ import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import DeleteTrash from "@/components/global/ikoner/DeleteTrash";
+
 
 const Select = dynamic(() => import('react-select'), { ssr: false }); //til hyrdration fail
 
@@ -22,6 +24,7 @@ const Inputs = ({ events, art }) => {
   const saveKladde = useArtworkStore((state) => state.saveKladde);
   const setSelectedLocation = useArtworkStore((state) => state.setSelectedLocation);
   const setSelectedDate = useArtworkStore((state) => state.setSelectedDate);
+  const sletVaerk = useArtworkStore((state) => state.sletVaerk);
 
   //useRouter
   const router = useRouter();
@@ -126,7 +129,7 @@ const Inputs = ({ events, art }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-10">
+    <Form onSubmit={handleSubmit(gemKladde)} className="flex flex-col gap-5">
       <h2 className="thin">Opret arrangement</h2>
 
       {/* TITEL */}
@@ -264,13 +267,23 @@ const Inputs = ({ events, art }) => {
             {gemteVaerker.length} / {maxArtworks} værker valgt
           </p>
         )}
-        <span className="grid gap-2">
-          {gemteVaerker
-            .filter((art) => art && art.object_number)
-            .map((art) => (
-              <p key={art.object_number}>{art.titles?.[0]?.title}</p> //viser titlen på værket i stedet for object_number
-            ))}
-        </span>
+        {/* <span className="grid gap-2">
+            {gemteVaerker
+              .filter((art) => art && art.object_number)
+              .map((art) => (
+                <div key={art.object_number} className="flex items-center justify-between gap-5 py-2">
+                  <p className="flex-1">{art.titles?.[0]?.title}</p>
+                  <button
+                    aria-label="Slet valgte værk"
+                    className="hover:text-red-600"
+                    onClick={() => sletVaerk(art.object_number)}
+                  >
+                    <DeleteTrash size={24} />
+                  </button>
+                </div>
+              ))}
+          </span> */}
+
 
         {/* Skjult input til validering */}
         <input
@@ -286,9 +299,13 @@ const Inputs = ({ events, art }) => {
               if (count === 0) return "Du skal vælge mindst ét kunstværk";
             },
           })}
+          
         />
-        <p className="text-red-600 text-sm">{errors.artworkCount?.message}</p>
+        <p className="text-red-500 text-sm">{errors.artworkCount?.message}</p>
+
       </div>
+
+
 
       <div className="flex justify-center gap-10">
         <PrimaryButton aria-label="Gem kladde" type="submit">Gem kladde</PrimaryButton>

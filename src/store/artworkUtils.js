@@ -25,6 +25,7 @@ export const setArtworks = (set, newArtworks) => { //arrays defineret i zustand
     artworks: newArtworks, //tilføj flere
     initialArtworks: newArtworks, //de første vist på siden
     filteredArtworks: newArtworks,//til filtrering
+    visteVaerker: newArtworks, //til vis gemte værker
     visibleArtworks: newArtworks.slice(0, 30), //vis kun 30
     offset: 30, //vis de næste 30
   });
@@ -47,7 +48,9 @@ export const loadMoreArtworks = (get, set) => {
 };
 
 
-export const hasMore = (get) => { //bruges til kun at vise knappen hvis der er flere at load
+export const hasMore = (get, visKunValgte = false) => { //bruges til kun at vise knappen hvis der er flere at load
+  if (visKunValgte) return false; //bruges til vis kun gemte værker
+
   const { filteredArtworks, artworks, visibleArtworks, allFilters } = get();
 
   const isFiltered = Object.values(allFilters).some((value) => value !== "");

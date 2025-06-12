@@ -37,7 +37,7 @@ const useArtworkStore = create(
             item.production_date?.some((p) => p.period === allFilters.period); //filtrerer efter mindst ét match
 
           const vaelgNationalitet =
-            !allFilters.nationality ||
+            !allFilters.nationality || // Hvis intet filter er sat, vis alt ellers vis filteret
             item.production?.some(
               (n) => n.creator_nationality === allFilters.nationality
             );
@@ -47,7 +47,7 @@ const useArtworkStore = create(
             item.object_names?.some((n) => n.name === allFilters.type);
 
           return (
-            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart
+            vaelgKunstner && vaelgPeriode && vaelgNationalitet && vaelgKunstart 
           );
         });
 
@@ -220,27 +220,7 @@ const useArtworkStore = create(
         //bruges ved onclick af opret-arrangement, så brugeren ikke forbliver i redigeringsmode
         resetForm: () => {
           set({
-            inputValue: {
-              title: "",
-              description: "",
-              date: "",
-              locationId: "",
-              curator: "",
-              artworkIds: [],
-              totalTickets: "",
-              bookedTickets: "",
-              location: {
-                locationId: "",
-                name: "",
-                address: "",
-                maxGuests: "",
-                maxArtworks: "",
-              },
-            },
             gemteVaerker: [],
-            selectedEventId: null,
-            selectedLocation: null,
-            selectedDate: null,
           });
         },
   
