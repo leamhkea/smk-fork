@@ -59,7 +59,7 @@ const Filtrering = ({ events }) => {
       </select>
 
       <select
-      aria-label="Vælg dato"
+        aria-label="Vælg dato"
         value={allFilters.date}
         onChange={(e) => filteredValue("date", e.target.value)}
       >
@@ -72,7 +72,8 @@ const Filtrering = ({ events }) => {
       </select>
 
       {/* Button til at nulstille alle filtre, og få alle arrangementer vist igen */}
-      <button aria-label="nultil filtre"
+      <button
+        aria-label="nultil filtre"
         className="mt-1 ml-6 hover:text-red-600"
         onClick={() => setFilter({ title: "", date: "" })}
       >
