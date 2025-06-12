@@ -8,21 +8,19 @@ import { loadMoreArtworks, setArtworks, hasMore } from "@/store/artworkUtils";
 
 import dynamic from "next/dynamic";
 
-const VaerkerListCard = dynamic(() => import("./VaerkerListCard"), {
-  ssr: false,
-  loading: () => <p>Indlæser dato...</p>,
-});
+import VaerkerListCard from "./VaerkerListCard";
+
 const Inputs = dynamic(() => import("../opretArrangement/Inputs"), {
   ssr: false,
-  loading: () => <p>Indlæser dato...</p>,
+  loading: () => <p>Indlæser inputs...</p>,
 });
 const Filtrering = dynamic(() => import("./Filtrering"), {
   ssr: false,
-  loading: () => <p>Indlæser dato...</p>,
+  loading: () => <p>Indlæser filtrering...</p>,
 });
 const SearchBar = dynamic(() => import("./SearchBar"), {
   ssr: false,
-  loading: () => <p>Indlæser dato...</p>,
+  loading: () => <p>Indlæser søgning...</p>,
 });
 
 //imports udefra

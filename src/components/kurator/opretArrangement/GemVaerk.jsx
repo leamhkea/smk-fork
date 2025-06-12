@@ -68,17 +68,17 @@ const GemVaerk = ({ vaerk, events }) => {
           <br />
           Vil du slette {vaerk.titles?.[0]?.title || "ukendt titel"}?
           <div className="flex gap-5 mt-4">
-            <PrimaryButton
+            <SecondaryButton
               onClick={() => {
                 sletVaerk(vaerk.object_number);
                 setVisPopUpDelete(false);
               }}
             >
               Ja
-            </PrimaryButton>
-            <SecondaryButton onClick={() => setVisPopUpDelete(false)}>
-              Nej
             </SecondaryButton>
+            <PrimaryButton onClick={() => setVisPopUpDelete(false)}>
+              Nej
+            </PrimaryButton>
           </div>
         </PopUP>
       )}
