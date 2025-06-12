@@ -1,5 +1,6 @@
 import { SignOutButton } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const SideMenu = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,14 +16,14 @@ const SideMenu = () => {
     >
       <ul className="p-10 overflow-y-auto grid gap-8">
         <li>
-          <a href="/profil">Min Profil</a>
+          <Link href="/profil">Min Profil</Link>
           <hr />
         </li>
         <li>
-          <a href="/arrangementer">Mine kladder</a>
+          <Link href="/arrangementer">Mine kladder</Link>
         </li>
         <li>
-          <a href="/vaerkarkiv">Opret arrangement</a>
+          <Link href="/vaerkarkiv">Opret arrangement</Link>
         </li>
         <li>
           <hr className="mb-2" />
