@@ -3,10 +3,12 @@
 // Import fra react og egne components
 import dynamic from "next/dynamic";
 
-const VaerkPopup = dynamic(() => import("./VaerkPopup"), {
-  ssr: false, // Kun client-side
-  loading: () => null, // Evt. vis en spinner hvis ønsket
-});
+import VaerkPopup from "./VaerkPopup";
+
+// const VaerkPopup = dynamic(() => import("./VaerkPopup"), {
+//   ssr: false, // Kun client-side
+//   loading: () => null, // Evt. vis en spinner hvis ønsket
+// });
 
 import Image from "next/image";
 import { useRef, useState } from "react";
