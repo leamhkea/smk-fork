@@ -36,7 +36,7 @@ const SingleCard = ({ event, art }) => {
 
         {/* ================== TILFØJ EVENT TIL KURV ================== */}
         <div className="m-auto">
-          <ButtonAddBillet billet={event} art={art} />
+          <ButtonAddBillet billet={event} art={art} antal={event.antal} />
         </div>
 
         {/* ================== PRAKTISK INFORMATION =================== */}

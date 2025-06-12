@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const ButtonAddBillet = ({ billet, art }) => {
   // Kalder på nødvendige funktioner fra store
-  const { addBillet, incAntal: updateAntal, billetter } = useBookingStore();
+  const { addBillet, incAntal, billetter } = useBookingStore();
 
   // Hvis billet.artworkIds findes, filtreres art-arrayet for at finde artworks med tilsvarende object_number
   const matchedArtworks = billet.artworkIds?.length
@@ -16,32 +16,38 @@ const ButtonAddBillet = ({ billet, art }) => {
       )
     : [];
 
+  // Laver const til at udregne antal ledige billetter
+  const ledigeBilletter = billet.totalTickets - billet.bookedTickets;
+
   // Funktion til at tilføje billet til kurv
-  const addToKurv = (billet) => {
-    toast.success("Billetten er tilføjet til kurven!");
+  const addToKurv = () => {
+    const eksisterendeBillet = billetter.find((bln) => bln.id === billet.id);
 
-    // Tjekker først, om der allerede er billetter i kurven
-    if (billetter.length) {
-      // Tjekker om den specifikke billet findes baseret på id
-      const duplicate = billetter.find((el) => el.id === billet.id);
+    // Først: tjek om der overhovedet er nogen billetter tilbage
+    if (ledigeBilletter === 0) {
+      toast.error("Der er ikke flere ledige billetter til dette arrangement.");
+      return;
+    }
 
-      // Hvis = Kalder funktionen updateAntal med billetens id og øger antallet (antal) af den billet i kurven.
-      if (duplicate) {
-        updateAntal(billet.id);
-
-        // Ellers = Tilføjes den nye billet til kurven med et antal sat til 1
+    // Hvis billetten allerede findes i kurven
+    if (eksisterendeBillet) {
+      if (eksisterendeBillet.antal < ledigeBilletter) {
+        incAntal(billet.id);
+        toast.success("En billet mere er tilføjet til kurven!");
       } else {
-        addBillet({ ...billet, antal: 1, matchedArtworks });
+        toast.error(
+          "Der er ikke flere ledige billetter til dette arrangement."
+        );
       }
-
-      // Hvis kurven er tom tilføjes billet til kurven direkte med antal sat til 1 og med matchedArtworks
     } else {
+      // Hvis billetten ikke findes i kurven, tilføjes den
       addBillet({ ...billet, antal: 1, matchedArtworks });
+      toast.success("Billetten er tilføjet til kurven!");
     }
   };
 
   return (
-    <SecondaryButton onClick={() => addToKurv(billet)}>
+    <SecondaryButton onClick={addToKurv}>
       Book billet til arrangement
     </SecondaryButton>
   );
