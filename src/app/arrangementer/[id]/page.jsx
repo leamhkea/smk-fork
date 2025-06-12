@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const SingleCard = dynamic(
   () => import("@/components/offentlig/singleview/SingleCard"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => <p className="min-h-screen">Loading...</p>,
   }
 );
 

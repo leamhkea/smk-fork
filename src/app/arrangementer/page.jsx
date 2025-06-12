@@ -1,4 +1,11 @@
-import ListServer from "@/components/offentlig/listview/ListServer";
+import dynamic from "next/dynamic";
+
+const ListServer = dynamic(
+  () => import("@/components/offentlig/listview/ListServer"),
+  {
+    loading: () => <p className="min-h-screen">Loading...</p>,
+  }
+);
 
 const Arrangementer = () => {
   return (
