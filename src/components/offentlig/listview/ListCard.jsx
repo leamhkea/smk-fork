@@ -28,7 +28,6 @@ const ListCard = ({ event, art }) => {
                 objectFit="contain"
                 className="absolute top-0 left-0"
                 priority={false}
-                placeholder="blur"
               />
             )}
           </div>
