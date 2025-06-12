@@ -83,10 +83,10 @@ const EventSlider = ({ title, events, art }) => {
                 // Måle ét kort (det første) for at beregne, hvor mange der kan vises ad gangen i slideren
                 ref={i === 0 ? cardRef : null}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2 box-border"
-              > 
-              <ul>
-              <ListCard event={event} art={art} />
-              </ul>
+              >
+                <ul>
+                  <ListCard event={event} art={art} />
+                </ul>
               </div>
             ))}
           </div>

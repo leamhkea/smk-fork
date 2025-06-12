@@ -20,11 +20,12 @@ const ListCard = ({ event, art }) => {
           <div className="w-full h-80 flex items-center border-1 border-gray-300 justify-center overflow-hidden">
             {matchedArtworks?.[0]?.image_thumbnail && (
               <Image
-                alt="artwork"
                 src={matchedArtworks[0].image_thumbnail}
+                alt="artwork"
                 width={200}
                 height={200}
-                className="object-contain w-full h-auto"
+                layout="responsive"
+                className="object-contain"
               />
             )}
           </div>
