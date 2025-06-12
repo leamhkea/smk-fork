@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
-
-const ListServer = dynamic(
-  () => import("@/components/offentlig/listview/ListServer"),
-  {
-    loading: () => <p>Loading...</p>,
-  }
-);
+import ListServer from "@/components/offentlig/listview/ListServer";
 
 const Arrangementer = () => {
   return (

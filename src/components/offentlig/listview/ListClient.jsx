@@ -1,6 +1,10 @@
 "use client";
-import EventSlider from "./EventSlider";
 import dynamic from "next/dynamic";
+
+const EventSlider = dynamic(() => import("./EventSlider"), {
+  ssr: false, // Kun client-side
+  loading: () => null, // Evt. vis en spinner hvis ønsket
+});
 
 const Filtrering = dynamic(() => import("./Filtrering"), { ssr: false });
 const ListKladder = dynamic(
