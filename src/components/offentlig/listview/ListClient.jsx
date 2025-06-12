@@ -1,12 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
+const Filtrering = dynamic(() => import("./Filtrering"), { ssr: false });
+const EventSlider = dynamic(() => import("./EventSlider"), { ssr: false });
+const ListKladder = dynamic(
+  () => import("@/components/kurator/kladder/ListKladder"),
+  { ssr: false }
+);
+const GoBackArrow = dynamic(
+  () => import("@/components/global/buttons/GoBackArrow"),
+  { ssr: false }
+);
+
 import { useEffect } from "react";
 import { SignedIn } from "@clerk/nextjs";
 import useArrangementStore from "@/store/arrangementStore";
-import ListKladder from "@/components/kurator/kladder/ListKladder";
-import EventSlider from "./EventSlider";
-import Filtrering from "./Filtrering";
-import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 
 const ListClient = (props) => {
   // Funktion til at sætte listen af arrangementer i global state

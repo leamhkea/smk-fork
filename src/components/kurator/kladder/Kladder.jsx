@@ -71,6 +71,7 @@ const Kladder = ({ event, vaerk }) => {
             width={200}
             height={200}
             className="object-cover max-w-full"
+            loading="lazy"
           />
         )}
       </div>

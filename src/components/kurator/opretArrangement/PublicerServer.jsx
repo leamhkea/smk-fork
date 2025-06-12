@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export async function PublicerServer(event) {
   const data = {
@@ -39,7 +39,6 @@ export async function PublicerServer(event) {
   } else {
     toast.success("Event publiceret!");
   }
-  
 
   return await res.json();
 }

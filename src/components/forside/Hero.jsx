@@ -13,34 +13,38 @@ const Hero = ({ art, events }) => {
       )
     : [];
 
-    //useRef
-    const containerRef = useRef(null);
+  //useRef
+  const containerRef = useRef(null);
 
-    // Scroll-progress i forhold til containeren
-    const { scrollYProgress } = useScroll({
-      target: containerRef,
-      offset: ["start start", "end start"],
-    });
-  
-    // Transformér scroll til y aksens bevægelse (parallax-delen)
-    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  // Scroll-progress i forhold til containeren
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Transformér scroll til y aksens bevægelse (parallax-delen)
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden -z-10">
+    <div
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden -z-10"
+    >
       {/* Baggrundsbillede */}
       {matchedArtworks?.[0]?.image_thumbnail && (
         <motion.div
-        style={{y}}
-        className="absolute inset-0 z-[-1] will-change-transform"
+          style={{ y }}
+          className="absolute inset-0 z-[-1] will-change-transform"
         >
-        <Image
-          alt="artwork"
-          src={matchedArtworks[0].image_thumbnail}
-          fill
-          priority
-          className="object-cover w-full h-full z-0"
-        />
-          </motion.div>
+          <Image
+            alt="artwork"
+            src={matchedArtworks[0].image_thumbnail}
+            fill
+            priority
+            className="object-cover w-full h-full z-0"
+            loading="lazy"
+          />
+        </motion.div>
       )}
       {/* Indhold ovenpå billedet */}
       <article className="relative flex flex-col z-0 justify-between gap-8 h-full p-8 text-white bg-black/50">

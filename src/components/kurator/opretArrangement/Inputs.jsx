@@ -3,17 +3,21 @@ import PrimaryButton from "@/components/global/buttons/PrimaryButton";
 import useArtworkStore from "@/store/kuratorStore";
 import useArrangementStore from "@/store/arrangementStore";
 //imports udefra
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Form from "next/form";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DeleteTrash from "@/components/global/ikoner/DeleteTrash";
 
+const Select = dynamic(() => import("react-select"), { ssr: false }); //til hyrdration fail
+import dynamic from "next/dynamic";
 
-const Select = dynamic(() => import('react-select'), { ssr: false }); //til hyrdration fail
+const DatePicker = dynamic(() => import("react-datepicker"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
 
 const Inputs = ({ events, art }) => {
   //zustand imports
@@ -22,7 +26,9 @@ const Inputs = ({ events, art }) => {
   const inputValue = useArtworkStore((state) => state.inputValue);
   const setInputValue = useArtworkStore((state) => state.setInputValue);
   const saveKladde = useArtworkStore((state) => state.saveKladde);
-  const setSelectedLocation = useArtworkStore((state) => state.setSelectedLocation);
+  const setSelectedLocation = useArtworkStore(
+    (state) => state.setSelectedLocation
+  );
   const setSelectedDate = useArtworkStore((state) => state.setSelectedDate);
   const sletVaerk = useArtworkStore((state) => state.sletVaerk);
 
@@ -135,7 +141,7 @@ const Inputs = ({ events, art }) => {
       {/* TITEL */}
       <div className="flex flex-col">
         <input
-        aria-label="indtast titel"
+          aria-label="indtast titel"
           type="text"
           placeholder="Arrangement titel *"
           {...register("titel", { required: "Titel er påkrævet" })}
@@ -151,7 +157,7 @@ const Inputs = ({ events, art }) => {
       {/* BESKRIVELSE */}
       <div className="flex flex-col">
         <textarea
-        aria-label="indtast beskrivelse"
+          aria-label="indtast beskrivelse"
           placeholder="Beskrivelse *"
           {...register("beskrivelse", {
             required: "Beskrivelse er påkrævet",
@@ -166,22 +172,22 @@ const Inputs = ({ events, art }) => {
             setInputValue("description", e.target.value); // Zustand
           }}
         />
-         <p className="text-sm text-gray-500">
-            {inputValue.description.length} / 400 karakterer
-          </p>
+        <p className="text-sm text-gray-500">
+          {inputValue.description.length} / 400 karakterer
+        </p>
         <p className="text-red-600 text-sm">{errors.beskrivelse?.message}</p>
       </div>
 
       {/* LOKATION */}
       <div className="flex flex-col">
-      <label className="mb-1 font-medium">Lokation *</label>
+        <label className="mb-1 font-medium">Lokation *</label>
         <Controller
           name="locationId"
           control={control}
           rules={{ required: "Lokation er påkrævet" }}
           render={({ field }) => (
             <Select
-            aria-label="Vælg lokation"
+              aria-label="Vælg lokation"
               {...field}
               options={lokation.map((loc) => ({
                 value: loc.id,
@@ -208,7 +214,8 @@ const Inputs = ({ events, art }) => {
                 setSelectedLocation(selectedLocation); // Zustand
               }}
               className="border border-(--black) p-2 w-full"
-              styles={{ //styling af reacts default
+              styles={{
+                //styling af reacts default
                 control: (base) => ({
                   ...base,
                   backgroundColor: "transparent",
@@ -227,7 +234,7 @@ const Inputs = ({ events, art }) => {
       <div className="flex flex-col">
         <label className="mb-1 font-medium">Dato *</label>
         <Controller
-        aria-label="Vælg dato"
+          aria-label="Vælg dato"
           name="dato"
           control={control}
           rules={{ required: "Dato er påkrævet" }}
@@ -254,9 +261,11 @@ const Inputs = ({ events, art }) => {
             Alle datoer er optaget for den valgte lokation.
           </p>
         )}
-          {!selectedLocation && (
-              <p className="text-sm text-red-500 mt-1">Vælg en lokation før du kan vælge en dato.</p>
-         )}
+        {!selectedLocation && (
+          <p className="text-sm text-red-500 mt-1">
+            Vælg en lokation før du kan vælge en dato.
+          </p>
+        )}
       </div>
 
       {/* KUNSTVÆRKER */}
@@ -284,10 +293,9 @@ const Inputs = ({ events, art }) => {
               ))}
           </span> */}
 
-
         {/* Skjult input til validering */}
         <input
-        aria-label="Vælg kunstværker"
+          aria-label="Vælg kunstværker"
           type="hidden"
           value={
             gemteVaerker.filter((params) => params && params.object_number)
@@ -299,16 +307,14 @@ const Inputs = ({ events, art }) => {
               if (count === 0) return "Du skal vælge mindst ét kunstværk";
             },
           })}
-          
         />
         <p className="text-red-500 text-sm">{errors.artworkCount?.message}</p>
-
       </div>
 
-
-
       <div className="flex justify-center gap-10">
-        <PrimaryButton aria-label="Gem kladde" type="submit">Gem kladde</PrimaryButton>
+        <PrimaryButton aria-label="Gem kladde" type="submit">
+          Gem kladde
+        </PrimaryButton>
       </div>
     </Form>
   );

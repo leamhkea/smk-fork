@@ -72,6 +72,7 @@ export default function SamledeVaerker({ event, art }) {
                   width={100}
                   height={100}
                   className="object-contain w-full h-auto"
+                  loading="lazy"
                 />
               )}
             </li>

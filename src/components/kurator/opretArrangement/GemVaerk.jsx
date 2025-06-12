@@ -87,4 +87,3 @@ const GemVaerk = ({ vaerk, events }) => {
 };
 
 export default GemVaerk;
-
