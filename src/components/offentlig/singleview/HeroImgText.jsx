@@ -27,7 +27,6 @@ const HeroImgText = ({ event, art }) => {
             width={500}
             height={500}
             className="object-contain w-full h-auto"
-            loading="lazy"
           />
         )}
         <SlideRight>

@@ -24,7 +24,6 @@ const KurvCard = ({ event, art, undtagelser = false }) => {
             width={50}
             height={50}
             className="object-contain w-full h-auto"
-            loading="lazy"
           />
         )}
       </div>

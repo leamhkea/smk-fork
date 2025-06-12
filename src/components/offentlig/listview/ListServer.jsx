@@ -1,4 +1,8 @@
-import ListClient from "./ListClient";
+import dynamic from "next/dynamic";
+
+const ListClient = dynamic(() => import("./ListClient"), {
+  loading: () => null, // Evt. vis en spinner hvis ønsket
+});
 
 // async: Man arbejder med asynkrone operationer (f.eks. at hente data fra en API).
 // await: Da fetch er en asynkron funktion, bruges await til at vente på, at anmodningen bliver færdig, før man går videre.

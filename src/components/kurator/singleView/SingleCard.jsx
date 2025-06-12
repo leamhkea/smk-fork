@@ -24,7 +24,6 @@ const SingleCard = ({ art }) => {
               width={500}
               height={500}
               className="object-contain max-w-full self-center"
-              loading="lazy"
             />
           )}
         </div>
@@ -41,7 +40,6 @@ const SingleCard = ({ art }) => {
                     width={500}
                     height={500}
                     className="object-contain max-w-full self-center"
-                    loading="lazy"
                   />
                 </li>
               )

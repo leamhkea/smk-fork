@@ -58,7 +58,6 @@ const VaerkPopup = ({ artwork, onClose }) => {
             width={200}
             height={200}
             className="object-contain m-auto pb-4"
-            loading="lazy"
           />
         )}
 

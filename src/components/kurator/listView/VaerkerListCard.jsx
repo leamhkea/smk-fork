@@ -30,7 +30,6 @@ const VaerkerListCard = ({ art, events }) => {
             className={`object-contain max-w-full self-center transition-opacity duration-300 ${
               isInSameDate ? "opacity-50" : "opacity-100"
             }`}
-            loading="lazy"
           />
         )}
 
