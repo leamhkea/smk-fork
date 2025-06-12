@@ -101,7 +101,7 @@ const VaerkerListClient = ({ artData, events }) => {
                       loadMoreArtworks(get, set);
                     }}
                   >
-                    Vis {visteVaerker.length} ud af {visKunValgte 
+                    Vis {visibleArtworks.length + 30} ud af {visKunValgte 
                       ? gemteVaerker.length 
                       : get().filteredArtworks.length > 0 
                         ? get().filteredArtworks.length 
