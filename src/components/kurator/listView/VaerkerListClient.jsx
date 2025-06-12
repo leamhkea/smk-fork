@@ -1,15 +1,30 @@
 "use client";
 //import af egne komponenter
-import VaerkerListCard from "./VaerkerListCard";
 import PrimaryButton from "@/components/global/buttons/PrimaryButton";
-import useArtworkStore from "@/store/kuratorStore";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
 import { loadMoreArtworks, setArtworks, hasMore } from "@/store/artworkUtils";
-import Filtrering from "./Filtrering";
 
-import SearchBar from "./SearchBar";
-
-import Inputs from "../opretArrangement/Inputs";
+import dynamic from "next/dynamic";
+const useArtworkStore = dynamic(() => import("@/store/kuratorStore"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
+const VaerkerListCard = dynamic(() => import("./VaerkerListCard"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
+const Inputs = dynamic(() => import("../opretArrangement/Inputs"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
+const Filtrering = dynamic(() => import("./Filtrering"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
+const SearchBar = dynamic(() => import("./SearchBar"), {
+  ssr: false,
+  loading: () => <p>Indlæser dato...</p>,
+});
 
 //imports udefra
 import { useEffect, useState } from "react";

@@ -42,7 +42,6 @@ const Hero = ({ art, events }) => {
             fill
             priority
             className="object-cover w-full h-full z-0"
-            loading="lazy"
           />
         </motion.div>
       )}

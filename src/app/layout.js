@@ -12,6 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 export const metadata = {
   title: "SMK - Statens Museum for Kunst",
   description: "SMK arrangement side",
+};
+
+export const viewport = {
   viewport: "width=device-width, initial-scale=1",
   charset: "UTF-8",
 };

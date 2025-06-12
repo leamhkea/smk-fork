@@ -12,7 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import DeleteTrash from "@/components/global/ikoner/DeleteTrash";
 
 const Select = dynamic(() => import("react-select"), { ssr: false }); //til hyrdration fail
-import dynamic from "next/dynamic";
 
 const DatePicker = dynamic(() => import("react-datepicker"), {
   ssr: false,
