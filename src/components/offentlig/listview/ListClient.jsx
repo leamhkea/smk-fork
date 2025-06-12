@@ -1,9 +1,8 @@
 "use client";
-
+import EventSlider from "./EventSlider";
 import dynamic from "next/dynamic";
 
 const Filtrering = dynamic(() => import("./Filtrering"), { ssr: false });
-const EventSlider = dynamic(() => import("./EventSlider"), { ssr: false });
 const ListKladder = dynamic(
   () => import("@/components/kurator/kladder/ListKladder"),
   { ssr: false }
