@@ -62,7 +62,8 @@ const Header = () => {
               <svg
                 viewBox="0 0 73 25"
                 width="120px"
-                height="100%"
+                height="auto"
+                length="auto"
                 style={{ display: "block", margin: 0, padding: 0 }}
                 fill="currentColor"
               >
