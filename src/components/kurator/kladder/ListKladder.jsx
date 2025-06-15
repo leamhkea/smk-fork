@@ -15,7 +15,7 @@ const ListKladder = ({ art }) => {
   const { resetForm } = useArtworkStore();
 
   //til kort visning
-  const [match, setMatchh] = useState(false);
+  const [match, setMatch] = useState(false);
   const [index, setIndex] = useState(0);
   const cardRef = useRef(null);
   const containerRef = useRef(null);
@@ -27,7 +27,7 @@ const ListKladder = ({ art }) => {
 
   // Hydration til Zustand
   useEffect(() => {
-    setMatchh(true);
+    setMatch(true);
   }, []);
 
   // Map og match værker
@@ -39,10 +39,10 @@ const ListKladder = ({ art }) => {
           );
           return { ...event, matchedVaerk: matchingVaerk }; // behold alle events også hvis den ikke kan finde værket
         })
-        .filter(Boolean)
+        // .filter(Boolean)
     : [];
 
-  //opret arrangement
+  //opret arrangement - bliver brugt som callback function i button
   const nytEvent = () => {
     resetForm();
     router.push("/vaerkarkiv");
