@@ -36,7 +36,7 @@ const VaerkerListClient = ({ artData, events }) => {
   );
   const gemteVaerker = useArtworkStore((state) => state.gemteVaerker);
 
-  //cleanup function
+
   useEffect(() => {
     if (artworks.length === 0 && artData.length > 0) {
       setArtworks(set, artData);
