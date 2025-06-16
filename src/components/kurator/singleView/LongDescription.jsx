@@ -11,7 +11,7 @@ const LongDescriptions = ({ description }) => {
   const shortText = description.slice(0, maxLength);
 
   const readMoreToggle = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const collapsing = laesmere;
     setLaesmere(!laesmere);

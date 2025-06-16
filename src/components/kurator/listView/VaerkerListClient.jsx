@@ -28,13 +28,14 @@ import { useEffect, useState } from "react";
 
 const VaerkerListClient = ({ artData, events }) => {
   //zustand import
-  const get = useArtworkStore.getState;
+  const get = useArtworkStore.getState; //utility funktioner, der skal bruge udgang til set og get uafhængigt af hooken 
   const set = useArtworkStore.setState;
   const { artworks, visibleArtworks } = useArtworkStore();
   const updatePublishedEvents = useArtworkStore(
     (state) => state.updatePublishedEvents
   );
   const gemteVaerker = useArtworkStore((state) => state.gemteVaerker);
+
 
   useEffect(() => {
     if (artworks.length === 0 && artData.length > 0) {

@@ -4,8 +4,8 @@
 import dynamic from "next/dynamic";
 
 const PopUP = dynamic(() => import("../global/PopUp"), {
-  ssr: false, // Kun client-side
-  loading: () => null, // Evt. vis en spinner hvis ønsket
+  ssr: false, 
+  loading: () => null, 
 });
 
 //imports af egne komponenter

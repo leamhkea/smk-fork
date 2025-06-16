@@ -117,7 +117,7 @@ const useArtworkStore = create(
         })),
 
       //returnerer objektet
-      getInputValue: () => get().inputValue,
+      // getInputValue: () => get().inputValue,
 
       //slet et arrangement
       sletInputValue: (arrangementID) =>
