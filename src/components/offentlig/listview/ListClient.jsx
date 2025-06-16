@@ -4,9 +4,9 @@ import EventSlider from "./EventSlider";
 import Filtrering from "./Filtrering";
 import ListKladder from "@/components/kurator/kladder/ListKladder";
 import GoBackArrow from "@/components/global/buttons/GoBackArrow";
+import useArrangementStore from "@/store/arrangementStore";
 import { useEffect } from "react";
 import { SignedIn } from "@clerk/nextjs";
-import useArrangementStore from "@/store/arrangementStore";
 
 const ListClient = (props) => {
   // Funktion til at sætte listen af arrangementer i global state
@@ -15,12 +15,12 @@ const ListClient = (props) => {
   // En filtreret version af arrangementerne
   const { visteArrangementer = [] } = useArrangementStore();
 
-  // Når props.events ændrer sig, opdateres den globale state med disse arrangementer
+  // Når komponenten får nye events fra props, sørg for at opdatere den globale tilstand (Zustand) med disse events, så resten af applikationen kan reagere på dem.
   useEffect(() => {
     if (props.events) {
-      setArrangementer(props.events);
+      setArrangementer(props.events); // sørger for, at man kun opdaterer Zustand-store, hvis events faktisk er der
     }
-  }, [props.events, setArrangementer]);
+  }, [props.events, setArrangementer]); // sørger for at effekten kører, hver gang events ændrer sig
 
   // Definerer lokationerne manuelt
   const lokationer = [
@@ -41,7 +41,7 @@ const ListClient = (props) => {
       event.location?.address.includes(by)
     );
 
-    // Resultatet bliver en liste
+    // Resultatet bliver en liste. Alle events der matcher byens navn bliver lagt i byEvents
     return {
       title: by,
       events: byEvents,
@@ -49,6 +49,7 @@ const ListClient = (props) => {
   });
 
   // Bruges til at vise en besked, hvis der ikke findes nogen events i nogen af byerne
+  // every() returnerer true, hvis ALLE grupper har events.length === 0
   const alleEventsErTom = grupperetEfterLokation.every(
     (gruppe) => gruppe.events.length === 0
   );

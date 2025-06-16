@@ -6,7 +6,7 @@ import ListClient from "./ListClient";
 
 const ListServer = async () => {
   const [event, smkData] = await Promise.all([
-    //Promise all for samle fetch i en.
+    // Promise all kører begge fetch kald samtidigt for hurtigere indlæsning.
     fetch("https://async-exhibit-server-rmug.onrender.com/events"),
     fetch(
       "https://api.smk.dk/api/v1/art/search/?keys=*&offset=80000&rows=2000"
@@ -15,11 +15,14 @@ const ListServer = async () => {
   // Når fetch-anmodningen er færdig, fås et Response-objekt (data), som konverteres til et JSON-format.
   const [events, smk] = await Promise.all([event.json(), smkData.json()]);
 
+  // 1. flapmap: Samler alle artworkIds fra events i én lang liste. || []: Hvis et event ikke har artworkIds, bruges en tom liste
+  // 2. map(...): Trækker alle object_number ud fra SMK-data
+  // 3. filter(...): Finder kunstværk-id’er, som ikke findes i SMK-dataen
   const allArtworkIds = events.flatMap((event) => event.artworkIds || []);
   const smkObjectNumbers = smk.items.map((item) => item.object_number);
   const missing = allArtworkIds.filter((id) => !smkObjectNumbers.includes(id));
 
-  // Funktion til at hente manglende værker, der ikke ligger i de første 2000 rows af smks api
+  // Funktion til at hente manglende værker, der ikke ligger i de første 2000 rows af smks api. Funktionen kører én fetch per manglende ID
   const fetchMissingArtworks = async (ids) => {
     const results = [];
     for (const id of ids) {
@@ -33,12 +36,13 @@ const ListServer = async () => {
     return results;
   };
 
+  // Lægger de oprindelige 2000 SMK-værker og de hentede manglende værker sammen i én liste
   const missingArtworks = await fetchMissingArtworks(missing);
   const completeArtworks = [...smk.items, ...missingArtworks];
 
   // Herunder laves const til alle lokationer, som bliver filtreret
   const filterByer = (byer) =>
-    events.filter((ev) => ev.location?.address.includes(byer));
+    events.filter((ev) => ev.location?.address.includes(byer)); // Brug af ?. (optional chaining) gør, at den ikke fejler, hvis location mangler
 
   return (
     <div>
