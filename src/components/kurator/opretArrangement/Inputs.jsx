@@ -66,7 +66,7 @@ const Inputs = ({ events, art }) => {
   const [lokation, setLokation] = useState([]);
 
   useEffect(() => {
-    const lokationMap = new Map(); //sørger for der er ingen duplikanter som i set()-constructor, men denne syntaks er ikke kompatibel da jeg ønsker en iterabel metode.
+    const lokationMap = new Map(); //sørger for der er ingen duplikanter som i set()-constructor, men denne metode kan gemme key-value pairs
 
     events.forEach((event) => {
       //definerer alle felter, så lokationMap ikke kun modtager value og key (syntaks i map())
