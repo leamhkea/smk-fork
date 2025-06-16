@@ -117,7 +117,7 @@ const Inputs = ({ events, art }) => {
     "2025-05-15",
   ].map((params) => new Date(params)); // konverter til Date-objekter
 
-  // Fjern de datoer der allerede er optaget for den valgte lokation
+  // Viser kun de datoer, der ikke er optaget
   const gyldigeDatoer = alleDatoer.filter(
     (d) =>
       !optagedeDatoer.some(
